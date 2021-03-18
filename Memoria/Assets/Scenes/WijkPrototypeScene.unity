@@ -671,6 +671,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!328 &694854864 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 3765758618670791405, guid: 3ffdb1b829b8eaa4f888835bd61f88c5, type: 3}
+  m_PrefabInstance: {fileID: 1821926931}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +842,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839775344}
-  m_LocalRotation: {x: 0.17067233, y: -0.000000008476964, z: 0.0000000014683266, w: 0.98532784}
+  m_LocalRotation: {x: 0.17067231, y: 0.000000015947705, z: -0.0000000027623617, w: 0.98532784}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -855,7 +860,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   m_Layer: 0
@@ -865,14 +869,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -923,7 +919,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.1421929, y: 0.000000008515773, z: -0.0000000012233127, w: 0.98983896}
+  m_LocalRotation: {x: 0.1421929, y: -0.000000008515732, z: 0.0000000012233068, w: 0.98983896}
   m_LocalPosition: {x: 10.97, y: 6.5, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1069,7 +1065,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220207208}
-  m_LocalRotation: {x: 0.11378454, y: 0.00000001911238, z: -0.0000000021889086, w: 0.9935055}
+  m_LocalRotation: {x: 0.11378454, y: 0.000000019112589, z: -0.0000000021889328, w: 0.9935055}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1088,6 +1084,7 @@ GameObject:
   - component: {fileID: 1302312455}
   - component: {fileID: 1302312454}
   - component: {fileID: 1302312456}
+  - component: {fileID: 1302312457}
   m_Layer: 6
   m_Name: CameraTransition
   m_TagString: Untagged
@@ -1135,6 +1132,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 292884380}
+--- !u!114 &1302312457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302312453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5a11cba87491a4bbb4b68d0840ed15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 694854864}
 --- !u!1 &1337428023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1754,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695744043}
-  m_LocalRotation: {x: 0.1421929, y: 0.000000008515773, z: -0.0000000012233125, w: 0.989839}
+  m_LocalRotation: {x: 0.1421929, y: -0.000000008515733, z: 0.0000000012233067, w: 0.989839}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1759,6 +1769,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 595665720657161676, guid: 3ffdb1b829b8eaa4f888835bd61f88c5, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].time
+      value: 0.4554962
+      objectReference: {fileID: 0}
+    - target: {fileID: 595665720657161676, guid: 3ffdb1b829b8eaa4f888835bd61f88c5, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[0].value
+      value: 0.87428284
+      objectReference: {fileID: 0}
+    - target: {fileID: 595665720657161676, guid: 3ffdb1b829b8eaa4f888835bd61f88c5, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].value
+      value: 0.6576704
+      objectReference: {fileID: 0}
     - target: {fileID: 4369817648176363432, guid: 3ffdb1b829b8eaa4f888835bd61f88c5, type: 3}
       propertyPath: m_Name
       value: House
@@ -1851,6 +1873,7 @@ GameObject:
   - component: {fileID: 1869486613}
   - component: {fileID: 1869486616}
   - component: {fileID: 1869486615}
+  - component: {fileID: 1869486617}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1922,3 +1945,11 @@ MonoBehaviour:
   cam: {fileID: 963194228}
   speed: 6
   turnSmoothTime: 0.1
+--- !u!81 &1869486617
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869486612}
+  m_Enabled: 1
