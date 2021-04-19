@@ -13,7 +13,12 @@ public class PlayerMovement : MonoBehaviour {
     public Material hoverMaterial;
     private GameObject hoverObject = null;
     private GameObject previousHitObject = null;
+
+    public Animator animatorElena;
+    Vector3 oldPos = new Vector3();
+
     private void Start() {
+        oldPos = transform.position;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -31,7 +36,7 @@ public class PlayerMovement : MonoBehaviour {
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
     }
-    bool created = false;
+    //bool created = false;
 
     private void FixedUpdate() {
         RaycastHit hit;
@@ -45,7 +50,7 @@ public class PlayerMovement : MonoBehaviour {
                 previousHitObject = hitObject;
                 print("object hit");
 
-                created = true;
+                //created = true;
                 hoverObject = Instantiate(objectHit.gameObject);
                 hoverObject.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
                 hoverObject.GetComponent<MeshRenderer>().material = hoverMaterial;
@@ -60,5 +65,20 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         previousHitObject = hitObject;
+
+
+        Vector3 difference = transform.position - oldPos;
+        float mag = difference.magnitude;
+        if(mag >= 0.05f)
+        {
+            animatorElena.SetBool("ElenaMoving", true);
+        }
+        else if(mag <= 0.01f)
+        {
+            animatorElena.SetBool("ElenaMoving", false);
+        }
+        oldPos = transform.position;
+
+        print(mag);
     }
 }

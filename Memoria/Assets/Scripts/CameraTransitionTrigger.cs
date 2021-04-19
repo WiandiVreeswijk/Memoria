@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class CameraTransitionTrigger : MonoBehaviour
 {
-    public CinemachineVirtualCamera camera;
+    public new CinemachineVirtualCamera camera;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
