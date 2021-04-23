@@ -146,8 +146,8 @@ public class PlayerMovement : MonoBehaviour {
         if(enableFeetIk == false) { return; }
         if(animatorElena == null) { return; }
 
-        AdjustFeetTarget(ref rightFootPosition, HumanBodyBones.RightToes);
-        AdjustFeetTarget(ref leftFootPosition, HumanBodyBones.LeftToes);
+        AdjustFeetTarget(ref rightFootPosition, HumanBodyBones.RightFoot);
+        AdjustFeetTarget(ref leftFootPosition, HumanBodyBones.LeftFoot);
 
         FeetPositionSolver(rightFootPosition, ref rightFootIkPosition, ref rightFootIkRotation);
         FeetPositionSolver(leftFootPosition, ref leftFootIkPosition, ref leftFootIkRotation);
@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour {
             lastFootPositionY = yVariable;
 
             targetIkPosition = transform.TransformPoint(targetIkPosition);
-
+            targetIkPosition.y += 0.3f;
             animatorElena.SetIKRotation(foot, rotationIkHolder);
         }
         animatorElena.SetIKPosition(foot, targetIkPosition);
