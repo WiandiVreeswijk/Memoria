@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour {
     #region Movement
     private void Movement()
     {
-        gravity -= 9.8f * Time.deltaTime;
+        gravity -= 9.8f * Time.fixedDeltaTime;
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
         if (direction.magnitude >= 0.1f)
         {
@@ -127,11 +127,12 @@ public class PlayerMovement : MonoBehaviour {
     {
         Vector3 difference = transform.position - oldPos;
         float mag = difference.magnitude;
-        if (mag >= 0.05f)
+        print(mag);
+        if (mag >= 0.01f)
         {
             animatorElena.SetBool("ElenaMoving", true);
         }
-        else if (mag <= 0.01f)
+        else if (mag <= 0.005f)
         {
             animatorElena.SetBool("ElenaMoving", false);
         }
