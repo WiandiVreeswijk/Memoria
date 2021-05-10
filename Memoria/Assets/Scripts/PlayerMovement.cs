@@ -127,7 +127,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         Vector3 difference = transform.position - oldPos;
         float mag = difference.magnitude;
-        print(mag);
         if (mag >= 0.01f)
         {
             animatorElena.SetBool("ElenaMoving", true);
@@ -154,8 +153,7 @@ public class PlayerMovement : MonoBehaviour {
         FeetPositionSolver(leftFootPosition, ref leftFootIkPosition, ref leftFootIkRotation);
     }
 
-    private void OnAnimatorIK(int layerIndex)
-    {
+    private void OnAnimatorIK(int layerIndex) {
         if (enableFeetIk == false) { return; }
         if (animatorElena == null) { return; }
         MovePelvisHeight();
@@ -163,18 +161,16 @@ public class PlayerMovement : MonoBehaviour {
         //right foot ik position and rotation -- utilise the pro features in here
         animatorElena.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
-        if (useProIkFeature)
-        {
-            animatorElena.SetIKPositionWeight(AvatarIKGoal.RightFoot, animatorElena.GetFloat(rightFootAnimVariableName));
+        if (useProIkFeature) {
+            animatorElena.SetIKRotationWeight(AvatarIKGoal.RightFoot, animatorElena.GetFloat(rightFootAnimVariableName));
         }
         MoveFeetToIkPoint(AvatarIKGoal.RightFoot, rightFootIkPosition, rightFootIkRotation, ref lastRightFootPositionY);
 
         //left foot ik position and rotation -- utilise the pro features in here
         animatorElena.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
 
-        if (useProIkFeature)
-        {
-            animatorElena.SetIKPositionWeight(AvatarIKGoal.LeftFoot, animatorElena.GetFloat(leftFootAnimVariableName));
+        if (useProIkFeature) {
+            animatorElena.SetIKRotationWeight(AvatarIKGoal.LeftFoot, animatorElena.GetFloat(leftFootAnimVariableName));
         }
         MoveFeetToIkPoint(AvatarIKGoal.LeftFoot, leftFootIkPosition, leftFootIkRotation, ref lastLeftFootPositionY);
     }
@@ -185,8 +181,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         Vector3 targetIkPosition = animatorElena.GetIKPosition(foot);
 
-        if(positionIkHolder != Vector3.zero)
-        {
+        if (positionIkHolder != Vector3.zero) {
             targetIkPosition = transform.InverseTransformPoint(targetIkPosition);
             positionIkHolder = transform.InverseTransformPoint(positionIkHolder);
 
@@ -196,15 +191,13 @@ public class PlayerMovement : MonoBehaviour {
             lastFootPositionY = yVariable;
 
             targetIkPosition = transform.TransformPoint(targetIkPosition);
-            targetIkPosition.y += 0.3f;
             animatorElena.SetIKRotation(foot, rotationIkHolder);
         }
+        //Vector3 temp = targetIkPosition + new Vector3(0, offset, 0);
         animatorElena.SetIKPosition(foot, targetIkPosition);
     }
-    private void MovePelvisHeight()
-    {
-        if(rightFootIkPosition == Vector3.zero || leftFootIkPosition == Vector3.zero || lastPelvisPositionY == 0)
-        {
+    private void MovePelvisHeight() {
+        if (rightFootIkPosition == Vector3.zero || leftFootIkPosition == Vector3.zero || lastPelvisPositionY == 0) {
             lastPelvisPositionY = animatorElena.bodyPosition.y;
             return;
         }
@@ -222,28 +215,24 @@ public class PlayerMovement : MonoBehaviour {
 
         lastPelvisPositionY = animatorElena.bodyPosition.y;
     }
-    private void FeetPositionSolver(Vector3 fromSkyPosition, ref Vector3 feetIkPositions, ref Quaternion feetIkRotations)
-    {
+    private void FeetPositionSolver(Vector3 fromSkyPosition, ref Vector3 feetIkPositions, ref Quaternion feetIkRotations) {
         RaycastHit feetOutHit;
 
         if (showSolverDebug)
             Debug.DrawLine(fromSkyPosition, fromSkyPosition + Vector3.down * (raycastDownDistance + heightFromGroundRaycast), Color.yellow);
 
-        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance + heightFromGroundRaycast, environmentLayer))
-        {
+        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance + heightFromGroundRaycast, environmentLayer)) {
             //finding our feet ik positions from the sky position
             feetIkPositions = fromSkyPosition;
             feetIkPositions.y = feetOutHit.point.y + pelvisOffset;
             feetIkRotations = Quaternion.FromToRotation(Vector3.up, feetOutHit.normal) * transform.rotation;
-
             return;
         }
 
         feetIkPositions = Vector3.zero;
     }
 
-    private void AdjustFeetTarget(ref Vector3 feetPositions, HumanBodyBones foot)
-    {
+    private void AdjustFeetTarget(ref Vector3 feetPositions, HumanBodyBones foot) {
         feetPositions = animatorElena.GetBoneTransform(foot).position;
         feetPositions.y = transform.position.y + heightFromGroundRaycast;
     }
@@ -252,5 +241,13 @@ public class PlayerMovement : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         print(collision.gameObject.name);
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(rightFootIkPosition, 0.05f);
+        Gizmos.DrawSphere(leftFootIkPosition, 0.05f);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawSphere(lastPelvisPositionY, 0.05f);
     }
 }
