@@ -23,4 +23,5 @@ public class NewPlayerMovement : MonoBehaviour {
         float speed = Input.GetAxis("Vertical");
         anim.SetFloat("Forward", shift ? speed / 2 : speed);
     }
+
 }

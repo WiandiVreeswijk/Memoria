@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     #region variables
-    public CharacterController controller;
     public Transform cam;
+    private CharacterController controller;
 
     [Header("Hover over object")]
     public Material hoverMaterial;
@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour {
     private GameObject previousHitObject = null;
 
     [Header("Animation")]
-    public Animator animatorElena;
     Vector3 oldPos = new Vector3();
+    private Animator animatorElena;
 
 
     private float horizontal, vertical;
@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour {
     #endregion
 
     private void Start() {
+        animatorElena = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
         oldPos = transform.position;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -63,12 +65,10 @@ public class PlayerMovement : MonoBehaviour {
         FixedUpdateFunction();
     }
     #region Movement
-    private void Movement()
-    {
+    private void Movement() {
         gravity -= 9.8f * Time.fixedDeltaTime;
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
-        if (direction.magnitude >= 0.1f)
-        {
+        if (direction.magnitude >= 0.1f) {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -78,8 +78,7 @@ public class PlayerMovement : MonoBehaviour {
             controller.Move(moveDirection.normalized * speed * Time.deltaTime);
 
 
-            if (controller.isGrounded)
-            {
+            if (controller.isGrounded) {
                 gravity = 0f;
             }
         }
@@ -87,17 +86,14 @@ public class PlayerMovement : MonoBehaviour {
     #endregion
 
     #region Interaction
-    private void Interaction()
-    {
+    private void Interaction() {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(0.5F, 0.5F, 0));
         Debug.DrawRay(ray.origin, ray.direction, Color.red);
         GameObject hitObject = null;
-        if (Physics.Raycast(ray, out hit))
-        {
+        if (Physics.Raycast(ray, out hit)) {
             Transform objectHit = hit.transform;
-            if (objectHit.gameObject.tag == "Interactable" && previousHitObject != objectHit.gameObject)
-            {
+            if (objectHit.gameObject.tag == "Interactable" && previousHitObject != objectHit.gameObject) {
                 hitObject = objectHit.gameObject;
                 previousHitObject = hitObject;
                 print("object hit");
@@ -110,8 +106,7 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-        if (hitObject != previousHitObject)
-        {
+        if (hitObject != previousHitObject) {
             Destroy(hoverObject);
             hoverObject = null;
             print("object destroyed");
@@ -123,16 +118,13 @@ public class PlayerMovement : MonoBehaviour {
     #endregion
 
     #region Animation
-    private void Animation()
-    {
+    private void Animation() {
         Vector3 difference = transform.position - oldPos;
         float mag = difference.magnitude;
-        if (mag >= 0.01f)
-        {
+
+        if (mag >= 0.01f) {
             animatorElena.SetBool("ElenaMoving", true);
-        }
-        else if (mag <= 0.005f)
-        {
+        } else if (mag <= 0.005f) {
             animatorElena.SetBool("ElenaMoving", false);
         }
         oldPos = transform.position;
@@ -141,10 +133,9 @@ public class PlayerMovement : MonoBehaviour {
 
     #region FeetGrounding
 
-    private void FixedUpdateFunction()
-    {
-        if(enableFeetIk == false) { return; }
-        if(animatorElena == null) { return; }
+    private void FixedUpdateFunction() {
+        if (enableFeetIk == false) { return; }
+        if (animatorElena == null) { return; }
 
         AdjustFeetTarget(ref rightFootPosition, HumanBodyBones.RightToes);
         AdjustFeetTarget(ref leftFootPosition, HumanBodyBones.LeftToes);
@@ -177,8 +168,7 @@ public class PlayerMovement : MonoBehaviour {
     #endregion
 
     #region FeetGroundingMethods
-    void MoveFeetToIkPoint(AvatarIKGoal foot, Vector3 positionIkHolder, Quaternion rotationIkHolder, ref float lastFootPositionY)
-    {
+    void MoveFeetToIkPoint(AvatarIKGoal foot, Vector3 positionIkHolder, Quaternion rotationIkHolder, ref float lastFootPositionY) {
         Vector3 targetIkPosition = animatorElena.GetIKPosition(foot);
 
         if (positionIkHolder != Vector3.zero) {
@@ -233,13 +223,14 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void AdjustFeetTarget(ref Vector3 feetPositions, HumanBodyBones foot) {
-        feetPositions = animatorElena.GetBoneTransform(foot).position;
+        //if (animatorElena.GetBoneTransform(foot) == null) print(foot + " is null");
+        //feetPositions = animatorElena.GetBoneTransform(foot).position;
+        feetPositions = new Vector3(0, 0, 0);
         feetPositions.y = transform.position.y + heightFromGroundRaycast;
     }
     #endregion
 
-    private void OnCollisionEnter(Collision collision)
-    {
+    private void OnCollisionEnter(Collision collision) {
         print(collision.gameObject.name);
     }
 

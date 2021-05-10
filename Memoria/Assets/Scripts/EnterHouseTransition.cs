@@ -5,14 +5,16 @@ using UnityEngine.Video;
 
 public class EnterHouseTransition : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;
+    //public VideoPlayer videoPlayer;
+    public GameObject elenaMesh;
 
     private bool playerEntered = false;
 
     private void Start()
     {
-        videoPlayer.Stop();
+        //videoPlayer.Stop();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!playerEntered)
@@ -20,13 +22,14 @@ public class EnterHouseTransition : MonoBehaviour
             if (other.gameObject.tag == "Player")
             {
                 playerEntered = true;
-                videoPlayer.Play();
+                //videoPlayer.Play();
             }
         }
         else
         {
             playerEntered = false;
-            videoPlayer.Pause();
+            //videoPlayer.Pause();
         }
+        elenaMesh.SetActive(!playerEntered);
     }
 }

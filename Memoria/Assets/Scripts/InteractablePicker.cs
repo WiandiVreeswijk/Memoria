@@ -17,13 +17,13 @@ public class InteractablePicker : MonoBehaviour {
             interactable.Interact();
         }
     }
-
+    
     void FixedUpdate() {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         Debug.DrawRay(ray.origin, ray.direction, Color.red);
-
+    
         text.text = "";
-
+    
         GameObject hoveredObject = null;
         if (Physics.Raycast(ray, out RaycastHit hit)) {
             Transform objectHit = hit.transform;
@@ -38,14 +38,14 @@ public class InteractablePicker : MonoBehaviour {
                 currentlyHoveredObject = hoveredObject;
             }
         }
-
+    
         if (hoveredObject != previouslyHoveredObject && ghostObjectCreated) {
             Destroy(ghostObject);
             ghostObject = null;
             ghostObjectCreated = false;
             currentlyHoveredObject = null;
         }
-
+    
         previouslyHoveredObject = hoveredObject;
     }
 }
