@@ -100,9 +100,9 @@ public class PlayerMovement : MonoBehaviour {
 
                 //created = true;
                 hoverObject = Instantiate(objectHit.gameObject);
-                hoverObject.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+                hoverObject.transform.localScale = objectHit.transform.localScale * 1.1f;
                 hoverObject.GetComponent<MeshRenderer>().material = hoverMaterial;
-                hoverObject.GetComponent<BoxCollider>().enabled = false;
+                hoverObject.GetComponent<Collider>().enabled = false;
             }
         }
 

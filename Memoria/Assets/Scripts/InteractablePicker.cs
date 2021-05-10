@@ -32,9 +32,9 @@ public class InteractablePicker : MonoBehaviour {
             if (objectHit.tag == "Interactable" && !ghostObjectCreated) {
                 ghostObjectCreated = true;
                 ghostObject = Instantiate(hoveredObject);
-                ghostObject.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+                ghostObject.transform.localScale = hoveredObject.transform.localScale * 1.05f;
                 ghostObject.GetComponent<MeshRenderer>().material = hoverMaterial;
-                ghostObject.GetComponent<BoxCollider>().enabled = false;
+                ghostObject.GetComponent<Collider>().enabled = false;
                 currentlyHoveredObject = hoveredObject;
             }
         }
