@@ -7,7 +7,6 @@ public class InteractablePicker : MonoBehaviour {
     private GameObject ghostObject;
     private GameObject currentlyHoveredObject;
     private GameObject previouslyHoveredObject;
-    public TMPro.TextMeshProUGUI text;
     public Material hoverMaterial;
 
     private void Update() {
@@ -22,12 +21,9 @@ public class InteractablePicker : MonoBehaviour {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         Debug.DrawRay(ray.origin, ray.direction, Color.red);
     
-        text.text = "";
-    
         GameObject hoveredObject = null;
         if (Physics.Raycast(ray, out RaycastHit hit)) {
             Transform objectHit = hit.transform;
-            text.text = objectHit.name;
             hoveredObject = objectHit.gameObject;
             if (objectHit.tag == "Interactable" && !ghostObjectCreated) {
                 ghostObjectCreated = true;
