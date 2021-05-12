@@ -30,7 +30,6 @@ public class PlayerMovementAdventure : MonoBehaviour {
         previousPlainMovement = plainMovement;
         if (plainMovement != Vector3.zero) {
             movement += plainMovement;
-
             Quaternion temporaryCameraRotation = cam.rotation;
             cam.eulerAngles = new Vector3(0, cam.eulerAngles.y, 0);
             smoothedRotatedMovement = cam.TransformDirection(movement).normalized;
