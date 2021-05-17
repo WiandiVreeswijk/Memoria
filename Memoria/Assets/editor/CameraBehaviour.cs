@@ -2,8 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraBehaviour : EditorWindow
-{
+public class CameraBehaviour : EditorWindow {
     //thirdperson
     GameObject thirdPersonCameraObject;
     CinemachineFreeLook thirdPersonCamera;
@@ -16,29 +15,24 @@ public class CameraBehaviour : EditorWindow
     //testTooling
 
     [MenuItem("WAEM/Camera tooling")]
-    public static void ShowWindow()
-    {
+    public static void ShowWindow() {
         var window = GetWindow<CameraBehaviour>("WAEM tooling");
         //window.Initialize();
     }
 
-    private void OnGUI()
-    {
+    private void OnGUI() {
         ThirdPersonCameraTooling();
 
         //toggles starting cutscene & menu
-        if (GUILayout.Button("Toggle instant play"))
-        {
+        if (GUILayout.Button("Toggle instant play")) {
             ToggleInstantPlay();
         }
     }
 
-    private void ThirdPersonCameraTooling()
-    {
+    private void ThirdPersonCameraTooling() {
         //finds the cinemachine freelook camera from the given object
         thirdPersonCameraObject = EditorGUILayout.ObjectField("tp camera object", thirdPersonCameraObject, typeof(GameObject), true) as GameObject;
-        if (thirdPersonCameraObject != null)
-        {
+        if (thirdPersonCameraObject != null) {
             thirdPersonCamera = thirdPersonCameraObject.GetComponent<CinemachineFreeLook>();
             EditorUtility.SetDirty(thirdPersonCameraObject);
 
@@ -51,24 +45,21 @@ public class CameraBehaviour : EditorWindow
             //slider to adjust sensitivity
             showPositionCamSpeed = EditorGUILayout.Foldout(showPositionCamSpeed, "Camera Speed");
             if (showPositionCamSpeed)
-                if (Selection.activeTransform)
-                {
+                if (Selection.activeTransform) {
                     camSpeedX = EditorGUILayout.Slider("cam speed X", camSpeedX, 300, 1000);
                     camSpeedY = EditorGUILayout.Slider("cam speed Y", camSpeedY, 3, 10);
                     thirdPersonCamera.m_XAxis.m_MaxSpeed = camSpeedX;
                     thirdPersonCamera.m_YAxis.m_MaxSpeed = camSpeedY;
                 }
 
-            if (!Selection.activeTransform)
-            {
+            if (!Selection.activeTransform) {
                 showPositionCamSpeed = false;
             }
 
             //slider to adjust camera accelaration and decelaration
             showPositionCamAccelDecel = EditorGUILayout.Foldout(showPositionCamAccelDecel, "Accel & Decel");
             if (showPositionCamAccelDecel)
-                if (Selection.activeTransform)
-                {
+                if (Selection.activeTransform) {
                     camAccelX = EditorGUILayout.Slider("cam accel X", camAccelX, 0, 1);
                     camDecelX = EditorGUILayout.Slider("cam decel X", camDecelX, 0, 1);
                     camAccelY = EditorGUILayout.Slider("cam accel Y", camAccelY, 0, 1);
@@ -79,32 +70,26 @@ public class CameraBehaviour : EditorWindow
                     thirdPersonCamera.m_YAxis.m_DecelTime = camDecelY;
                 }
 
-            if (!Selection.activeTransform)
-            {
+            if (!Selection.activeTransform) {
                 showPositionCamAccelDecel = false;
             }
-        }
-        else
-        {
+        } else {
             EditorGUILayout.HelpBox("Third person camera object is missing", MessageType.Warning);
         }
     }
 
-    private void ToggleInstantPlay()
-    {
-        GameObject obj = GameObject.Find("InstantPlayOn"); ;
+    private void ToggleInstantPlay() {
+        GameObject instantPlayObjects = GameObject.Find("InstantPlayObjects");
+        GameObject obj = GameObject.Find("InstantPlayOn");
         bool instantPlayOn = obj != null;
-        if (!instantPlayOn)
-        {
-            new GameObject("InstantPlayOn");
+        if (!instantPlayOn) {
+            new GameObject("InstantPlayOn").transform.parent = instantPlayObjects.transform;
             instantPlayOn = true;
-        }
-        else
-        {
-            GameObject.DestroyImmediate(obj);
+        } else {
+            DestroyImmediate(obj);
             instantPlayOn = false;
         }
 
-        GameObject.Find("InstantPlayVariables").transform.GetChild(0).gameObject.SetActive(!instantPlayOn);
+        instantPlayObjects.transform.GetChild(0).gameObject.SetActive(!instantPlayOn);
     }
 }
