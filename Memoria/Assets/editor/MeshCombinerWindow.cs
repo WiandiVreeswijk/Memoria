@@ -48,9 +48,9 @@ public class MeshCombinerWindow : ScriptableWizard {
             var materials = meshFilters[i].GetComponent<MeshRenderer>().sharedMaterials;
             if (materials == null) continue;
             if (materials.Length > 1) {
-                parentOfObjectsToCombine.transform.position = originalPosition;
-                Debug.LogError("Multiple materials on meshes. Can't combine");
-                return;
+                //parentOfObjectsToCombine.transform.position = originalPosition;
+                //Debug.LogError("Multiple materials on meshes. Can't combine");
+                //return;
             }
 
             Material material = materials[0];
@@ -81,18 +81,20 @@ public class MeshCombinerWindow : ScriptableWizard {
             renderer.sharedMaterial = entry.Key;
             combinedObjects.Add(combinedObject);
 
-            if (parentOfObjectsToCombine.transform.parent != null) {
-                combinedObject.transform.parent = parentOfObjectsToCombine.transform.parent;
-            }
-            combinedObject.isStatic = true;
+
         }
 
         GameObject resultGO = null;
         if (combinedObjects.Count > 1) {
-            resultGO = new GameObject("CombinedMeshes_" + parentOfObjectsToCombine.name);
+            resultGO = new GameObject(parentOfObjectsToCombine.name + "Combined");
             foreach (var combinedObject in combinedObjects) combinedObject.transform.parent = resultGO.transform;
         } else {
             resultGO = combinedObjects[0];
+        }
+
+        resultGO.isStatic = true;
+        if (parentOfObjectsToCombine.transform.parent != null) {
+            resultGO.transform.parent = parentOfObjectsToCombine.transform.parent;
         }
 
         if (createPrefab) PrefabUtility.SaveAsPrefabAssetAndConnect(resultGO, "Assets/ContentPacks/CombinedMeshes" + resultGO.name + ".prefab", InteractionMode.UserAction);
