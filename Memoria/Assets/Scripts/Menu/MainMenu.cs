@@ -9,9 +9,18 @@ public class MainMenu : MonoBehaviour
     public PlayableDirector director;
     public GameObject controlPanel;
 
-    public CinemachineVirtualCamera mainMenuCamera; 
+    public CinemachineVirtualCamera mainMenuCamera;
+
+    public CursorLocker cursorLocker;
+
+    private void Start()
+    {
+        cursorLocker.UnlockMouse();
+    }
+
     public void PlayGame()
     {
+        cursorLocker.LockMouse();
         StartTimeLine();
         mainMenuCamera.Priority = 10;
     }
