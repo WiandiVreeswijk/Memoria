@@ -4,17 +4,16 @@ using Cinemachine;
 
 public class CameraBehaviour : EditorWindow
 {
+    //thirdperson
     GameObject thirdPersonCameraObject;
     CinemachineFreeLook thirdPersonCamera;
-
     int fieldOfView;
-
     bool showPositionCamSpeed = true;
     float camSpeedX, camSpeedY;
-
     bool showPositionCamAccelDecel = true;
     float camAccelX, camDecelX, camAccelY, camDecelY;
 
+    //testTooling
 
     [MenuItem("WAEM/Camera tooling")]
     public static void ShowWindow()
@@ -24,6 +23,17 @@ public class CameraBehaviour : EditorWindow
     }
 
     private void OnGUI()
+    {
+        ThirdPersonCameraTooling();
+
+        //toggles starting cutscene & menu
+        if (GUILayout.Button("Toggle instant play"))
+        {
+            ToggleInstantPlay();
+        }
+    }
+
+    private void ThirdPersonCameraTooling()
     {
         //finds the cinemachine freelook camera from the given object
         thirdPersonCameraObject = EditorGUILayout.ObjectField("tp camera object", thirdPersonCameraObject, typeof(GameObject), true) as GameObject;
@@ -80,4 +90,21 @@ public class CameraBehaviour : EditorWindow
         }
     }
 
+    private void ToggleInstantPlay()
+    {
+        GameObject obj = GameObject.Find("InstantPlayOn"); ;
+        bool instantPlayOn = obj != null;
+        if (!instantPlayOn)
+        {
+            new GameObject("InstantPlayOn");
+            instantPlayOn = true;
+        }
+        else
+        {
+            GameObject.DestroyImmediate(obj);
+            instantPlayOn = false;
+        }
+
+        GameObject.Find("InstantPlayVariables").transform.GetChild(0).gameObject.SetActive(!instantPlayOn);
+    }
 }
