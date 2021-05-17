@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using Cinemachine;
 
 public class EnterHouseTransition : MonoBehaviour
 {
-    //public VideoPlayer videoPlayer;
     public GameObject elenaMesh;
 
     private bool playerEntered = false;
 
-    private void Start()
-    {
-        //videoPlayer.Stop();
-    }
+    public CinemachineVirtualCamera firstPersonCamera;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,13 +19,13 @@ public class EnterHouseTransition : MonoBehaviour
             if (other.gameObject.tag == "Player")
             {
                 playerEntered = true;
-                //videoPlayer.Play();
+                firstPersonCamera.Priority = 11;
             }
         }
         else
         {
             playerEntered = false;
-            //videoPlayer.Pause();
+            firstPersonCamera.Priority = 9;
         }
         elenaMesh.SetActive(!playerEntered);
     }
