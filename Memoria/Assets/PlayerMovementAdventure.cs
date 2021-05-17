@@ -39,7 +39,7 @@ public class PlayerMovementAdventure : MonoBehaviour {
 
         //Check if we're making a 180 turn
         float dot = Vector3.Dot(previousPlainMovement, plainMovement);
-        bool sharpTurn = dot < 0;
+        bool sharpTurn = dot < 0.1f;
         if (sharpTurn) movement = Vector3.zero;
         if (plainRawMovement == Vector3.zero) { //No keys are pressed so no movement input
             if (!sharpTurn) {
