@@ -48,7 +48,7 @@ public class PlayerMovementAdventure : MonoBehaviour {
             }
             wasMovingLastFrame = false;
         } else if (sharpTurn || (Mathf.Abs(plainMovement.x) + Mathf.Abs(plainMovement.z)) > startMovingTreshold) {//If any keys are pressed and thus the player should be moving. Or if there is a sharp turn
-            if (Input.GetKey(KeyCode.LeftShift)) isRunning = true;
+            if (Input.GetButton("Sprint")) isRunning = true;
             movement += plainMovement; //Add input movement to movement resulting from the previous frame
 
             Quaternion temporaryCameraRotation = cam.rotation;
