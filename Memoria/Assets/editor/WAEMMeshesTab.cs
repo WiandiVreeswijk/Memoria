@@ -5,17 +5,15 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class WAEMMeshesTab : WAEMTab
-{
-    public override void Initialize()
-    {
-        
+public class WAEMMeshesTab : IWAEMTab {
+    public void Initialize() {
+
     }
 
-    public override void OnGUI(GUIStyle style)
+    public void OnGUI(EditorWindow window, GUIStyle style)
     {
         EditorGUI.indentLevel++;
-
+        GUI.skin.FindStyle("HelpBox").richText = true;
         EditorGUILayout.HelpBox(
             "<size=11>Use this tool to:\n" +
             "<b>• Combine meshes</b>\tSelect the parent object of a group of objects\n" +
@@ -29,7 +27,7 @@ public class WAEMMeshesTab : WAEMTab
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection();
     }
 
-    public override void OnUpdate()
+    public void OnUpdate()
     {
         
     }

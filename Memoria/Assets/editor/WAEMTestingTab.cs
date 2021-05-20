@@ -4,7 +4,7 @@ using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 
-public class WAEMTestingTab : WAEMTab {
+public class WAEMTestingTab : IWAEMTab {
     //thirdpersonCamera
     GameObject thirdPersonCameraObject;
     CinemachineFreeLook thirdPersonCamera;
@@ -14,11 +14,11 @@ public class WAEMTestingTab : WAEMTab {
     bool showPositionCamAccelDecel = true;
     float camAccelX, camDecelX, camAccelY, camDecelY;
 
-    public override void Initialize() {
+    public void Initialize() {
 
     }
 
-    public override void OnGUI(GUIStyle style) {
+    public void OnGUI(EditorWindow window, GUIStyle style) {
         bool enabled = IsInstantPlayEnabled();
         EditorGUILayout.LabelField($"<b>InstantPlay</b> <b><color={(enabled ? "green" : "red")}>{(enabled ? "enabled" : "disabled")}</color></b>", style);
         EditorGUI.indentLevel++;
@@ -37,7 +37,7 @@ public class WAEMTestingTab : WAEMTab {
         EditorGUI.indentLevel--;
     }
 
-    public override void OnUpdate() {
+    public void OnUpdate() {
 
     }
 
