@@ -24,6 +24,12 @@ public class MainMenu : MonoBehaviour
         StartTimeLine();
         mainMenuCamera.Priority = 10;
     }
+
+    private void Update()
+    {
+        if (Input.GetButton("Sprint")) PlayGame();
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quit");

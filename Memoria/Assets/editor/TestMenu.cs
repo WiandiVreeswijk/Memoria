@@ -2,8 +2,8 @@ using UnityEditor;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraBehaviour : EditorWindow {
-    //thirdperson
+public class TestMenu : EditorWindow {
+    //thirdpersonCamera
     GameObject thirdPersonCameraObject;
     CinemachineFreeLook thirdPersonCamera;
     int fieldOfView;
@@ -12,25 +12,30 @@ public class CameraBehaviour : EditorWindow {
     bool showPositionCamAccelDecel = true;
     float camAccelX, camDecelX, camAccelY, camDecelY;
 
-    //testTooling
+    //playerMovement
+    
 
-    [MenuItem("WAEM/Camera tooling")]
+    [MenuItem("WAEM/Test tooling")]
     public static void ShowWindow() {
-        var window = GetWindow<CameraBehaviour>("WAEM tooling");
+        var window = GetWindow<TestMenu>("WAEM tooling");
         //window.Initialize();
     }
 
     private void OnGUI() {
-        ThirdPersonCameraTooling();
+        ThirdPersonCamera();
+        ThirdPersonMovement();
 
         //toggles starting cutscene & menu
+        GUILayout.Label("Press to toggle between full game and instant play", EditorStyles.boldLabel);
         if (GUILayout.Button("Toggle instant play")) {
             ToggleInstantPlay();
         }
     }
 
-    private void ThirdPersonCameraTooling() {
+    private void ThirdPersonCamera() {
         //finds the cinemachine freelook camera from the given object
+        GUILayout.Label("Third person camera options", EditorStyles.boldLabel);
+
         thirdPersonCameraObject = EditorGUILayout.ObjectField("tp camera object", thirdPersonCameraObject, typeof(GameObject), true) as GameObject;
         if (thirdPersonCameraObject != null) {
             thirdPersonCamera = thirdPersonCameraObject.GetComponent<CinemachineFreeLook>();
@@ -76,6 +81,11 @@ public class CameraBehaviour : EditorWindow {
         } else {
             EditorGUILayout.HelpBox("Third person camera object is missing", MessageType.Warning);
         }
+    }
+
+    private void ThirdPersonMovement()
+    {
+        GUILayout.Label("Third person movement options", EditorStyles.boldLabel);
     }
 
     private void ToggleInstantPlay() {
