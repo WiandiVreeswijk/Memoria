@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class WAEMMeshesTab : IWAEMTab {
+    private float packMargin = 2.0f;
+
     public void Initialize() {
 
     }
@@ -24,7 +26,10 @@ public class WAEMMeshesTab : IWAEMTab {
         var layout = GUILayout.Height(40);
         if (GUILayout.Button("Combine meshes", layout)) CombineSelectionMultiMat();
         if (GUILayout.Button("Separate submeshes", layout)) ExtractSelection();
+        GUILayout.BeginHorizontal();
+
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection();
+        GUILayout.EndHorizontal();
     }
 
     public void OnUpdate()
@@ -214,8 +219,8 @@ public class WAEMMeshesTab : IWAEMTab {
 
         Undo.RecordObject(mesh, "CalculateLightmapUVs");
         if (mesh != null) {
-            Debug.Log("Succesfully calculated lightmap UVs");
             CalculateLightmapUVs(mesh);
+            Debug.Log("Succesfully calculated lightmap UVs");
         }
     }
 
@@ -256,9 +261,14 @@ public class WAEMMeshesTab : IWAEMTab {
         return mesh;
     }
 
-    private void CalculateLightmapUVs(Mesh mesh) {
+    private void CalculateLightmapUVs(Mesh mesh, float packMargin = 2.0f) {
         UnwrapParam param;
         UnwrapParam.SetDefaults(out param);
+        param.packMargin = 0.02f;
+        Debug.Log(param.hardAngle);
+        Debug.Log(param.angleError);
+        Debug.Log(param.areaError);
+        Debug.Log(param.packMargin);
         Unwrapping.GenerateSecondaryUVSet(mesh, param);
     }
 }

@@ -16,14 +16,14 @@ public class WAEMBuildingTab : IWAEMTab {
     private GameObject prefab;
     private bool isDragPerformed = false;
     private bool isDragging = false;
+
     public void OnGUI(EditorWindow window, GUIStyle style) {
-        prefab = EditorGUILayout.ObjectField((Object)prefab, typeof(GameObject), false) as GameObject;
+        prefab = EditorGUILayout.ObjectField(prefab, typeof(GameObject), false) as GameObject;
 
         if (prefab == null) return;
         var box = new VisualElement();
         box.style.backgroundColor = Color.red;
         // box.style.flexGrow = 1f;
-
 
         box.RegisterCallback<MouseDownEvent>(evt => {
             DragAndDrop.PrepareStartDrag();
@@ -42,7 +42,6 @@ public class WAEMBuildingTab : IWAEMTab {
         window.rootVisualElement.Add(box);
         SceneView.duringSceneGui += sv => OnDragEnd();
         EditorApplication.hierarchyWindowItemOnGUI += (id, rect) => OnDragEnd();
-
     }
 
     private void OnDragEnd() {
