@@ -21,17 +21,47 @@ public class PlayerMovementAdventure : MonoBehaviour {
     private float forwardSpeed = 0.0f;
     private bool wasMovingLastFrame;
 
+    private CharacterController controller;
+    private float fpsSpeed;
+    [HideInInspector]
+    public bool inHouse;
+
     private void Start() {
         cam = Camera.main.transform;
         animator = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
+
+        inHouse = false;
     }
 
     void Update() {
+        if (!inHouse)
+        {
+            animator.enabled = true;
+            Adventure();
+        }
+        else
+        {
+            animator.enabled = false;
+            FPS();
+        }
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.ClampMagnitude(smoothedRotatedMovement, forwardSpeed)); //Smoother direction the player is moving to
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.ClampMagnitude(plainRotatedMovement, forwardSpeed)); //Direction the player is moving to
+    }
+
+    private void Adventure()
+    {
         bool isRunning = false;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         float rawHorizontal = Input.GetAxisRaw("Horizontal");
         float rawVertical = Input.GetAxisRaw("Vertical");
+
         Vector3 plainMovement = new Vector3(horizontal, 0, vertical); //This frame's movement store in a vector.
         Vector3 plainRawMovement = new Vector3(rawHorizontal, 0, rawVertical); //This frame's movement store in a vector.
 
@@ -41,13 +71,17 @@ public class PlayerMovementAdventure : MonoBehaviour {
         float dot = Vector3.Dot(previousPlainMovement, plainMovement);
         bool sharpTurn = dot < 0.1f;
         if (sharpTurn) movement = Vector3.zero;
-        if (plainRawMovement == Vector3.zero) { //No keys are pressed so no movement input
-            if (!sharpTurn) {
+        if (plainRawMovement == Vector3.zero)
+        { //No keys are pressed so no movement input
+            if (!sharpTurn)
+            {
                 if (wasMovingLastFrame) runVariableSmoothed = 0.0f; //Player just stopped pressing movement keys
                 forwardSpeed = Mathf.Clamp01(forwardSpeed - movementDecreaseWhenNotMoving); //Prevent instant movement stop
             }
             wasMovingLastFrame = false;
-        } else if (sharpTurn || (Mathf.Abs(plainMovement.x) + Mathf.Abs(plainMovement.z)) > startMovingTreshold) {//If any keys are pressed and thus the player should be moving. Or if there is a sharp turn
+        }
+        else if (sharpTurn || (Mathf.Abs(plainMovement.x) + Mathf.Abs(plainMovement.z)) > startMovingTreshold)
+        {//If any keys are pressed and thus the player should be moving. Or if there is a sharp turn
             if (Input.GetButton("Sprint")) isRunning = true;
             movement += plainMovement; //Add input movement to movement resulting from the previous frame
 
@@ -73,10 +107,12 @@ public class PlayerMovementAdventure : MonoBehaviour {
         animator.SetFloat("Running", runVariableSmoothed);
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.ClampMagnitude(smoothedRotatedMovement, forwardSpeed)); //Smoother direction the player is moving to
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.ClampMagnitude(plainRotatedMovement, forwardSpeed)); //Direction the player is moving to
+    private void FPS()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * horizontal + transform.forward * vertical;
+        controller.Move(move * fpsSpeed * Time.deltaTime);
     }
 }
