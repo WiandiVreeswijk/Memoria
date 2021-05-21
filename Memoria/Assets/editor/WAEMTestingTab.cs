@@ -41,6 +41,14 @@ public class WAEMTestingTab : IWAEMTab {
 
     }
 
+    public void OnSelectionChange(EditorWindow window) {
+
+    }
+
+    public void OnDestroy() {
+
+    }
+
     private void ThirdPersonCamera() {
         //finds the cinemachine freelook camera from the given object
         EditorGUILayout.LabelField("Third person camera options", EditorStyles.boldLabel);

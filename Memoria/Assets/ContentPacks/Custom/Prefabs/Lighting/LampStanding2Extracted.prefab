@@ -123,11 +123,11 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.80784315, b: 0.64705884, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.9025229, b: 0.8844021, a: 1}
+  m_Intensity: 0.75
   m_Range: 10
   m_SpotAngle: 118.95003
-  m_InnerSpotAngle: 75.017914
+  m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -183,6 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8170849526282334168}
+  - component: {fileID: 739758345828898377}
   m_Layer: 0
   m_Name: LampStanding2Extracted
   m_TagString: Untagged
@@ -197,7 +198,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6549952354289170170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.976, y: -0.0009999275, z: 5.4314785}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
@@ -206,6 +207,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &739758345828898377
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549952354289170170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &6992895900181333442
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class WAEMToolingWindow : EditorWindow {
         Baking,
         Testing,
         Building,
+        Lighting,
     }
 
 
@@ -31,14 +32,28 @@ public class WAEMToolingWindow : EditorWindow {
     [SerializeField] private WAEMBakingTab bakingTab;
     [SerializeField] private WAEMTestingTab testingTab;
     [SerializeField] private WAEMBuildingTab buildingTab;
+    [SerializeField] private WAEMLightingTab lightingTab;
 
 
-    
+
     private void OnEnable() {
         if (meshesTab == null) meshesTab = new WAEMMeshesTab();
         if (bakingTab == null) bakingTab = new WAEMBakingTab();
         if (testingTab == null) testingTab = new WAEMTestingTab();
         if (buildingTab == null) buildingTab = new WAEMBuildingTab();
+        if (lightingTab == null) lightingTab = new WAEMLightingTab();
+    }
+
+    private void OnDestroy() {
+        if (tabs == null) InitTabs();
+        foreach (var tabPair in tabs) {
+            tabPair.Value.OnDestroy();
+        }
+    }
+
+    private void OnSelectionChange() {
+        if (tabs == null) InitTabs();
+        tabs[(Tab)activeTab].OnSelectionChange(this);
     }
 
     private Dictionary<Tab, IWAEMTab> tabs;
@@ -53,6 +68,7 @@ public class WAEMToolingWindow : EditorWindow {
             {Tab.Baking, bakingTab},
             {Tab.Testing, testingTab},
             {Tab.Building, buildingTab},
+            {Tab.Lighting, lightingTab},
         };
         foreach (var tabPair in tabs) {
             tabPair.Value.Initialize();
@@ -60,7 +76,7 @@ public class WAEMToolingWindow : EditorWindow {
     }
 
     private void OnGUI() {
-        if(tabs == null) InitTabs();
+        if (tabs == null) InitTabs();
         style = new GUIStyle(GUI.skin.label);
         style.richText = true;
         EditorGUILayout.Separator();

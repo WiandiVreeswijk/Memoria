@@ -66,4 +66,12 @@ public class WAEMBakingTab : IWAEMTab {
     public void OnUpdate() {
         currentlyBaking = Lightmapping.isRunning;
     }
+
+    public void OnSelectionChange(EditorWindow window) {
+
+    }
+
+    public void OnDestroy() {
+
+    }
 }

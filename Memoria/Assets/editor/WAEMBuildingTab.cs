@@ -20,28 +20,28 @@ public class WAEMBuildingTab : IWAEMTab {
     public void OnGUI(EditorWindow window, GUIStyle style) {
         prefab = EditorGUILayout.ObjectField(prefab, typeof(GameObject), false) as GameObject;
 
-        if (prefab == null) return;
-        var box = new VisualElement();
-        box.style.backgroundColor = Color.red;
-        // box.style.flexGrow = 1f;
-
-        box.RegisterCallback<MouseDownEvent>(evt => {
-            DragAndDrop.PrepareStartDrag();
-            DragAndDrop.StartDrag("Dragging");
-            DragAndDrop.objectReferences = new Object[] { prefab };
-
-            Selection.activeGameObject = null;
-            isDragPerformed = false;
-            isDragging = true;
-        });
-
-        box.RegisterCallback<DragUpdatedEvent>(evt => {
-            DragAndDrop.visualMode = DragAndDropVisualMode.Move;
-        });
-
-        window.rootVisualElement.Add(box);
-        SceneView.duringSceneGui += sv => OnDragEnd();
-        EditorApplication.hierarchyWindowItemOnGUI += (id, rect) => OnDragEnd();
+        //if (prefab == null) return;
+        //var box = new VisualElement();
+        //box.style.backgroundColor = Color.red;
+        //// box.style.flexGrow = 1f;
+        //
+        //box.RegisterCallback<MouseDownEvent>(evt => {
+        //    DragAndDrop.PrepareStartDrag();
+        //    DragAndDrop.StartDrag("Dragging");
+        //    DragAndDrop.objectReferences = new Object[] { prefab };
+        //
+        //    Selection.activeGameObject = null;
+        //    isDragPerformed = false;
+        //    isDragging = true;
+        //});
+        //
+        //box.RegisterCallback<DragUpdatedEvent>(evt => {
+        //    DragAndDrop.visualMode = DragAndDropVisualMode.Move;
+        //});
+        //
+        //window.rootVisualElement.Add(box);
+        //SceneView.duringSceneGui += sv => OnDragEnd();
+        //EditorApplication.hierarchyWindowItemOnGUI += (id, rect) => OnDragEnd();
     }
 
     private void OnDragEnd() {
@@ -62,5 +62,14 @@ public class WAEMBuildingTab : IWAEMTab {
 
 
     public void OnUpdate() {
+
+    }
+
+    public void OnSelectionChange(EditorWindow window) {
+
+    }
+
+    public void OnDestroy() {
+
     }
 }

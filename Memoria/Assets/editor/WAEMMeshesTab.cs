@@ -37,6 +37,14 @@ public class WAEMMeshesTab : IWAEMTab {
         
     }
 
+    public void OnSelectionChange(EditorWindow window) {
+
+    }
+
+    public void OnDestroy() {
+
+    }
+
     private void CombineSelectionMultiMat() {
         if (Selection.objects.Length > 1) {
             Debug.LogError("Too many objects selected.");
@@ -170,6 +178,7 @@ public class WAEMMeshesTab : IWAEMTab {
         Undo.RegisterCompleteObjectUndo(selected, "extract");
         Undo.RegisterCreatedObjectUndo(parent, "extractCreateObject");
 
+        Quaternion originalRotation = selected.transform.rotation;
         Vector3 originalPosition = selected.transform.position;
         selected.transform.position = Vector3.zero;
 
@@ -193,7 +202,9 @@ public class WAEMMeshesTab : IWAEMTab {
 
         selected.SetActive(false);
         selected.transform.position = originalPosition;
+        selected.transform.rotation = originalRotation;
         parent.transform.position = originalPosition;
+        parent.transform.rotation = originalRotation;
         parent.isStatic = true;
     }
 
@@ -265,10 +276,10 @@ public class WAEMMeshesTab : IWAEMTab {
         UnwrapParam param;
         UnwrapParam.SetDefaults(out param);
         param.packMargin = packMargin;
-        Debug.Log(param.hardAngle);
-        Debug.Log(param.angleError);
-        Debug.Log(param.areaError);
-        Debug.Log(param.packMargin);
+        //Debug.Log(param.hardAngle);
+        //Debug.Log(param.angleError);
+        //Debug.Log(param.areaError);
+        //Debug.Log(param.packMargin);
         Unwrapping.GenerateSecondaryUVSet(mesh, param);
     }
 }
