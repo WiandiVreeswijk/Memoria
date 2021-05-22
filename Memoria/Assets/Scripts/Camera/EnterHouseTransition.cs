@@ -12,26 +12,43 @@ public class EnterHouseTransition : MonoBehaviour
 
     private PlayerMovementAdventure adventureMovement;
 
+    private bool isColliding = false;
+
     private void Start()
     {
         adventureMovement = FindObjectOfType<PlayerMovementAdventure>();
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (!adventureMovement.inHouse)
+        if (isColliding) return;
+        isColliding = true;
+
+        print("entered house");
+        if (other.gameObject.tag == "Player")
         {
-            if (other.gameObject.tag == "Player")
-            {
-                adventureMovement.inHouse = true;
-                firstPersonCamera.Priority = 11;
-            }
+            adventureMovement.inHouse = true;
+            firstPersonCamera.Priority = 11;
         }
-        else
+        elenaMesh.SetActive(false);
+
+        StartCoroutine(Reset());
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        print("exit house");
+        if (other.gameObject.tag == "Player")
         {
             adventureMovement.inHouse = false;
             firstPersonCamera.Priority = 9;
         }
-        elenaMesh.SetActive(!adventureMovement.inHouse);
+        elenaMesh.SetActive(true);
+    }
+
+    IEnumerator Reset()
+    {
+        yield return new WaitForEndOfFrame();
+        isColliding = false;
     }
 }
