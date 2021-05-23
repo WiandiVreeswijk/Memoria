@@ -51,10 +51,10 @@ public class MusicControl : MonoBehaviour
     private void FixedUpdate()
     {
         audio.setParameterByID(relaxedParameter, relaxedValue);
-        audio.setParameterByID(energeticParameter, 0);
+        audio.setParameterByID(energeticParameter, energeticValue);
         if (gameHasStarted)
         {
-            energeticValue = Mathf.Lerp(0, 1, lerpValue);
+            energeticValue = Mathf.Lerp(energeticValue, 0, lerpValue * Time.fixedDeltaTime);
         }
         audio.setParameterByID(energeticParameter, energeticValue);
     }
