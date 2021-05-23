@@ -22,7 +22,7 @@ public class MusicControl : MonoBehaviour
     public float energeticValue = 1f;
 
     private bool gameHasStarted = false;
-    private float lerpValue = 0.5f;
+    private float lerpValue = 0.1f;
 
     private void Start()
     {
