@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
 
-public class SoundControl : MonoBehaviour
+public class AmbientControl : MonoBehaviour
 {
     private PlayerMovementAdventure adventureMovement;
 
