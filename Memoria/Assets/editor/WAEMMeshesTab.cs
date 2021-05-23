@@ -20,6 +20,7 @@ public class WAEMMeshesTab : IWAEMTab {
             "<b>• Combine meshes</b>\tSelect the parent object of a group of objects\n" +
             "<b>• Separate submeshes</b>\tSelect the object to separate\n" +
             "<b>• Calculate submeshes</b>\tSelect a mesh or an object with a mesh\n" +
+            "<b>• Bake colliders</b>\tSelect a mesh to generate a mesh collider\n" +
             "</size>", MessageType.Info, true);
         EditorGUI.indentLevel--;
         var layout = GUILayout.Height(40);
@@ -30,7 +31,7 @@ public class WAEMMeshesTab : IWAEMTab {
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection(packMargin);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Bake collider")) BakeMeshCollider();
+        if (GUILayout.Button("Bake collider", layout)) BakeMeshCollider();
         GUILayout.EndHorizontal();
 
     }
