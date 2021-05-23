@@ -12,8 +12,7 @@ public class WAEMMeshesTab : IWAEMTab {
 
     }
 
-    public void OnGUI(EditorWindow window, GUIStyle style)
-    {
+    public void OnGUI(EditorWindow window, GUIStyle style) {
         EditorGUI.indentLevel++;
         GUI.skin.FindStyle("HelpBox").richText = true;
         EditorGUILayout.HelpBox(
@@ -30,11 +29,14 @@ public class WAEMMeshesTab : IWAEMTab {
         packMargin = GUILayout.HorizontalSlider(packMargin, 0.004f, 0.1f);
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection(packMargin);
         GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Bake collider")) BakeMeshCollider();
+        GUILayout.EndHorizontal();
+
     }
 
-    public void OnUpdate()
-    {
-        
+    public void OnUpdate() {
+
     }
 
     public void OnSelectionChange(EditorWindow window) {
@@ -164,8 +166,7 @@ public class WAEMMeshesTab : IWAEMTab {
             Debug.LogError("No mesh found in selected GameObject.");
             return;
         }
-        if (selectedMeshFilter.sharedMesh.subMeshCount < 2)
-        {
+        if (selectedMeshFilter.sharedMesh.subMeshCount < 2) {
             Debug.LogError("Selected mesh filter doesn't have multiple submeshes.");
             return;
         }
@@ -206,6 +207,32 @@ public class WAEMMeshesTab : IWAEMTab {
         parent.transform.position = originalPosition;
         parent.transform.rotation = originalRotation;
         parent.isStatic = true;
+    }
+
+    private void BakeMeshCollider() {
+        if (Selection.objects.Length > 1) {
+            Debug.LogError("Too many objects selected.");
+            return;
+        }
+        if (Selection.activeGameObject == null) {
+            Debug.LogError("No GameObject selected.");
+            return;
+        }
+
+        MeshFilter selectedMeshFilter = Selection.activeGameObject.GetComponent<MeshFilter>();
+        if (selectedMeshFilter == null) {
+            Debug.LogError("No mesh found in selected GameObject.");
+            return;
+        }
+
+        Physics.BakeMesh(selectedMeshFilter.sharedMesh.GetInstanceID(), true);
+
+        MeshCollider collider = Selection.activeGameObject.GetComponent<MeshCollider>();
+        if (collider == null) {
+            collider = Selection.activeGameObject.AddComponent<MeshCollider>();
+        }
+
+        collider.sharedMesh = selectedMeshFilter.sharedMesh;
     }
 
     private void CalculateLightmapUVsForSelection(float packMargin) {

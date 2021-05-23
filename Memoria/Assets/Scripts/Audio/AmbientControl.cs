@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
 
-public class AmbientControl : MonoBehaviour
-{
+public class AmbientControl : MonoBehaviour {
     private PlayerMovementAdventure adventureMovement;
 
     [Header("FMOD Event")]
@@ -22,8 +21,7 @@ public class AmbientControl : MonoBehaviour
     [Range(0f, 1f)]
     public float birdValue = 1f;
 
-    private void Start()
-    {
+    private void Start() {
         adventureMovement = FindObjectOfType<PlayerMovementAdventure>();
 
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
@@ -42,21 +40,40 @@ public class AmbientControl : MonoBehaviour
 
         FMOD.Studio.PLAYBACK_STATE PbState;
         audio.getPlaybackState(out PbState);
-        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
+        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
             audio.start();
         }
+
+        SetVolume(0.7f);
+        SetBirds(0.7f);
     }
-    private void FixedUpdate()
-    {
-        if (adventureMovement.inHouse)
-        {
-            audio.setParameterByID(volumeParameter, 0);
-        }
-        else if(!adventureMovement.inHouse)
-        {
-            audio.setParameterByID(volumeParameter, volumeValue);
-            audio.setParameterByID(birdsParameter, birdValue);
-        }
+
+    public void SetParameters(float volume, float birds) {
+        volumeValue = volume;
+        birdValue = birds;
+        audio.setParameterByID(volumeParameter, volumeValue);
+        audio.setParameterByID(birdsParameter, birdValue);
+    }
+
+    public void SetVolume(float volume) {
+        volumeValue = volume;
+        audio.setParameterByID(volumeParameter, volumeValue);
+    }
+
+    public void SetBirds(float birds) {
+        birdValue = birds;
+        audio.setParameterByID(birdsParameter, birdValue);
+    }
+
+    public float GetVolume() {
+        float volume;
+        audio.getParameterByID(volumeParameter, out volume);
+        return volume;
+    }
+
+    public float GetBirds() {
+        float volume;
+        audio.getParameterByID(birdsParameter, out volume);
+        return volume;
     }
 }
