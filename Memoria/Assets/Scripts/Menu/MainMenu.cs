@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using Cinemachine;
 
-public class MainMenu : MonoBehaviour
-{
+public class MainMenu : MonoBehaviour {
     public PlayableDirector director;
     public GameObject controlPanel;
 
@@ -13,30 +12,30 @@ public class MainMenu : MonoBehaviour
 
     public CursorLocker cursorLocker;
 
-    private void Start()
-    {
+    private void Start() {
         cursorLocker.UnlockMouse();
+        director.stopped += Director_stopped;
     }
 
-    public void PlayGame()
-    {
+    private void Director_stopped(PlayableDirector obj) {
+        Globals.GetMenuController().NotifyPlayer("WASD to move");
+    }
+
+    public void PlayGame() {
         cursorLocker.LockMouse();
         StartTimeLine();
         mainMenuCamera.Priority = 10;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (Input.GetButton("Sprint")) PlayGame();
     }
 
-    public void QuitGame()
-    {
+    public void QuitGame() {
         Debug.Log("Quit");
         Application.Quit();
     }
-    public void StartTimeLine()
-    {
+    public void StartTimeLine() {
         director.Play();
     }
 }

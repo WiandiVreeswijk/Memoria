@@ -61,7 +61,6 @@ public class MusicControl : MonoBehaviour
 
     public void GameStarted()
     {
-        print(gameHasStarted);
         gameHasStarted = true;
     }
 }

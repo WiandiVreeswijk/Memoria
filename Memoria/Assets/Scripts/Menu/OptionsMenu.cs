@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class OptionsMenu : MonoBehaviour
-{
+public class OptionsMenu : MonoBehaviour {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public Animator menuFadeAnimator;
@@ -15,47 +14,39 @@ public class OptionsMenu : MonoBehaviour
 
     public CursorLocker cursorLocker;
 
-    private void Update()
-    {
-        if (director.state != PlayState.Playing)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (gameIsPaused)
-                {
+    private void Update() {
+        if (director.state != PlayState.Playing) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                if (gameIsPaused) {
                     Resume();
-                }
-                else
-                {
+                } else {
                     Pause();
                 }
             }
         }
     }
 
-    private void Pause()
-    {
-        pauseMenuUI.SetActive(true);
+    private void Pause() {
+        Globals.GetMenuController().SetMenu("Pause");
+        //pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         cursorLocker.UnlockMouse();
         gameIsPaused = true;
     }
 
-    private void Resume()
-    {
-        pauseMenuUI.SetActive(false);
+    private void Resume() {
+        Globals.GetMenuController().CloseMenu();
+        //pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         cursorLocker.LockMouse();
         gameIsPaused = false;
     }
 
-    public void ResumeGame()
-    {
+    public void ResumeGame() {
         Resume();
     }
 
-    public void LoadMenu()
-    {
+    public void LoadMenu() {
         Time.timeScale = 1f;
         cursorLocker.UnlockMouse();
         pauseMenuUI.SetActive(false);
