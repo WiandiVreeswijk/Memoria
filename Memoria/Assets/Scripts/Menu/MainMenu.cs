@@ -17,6 +17,10 @@ public class MainMenu : MonoBehaviour {
         director.stopped += Director_stopped;
     }
 
+    private void OnDestroy() {
+        director.stopped -= Director_stopped;
+    }
+
     private void Director_stopped(PlayableDirector obj) {
         Globals.GetMenuController().NotifyPlayer("WASD to move");
     }
@@ -25,6 +29,7 @@ public class MainMenu : MonoBehaviour {
         cursorLocker.LockMouse();
         StartTimeLine();
         mainMenuCamera.Priority = 10;
+        print("Play");
     }
 
     private void Update() {
@@ -35,7 +40,10 @@ public class MainMenu : MonoBehaviour {
         Debug.Log("Quit");
         Application.Quit();
     }
-    public void StartTimeLine() {
+    public void StartTimeLine()
+    {
+        director.time = 0;
+        director.Evaluate();
         director.Play();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour {
     //private Animator animator;
@@ -24,6 +25,7 @@ public class MenuController : MonoBehaviour {
         }
     }
 
+    public GameObject collectedThingies;
     [SerializeField] private GameObject notificationPrefab;
     [SerializeField] private GameObject notificationsParent;
 
@@ -48,6 +50,12 @@ public class MenuController : MonoBehaviour {
         SetMenu("Main", 0.0f);
     }
 
+    public void ReloadScene() {
+        Application.Quit();
+        //DOTween.Clear();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void CloseMenu(bool instant = false) {
         if (activePanel != null) {
             FadePanelOut(activePanel, instant ? 0.0f : fadeTime);
@@ -56,7 +64,9 @@ public class MenuController : MonoBehaviour {
         }
     }
 
-    public void SetMenu(string name) {
+    public void SetMenu(string name)
+    {
+        if (name == "Notification") collectedThingies.SetActive(true);
         SetMenu(name, fadeTime);
     }
 

@@ -9,7 +9,7 @@ public class Globals : MonoBehaviour {
 
     void Start() {
         _Instance = this;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         persistenceManager = Utils.FindUniqueScript<PersistenceManager>();
         menuController = FindObjectThatShouldBeUnique<MenuController>();
     }

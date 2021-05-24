@@ -3658,7 +3658,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4284006144
-  m_fontColor: {r: 0, g: 0.7490196, b: 0.34509805, a: 1}
+  m_fontColor: {r: 0, g: 1, b: 0.4627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3798,7 +3798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Welcome playtester! \n\n <size=50>Collect \n<size=10>\n<size=70><b>10</b><size=10>\n\n<size=50><color=#00BF58>spheres</color>
+  m_text: 'Welcome playtester! \n\n <size=50>Collect \n<size=10>\n<size=70><b>10</b><size=10>\n\n<size=50><color=#00FF76>spheres</color>
     to succeed.\n\nTake all the time you need. Please keep in mind the game is in
     early developent. \n <b>Have fun!
 
@@ -4213,12 +4213,12 @@ GameObject:
   - component: {fileID: 1500688192}
   - component: {fileID: 1500688191}
   m_Layer: 5
-  m_Name: NotificationPrefab
+  m_Name: CollectedThingies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1500688190
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5007,7 +5007,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875760968}
-  m_LocalRotation: {x: 0.02098318, y: 0.3643304, z: -0.008211421, w: 0.93099713}
+  m_LocalRotation: {x: 0.020983173, y: 0.3643304, z: -0.008211418, w: 0.93099713}
   m_LocalPosition: {x: 18.730715, y: 2.09, z: 17.867794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5556,7 +5556,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084926851}
-  m_LocalRotation: {x: -0.043119665, y: -0.66375154, z: -0.0383799, w: 0.7457222}
+  m_LocalRotation: {x: -0.043119658, y: -0.6637515, z: -0.03837989, w: 0.74572223}
   m_LocalPosition: {x: 28.880001, y: 0.99, z: 24.218933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7470,9 +7470,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1115946824927605626}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
+      - m_Target: {fileID: 1115946824927605632}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: ReloadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8905,6 +8905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f680830880445946a1f95f7434eec07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectedThingies: {fileID: 1500688189}
   notificationPrefab: {fileID: 4946047720827486611, guid: ae204908b6e64a940bb7874165baaeef, type: 3}
   notificationsParent: {fileID: 1729816207}
   mainPanel: {fileID: 442487818}
@@ -11710,7 +11711,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3981117371771476066}
-  m_LocalRotation: {x: 0.054790817, y: 0.008044839, z: 0.00042402, w: 0.9984654}
+  m_LocalRotation: {x: 0.05479081, y: 0.008044869, z: 0.00042402185, w: 0.99846536}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11910,7 +11911,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3981117372842281340}
-  m_LocalRotation: {x: 0.018485662, y: -0.006157011, z: -0.00054937415, w: 0.99981004}
+  m_LocalRotation: {x: 0.01848569, y: -0.0061570695, z: -0.00054938527, w: 0.99981}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12110,7 +12111,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3981117372937823165}
-  m_LocalRotation: {x: 0.03662018, y: 0.008035898, z: 0.00057028426, w: 0.9992968}
+  m_LocalRotation: {x: 0.036620177, y: 0.008035839, z: 0.0005702861, w: 0.9992968}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17307,6 +17308,10 @@ PrefabInstance:
     - target: {fileID: 8288807754946168205, guid: 8a61f447e23a99c4f857109d45f03592, type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8288898381580454161, guid: 8a61f447e23a99c4f857109d45f03592, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.506
       objectReference: {fileID: 0}
     - target: {fileID: 8288898381831689883, guid: 8a61f447e23a99c4f857109d45f03592, type: 3}
       propertyPath: m_Name
