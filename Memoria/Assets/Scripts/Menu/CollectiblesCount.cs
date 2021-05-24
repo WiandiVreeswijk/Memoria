@@ -21,7 +21,7 @@ public class CollectiblesCount : MonoBehaviour {
     private void FixedUpdate() {
         collectibleCount.text = $"{leftTocollect}";
         if (leftTocollect == 0) {
-            spawner.active = true;
+            spawner.SetActive();
         }
     }
 }

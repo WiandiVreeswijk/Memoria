@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireworksSpawner : MonoBehaviour {
     public GameObject fireworksPrefab;
-    public bool active = false;
+    private bool active = false;
 
     private int index = 0;
 
@@ -14,6 +14,12 @@ public class FireworksSpawner : MonoBehaviour {
         float bb = Random.Range(0, 128);
         if (rr + gg + bb < min) return RandomC(min);
         return new Color(rr, gg, bb);
+    }
+
+    public void SetActive() {
+        if (active) return;
+        FMODUnity.RuntimeManager.CreateInstance("event:/AMBIENT/Fireworks").start();
+        active = true;
     }
 
     void FixedUpdate() {
