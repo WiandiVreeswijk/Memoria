@@ -42,8 +42,6 @@ public class ClothSimulatorEditor : Editor {
             //}
             //cloth.sphereColliders = pairs;
             //Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
-
-
         //}
 
         if (GUILayout.Button("Test")) {

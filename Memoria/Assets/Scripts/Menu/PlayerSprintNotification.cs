@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerSprintNotification : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
-            Globals.GetMenuController().NotifyPlayer("SHIFT to sprint", 2.5f);
+            Globals.GetMenuController().NotifyPlayer("Hold SHIFT to walk", 4.5f);
             Destroy(gameObject);
         }
     }

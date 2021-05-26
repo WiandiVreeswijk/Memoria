@@ -19,9 +19,9 @@ public class NewPlayerMovement : MonoBehaviour {
 
     private void Move() {
         bool shift = Input.GetKey(KeyCode.LeftShift);
-        anim.SetBool("Running", shift);
+        anim.SetBool("Running", !shift);
         float speed = Input.GetAxis("Vertical");
-        anim.SetFloat("Forward", shift ? speed / 2 : speed);
+        anim.SetFloat("Forward", shift ? speed : speed / 2);
     }
 
 }

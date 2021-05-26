@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using Cinemachine;
+using DG.Tweening;
 
 public class MainMenu : MonoBehaviour {
     public PlayableDirector director;
@@ -22,7 +23,11 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void Director_stopped(PlayableDirector obj) {
-        Globals.GetMenuController().NotifyPlayer("WASD to move");
+        Globals.GetPlayer().movement.canMove = true;
+        Globals.GetMenuController().NotifyPlayer("<font=\"Mouse SDF\"><size=36>u</size></font>  to move the camera");
+        Utils.DelayedAction(10.0f, () => {
+            if (!Globals.GetPlayer().movement.hasMoved) Globals.GetMenuController().NotifyPlayer("WASD to move");
+        });
     }
 
     public void PlayGame() {
@@ -32,16 +37,11 @@ public class MainMenu : MonoBehaviour {
         print("Play");
     }
 
-    private void Update() {
-        if (Input.GetButton("Sprint")) PlayGame();
-    }
-
     public void QuitGame() {
         Debug.Log("Quit");
         Application.Quit();
     }
-    public void StartTimeLine()
-    {
+    public void StartTimeLine() {
         director.time = 0;
         director.Evaluate();
         director.Play();
