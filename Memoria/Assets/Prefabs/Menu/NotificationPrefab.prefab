@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.763, y: -3.2}
-  m_SizeDelta: {x: 359.526, y: 51.2661}
+  m_AnchoredPosition: {x: 9.4928, y: 0.6062}
+  m_SizeDelta: {x: 406.1756, y: 49.4475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4946047720389638466
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Text
+  m_text: <font="Mouse SDF"><size=36>u</size></font>  to move the camera
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5d2f609f45ccc1f4e8a7dcaee7ae4739, type: 2}
   m_sharedMaterial: {fileID: 4522802493241838291, guid: 5d2f609f45ccc1f4e8a7dcaee7ae4739, type: 2}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 4946047720827486622}
   - component: {fileID: 4946047720827486609}
   - component: {fileID: 6627825646728571161}
+  - component: {fileID: 4359266367351083280}
   m_Layer: 5
   m_Name: NotificationPrefab
   m_TagString: Untagged
@@ -170,8 +171,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 192.59277, y: -300.90985}
-  m_SizeDelta: {x: 385.1825, y: 75.9445}
+  m_AnchoredPosition: {x: 219.87265, y: -303.63785}
+  m_SizeDelta: {x: 439.7422, y: 81.4005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4946047720827486622
 CanvasRenderer:
@@ -223,3 +224,15 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &4359266367351083280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4946047720827486611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fd1c0f46709ef4096bcda5331639c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
