@@ -10,6 +10,7 @@ public class BouncePlayer : MonoBehaviour
     public Vector3 punch;
     public float duration = 0.5f, elasticity = 0.3f;
     public int vibrato = 1;
+    private Tween tween;
 
 
 
@@ -17,8 +18,9 @@ public class BouncePlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.up * launchForce;
-            transform.DOPunchScale(punch, duration, vibrato, elasticity);
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity = transform.up * launchForce;
+            if (tween != null) tween.Kill(true);
+            tween = transform.DOPunchScale(punch, duration, vibrato, elasticity);
         }
     }
 }
