@@ -54,6 +54,7 @@ public class PlayerMovement25D : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        //groundCheckCollider = GetComponentInChildren<Collider2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -64,7 +65,8 @@ public class PlayerMovement25D : MonoBehaviour {
 
     bool justLanded = false;
     private void FixedUpdate() {
-        bool isGroundedThisFrame = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
+        bool areFeetGrounded = Physics2D.OverlapCircle(transform.position, 0.1f, platformLayerMask);
+        bool isGroundedThisFrame = areFeetGrounded && Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
         justLanded = !isGrounded && isGroundedThisFrame;
         isGrounded = isGroundedThisFrame;
 
@@ -112,6 +114,11 @@ public class PlayerMovement25D : MonoBehaviour {
         if (rb.velocity.y > 0 && Input.GetKeyUp(KeyCode.Space)) {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, 0.1f);
     }
 
     private void Adventure() {
