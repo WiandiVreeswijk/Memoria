@@ -30,7 +30,7 @@ public class PlayerMovement25D : MonoBehaviour {
 
     //public bool hasMoved = false;
     //public bool canMove = false;
-    
+
     public float moveSpeed;
     public float jumpForce;
     private float moveInput;
@@ -51,13 +51,10 @@ public class PlayerMovement25D : MonoBehaviour {
     public float jumpBufferLength;
     private float jumpBufferCount;
 
-    private void Start() {
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
-        //cam = Camera.main.transform;
         animator = GetComponent<Animator>();
-        //controller = GetComponent<CharacterController>();
-        //inHouse = false;
     }
 
     void Update() {
@@ -65,49 +62,50 @@ public class PlayerMovement25D : MonoBehaviour {
         moveInput = Input.GetAxis("Horizontal");
     }
 
+    bool justLanded = false;
     private void FixedUpdate() {
-        isGrounded = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
-        MoveHorizontal();
-    }
+        bool isGroundedThisFrame = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
+        justLanded = !isGrounded && isGroundedThisFrame;
+        isGrounded = isGroundedThisFrame;
 
-    private void MoveHorizontal() {
+        float horizontal = moveInput;
+        float animatorForwardSpeed = Mathf.Clamp01(Mathf.Abs(rb.velocity.x));
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
-        if (Input.GetAxis("Horizontal") < 0) {
-            transform.rotation = Quaternion.Euler(0, 90, 0);
-        }
+        //TODO rotate 180 animation
+        if (horizontal < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (horizontal > 0) transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (Input.GetAxis("Horizontal") > 0) {
-            transform.rotation = Quaternion.Euler(0, -90, 0);
-        }
-        animator.SetFloat("Forward", rb.velocity.magnitude);
+        animator.SetFloat("Forward", animatorForwardSpeed);
+        animator.SetFloat("Running", animatorForwardSpeed);
     }
-    private void Jump() {
-        //to manage hang time
-        if (isGrounded) {
-            hangCounter = hangTime;
-        } else {
-            hangCounter -= Time.deltaTime;
-        }
 
-        //manage jump buffer
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            jumpBufferCount = jumpBufferLength;
-        } else {
-            jumpBufferCount -= Time.deltaTime;
-        }
+    private void Jump() {
+        //Manage hang time
+        if (isGrounded) hangCounter = hangTime;
+        else hangCounter -= Time.deltaTime;
+
+        //Manage jump buffer
+        if (Input.GetKeyDown(KeyCode.Space)) jumpBufferCount = jumpBufferLength;
+        else jumpBufferCount -= Time.deltaTime;
 
         //checks hangtime and jumpbuffer
         if (jumpBufferCount >= 0 && hangCounter > 0f) {
+            if (jumpBufferCount == jumpBufferLength) {
+                //Just jumped
+            }
             rb.velocity = Vector2.up * jumpForce;
             jumpBufferCount = 0;
         }
 
-        //checks if player is falling down
+        //Probably temporary as we'll need jump/hover/landing animations
+        animator.SetFloat("Jump", isGrounded ? 0 : 1);
+
+        //Check if player is falling down
         if (rb.velocity.y < 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        //checks if player is going up and jump button is released
+        //Check if player is going up and jump button is released
         else if (rb.velocity.y > 0 && !Input.GetKeyDown(KeyCode.Space)) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
