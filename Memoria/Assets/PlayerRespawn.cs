@@ -7,7 +7,7 @@ public class PlayerRespawn : MonoBehaviour
     private bool respawnPlayer = false;
 
     private Vector3 playerPosition;
-    private Vector3 playerStartPosition;
+    public Vector3 playerStartPosition;
 
 
     private void Start()
@@ -22,7 +22,6 @@ public class PlayerRespawn : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("Player").transform.position = playerStartPosition;
             respawnPlayer = false;
-            print("respawned");
         }
     }
 
@@ -30,7 +29,6 @@ public class PlayerRespawn : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            print("triggered");
             respawnPlayer = true;
         }
     }
