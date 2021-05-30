@@ -47,7 +47,7 @@ public class MenuController : MonoBehaviour {
             } else Debug.LogError($"A UIElement named {element.name} is null");
         }
 
-        SetMenu("Main", 0.0f);
+        //SetMenu("Main", 0.0f);
     }
 
     public void ReloadScene() {

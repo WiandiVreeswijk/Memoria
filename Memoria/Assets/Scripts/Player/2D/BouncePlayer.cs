@@ -15,7 +15,6 @@ public class BouncePlayer : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision.collider.name);
         if (collision.gameObject.CompareTag("Player"))
         {
             //collision.gameObject.GetComponent<Rigidbody2D>().velocity = transform.up * launchForce; 
