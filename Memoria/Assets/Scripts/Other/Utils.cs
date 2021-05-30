@@ -31,4 +31,9 @@ public static class Utils {
     public static void DelayedAction(float delay, Action action) {
         DOTween.Sequence().AppendInterval(delay).AppendCallback(() => action());
     }
+
+    /*Logs an error when les or more than one instance of the type is found in the scene*/
+    public static void EnsureOnlyOneInstanceInScene<T>() where T : Object {
+        FindUniqueObject<T>();
+    }
 }
