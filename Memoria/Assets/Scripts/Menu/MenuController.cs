@@ -32,6 +32,7 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private WAEMUIElement[] uiElements;
     [SerializeField] private float fadeTime = 1.0f;
+    [SerializeField] private UnityEngine.UI.Image blackScreen;
 
     private Tween mainFade;
     private WAEMDictUIElement activePanel;
@@ -47,7 +48,16 @@ public class MenuController : MonoBehaviour {
             } else Debug.LogError($"A UIElement named {element.name} is null");
         }
 
+        CloseMenu(true);
         //SetMenu("Main", 0.0f);
+    }
+
+    public void BlackScreenFadeIn() {
+        //blackScreen fade in
+    }
+
+    public void BlackScreenFadeOut() {
+        //blackScreen fade out
     }
 
     public void ReloadScene() {
@@ -59,13 +69,12 @@ public class MenuController : MonoBehaviour {
     public void CloseMenu(bool instant = false) {
         if (activePanel != null) {
             FadePanelOut(activePanel, instant ? 0.0f : fadeTime);
-            FadeMainPanelOut(instant ? 0.0f : fadeTime);
             activePanel = null;
         }
+        FadeMainPanelOut(instant ? 0.0f : fadeTime);
     }
 
-    public void SetMenu(string name)
-    {
+    public void SetMenu(string name) {
         if (name == "Notification") collectedThingies.SetActive(true);
         SetMenu(name, fadeTime);
     }
@@ -129,8 +138,14 @@ public class MenuController : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) NotifyPlayer("Hallo!");
-        if (Input.GetKeyDown(KeyCode.Alpha2)) NotifyPlayer("Notificatie!");
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) NotifyPlayer("Hallo!");
+        //if (Input.GetKeyDown(KeyCode.Alpha2)) NotifyPlayer("Notificatie!");
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            CloseMenu();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            SetMenu("Main");
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SetMenu("Options");
     }
 
     // Update is called once per frame

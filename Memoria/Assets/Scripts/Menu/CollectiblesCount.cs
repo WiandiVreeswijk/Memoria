@@ -19,9 +19,11 @@ public class CollectiblesCount : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        collectibleCount.text = $"{leftTocollect}";
-        if (leftTocollect == 0) {
-            spawner.SetActive();
+        if (spawner != null) {
+            collectibleCount.text = $"{leftTocollect}";
+            if (leftTocollect == 0) {
+                spawner.SetActive();
+            }
         }
     }
 }
