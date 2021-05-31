@@ -9,15 +9,26 @@ public class OblivionManager : MonoBehaviour {
     [SerializeField] private float oblivionPositionOffset = 0.0f;
 
     [Header("Perlin")]
-    [Range(0.0f, 10.0f)] [SerializeField] private float perlinAmount = 8.0f;
+    [Range(0.0f, 20.0f)] [SerializeField] private float perlinAmount = 8.0f;
     [Range(0.0f, 10.0f)] [SerializeField] private float perlinScale = 5.0f;
     [Header("Voronoi")]
     [Range(0.0f, 10.0f)] [SerializeField] private float voronoiAmount = 4.75f;
     [Range(0.0f, 2.0f)] [SerializeField] private float voronoiSpeed = 1.0f;
     [Range(0.0f, 10.0f)] [SerializeField] private float voronoiDensity = 5.0f;
+    [Range(0.0f, 0.01f)] [SerializeField] private float voronoiNormalStrength = 0.003f;
+    
+    [Header("Creep")]
+    [Range(0.0f, 10.0f)] [SerializeField] private float creepMultiplier = 5.0f;
+    [Range(0.0f, 10.0f)] [SerializeField] private float creepIntensity = 4.0f;
+
+    [Header("Bumps")]
+    [Range(0.0f, 200.0f)] [SerializeField] private float bumpsNormalStrength = 75.0f;
+    [Range(0.0f, 10.0f)] [SerializeField] private float bumpsNoiseScale = 1.3f;
 
     [Header("Color")]
     [ColorUsage(true, true)] [SerializeField] private Color oblivionColor = Color.black;
+    [ColorUsage(true, true)] [SerializeField] private Color oblivionAltColor = Color.white;
+    [Range(0.0f, 1.0f)] [SerializeField] private float oblivionAltColorIntensity = 0.5f;
 
     [Header("Debug")]
     [SerializeField] private bool debug = false;
@@ -28,10 +39,12 @@ public class OblivionManager : MonoBehaviour {
     void Update() {
         if (debug) {
             Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
-            Shader.SetGlobalFloat("_OblivionPositionOffset", -oblivionPositionOffset);
+            Shader.SetGlobalFloat("_OblivionPositionOffset", 0);
             Shader.SetGlobalFloat("_PerlinAmount", 0);
             Shader.SetGlobalFloat("_VoronoiAmount", 0);
             Shader.SetGlobalColor("_OblivionColor", oblivionColor);
+            Shader.SetGlobalColor("_OblivionAltColor", oblivionAltColor);
+            Shader.SetGlobalFloat("_OblivionAltColorIntensity", oblivionAltColorIntensity);
         } else {
             Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
             Shader.SetGlobalFloat("_OblivionPositionOffset", -oblivionPositionOffset);
@@ -40,7 +53,17 @@ public class OblivionManager : MonoBehaviour {
             Shader.SetGlobalFloat("_VoronoiAmount", voronoiAmount);
             Shader.SetGlobalFloat("_VoronoiSpeed", voronoiSpeed);
             Shader.SetGlobalFloat("_VoronoiDensity", voronoiDensity);
+            Shader.SetGlobalFloat("_VoronoiNormalStrength", voronoiNormalStrength);
+            Shader.SetGlobalFloat("_CreepIntensity", creepIntensity);
+            Shader.SetGlobalFloat("_CreepMultiplier", creepMultiplier);
+            Shader.SetGlobalFloat("_OblivionAltColorIntensity", oblivionAltColorIntensity);
+            Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
+            Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
             Shader.SetGlobalColor("_OblivionColor", oblivionColor);
+            Shader.SetGlobalColor("_OblivionAltColor", oblivionAltColor);
+            
+
+
         }
     }
 }
