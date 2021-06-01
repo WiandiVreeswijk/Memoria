@@ -630,11 +630,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5913507830863160281, guid: 0ec04f9d8b0435d4fbb5fe52ecfd77ac, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8001413260931106628, guid: 0ec04f9d8b0435d4fbb5fe52ecfd77ac, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8001413261723151364, guid: 0ec04f9d8b0435d4fbb5fe52ecfd77ac, type: 3}
       propertyPath: m_RootOrder
@@ -686,7 +686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8001413261723151365, guid: 0ec04f9d8b0435d4fbb5fe52ecfd77ac, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ec04f9d8b0435d4fbb5fe52ecfd77ac, type: 3}
@@ -896,21 +896,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b422042f4c5e4498bd588141f0c6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oblivionPosition: -14.1
+  oblivionPosition: -2.68
   oblivionPositionOffset: 6
   perlinAmount: 15
-  perlinScale: 0.5
-  voronoiAmount: 4.75
+  perlinScale: 0
+  voronoiAmount: 0
   voronoiSpeed: 0.5
   voronoiDensity: 5
-  voronoiNormalStrength: 0.003
-  creepMultiplier: 4.75
+  voronoiNormalStrength: 0.01
+  creepMultiplier: 4.24
   creepIntensity: 8
-  bumpsNormalStrength: 75
+  bumpsNormalStrength: 16.7
   bumpsNoiseScale: 1.3
-  oblivionColor: {r: 0.0754717, g: 0, b: 0.027680308, a: 1}
-  oblivionAltColor: {r: 2.318155, g: 0, b: 0.250567, a: 1}
-  oblivionAltColorIntensity: 0.097
+  oblivionColor: {r: 0, g: 0, b: 0, a: 1}
+  altColor: {r: 0, g: 0.08690432, b: 0.67592245, a: 1}
+  altColorIntensity: 0.5
+  altColorEdgeIntensity: 10
   debug: 0
 --- !u!4 &717701559 stripped
 Transform:
@@ -926,7 +927,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2436096105583756818, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7923216813136205908, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_Name
@@ -934,7 +935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7923216813136205908, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7923216813136205909, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_RootOrder
@@ -1362,7 +1363,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1213065176
 Transform:
@@ -13034,7 +13035,7 @@ Transform:
   m_GameObject: {fileID: 2714449340216257131}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7, y: 5.5, z: 0.5}
-  m_LocalScale: {x: 60, y: 15, z: 0.1}
+  m_LocalScale: {x: 23.1372, y: 15, z: 0.1}
   m_Children: []
   m_Father: {fileID: 6052997839545594940}
   m_RootOrder: 12
@@ -13094,7 +13095,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2436096105583756818, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7923216813136205908, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_Name
@@ -13102,7 +13103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7923216813136205908, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7923216813136205909, guid: 86d3e16034971bb4bb1e699d0a66facf, type: 3}
       propertyPath: m_RootOrder
