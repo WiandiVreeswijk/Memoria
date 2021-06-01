@@ -25,11 +25,12 @@ public class OblivionManager : MonoBehaviour {
     [Range(0.0f, 200.0f)] [SerializeField] private float bumpsNormalStrength = 75.0f;
     [Range(0.0f, 10.0f)] [SerializeField] private float bumpsNoiseScale = 1.3f;
 
-    [Header("Color")]
+    [Header("Visual")]
     [ColorUsage(true, true)] [SerializeField] private Color oblivionColor = Color.black;
     [ColorUsage(true, true)] [SerializeField] private Color altColor = Color.white;
     [Range(0.0f, 1.0f)] [SerializeField] private float altColorIntensity = 0.5f;
     [Range(0.0f, 10.0f)] [SerializeField] private float altColorEdgeIntensity = 1.0f;
+    [Range(0.0f, 1.0f)] [SerializeField] private float smoothness = 0.7f;
 
     [Header("Debug")]
     [SerializeField] private bool debug = false;
@@ -54,9 +55,9 @@ public class OblivionManager : MonoBehaviour {
             Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
             Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
             Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
+            Shader.SetGlobalFloat("_Smoothness", smoothness);
             Shader.SetGlobalColor("_OblivionColor", oblivionColor);
             Shader.SetGlobalColor("_AltColor", altColor);
-
         } else {
             Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
             Shader.SetGlobalFloat("_OblivionPositionOffset", -oblivionPositionOffset);
@@ -72,6 +73,7 @@ public class OblivionManager : MonoBehaviour {
             Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
             Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
             Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
+            Shader.SetGlobalFloat("_Smoothness", smoothness);
             Shader.SetGlobalColor("_OblivionColor", oblivionColor);
             Shader.SetGlobalColor("_AltColor", altColor);
         }
