@@ -272,6 +272,9 @@
         },
         {
             "m_Id": "6d2c6a5542a24b909c86860805e11c56"
+        },
+        {
+            "m_Id": "e368d1da28084381ad9476382b25d295"
         }
     ],
     "m_GroupDatas": [
@@ -554,7 +557,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "176ae105d21e496da6021b7ab978b6a2"
+                    "m_Id": "e368d1da28084381ad9476382b25d295"
                 },
                 "m_SlotId": 0
             }
@@ -1355,6 +1358,20 @@
                     "m_Id": "610b875cdc3d486ab8730873e0c8fb8a"
                 },
                 "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "e368d1da28084381ad9476382b25d295"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "176ae105d21e496da6021b7ab978b6a2"
+                },
+                "m_SlotId": 0
             }
         },
         {
@@ -2278,6 +2295,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "167925b8d88f4506a10f2f99c0001d7f",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PowerNode",
     "m_ObjectId": "176ae105d21e496da6021b7ab978b6a2",
     "m_Group": {
@@ -2288,10 +2329,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 2769.5,
+            "x": 3016.0,
             "y": 1432.0,
             "width": 208.00001525878907,
-            "height": 302.0000305175781
+            "height": 302.0
         }
     },
     "m_Slots": [
@@ -3867,20 +3908,44 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "57022df75adb4f85a82fc751f4828f4f",
+    "m_Id": 0,
+    "m_DisplayName": "In",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "In",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "57b455d7ec5f4bcfa335b9d1ccc5aaf9",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "1f2b498a6c414695a81c134991d6134e"
     },
     "m_Name": "Property",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 2619.5,
-            "y": 1613.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": 2849.0,
+            "y": 1717.0001220703125,
+            "width": 151.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -8231,6 +8296,41 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.AbsoluteNode",
+    "m_ObjectId": "e368d1da28084381ad9476382b25d295",
+    "m_Group": {
+        "m_Id": "1f2b498a6c414695a81c134991d6134e"
+    },
+    "m_Name": "Absolute",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 2765.0,
+            "y": 1432.0,
+            "width": 208.00001525878907,
+            "height": 278.0000305175781
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "57022df75adb4f85a82fc751f4828f4f"
+        },
+        {
+            "m_Id": "167925b8d88f4506a10f2f99c0001d7f"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
 }
 
 {

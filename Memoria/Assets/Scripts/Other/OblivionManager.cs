@@ -4,6 +4,8 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 public class OblivionManager : MonoBehaviour {
+    private bool isInEditor = false;
+
     [Header("Position")]
     [SerializeField] private float oblivionPosition = 0.0f;
     [SerializeField] private float oblivionPositionOffset = 0.0f;
@@ -16,7 +18,7 @@ public class OblivionManager : MonoBehaviour {
     [Range(0.0f, 2.0f)] [SerializeField] private float voronoiSpeed = 1.0f;
     [Range(0.0f, 10.0f)] [SerializeField] private float voronoiDensity = 5.0f;
     [Range(0.0f, 0.05f)] [SerializeField] private float voronoiNormalStrength = 0.003f;
-    
+
     [Header("Creep")]
     [Range(0.0f, 10.0f)] [SerializeField] private float creepMultiplier = 5.0f;
     [Range(0.0f, 10.0f)] [SerializeField] private float creepIntensity = 4.0f;
@@ -35,47 +37,45 @@ public class OblivionManager : MonoBehaviour {
     [Header("Debug")]
     [SerializeField] private bool debug = false;
     void Start() {
+        isInEditor = !Application.isPlaying;
         Utils.EnsureOnlyOneInstanceInScene<OblivionManager>();
+
+        if (!isInEditor) oblivionPosition = 0;
     }
 
     void Update() {
+        if (isInEditor) EditorUpdate();
+        else GameUpdate();
+    }
+
+    void EditorUpdate() {
+        Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
+        Shader.SetGlobalFloat("_OblivionPositionOffset", -oblivionPositionOffset);
+        Shader.SetGlobalFloat("_PerlinScale", perlinScale);
+        Shader.SetGlobalFloat("_PerlinAmount", perlinAmount);
+        Shader.SetGlobalFloat("_VoronoiAmount", voronoiAmount);
+        Shader.SetGlobalFloat("_VoronoiSpeed", voronoiSpeed);
+        Shader.SetGlobalFloat("_VoronoiDensity", voronoiDensity);
+        Shader.SetGlobalFloat("_VoronoiNormalStrength", voronoiNormalStrength);
+        Shader.SetGlobalFloat("_CreepIntensity", creepIntensity);
+        Shader.SetGlobalFloat("_CreepMultiplier", creepMultiplier);
+        Shader.SetGlobalFloat("_AltColorIntensity", altColorIntensity);
+        Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
+        Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
+        Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
+        Shader.SetGlobalFloat("_Smoothness", smoothness);
+        Shader.SetGlobalColor("_OblivionColor", oblivionColor);
+        Shader.SetGlobalColor("_AltColor", altColor);
+
         if (debug) {
-            Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
             Shader.SetGlobalFloat("_OblivionPositionOffset", 0);
             Shader.SetGlobalFloat("_PerlinAmount", 0);
             Shader.SetGlobalFloat("_VoronoiAmount", 0);
-
-            Shader.SetGlobalFloat("_PerlinScale", perlinScale);
-            Shader.SetGlobalFloat("_VoronoiSpeed", voronoiSpeed);
-            Shader.SetGlobalFloat("_VoronoiDensity", voronoiDensity);
-            Shader.SetGlobalFloat("_VoronoiNormalStrength", voronoiNormalStrength);
-            Shader.SetGlobalFloat("_CreepIntensity", creepIntensity);
-            Shader.SetGlobalFloat("_CreepMultiplier", creepMultiplier);
-            Shader.SetGlobalFloat("_AltColorIntensity", altColorIntensity);
-            Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
-            Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
-            Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
-            Shader.SetGlobalFloat("_Smoothness", smoothness);
-            Shader.SetGlobalColor("_OblivionColor", oblivionColor);
-            Shader.SetGlobalColor("_AltColor", altColor);
-        } else {
-            Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
-            Shader.SetGlobalFloat("_OblivionPositionOffset", -oblivionPositionOffset);
-            Shader.SetGlobalFloat("_PerlinScale", perlinScale);
-            Shader.SetGlobalFloat("_PerlinAmount", perlinAmount);
-            Shader.SetGlobalFloat("_VoronoiAmount", voronoiAmount);
-            Shader.SetGlobalFloat("_VoronoiSpeed", voronoiSpeed);
-            Shader.SetGlobalFloat("_VoronoiDensity", voronoiDensity);
-            Shader.SetGlobalFloat("_VoronoiNormalStrength", voronoiNormalStrength);
-            Shader.SetGlobalFloat("_CreepIntensity", creepIntensity);
-            Shader.SetGlobalFloat("_CreepMultiplier", creepMultiplier);
-            Shader.SetGlobalFloat("_AltColorIntensity", altColorIntensity);
-            Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
-            Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
-            Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
-            Shader.SetGlobalFloat("_Smoothness", smoothness);
-            Shader.SetGlobalColor("_OblivionColor", oblivionColor);
-            Shader.SetGlobalColor("_AltColor", altColor);
         }
+    }
+
+    void GameUpdate() {
+        Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
+        oblivionPosition += 0.2f * Time.deltaTime;
     }
 }
