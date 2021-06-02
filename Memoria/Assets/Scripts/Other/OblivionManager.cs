@@ -6,7 +6,12 @@ using UnityEngine;
 public class OblivionManager : MonoBehaviour {
     private bool isInEditor = false;
 
+
+    [Header("Game")]
+    [Range(0.1f, 2.0f)] [SerializeField] private float oblivionSpeed = 1.0f;
+
     [Header("Position")]
+    [Space(30.0f)]
     [SerializeField] private float oblivionPosition = 0.0f;
     [SerializeField] private float oblivionPositionOffset = 0.0f;
 
@@ -76,6 +81,6 @@ public class OblivionManager : MonoBehaviour {
 
     void GameUpdate() {
         Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
-        oblivionPosition += 0.2f * Time.deltaTime;
+        oblivionPosition += oblivionSpeed * Time.deltaTime;
     }
 }
