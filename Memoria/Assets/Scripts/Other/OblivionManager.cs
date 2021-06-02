@@ -51,7 +51,7 @@ public class OblivionManager : MonoBehaviour {
             Shader.SetGlobalFloat("_VoronoiNormalStrength", voronoiNormalStrength);
             Shader.SetGlobalFloat("_CreepIntensity", creepIntensity);
             Shader.SetGlobalFloat("_CreepMultiplier", creepMultiplier);
-            Shader.SetGlobalFloat("_OblivionAltColorIntensity", altColorIntensity);
+            Shader.SetGlobalFloat("_AltColorIntensity", altColorIntensity);
             Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
             Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
             Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
@@ -69,7 +69,7 @@ public class OblivionManager : MonoBehaviour {
             Shader.SetGlobalFloat("_VoronoiNormalStrength", voronoiNormalStrength);
             Shader.SetGlobalFloat("_CreepIntensity", creepIntensity);
             Shader.SetGlobalFloat("_CreepMultiplier", creepMultiplier);
-            Shader.SetGlobalFloat("_OblivionAltColorIntensity", altColorIntensity);
+            Shader.SetGlobalFloat("_AltColorIntensity", altColorIntensity);
             Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
             Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
             Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
