@@ -42,6 +42,7 @@ public class PlayerMovement25D : MonoBehaviour {
     private bool isGrounded;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 4f;
+    public Vector2 groundColliderCheckSize = new Vector2(0.2f, 0.2f);
 
     public int extraJumpsValue;
 
@@ -67,14 +68,14 @@ public class PlayerMovement25D : MonoBehaviour {
 
     bool justLanded = false;
     private void FixedUpdate() {
-        bool areFeetGrounded = Physics2D.OverlapCircle(transform.position, 0.1f, platformLayerMask);
+        bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
         bool isGroundedThisFrame = areFeetGrounded && Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
         justLanded = !isGrounded && isGroundedThisFrame;
         isGrounded = isGroundedThisFrame;
 
         float horizontal = moveInput;
         float animatorForwardSpeed = Mathf.Clamp01(Mathf.Abs(rb.velocity.x));
-        if(!stunned)rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        if (!stunned) rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
         //TODO rotate 180 animation
         if (horizontal < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -118,15 +119,13 @@ public class PlayerMovement25D : MonoBehaviour {
         }
     }
 
-    public void Stunned(float duration)
-    {
+    public void Stunned(float duration) {
         stunned = true;
         if (stunned) gameObject.GetComponent<PlayerVisualEffects>().DoBlink(0.1f, 4);
         Utils.DelayedAction(duration, () => stunned = false);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, 0.1f);
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireCube(transform.position, new Vector3(groundColliderCheckSize.x, groundColliderCheckSize.y, 0.02f));
     }
 }

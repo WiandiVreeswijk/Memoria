@@ -4904,12 +4904,13 @@ GameObject:
   - component: {fileID: 2650534466570212201}
   - component: {fileID: 2650534466570212206}
   - component: {fileID: 2650534466570211985}
-  - component: {fileID: 3722081597033926477}
+  - component: {fileID: 7147793959470264671}
   - component: {fileID: 3722081597033926480}
   - component: {fileID: 3722081597033926482}
   - component: {fileID: 402376488}
   - component: {fileID: 402376493}
   - component: {fileID: 402376495}
+  - component: {fileID: 2104120328}
   m_Layer: 0
   m_Name: Player25D
   m_TagString: Player
@@ -4962,8 +4963,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &3722081597033926477
-CapsuleCollider2D:
+--- !u!61 &7147793959470264671
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4976,8 +4977,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.915}
-  m_Size: {x: 0.5, y: 1.83}
-  m_Direction: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 1.73}
+  m_EdgeRadius: 0.1
 --- !u!95 &3722081597033926480
 Animator:
   serializedVersion: 3
@@ -5063,6 +5074,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStartPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &2104120328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650534466570212205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8376ad763c13f624f92878b9c9cfce27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3722081595164302892
 GameObject:
   m_ObjectHideFlags: 0

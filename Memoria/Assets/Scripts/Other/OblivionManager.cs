@@ -38,7 +38,7 @@ public class OblivionManager : MonoBehaviour {
     [ColorUsage(true, true)] [SerializeField] private Color oblivionColor = Color.black;
     [ColorUsage(true, true)] [SerializeField] private Color altColor = Color.white;
     [Range(0.0f, 1.0f)] [SerializeField] private float altColorIntensity = 0.5f;
-    [Range(0.0f, 10.0f)] [SerializeField] private float altColorEdgeIntensity = 1.0f;
+    [Range(0.0f, 25.0f)] [SerializeField] private float altColorEdgeIntensity = 1.0f;
     [Range(0.0f, 1.0f)] [SerializeField] private float smoothness = 0.7f;
 
     [Header("Debug")]
@@ -48,7 +48,7 @@ public class OblivionManager : MonoBehaviour {
         isInEditor = !Application.isPlaying;
         Utils.EnsureOnlyOneInstanceInScene<OblivionManager>();
 
-        if (!isInEditor) oblivionPosition = 0;
+        if (!isInEditor) oblivionPosition = -5;
     }
 
     void Update() {
@@ -93,9 +93,9 @@ public class OblivionManager : MonoBehaviour {
             float distance = Utils.Distance(oblivionPosition, nextSafeAreaPoint.position.x);
             oblivionPosition += oblivionSpeed * Time.deltaTime;
 
-            if (distance < 1.0f) {
+            if (distance < 2.0f) {
                 moving = false;
-                LerpOblivionToPosition(nextSafeAreaPoint.position.x, 1.0f, Ease.OutSine);
+                LerpOblivionToPosition(nextSafeAreaPoint.position.x, 1.5f, Ease.OutSine);
             }
         }
     }
@@ -105,8 +105,8 @@ public class OblivionManager : MonoBehaviour {
     }
 
     public void ContinueFromSaveArea(Transform oblivionContinuePosition) {
-        LerpOblivionToPosition(oblivionContinuePosition.position.x, 1.0f, Ease.OutCirc).OnComplete(() => {
-            nextSafeAreaPoint = null;
+        nextSafeAreaPoint = null;
+        LerpOblivionToPosition(oblivionContinuePosition.position.x, 1.0f, Ease.InQuad).OnComplete(() => {
             moving = true;
         });
     }
@@ -117,13 +117,11 @@ public class OblivionManager : MonoBehaviour {
         return tween;
     }
 
-    public float GetOblivionPosition()
-    {
+    public float GetOblivionPosition() {
         return oblivionPosition;
     }
 
-    public void SetOblivionPosition(float position)
-    {
+    public void SetOblivionPosition(float position) {
         oblivionPosition = position;
     }
 }
