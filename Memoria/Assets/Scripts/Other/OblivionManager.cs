@@ -116,4 +116,14 @@ public class OblivionManager : MonoBehaviour {
         tween = DOTween.To(() => oblivionPosition, x => oblivionPosition = x, position, duration).SetEase(ease);
         return tween;
     }
+
+    public float GetOblivionPosition()
+    {
+        return oblivionPosition;
+    }
+
+    public void SetOblivionPosition(float position)
+    {
+        oblivionPosition = position;
+    }
 }
