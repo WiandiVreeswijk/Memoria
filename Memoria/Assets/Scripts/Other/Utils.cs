@@ -8,11 +8,22 @@ using Object = UnityEngine.Object;
 public static class Utils {
     /*Find instances of objects. Mostly used in Globals*/
     #region ObjectFinding
-    private static T CheckObjects<T>(T[] collection, string name) where T : class {
-        if (collection.Length == 0) Debug.LogError($"No instances of unique type {name} could be found. This will probably break a lot of stuff!");
+    private static T CheckObjects<T>(T[] collection, string name, bool errorWhenNoneFound = true) where T : class {
+        if (errorWhenNoneFound && collection.Length == 0) Debug.LogError($"No instances of unique type {name} could be found. This will probably break a lot of stuff!");
         if (collection.Length == 1) return collection[0];
         if (collection.Length > 1) Debug.LogError($"Multiple instances of unique type {name} could be found. This will probably break a lot of stuff!");
         return null;
+    }
+
+    public delegate T InstantiateCallback<T>();
+    public static void FindOrInstantiateUniqueObject<T>(out T obj, InstantiateCallback<T> callback) where T : Object {
+        obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name, false);
+        if (obj == null) obj = callback();
+    }
+
+    public static bool FindUniqueObject<T>(out T obj) where T : Object {
+        obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name);
+        return obj != null;
     }
 
     public static T FindUniqueObject<T>() where T : Object {
@@ -42,6 +53,11 @@ public static class Utils {
     /*Maps a float from one range to another*/
     public static float Map(float value, float from1, float to1, float from2, float to2) {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
+
+    /*Distance between two values*/
+    public static float Distance(float one, float two) {
+        return Mathf.Abs(one - two);
     }
     #endregion
 }

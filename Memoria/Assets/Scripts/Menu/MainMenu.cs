@@ -23,10 +23,10 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void Director_stopped(PlayableDirector obj) {
-        Globals.GetPlayer().movement.canMove = true;
-        Globals.GetMenuController().NotifyPlayer("<font=\"Mouse SDF\"><size=36>u</size></font>  to move the camera");
+        Globals.Player.PlayerMovementAdventure.canMove = true;
+        Globals.MenuController.NotifyPlayer("<font=\"Mouse SDF\"><size=36>u</size></font>  to move the camera");
         Utils.DelayedAction(10.0f, () => {
-            if (!Globals.GetPlayer().movement.hasMoved) Globals.GetMenuController().NotifyPlayer("WASD to move");
+            if (!Globals.Player.PlayerMovementAdventure.hasMoved) Globals.MenuController.NotifyPlayer("WASD to move");
         });
     }
 

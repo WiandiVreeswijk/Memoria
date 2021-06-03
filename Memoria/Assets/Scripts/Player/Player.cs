@@ -4,8 +4,18 @@ using UnityEngine;
 
 //Keeps track of all player variables and components
 public class Player : MonoBehaviour {
-    public PlayerMovementAdventure movement;
+    private PlayerMovement25D playerMovement25D;
+    public PlayerMovement25D PlayerMovement25D { get { return playerMovement25D; } }
+
+    private PlayerMovementAdventure playerMovementAdventure;
+    public PlayerMovementAdventure PlayerMovementAdventure { get { return playerMovementAdventure; } }
+
+    private PlayerVisualEffects visualEffects;
+    public PlayerVisualEffects VisualEffects { get { return visualEffects; } }
+
     void Start() {
-        movement = GetComponent<PlayerMovementAdventure>();
+        playerMovementAdventure = GetComponent<PlayerMovementAdventure>();
+        playerMovement25D = GetComponent<PlayerMovement25D>();
+        visualEffects = GetComponent<PlayerVisualEffects>();
     }
 }

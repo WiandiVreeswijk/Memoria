@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [ExecuteInEditMode]
 public class OblivionManager : MonoBehaviour {
     private bool isInEditor = false;
 
+    private Transform nextSafeAreaPoint;
 
     [Header("Game")]
     [Range(0.1f, 10.0f)] [SerializeField] private float oblivionSpeed = 1.0f;
@@ -41,6 +43,7 @@ public class OblivionManager : MonoBehaviour {
 
     [Header("Debug")]
     [SerializeField] private bool debug = false;
+
     void Start() {
         isInEditor = !Application.isPlaying;
         Utils.EnsureOnlyOneInstanceInScene<OblivionManager>();
@@ -79,9 +82,39 @@ public class OblivionManager : MonoBehaviour {
         }
     }
 
+    bool moving = true;
+    Tween tween;
     void GameUpdate() {
         Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
-        oblivionPosition += oblivionSpeed * Time.deltaTime;
+        if (!moving) return;
+        if (nextSafeAreaPoint == null) {
+            oblivionPosition += oblivionSpeed * Time.deltaTime;
+        } else {
+            float distance = Utils.Distance(oblivionPosition, nextSafeAreaPoint.position.x);
+            oblivionPosition += oblivionSpeed * Time.deltaTime;
+
+            if (distance < 1.0f) {
+                moving = false;
+                LerpOblivionToPosition(nextSafeAreaPoint.position.x, 1.0f, Ease.OutSine);
+            }
+        }
+    }
+
+    public void SetNextSafeArea(Transform point) {
+        nextSafeAreaPoint = point;
+    }
+
+    public void ContinueFromSaveArea(Transform oblivionContinuePosition) {
+        LerpOblivionToPosition(oblivionContinuePosition.position.x, 1.0f, Ease.OutCirc).OnComplete(() => {
+            nextSafeAreaPoint = null;
+            moving = true;
+        });
+    }
+
+    private Tween LerpOblivionToPosition(float position, float duration, Ease ease) {
+        if (tween != null) tween.Kill();
+        tween = DOTween.To(() => oblivionPosition, x => oblivionPosition = x, position, duration).SetEase(ease);
+        return tween;
     }
 
     public float GetOblivionPosition()
