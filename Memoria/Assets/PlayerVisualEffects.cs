@@ -5,6 +5,19 @@ using UnityEngine;
 public class PlayerVisualEffects : MonoBehaviour
 {
     public SkinnedMeshRenderer elenaMesh;
+    public ParticleSystem deathParticles;
+
+    private void Start()
+    {
+        deathParticles.Stop();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Death();
+        }
+    }
 
     public void DoBlink(float speed, int times)
     {
@@ -21,5 +34,12 @@ public class PlayerVisualEffects : MonoBehaviour
     {
         elenaMesh.enabled = false;
         Utils.DelayedAction(speed, () => BlinkOn(speed, times - 1));
+    }
+
+    void Death()
+    {
+        elenaMesh.enabled = false;
+        deathParticles.Play();
+
     }
 }
