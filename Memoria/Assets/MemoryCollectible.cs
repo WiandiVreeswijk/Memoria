@@ -10,6 +10,20 @@ public class MemoryCollectible : MonoBehaviour
 
     private Tween rotationTween, positionTween;
 
+    public ParticleSystem hoveringParticles, collectedParticles;
+    public MeshRenderer render;
+    private void Start()
+    {
+        collectedParticles.Pause();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        render.enabled = false;
+        hoveringParticles.Stop();
+        collectedParticles.Play();
+    }
+
     private void FixedUpdate()
     {
         rotationTween = renderer.transform.DORotate(new Vector3(0,-360,0), rotationSpeed, RotateMode.LocalAxisAdd);
