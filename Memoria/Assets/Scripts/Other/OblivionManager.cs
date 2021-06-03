@@ -8,7 +8,7 @@ public class OblivionManager : MonoBehaviour {
 
 
     [Header("Game")]
-    [Range(0.1f, 2.0f)] [SerializeField] private float oblivionSpeed = 1.0f;
+    [Range(0.1f, 10.0f)] [SerializeField] private float oblivionSpeed = 1.0f;
 
     [Header("Position")]
     [Space(30.0f)]

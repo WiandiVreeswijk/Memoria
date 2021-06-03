@@ -40,7 +40,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740880391}
   serializedVersion: 7
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4909,6 +4909,7 @@ GameObject:
   - component: {fileID: 3722081597033926482}
   - component: {fileID: 402376488}
   - component: {fileID: 402376493}
+  - component: {fileID: 402376495}
   m_Layer: 0
   m_Name: Player25D
   m_TagString: Player
@@ -5032,6 +5033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elenaMesh: {fileID: 7846667492069546053}
   deathParticles: {fileID: 740880394}
+  isDeath: 0
 --- !u!114 &402376493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5048,6 +5050,19 @@ MonoBehaviour:
   maxPlayerHeight: 8
   minCameraY: 0.9
   maxCameraY: 0.25
+--- !u!114 &402376495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650534466570212205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e117cd977190b964c8d7cfef097fb321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStartPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &3722081595164302892
 GameObject:
   m_ObjectHideFlags: 0
