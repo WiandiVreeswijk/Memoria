@@ -7,17 +7,14 @@ public class PlayerVisualEffects : MonoBehaviour
     public SkinnedMeshRenderer elenaMesh;
     public ParticleSystem deathParticles;
 
+    [HideInInspector]
+    public bool isDeath = false;
+
     private void Start()
     {
         deathParticles.Stop();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Death();
-        }
-    }
+    #region Blinking
 
     public void DoBlink(float speed, int times)
     {
@@ -36,10 +33,19 @@ public class PlayerVisualEffects : MonoBehaviour
         Utils.DelayedAction(speed, () => BlinkOn(speed, times - 1));
     }
 
-    void Death()
+    #endregion
+
+    #region Death
+    public void Death()
     {
-        elenaMesh.enabled = false;
-        deathParticles.Play();
+        if (!isDeath)
+        {
+            elenaMesh.enabled = false;
+            deathParticles.Play();
+            isDeath = true;
+        }
 
     }
+
+    #endregion
 }

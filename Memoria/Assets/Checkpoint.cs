@@ -10,6 +10,7 @@ public class Checkpoint : MonoBehaviour
     private bool isActivated = false;
 
     private PlayerRespawn respawn;
+    private PlayerDeath death;
 
     public ParticleSystem particles;
     public GameObject checkpoint;
@@ -22,6 +23,7 @@ public class Checkpoint : MonoBehaviour
     private void Start()
     {
         respawn = FindObjectOfType<PlayerRespawn>();
+        death = FindObjectOfType<PlayerDeath>();
         particles.Stop();
         NotActivated();
     }
@@ -38,6 +40,7 @@ public class Checkpoint : MonoBehaviour
     {
         checkpointMaterial.material.color = activateColor;
         respawn.playerStartPosition = transform.position;
+        death.playerStartPosition = transform.position;
         tween = checkpoint.transform.DOPunchScale(punch, duration, vibrato, elasticity);
         particles.Play();
     }

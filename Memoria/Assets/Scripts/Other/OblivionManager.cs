@@ -83,4 +83,14 @@ public class OblivionManager : MonoBehaviour {
         Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
         oblivionPosition += oblivionSpeed * Time.deltaTime;
     }
+
+    public float GetOblivionPosition()
+    {
+        return oblivionPosition;
+    }
+
+    public void SetOblivionPosition(float position)
+    {
+        oblivionPosition = position;
+    }
 }

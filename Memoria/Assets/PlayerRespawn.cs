@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    private bool respawnPlayer = false;
+    [HideInInspector]
+    public bool respawnPlayer = false;
 
     private Vector3 playerPosition;
     public Vector3 playerStartPosition;
