@@ -18,7 +18,16 @@ public class OblivionSafeArea : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player")) {
+            Globals.OblivionManager.SetNextSafeArea(oblivionStopPosition);
             blockingWall.simulated = true;
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) {
+            Globals.OblivionManager.ContinueFromSaveArea(oblivionContinuePosition);
         }
     }
 }

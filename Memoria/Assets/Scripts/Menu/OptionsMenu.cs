@@ -27,7 +27,7 @@ public class OptionsMenu : MonoBehaviour {
     }
 
     private void Pause() {
-        Globals.GetMenuController().SetMenu("Pause");
+        Globals.MenuController.SetMenu("Pause");
         //pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         cursorLocker.UnlockMouse();
@@ -35,7 +35,7 @@ public class OptionsMenu : MonoBehaviour {
     }
 
     private void Resume() {
-        Globals.GetMenuController().CloseMenu();
+        Globals.MenuController.CloseMenu();
         //pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         cursorLocker.LockMouse();

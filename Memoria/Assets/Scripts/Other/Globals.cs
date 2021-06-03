@@ -1,30 +1,75 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Globals : MonoBehaviour {
+    [Serializable]
+    public enum GlobalsType {
+        NEIGHTBORHOOD,
+        OBLIVION,
+    }
+
+    //Global
     private static Globals _Instance;
     private Player player;
     private MenuController menuController;
     private PersistenceManager persistenceManager;
 
-    void Start() {
+    public GameObject persistenceManagerPrefab;
+    public GameObject menuControllerPrefab;
+
+    //Oblivion
+    private OblivionManager oblivionManager;
+
+    private void Awake() {
+        DontDestroyOnLoad(this);
         _Instance = this;
-        //DontDestroyOnLoad(this);
-        persistenceManager = Utils.FindUniqueObject<PersistenceManager>();
-        menuController = Utils.FindUniqueObject<MenuController>();
+    }
+
+    public static void Initialize(GlobalsType type) {
+        if (_Instance == null) Debug.LogError("No globals found in scene.");
+        _Instance.GlobalInitialize();
+        switch (type) {
+            case GlobalsType.NEIGHTBORHOOD: _Instance.InitializeNeighborhood(); break;
+            case GlobalsType.OBLIVION: _Instance.InitializeOblivion(); break;
+        }
+    }
+
+    private void GlobalInitialize() {
         player = Utils.FindUniqueObject<Player>();
+        Utils.FindOrInstantiateUniqueObject(out menuController, () => {
+            return Instantiate(menuControllerPrefab, transform).GetComponent<MenuController>();
+        });
+
+        Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => {
+            return Instantiate(persistenceManagerPrefab, transform).GetComponent<PersistenceManager>();
+        });
     }
 
-    public static MenuController GetMenuController() {
-        return _Instance.menuController;
+    private void InitializeNeighborhood() {
+
     }
 
-    public static PersistenceManager GetPersistenceManager() {
-        return _Instance.persistenceManager;
+    private void InitializeOblivion() {
+        oblivionManager = Utils.FindUniqueObject<OblivionManager>();
     }
 
-    public static Player GetPlayer() {
-        return _Instance.player;
-    }
+    #region GlobalGlobals
+
+    public static MenuController MenuController { get { return _Instance.menuController; } }
+    public static PersistenceManager PersistenceManager { get { return _Instance.persistenceManager; } }
+    public static Player Player { get { return _Instance.player; } }
+
+    #endregion
+
+    #region NeighbourhoodGlobals
+
+    #endregion
+
+    #region OblivionGlobals
+
+    public static OblivionManager OblivionManager { get { return _Instance.oblivionManager; } }
+
+    #endregion
 }
