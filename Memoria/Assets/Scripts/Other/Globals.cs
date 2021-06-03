@@ -23,7 +23,9 @@ public class Globals : MonoBehaviour {
     private OblivionManager oblivionManager;
     private CheckpointManager checkpointManager;
 
-    private void Awake() {
+    private void Awake()
+    {
+        print("testest");
         DontDestroyOnLoad(this);
         _Instance = this;
     }
