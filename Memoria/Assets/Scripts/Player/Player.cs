@@ -13,9 +13,13 @@ public class Player : MonoBehaviour {
     private PlayerVisualEffects visualEffects;
     public PlayerVisualEffects VisualEffects { get { return visualEffects; } }
 
+    private Elena25DCameraController cameraController;
+    public Elena25DCameraController CameraController { get { return cameraController; } }
+
     void Start() {
-        playerMovementAdventure = GetComponent<PlayerMovementAdventure>();
+        cameraController = GetComponent<Elena25DCameraController>();
         playerMovement25D = GetComponent<PlayerMovement25D>();
         visualEffects = GetComponent<PlayerVisualEffects>();
+        playerMovementAdventure = GetComponent<PlayerMovementAdventure>();
     }
 }

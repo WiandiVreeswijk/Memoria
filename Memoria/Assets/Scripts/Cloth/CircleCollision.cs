@@ -7,7 +7,7 @@ public class CircleCollision : MonoBehaviour {
 
     //circles radius
     public float radius;
-    public Camera camera;
+    public new Camera camera;
 
     bool isMoved;
 

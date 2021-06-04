@@ -9,7 +9,7 @@ public class MusicControl : MonoBehaviour
     [Header("FMOD Event")]
     [FMODUnity.EventRef]
     public string SelectAudio;
-    public FMOD.Studio.EventInstance audio;
+    public new FMOD.Studio.EventInstance audio;
     private PARAMETER_ID energeticParameter;
     private PARAMETER_ID relaxedParameter;
 

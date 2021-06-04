@@ -8,6 +8,7 @@ public class Checkpoint : MonoBehaviour {
     public Transform respawnPoint;
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        Globals.Player.CameraController.ZoomIn();
         Globals.CheckpointManager.SetCheckpoint(this);
         if (collision.CompareTag("Player")) {
             Globals.OblivionManager.SetNextSafeArea(oblivionStopPoint);
@@ -15,6 +16,7 @@ public class Checkpoint : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
+        Globals.Player.CameraController.ZoomOut();
         if (collision.CompareTag("Player")) {
             Globals.OblivionManager.ContinueFromSaveArea(oblivionContinuePoint);
         }
