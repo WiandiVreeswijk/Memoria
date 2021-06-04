@@ -21,8 +21,7 @@ public class MemoryCollectible : MonoBehaviour
     {
         render.enabled = false;
         hoveringParticles.Stop();
-        //hoveringParticles.
-        //collectedParticles.Play();
+        collectedParticles.Play();
     }
 
     private void FixedUpdate()
