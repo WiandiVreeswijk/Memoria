@@ -15,6 +15,7 @@ public class CollectiblesCount : MonoBehaviour {
         spawner = FindObjectOfType<FireworksSpawner>();
         amountOfCollectibles = GameObject.FindGameObjectsWithTag("Collectible");
         leftTocollect = amountOfCollectibles.Length;
+        if (leftTocollect == 0) leftTocollect = 1;
         collectibleCount.text = $"{leftTocollect}";
     }
 

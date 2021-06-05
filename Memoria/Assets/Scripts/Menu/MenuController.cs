@@ -32,13 +32,16 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private WAEMUIElement[] uiElements;
     [SerializeField] private float fadeTime = 1.0f;
-    [SerializeField] private UnityEngine.UI.Image blackScreen;
+    [SerializeField] private CanvasGroup blackScreen;
 
     private Tween mainFade;
     private WAEMDictUIElement activePanel;
     private Dictionary<string, WAEMDictUIElement> uiElementsDict = new Dictionary<string, WAEMDictUIElement>();
     private int notificationIndex = 0;
 
+
+    private bool initialized = false;
+    private string afterInitializationPanel = "";
     void Start() {
         foreach (var element in uiElements) {
             if (element.panel != null) {
@@ -49,15 +52,24 @@ public class MenuController : MonoBehaviour {
         }
 
         CloseMenu(true);
-        //SetMenu("Main", 0.0f);
+        initialized = true;
+        if (afterInitializationPanel.Length != 0) SetMenu(afterInitializationPanel, 0.0f);
     }
 
+    private Tween blackScreenTween;
     public void BlackScreenFadeIn() {
-        //blackScreen fade in
+        blackScreenTween?.Kill();
+        DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 1.0f, 1.0f).OnComplete(() => {
+            blackScreen.blocksRaycasts = false;
+            blackScreen.interactable = false;
+        });
     }
 
     public void BlackScreenFadeOut() {
-        //blackScreen fade out
+        blackScreenTween?.Kill();
+        DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, 1.0f);
+        blackScreen.blocksRaycasts = false;
+        blackScreen.interactable = false;
     }
 
     public void ReloadScene() {
@@ -80,6 +92,10 @@ public class MenuController : MonoBehaviour {
     }
 
     public void SetMenu(string name, float time) {
+        if (!initialized) {
+            afterInitializationPanel = name;
+            return;
+        }
         if (uiElementsDict.TryGetValue(name, out WAEMDictUIElement group)) {
             if (activePanel == group) return;
             if (activePanel == null) FadeMainPanelIn(time);

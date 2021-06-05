@@ -23,8 +23,7 @@ public class Globals : MonoBehaviour {
     private OblivionManager oblivionManager;
     private CheckpointManager checkpointManager;
 
-    private void Awake()
-    {
+    private void Awake() {
         DontDestroyOnLoad(this);
         _Instance = this;
     }
@@ -40,7 +39,6 @@ public class Globals : MonoBehaviour {
 
     private void GlobalInitialize() {
         player = Utils.FindUniqueObject<Player>();
-        checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
         Utils.FindOrInstantiateUniqueObject(out menuController, () => {
             return Instantiate(menuControllerPrefab, transform).GetComponent<MenuController>();
         });
@@ -51,11 +49,12 @@ public class Globals : MonoBehaviour {
     }
 
     private void InitializeNeighborhood() {
-
+        menuController.SetMenu("Main", 0.0f);
     }
 
     private void InitializeOblivion() {
         oblivionManager = Utils.FindUniqueObject<OblivionManager>();
+        checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
     }
 
     #region GlobalGlobals
