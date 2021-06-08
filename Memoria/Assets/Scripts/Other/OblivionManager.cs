@@ -6,7 +6,6 @@ using DG.Tweening;
 [ExecuteInEditMode]
 public class OblivionManager : MonoBehaviour {
     private bool isInEditor = false;
-
     private Transform nextSafeAreaPoint;
 
     [Header("Game")]
@@ -43,6 +42,8 @@ public class OblivionManager : MonoBehaviour {
 
     [Header("Debug")]
     [SerializeField] private bool debug = false;
+
+    public GameObject endPoint;
 
     void Start() {
         isInEditor = !Application.isPlaying;
@@ -87,16 +88,17 @@ public class OblivionManager : MonoBehaviour {
     void GameUpdate() {
         Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
         if (!moving) return;
-        if (nextSafeAreaPoint == null) {
-            oblivionPosition += oblivionSpeed * Time.deltaTime;
-        } else {
-            float distance = Utils.Distance(oblivionPosition, nextSafeAreaPoint.position.x);
-            oblivionPosition += oblivionSpeed * Time.deltaTime;
+        Vector3 nextGoal = endPoint.transform.position;
+        if (nextSafeAreaPoint != null) {
+            nextGoal = nextSafeAreaPoint.position;
+        }
 
-            if (distance < 2.0f) {
-                moving = false;
-                LerpOblivionToPosition(nextSafeAreaPoint.position.x, 1.5f, Ease.OutSine);
-            }
+        float distance = Utils.Distance(oblivionPosition, nextGoal.x);
+        oblivionPosition += oblivionSpeed * Time.deltaTime;
+
+        if (distance < 2.0f) {
+            moving = false;
+            LerpOblivionToPosition(nextGoal.x, 1.5f, Ease.OutSine);
         }
     }
 
