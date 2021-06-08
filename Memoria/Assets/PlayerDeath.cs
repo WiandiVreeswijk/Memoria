@@ -4,8 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 
 public class PlayerDeath : MonoBehaviour {
-    private bool isRespawning = false;
-    private float offset = 3;
     Sequence deathDelay;
     private void FixedUpdate() {
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {

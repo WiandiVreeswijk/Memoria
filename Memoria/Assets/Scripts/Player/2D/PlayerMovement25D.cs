@@ -69,17 +69,25 @@ public class PlayerMovement25D : MonoBehaviour {
         moveInput = Input.GetAxis("Horizontal");
     }
 
+    bool justLanded = false;
     bool wasTouching = false;
+    private float previousYVelocity = 0.0f;
     private void FixedUpdate() {
         //IsTouching is checked for this frame and the previous frame to prevent Elena from 'tripping' over adjecent colliders
         bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
-        bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
-        bool touching = wasTouching || isTouchingLayers;
-        wasTouching = isTouchingLayers;
+        //bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
 
-        bool isGroundedThisFrame = areFeetGrounded && touching;
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useLayerMask = true;
+        filter.layerMask = platformLayerMask;
 
-        //justLanded = !isGrounded && isGroundedThisFrame;
+       // bool touching = wasTouching || isTouchingLayers;
+       // wasTouching = isTouchingLayers;
+
+        bool isGroundedThisFrame = areFeetGrounded;
+
+        justLanded = !isGrounded && isGroundedThisFrame;
+        if (justLanded) OnLand(previousYVelocity);
         isGrounded = isGroundedThisFrame;
 
         float horizontal = moveInput;
@@ -92,6 +100,13 @@ public class PlayerMovement25D : MonoBehaviour {
 
         animator.SetFloat("Forward", animatorForwardSpeed);
         animator.SetFloat("Running", animatorForwardSpeed);
+        previousYVelocity = rb.velocity.y;
+    }
+
+    private void OnLand(float landingVelocity) {
+        if (Mathf.Abs(landingVelocity) > 5.0f) {
+            Globals.Player.VisualEffects.Land(rb.velocity.x);
+        }
     }
 
     private void Jump() {
