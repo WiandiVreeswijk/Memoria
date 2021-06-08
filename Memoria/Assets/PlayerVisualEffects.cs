@@ -56,7 +56,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     public void Land(float direction) {
         PlayDust(0.075f, 100, direction);
     }
-    private void PlayDust(float duration, int count, float direction) {
+    private void PlayDust(float duration, int count, float velocity) {
         ParticleSystem particleSystem = null;
         foreach (var ps in dustParticleSystems) {
             if (ps.isStopped) {
@@ -71,7 +71,7 @@ public class PlayerVisualEffects : MonoBehaviour {
             var e = particleSystem.emission;
             e.rateOverTime = count;
             var l = particleSystem.velocityOverLifetime;
-            float force = -direction / 4.0f;
+            float force = -velocity / 4.0f;
             l.x = force;
             particleSystem.Play();
         }
