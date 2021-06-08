@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerDeath : MonoBehaviour {
     private bool isRespawning = false;
     private float offset = 3;
-
+    Sequence deathDelay;
     private void FixedUpdate() {
-        if (!isRespawning && Globals.OblivionManager.GetOblivionPosition() - offset > transform.position.x || transform.position.y < -2.0f) {
-            isRespawning = true;
-            Invoke("Respawn", 0.0f);
+        if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
+            if (deathDelay == null) deathDelay = Utils.DelayedAction(1.0f, Respawn);
+        } else {
+            deathDelay?.Kill();
+            deathDelay = null;
+        }
+
+        if (transform.position.y < -2.0f) {
+            Respawn();
         }
     }
 
@@ -26,6 +33,7 @@ public class PlayerDeath : MonoBehaviour {
         Globals.Player.VisualEffects.Death();
         Globals.Player.VisualEffects.isDeath = false;
         Globals.Player.VisualEffects.elenaMesh.enabled = true;
-        isRespawning = false;
+        deathDelay?.Kill();
+        deathDelay = null;
     }
 }
