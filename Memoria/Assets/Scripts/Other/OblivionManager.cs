@@ -124,4 +124,5 @@ public class OblivionManager : MonoBehaviour {
     public void SetOblivionPosition(float position) {
         oblivionPosition = position;
     }
+
 }
