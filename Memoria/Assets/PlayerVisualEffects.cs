@@ -7,8 +7,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     public SkinnedMeshRenderer elenaMesh;
     public ParticleSystem deathParticles;
 
-    private Tween tween = null;
-    public ParticleSystem dust;
+    public ParticleSystem[] dustParticleSystems;
 
     [HideInInspector]
     public bool isDeath = false;
@@ -51,22 +50,31 @@ public class PlayerVisualEffects : MonoBehaviour {
     #endregion
 
     #region Dust
-    public void Jump()
-    {
-        PlayDust(0.075f, 200);
+    public void Jump(float direction) {
+        PlayDust(0.075f, 200, direction);
     }
-    public void Land()
-    {
-        PlayDust(0.25f, 100);
+    public void Land(float direction) {
+        PlayDust(0.075f, 100, direction);
     }
-    private void PlayDust(float duration, int count)
-    {
-        if (!dust.isStopped) return;
-        var m = dust.main;
-        m.duration = duration;
-        var e = dust.emission;
-        e.rateOverTime = count;
-        dust.Play();
+    private void PlayDust(float duration, int count, float direction) {
+        ParticleSystem particleSystem = null;
+        foreach (var ps in dustParticleSystems) {
+            if (ps.isStopped) {
+                particleSystem = ps;
+                continue;
+            }
+        }
+
+        if (particleSystem != null) {
+            var m = particleSystem.main;
+            m.duration = duration;
+            var e = particleSystem.emission;
+            e.rateOverTime = count;
+            var l = particleSystem.velocityOverLifetime;
+            float force = -direction / 4.0f;
+            l.x = force;
+            particleSystem.Play();
+        }
     }
     #endregion
 }
