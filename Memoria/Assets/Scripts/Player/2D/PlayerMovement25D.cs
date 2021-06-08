@@ -54,11 +54,14 @@ public class PlayerMovement25D : MonoBehaviour {
 
     private bool stunned = false;
 
+    private PlayerVisualEffects visuals;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         //groundCheckCollider = GetComponentInChildren<Collider2D>();
         animator = GetComponent<Animator>();
+        visuals = GetComponent<PlayerVisualEffects>();
     }
 
     void Update() {

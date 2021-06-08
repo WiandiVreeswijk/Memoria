@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine;
 public class PlayerVisualEffects : MonoBehaviour {
     public SkinnedMeshRenderer elenaMesh;
     public ParticleSystem deathParticles;
+
+    private Tween tween = null;
+    public ParticleSystem dust;
 
     [HideInInspector]
     public bool isDeath = false;
@@ -44,5 +48,25 @@ public class PlayerVisualEffects : MonoBehaviour {
 
     }
 
+    #endregion
+
+    #region Dust
+    public void Jump()
+    {
+        PlayDust(0.075f, 200);
+    }
+    public void Land()
+    {
+        PlayDust(0.25f, 100);
+    }
+    private void PlayDust(float duration, int count)
+    {
+        if (!dust.isStopped) return;
+        var m = dust.main;
+        m.duration = duration;
+        var e = dust.emission;
+        e.rateOverTime = count;
+        dust.Play();
+    }
     #endregion
 }
