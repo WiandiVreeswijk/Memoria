@@ -57,8 +57,8 @@ public class OblivionManager : MonoBehaviour {
     }
 
     void EditorUpdate() {
-        Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
-        Shader.SetGlobalFloat("_OblivionPositionOffset", -oblivionPositionOffset);
+        Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
+        Shader.SetGlobalFloat("_OblivionPositionOffset", oblivionPositionOffset);
         Shader.SetGlobalFloat("_PerlinScale", perlinScale);
         Shader.SetGlobalFloat("_PerlinAmount", perlinAmount);
         Shader.SetGlobalFloat("_VoronoiAmount", voronoiAmount);
@@ -85,7 +85,7 @@ public class OblivionManager : MonoBehaviour {
     bool moving = true;
     Tween tween;
     void GameUpdate() {
-        Shader.SetGlobalFloat("_OblivionPosition", -oblivionPosition);
+        Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
         if (!moving) return;
         if (nextSafeAreaPoint == null) {
             oblivionPosition += oblivionSpeed * Time.deltaTime;

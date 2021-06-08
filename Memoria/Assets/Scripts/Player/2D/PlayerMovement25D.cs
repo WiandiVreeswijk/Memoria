@@ -66,11 +66,17 @@ public class PlayerMovement25D : MonoBehaviour {
         moveInput = Input.GetAxis("Horizontal");
     }
 
-    bool justLanded = false;
+    bool wasTouching = false;
     private void FixedUpdate() {
+        //IsTouching is checked for this frame and the previous frame to prevent Elena from 'tripping' over adjecent colliders
         bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
-        bool isGroundedThisFrame = areFeetGrounded && Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
-        justLanded = !isGrounded && isGroundedThisFrame;
+        bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
+        bool touching = wasTouching || isTouchingLayers;
+        wasTouching = isTouchingLayers;
+
+        bool isGroundedThisFrame = areFeetGrounded && touching;
+
+        //justLanded = !isGrounded && isGroundedThisFrame;
         isGrounded = isGroundedThisFrame;
 
         float horizontal = moveInput;
