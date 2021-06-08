@@ -7,7 +7,7 @@ public class OblivionVFXManager : MonoBehaviour
 {
     private OblivionManager oblivion;
     private VisualEffect oblivionParticles;
-    private float offset = 10f;
+    private float offset = 12.5f;
 
     private void Start()
     {
