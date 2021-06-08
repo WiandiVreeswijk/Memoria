@@ -54,7 +54,7 @@ public class PlayerTriggerVolume : MonoBehaviour {
     }
 
     private void HouseInterior(bool enter) {
-        if (tween != null) tween.Kill();
+        tween?.Kill();
         if (enter) {
             tween = DOTween.To(() => sound.GetVolume(), x => sound.SetVolume(x), 0, 2.0f);
         } else {

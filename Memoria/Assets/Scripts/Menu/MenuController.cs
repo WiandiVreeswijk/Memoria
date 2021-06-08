@@ -126,14 +126,14 @@ public class MenuController : MonoBehaviour {
     }
 
     private void FadePanelIn(WAEMDictUIElement group, float time) {
-        if (group.tween != null) group.tween.Kill();
+        group.tween?.Kill();
         group.panel.blocksRaycasts = true;
         group.panel.gameObject.SetActive(true);
         group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 1.0f, time).SetEase(Ease.OutQuint);
     }
 
     private void FadePanelOut(WAEMDictUIElement group, float time) {
-        if (group.tween != null) group.tween.Kill();
+        group.tween?.Kill();
         group.panel.blocksRaycasts = false;
         group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 0.0f, time).OnComplete(() => {
             group.panel.gameObject.SetActive(false);
@@ -141,13 +141,13 @@ public class MenuController : MonoBehaviour {
     }
 
     private void FadeMainPanelIn(float time) {
-        if (mainFade != null) mainFade.Kill(true);
+        mainFade?.Kill(true);
         mainPanel.gameObject.SetActive(true);
         mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetEase(Ease.InCirc);
     }
 
     private void FadeMainPanelOut(float time) {
-        if (mainFade != null) mainFade.Kill(true);
+        mainFade?.Kill(true);
         mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 0.0f, time).OnComplete(() => {
             mainPanel.gameObject.SetActive(false);
         }).SetEase(Ease.InCirc);

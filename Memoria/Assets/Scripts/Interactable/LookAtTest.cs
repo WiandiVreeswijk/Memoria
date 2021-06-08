@@ -19,14 +19,14 @@ public class LookAtTest : MonoBehaviour {
         if (dist > 4.5f) {
             //Stop
             if (!toggle) {
-                if (tween != null) tween.Kill();
+                tween?.Kill();
                 tween = DOTween.To(() => lerp, x => lerp = x, 1.0f, 2.0f).SetEase(Ease.InOutQuad);
                 toggle = true;
             }
         } else if (dist < 4.0f) {
             //Start
             if (toggle) {
-                if (tween != null) tween.Kill();
+                tween?.Kill();
                 tween = DOTween.To(() => lerp, x => lerp = x, 0.0f, 2.0f).SetEase(Ease.InOutQuad);
                 toggle = false;
             }

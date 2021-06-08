@@ -19,7 +19,7 @@ public class BouncePlayer : MonoBehaviour {
         {
             //collision.gameObject.GetComponent<Rigidbody2D>().velocity = transform.up * launchForce; 
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * launchForce, ForceMode2D.Impulse);
-            if (tween != null) tween.Kill(true);
+            tween?.Kill(true);
             tween = transform.DOPunchScale(punch, duration, vibrato, elasticity);
         }
     }

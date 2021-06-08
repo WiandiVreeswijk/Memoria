@@ -81,9 +81,8 @@ public class PlayerMovement25D : MonoBehaviour {
         filter.useLayerMask = true;
         filter.layerMask = platformLayerMask;
 
-       // bool touching = wasTouching || isTouchingLayers;
-       // wasTouching = isTouchingLayers;
-
+        // bool touching = wasTouching || isTouchingLayers;
+        // wasTouching = isTouchingLayers;
         bool isGroundedThisFrame = areFeetGrounded;
 
         justLanded = !isGrounded && isGroundedThisFrame;

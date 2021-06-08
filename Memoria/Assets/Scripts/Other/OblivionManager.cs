@@ -114,7 +114,7 @@ public class OblivionManager : MonoBehaviour {
     }
 
     private Tween LerpOblivionToPosition(float position, float duration, Ease ease) {
-        if (tween != null) tween.Kill();
+        tween?.Kill();
         tween = DOTween.To(() => oblivionPosition, x => oblivionPosition = x, position, duration).SetEase(ease);
         return tween;
     }

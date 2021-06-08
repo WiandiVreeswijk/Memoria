@@ -28,7 +28,7 @@ public class Elena25DCameraController : MonoBehaviour {
 
     Tween zoomTween;
     private void SetZoom(float zoom) {
-        if (zoomTween != null) zoomTween.Kill();
+        zoomTween?.Kill();
         zoomTween = DOTween.To(() => transposer.m_CameraDistance, x => transposer.m_CameraDistance = x, zoom, 0.5f).SetEase(Ease.OutQuart);
     }
 
