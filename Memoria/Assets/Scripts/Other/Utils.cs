@@ -37,16 +37,13 @@ public static class Utils {
     public static T FindUniqueObjectWithTag<T>(string tag) where T : Component {
         return FindUniqueGameObjectWithTag(tag)?.GetComponent<T>();
     }
-    #endregion
-
-    public static Sequence DelayedAction(float delay, Action action) {
-        return DOTween.Sequence().AppendInterval(delay).AppendCallback(() => action());
-    }
 
     /*Logs an error when les or more than one instance of the type is found in the scene*/
     public static void EnsureOnlyOneInstanceInScene<T>() where T : Object {
         FindUniqueObject<T>();
     }
+
+    #endregion
 
     #region Math
 
@@ -59,5 +56,23 @@ public static class Utils {
     public static float Distance(float one, float two) {
         return Mathf.Abs(one - two);
     }
+    #endregion
+
+    #region Timing
+
+    public static Sequence DelayedAction(float delay, Action action) {
+        return DOTween.Sequence().AppendInterval(delay).AppendCallback(() => action());
+    }
+
+    public struct Cooldown {
+        public float time;
+
+        public bool Ready(float time) {
+            bool ready = this.time + time <= Time.time;
+            if (ready) this.time = Time.time;
+            return ready;
+        }
+    }
+
     #endregion
 }

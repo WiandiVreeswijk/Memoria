@@ -72,6 +72,8 @@ public class PlayerMovement25D : MonoBehaviour {
     bool justLanded = false;
     bool wasTouching = false;
     private float previousYVelocity = 0.0f;
+    private Utils.Cooldown cooldown;
+
     private void FixedUpdate() {
         //IsTouching is checked for this frame and the previous frame to prevent Elena from 'tripping' over adjecent colliders
         bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
