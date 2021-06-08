@@ -11,7 +11,9 @@ public class CheckpointManager : MonoBehaviour {
     }
 
     public void SetCheckpoint(Checkpoint checkpoint) {
-        lastCheckpoint = checkpoint;
+        if (Globals.OblivionManager.GetOblivionPosition() < checkpoint.GetOblivionStopPoint().x) {
+            lastCheckpoint = checkpoint;
+        }// else Debug.LogError("Checkpoint was behind oblivion");
     }
 
     public Checkpoint GetLastCheckpoint() {
