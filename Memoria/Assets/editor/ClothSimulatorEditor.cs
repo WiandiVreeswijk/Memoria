@@ -44,11 +44,11 @@ public class ClothSimulatorEditor : Editor {
             //Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
         //}
 
-        if (GUILayout.Button("Test")) {
-            simulator.Spawn();
-        }
-        if (GUILayout.Button("Simulate")) {
-            simulator.Simulate();
-        }
+        //if (GUILayout.Button("Test")) {
+        //    simulator.Spawn();
+        //}
+        //if (GUILayout.Button("Simulate")) {
+        //    simulator.Simulate();
+        //}
     }
 }
