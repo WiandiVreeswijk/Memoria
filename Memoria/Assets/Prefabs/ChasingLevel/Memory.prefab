@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2326994808179526867}
   - component: {fileID: 2323267684113801363}
   - component: {fileID: 2312131114856407573}
+  - component: {fileID: 728509114}
   m_Layer: 0
   m_Name: Render
   m_TagString: Untagged
@@ -81,6 +82,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &728509114
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324840021640695221}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49422708ecddc914fac591c2b8dedb75, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2325383632885775090
 GameObject:
   m_ObjectHideFlags: 0
@@ -4985,6 +5005,7 @@ MonoBehaviour:
   hoveringParticles: {fileID: 9092277653424933033}
   collectedParticles: {fileID: 204081729010999259}
   render: {fileID: 2312131114856407573}
+  collectedAnimation: {fileID: 728509114}
 --- !u!61 &1015025704
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5077,6 +5098,10 @@ PrefabInstance:
     - target: {fileID: 4248596120498176, guid: c9eb15264aa6c4348b00d5b9b3daab2a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198108421688386642, guid: c9eb15264aa6c4348b00d5b9b3daab2a, type: 3}
+      propertyPath: stopAction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199056527070751096, guid: c9eb15264aa6c4348b00d5b9b3daab2a, type: 3}
       propertyPath: m_Materials.Array.size
@@ -5285,7 +5310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4117084143567096, guid: b3a28f566bc928b4a8d3b9b5e84a3b79, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 3.2519999
       objectReference: {fileID: 0}
     - target: {fileID: 4117084143567096, guid: b3a28f566bc928b4a8d3b9b5e84a3b79, type: 3}
       propertyPath: m_LocalScale.y
@@ -5293,11 +5318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4117084143567096, guid: b3a28f566bc928b4a8d3b9b5e84a3b79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.347
+      value: -0.985
       objectReference: {fileID: 0}
     - target: {fileID: 4117084143567096, guid: b3a28f566bc928b4a8d3b9b5e84a3b79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.174
+      value: 4.466
       objectReference: {fileID: 0}
     - target: {fileID: 4117084143567096, guid: b3a28f566bc928b4a8d3b9b5e84a3b79, type: 3}
       propertyPath: m_LocalPosition.z
