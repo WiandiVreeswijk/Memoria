@@ -8,12 +8,15 @@ public class MemoryCollectible : MonoBehaviour {
 
     public ParticleSystem hoveringParticles, collectedParticles;
     public MeshRenderer render;
+
+    public Animator collectedAnimation;
+
     private void Start() {
         collectedParticles.Pause();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        render.enabled = false;
+        collectedAnimation.Play("MemoryCollected");
         hoveringParticles.Stop();
         collectedParticles.Play();
     }
