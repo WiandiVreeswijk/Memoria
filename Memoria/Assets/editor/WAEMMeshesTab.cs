@@ -31,7 +31,8 @@ public class WAEMMeshesTab : IWAEMTab {
         packMargin = GUILayout.HorizontalSlider(packMargin, 0.004f, 0.1f);
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection(packMargin);
         GUILayout.EndHorizontal();
-        if (GUILayout.Button("Calculate height UVs for mesh", layout)) CalculateHeightUVsForSelection();
+        if (GUILayout.Button("Calculate height UVs for mesh", layout)) CalculateHeightUVsForSelection(false);
+        if (GUILayout.Button("Calculate height UVs for mesh flipped", layout)) CalculateHeightUVsForSelection(true);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Bake collider", layout)) BakeMeshCollider();
         GUILayout.EndHorizontal();
@@ -238,7 +239,7 @@ public class WAEMMeshesTab : IWAEMTab {
         collider.sharedMesh = selectedMeshFilter.sharedMesh;
     }
 
-    private void CalculateHeightUVsForSelection() {
+    private void CalculateHeightUVsForSelection(bool flipped) {
         if (Selection.objects.Length > 1) {
             List<Mesh> meshes = new List<Mesh>();
             foreach (var obj in Selection.objects) {
@@ -247,11 +248,9 @@ public class WAEMMeshesTab : IWAEMTab {
                     MeshFilter filter = ((GameObject)obj).GetComponent<MeshFilter>();
                     if (filter != null && filter.sharedMesh != null && !meshes.Contains(filter.sharedMesh)) meshes.Add(filter.sharedMesh);
                 }
-
             }
 
             if (meshes.Count > 0) {
-
                 Vector3[][] vertices = new Vector3[meshes.Count][];
                 Vector2[][] newUVs = new Vector2[meshes.Count][];
                 float[] minVerts = new float[meshes.Count];
@@ -270,12 +269,11 @@ public class WAEMMeshesTab : IWAEMTab {
 
                     newUVs[x] = new Vector2[vertices[x].Length];
                     for (int i = 0; i < vertices[x].Length; i++) {
-                        newUVs[x][i] = new Vector2(0, Utils.Remap(vertices[x][i].y, minVerts[x], maxVerts[x], 0, 1));
+                        newUVs[x][i] = new Vector2(0, Utils.Remap(vertices[x][i].y, minVerts[x], maxVerts[x], flipped ? 1 : 0, flipped ? 0 : 1));
                     }
                 });
 
                 Undo.SetCurrentGroupName("CalculateHeightUVsGroup");
-
                 for (int i = 0; i < meshes.Count; i++) {
                     Undo.RecordObject(meshes[i], "CalculateHeightUVs");
                     meshes[i].uv3 = newUVs[i];
@@ -301,13 +299,13 @@ public class WAEMMeshesTab : IWAEMTab {
             }
 
             if (mesh != null) {
-                CalculateHeightUVs(mesh);
+                CalculateHeightUVs(mesh, flipped);
                 Debug.Log("Succesfully calculated height UVs");
             }
         }
     }
 
-    private void CalculateHeightUVs(Mesh mesh) {
+    private void CalculateHeightUVs(Mesh mesh, bool flipped) {
         Undo.RecordObject(mesh, "CalculateHeightUVs");
         float minVert = float.MaxValue;
         float maxVert = float.MinValue;
@@ -319,7 +317,7 @@ public class WAEMMeshesTab : IWAEMTab {
 
         Vector2[] newUVs = new Vector2[mesh.uv.Length];
         for (int i = 0; i < mesh.uv.Length; i++) {
-            newUVs[i] = new Vector2(0, Utils.Remap(mesh.vertices[i].y, minVert, maxVert, 0, 1));
+            newUVs[i] = new Vector2(0, Utils.Remap(mesh.vertices[i].y, minVert, maxVert, flipped ? 1 : 0, flipped ? 0 : 1));
         }
 
         mesh.uv3 = newUVs;
