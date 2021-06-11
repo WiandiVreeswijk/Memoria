@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -30,6 +31,7 @@ public class WAEMMeshesTab : IWAEMTab {
         packMargin = GUILayout.HorizontalSlider(packMargin, 0.004f, 0.1f);
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection(packMargin);
         GUILayout.EndHorizontal();
+        if (GUILayout.Button("Calculate height UVs for mesh", layout)) CalculateHeightUVsForSelection();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Bake collider", layout)) BakeMeshCollider();
         GUILayout.EndHorizontal();
@@ -234,6 +236,93 @@ public class WAEMMeshesTab : IWAEMTab {
         }
 
         collider.sharedMesh = selectedMeshFilter.sharedMesh;
+    }
+
+    private void CalculateHeightUVsForSelection() {
+        if (Selection.objects.Length > 1) {
+            List<Mesh> meshes = new List<Mesh>();
+            foreach (var obj in Selection.objects) {
+                if (obj.GetType() == typeof(Mesh) && !meshes.Contains(obj as Mesh)) meshes.Add(obj as Mesh);
+                else if (obj.GetType() == typeof(GameObject)) {
+                    MeshFilter filter = ((GameObject)obj).GetComponent<MeshFilter>();
+                    if (filter != null && filter.sharedMesh != null && !meshes.Contains(filter.sharedMesh)) meshes.Add(filter.sharedMesh);
+                }
+
+            }
+
+            if (meshes.Count > 0) {
+
+                Vector3[][] vertices = new Vector3[meshes.Count][];
+                Vector2[][] newUVs = new Vector2[meshes.Count][];
+                float[] minVerts = new float[meshes.Count];
+                float[] maxVerts = new float[meshes.Count];
+                for (int i = 0; i < meshes.Count; i++) {
+                    vertices[i] = meshes[i].vertices;
+                    minVerts[i] = float.MaxValue;
+                    maxVerts[i] = float.MinValue;
+                }
+
+                Parallel.For(0, meshes.Count, x => {
+                    foreach (var vert in vertices[x]) {
+                        if (vert.y < minVerts[x]) minVerts[x] = vert.y;
+                        if (vert.y > maxVerts[x]) maxVerts[x] = vert.y;
+                    }
+
+                    newUVs[x] = new Vector2[vertices[x].Length];
+                    for (int i = 0; i < vertices[x].Length; i++) {
+                        newUVs[x][i] = new Vector2(0, Utils.Remap(vertices[x][i].y, minVerts[x], maxVerts[x], 0, 1));
+                    }
+                });
+
+                Undo.SetCurrentGroupName("CalculateHeightUVsGroup");
+
+                for (int i = 0; i < meshes.Count; i++) {
+                    Undo.RecordObject(meshes[i], "CalculateHeightUVs");
+                    meshes[i].uv3 = newUVs[i];
+                }
+
+                Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
+                Debug.Log("Succesfully calculated height UVs for " + meshes.Count + " meshes");
+            } else Debug.LogError("No mesh found in selected Objects.");
+        } else {
+
+            Mesh mesh = null;
+            if (Selection.activeObject.GetType() == typeof(Mesh)) {
+                mesh = Selection.activeObject as Mesh;
+
+            } else if (Selection.activeGameObject != null) {
+                mesh = Selection.activeGameObject.GetComponent<MeshFilter>()?.sharedMesh;
+                if (mesh == null) {
+                    Debug.LogError("No mesh found in selected GameObject.");
+                    return;
+                }
+            } else {
+                Debug.LogError("No GameObject or Mesh selected.");
+            }
+
+            if (mesh != null) {
+                CalculateHeightUVs(mesh);
+                Debug.Log("Succesfully calculated height UVs");
+            }
+        }
+    }
+
+    private void CalculateHeightUVs(Mesh mesh) {
+        Undo.RecordObject(mesh, "CalculateHeightUVs");
+        float minVert = float.MaxValue;
+        float maxVert = float.MinValue;
+
+        foreach (var vert in mesh.vertices) {
+            if (vert.y < minVert) minVert = vert.y;
+            if (vert.y > maxVert) maxVert = vert.y;
+        }
+
+        Vector2[] newUVs = new Vector2[mesh.uv.Length];
+        for (int i = 0; i < mesh.uv.Length; i++) {
+            newUVs[i] = new Vector2(0, Utils.Remap(mesh.vertices[i].y, minVert, maxVert, 0, 1));
+        }
+
+        mesh.uv3 = newUVs;
     }
 
     private void CalculateLightmapUVsForSelection(float packMargin) {

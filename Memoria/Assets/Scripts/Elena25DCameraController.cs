@@ -21,7 +21,7 @@ public class Elena25DCameraController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        float mapped = Utils.Map(Mathf.Clamp(transform.position.y, minPlayerHeight, maxPlayerHeight), minPlayerHeight, maxPlayerHeight, minCameraY, maxCameraY);
+        float mapped = Utils.Remap(Mathf.Clamp(transform.position.y, minPlayerHeight, maxPlayerHeight), minPlayerHeight, maxPlayerHeight, minCameraY, maxCameraY);
         transposer.m_ScreenY = Mathf.Lerp(transposer.m_ScreenY, mapped, Time.deltaTime);
         //transposer.m_ScreenY;
     }
