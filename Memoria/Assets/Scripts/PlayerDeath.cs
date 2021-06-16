@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class PlayerDeath : MonoBehaviour {
     Sequence deathDelay;
+
     private void FixedUpdate() {
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
             if (deathDelay == null) deathDelay = Utils.DelayedAction(1.0f, Respawn);
@@ -18,7 +19,13 @@ public class PlayerDeath : MonoBehaviour {
         }
     }
 
-    private void Respawn() {
+    private void Respawn()
+    {
+        VisualFX();
+        Utils.DelayedAction(1.0f, RespawnPosition);
+    }
+
+    private void RespawnPosition() {
         Checkpoint lastCheckpoint = Globals.CheckpointManager.GetLastCheckpoint();
         if (lastCheckpoint == null) {
             Globals.Player.transform.position = Globals.CheckpointManager.GetSpawn();
@@ -28,10 +35,17 @@ public class PlayerDeath : MonoBehaviour {
             Globals.OblivionManager.SetOblivionPosition(lastCheckpoint.GetOblivionStopPoint().x);
         }
 
-        Globals.Player.VisualEffects.Death();
-        Globals.Player.VisualEffects.isDeath = false;
         Globals.Player.VisualEffects.elenaMesh.enabled = true;
+        Globals.Player.VisualEffects.respawnParticles.Play();
+
         deathDelay?.Kill();
         deathDelay = null;
+    }
+
+
+    private void VisualFX()
+    {
+        Globals.Player.VisualEffects.Death();
+        Globals.Player.VisualEffects.isDeath = false;
     }
 }

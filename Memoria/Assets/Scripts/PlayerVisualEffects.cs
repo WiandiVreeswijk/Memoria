@@ -9,6 +9,8 @@ public class PlayerVisualEffects : MonoBehaviour {
 
     public ParticleSystem[] dustParticleSystems;
 
+    public ParticleSystem respawnParticles;
+
     [HideInInspector]
     public bool isDeath = false;
     private bool isBlinking = false;
