@@ -12,6 +12,13 @@ public class BouncePlayer : MonoBehaviour {
     private Tween tween;
     private Utils.Cooldown cooldown;
 
+    private ParticleSystem dust;
+
+    private void Start()
+    {
+        dust = gameObject.GetComponentInChildren<ParticleSystem>();
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
@@ -20,6 +27,7 @@ public class BouncePlayer : MonoBehaviour {
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * launchForce, ForceMode2D.Impulse);
                 tween?.Kill(true);
                 tween = transform.DOPunchScale(punch, duration, vibrato, elasticity);
+                dust.Play();
             }
         }
     }
