@@ -246,17 +246,17 @@ public class WAEMMeshesTab : IWAEMTab {
         //Undo.SetCurrentGroupName("CalculateHeightUVsGroup");
         if (Selection.gameObjects.Length > 0) {
             List<MeshFilter> filters = new List<MeshFilter>();
-            foreach (var obj in Selection.objects) {
+            foreach (var obj in Selection.gameObjects) {
                 if (obj.GetType() == typeof(GameObject)) {
                     MeshFilter filter = ((GameObject)obj).GetComponent<MeshFilter>();
                     if (filter != null && filter.sharedMesh != null && !filters.Contains(filter)) filters.Add(filter);
                 }
             }
-
             int found = 0;
             filters.RemoveAll(x => {
                 if (x.sharedMesh.name.EndsWith("_heightUV")) return true;
-                Mesh mesh = AssetDatabase.LoadAssetAtPath("Assets/ContentPacks/Tooling/VegetationMeshes/" + x.sharedMesh.name + "_heightUV.asset", typeof(Mesh)) as Mesh;
+                Mesh mesh = AssetDatabase.LoadAssetAtPath("Assets/ContentPacks/Tooling/VegetationMeshes/" + x.sharedMesh.name + "_heightUV.asset",
+                    typeof(Mesh)) as Mesh;
                 if (mesh == null) return false;
                 found++;
                 Undo.RecordObject(x, "CalculateHeightUVs");
@@ -264,31 +264,47 @@ public class WAEMMeshesTab : IWAEMTab {
                 return true;
             });
 
-            Debug.Log(filters.Count + " new meshes and " + found + " existing meshes");
-            if (filters.Count > 0) {
-                Mesh[] meshes = new Mesh[filters.Count];
-                Vector3[][] vertices = new Vector3[filters.Count][];
-                Vector2[][] newUVs = new Vector2[filters.Count][];
-                float[] minVerts = new float[filters.Count];
-                float[] maxVerts = new float[filters.Count];
-                for (int i = 0; i < filters.Count; i++) {
+            int count = 0;
+            Dictionary<Mesh, List<MeshFilter>> meshDict = new Dictionary<Mesh, List<MeshFilter>>();
+            foreach (var filter in filters) {
+                foreach (var filter2 in filters) {
+                    if (filter == filter2) continue;
+                    meshDict.TryGetValue(filter.sharedMesh, out List<MeshFilter> list);
+                    if (list == null) {
+                        list = new List<MeshFilter>();
+                        meshDict.Add(filter.sharedMesh, list);
+                    }
+
+                    count++;
+                    list.Add(filter);
+                }
+            }
+            if (meshDict.Count > 0) {
+                Mesh[] meshes = new Mesh[meshDict.Count];
+                Vector3[][] vertices = new Vector3[meshDict.Count][];
+                Vector2[][] newUVs = new Vector2[meshDict.Count][];
+                float[] minVerts = new float[meshDict.Count];
+                float[] maxVerts = new float[meshDict.Count];
+                int i = 0;
+                foreach (var pair in meshDict) {
                     meshes[i] = new Mesh();
-                    meshes[i].name = filters[i].sharedMesh.name + "_heightUV";
-                    meshes[i].vertices = filters[i].sharedMesh.vertices;
-                    meshes[i].triangles = filters[i].sharedMesh.triangles;
-                    meshes[i].uv = filters[i].sharedMesh.uv;
-                    meshes[i].uv2 = filters[i].sharedMesh.uv2;
-                    meshes[i].uv3 = filters[i].sharedMesh.uv3;
-                    meshes[i].uv4 = filters[i].sharedMesh.uv4;
-                    meshes[i].normals = filters[i].sharedMesh.normals;
-                    meshes[i].colors = filters[i].sharedMesh.colors;
-                    meshes[i].tangents = filters[i].sharedMesh.tangents;
-                    vertices[i] = filters[i].sharedMesh.vertices;
+                    meshes[i].name = pair.Key.name + "_heightUV";
+                    meshes[i].vertices = pair.Key.vertices;
+                    meshes[i].triangles = pair.Key.triangles;
+                    meshes[i].uv = pair.Key.uv;
+                    meshes[i].uv2 = pair.Key.uv2;
+                    meshes[i].uv3 = pair.Key.uv3;
+                    meshes[i].uv4 = pair.Key.uv4;
+                    meshes[i].normals = pair.Key.normals;
+                    meshes[i].colors = pair.Key.colors;
+                    meshes[i].tangents = pair.Key.tangents;
+                    vertices[i] = pair.Key.vertices;
                     minVerts[i] = float.MaxValue;
                     maxVerts[i] = float.MinValue;
+                    i++;
                 }
 
-                Parallel.For(0, filters.Count, x => {
+                Parallel.For(0, meshDict.Count, x => {
                     foreach (var vert in vertices[x]) {
                         if (vert.y < minVerts[x]) minVerts[x] = vert.y;
                         if (vert.y > maxVerts[x]) maxVerts[x] = vert.y;
@@ -299,21 +315,23 @@ public class WAEMMeshesTab : IWAEMTab {
                         newUVs[x][i] = new Vector2(0, Utils.Remap(vertices[x][i].y, minVerts[x], maxVerts[x], flipped ? 1 : 0, flipped ? 0 : 1));
                     }
                 });
-
-
-                for (int i = 0; i < filters.Count; i++) {
-                    meshes[i].uv3 = newUVs[i];
-                    Debug.Log("Created mesh asset at " + "Assets/ContentPacks/Tooling/VegetationMeshes/" + filters[i].sharedMesh.name + "_heightUV.asset");
-                    AssetDatabase.CreateAsset(meshes[i], "Assets/ContentPacks/Tooling/VegetationMeshes/" + filters[i].sharedMesh.name + "_heightUV.asset");
-                    Undo.RecordObject(filters[i], "CalculateHeightUVs");
-                    filters[i].sharedMesh = meshes[i];
-                    EditorUtility.SetDirty(filters[i]);
+                int j = 0;
+                foreach (var pair in meshDict) {
+                    meshes[j].uv3 = newUVs[j];
+                    Debug.Log("Created mesh asset at " + "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV.asset");
+                    AssetDatabase.CreateAsset(meshes[j], "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV.asset");
+                    foreach (var mesh in pair.Value) {
+                        Undo.RecordObject(mesh, "CalculateHeightUVs");
+                        mesh.sharedMesh = meshes[j];
+                        EditorUtility.SetDirty(mesh);
+                    }
+                    j++;
                 }
 
                 Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 AssetDatabase.SaveAssets();
-                Debug.Log("Succesfully calculated height UVs for " + filters.Count + " meshes");
             }
+            Debug.Log("Succesfully calculated height UVs for " + meshDict.Count + " new meshgroups and " + found + " existing meshes. Totalling " + count + " different meshes");
         }
         AssetDatabase.SaveAssets();
     }
