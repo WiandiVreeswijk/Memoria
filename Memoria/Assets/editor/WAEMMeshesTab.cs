@@ -31,8 +31,10 @@ public class WAEMMeshesTab : IWAEMTab {
         packMargin = GUILayout.HorizontalSlider(packMargin, 0.004f, 0.1f);
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection(packMargin);
         GUILayout.EndHorizontal();
-        if (GUILayout.Button("Calculate height UVs for mesh", layout)) CalculateHeightUVsForSelection(false);
-        if (GUILayout.Button("Calculate height UVs for mesh flipped", layout)) CalculateHeightUVsForSelection(true);
+        //if (GUILayout.Button("Calculate height UVs for mesh", layout)) CalculateHeightUVsForSelection(false);
+        //if (GUILayout.Button("Calculate height UVs for mesh flipped", layout)) CalculateHeightUVsForSelection(true);
+        if (GUILayout.Button("Fix height UVs for selected plant", layout)) FixHeightUVsForSelection(false);
+        if (GUILayout.Button("Fix height UVs for selected plant flipped", layout)) FixHeightUVsForSelection(true);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Bake collider", layout)) BakeMeshCollider();
         GUILayout.EndHorizontal();
@@ -239,6 +241,101 @@ public class WAEMMeshesTab : IWAEMTab {
         collider.sharedMesh = selectedMeshFilter.sharedMesh;
     }
 
+
+    private void FixHeightUVsForSelection(bool flipped) {
+        //Undo.SetCurrentGroupName("CalculateHeightUVsGroup");
+        if (Selection.gameObjects.Length > 0) {
+            List<MeshFilter> filters = new List<MeshFilter>();
+            foreach (var obj in Selection.gameObjects) {
+                if (obj.GetType() == typeof(GameObject)) {
+                    MeshFilter filter = ((GameObject)obj).GetComponent<MeshFilter>();
+                    if (filter != null && filter.sharedMesh != null && !filters.Contains(filter)) filters.Add(filter);
+                }
+            }
+            int found = 0;
+            filters.RemoveAll(x => {
+                if (x.sharedMesh.name.EndsWith("_heightUV")) return true;
+                Mesh mesh = AssetDatabase.LoadAssetAtPath("Assets/ContentPacks/Tooling/VegetationMeshes/" + x.sharedMesh.name + "_heightUV.asset",
+                    typeof(Mesh)) as Mesh;
+                if (mesh == null) return false;
+                found++;
+                Undo.RecordObject(x, "CalculateHeightUVs");
+                x.sharedMesh = mesh;
+                return true;
+            });
+
+            int count = 0;
+            Dictionary<Mesh, List<MeshFilter>> meshDict = new Dictionary<Mesh, List<MeshFilter>>();
+            foreach (var filter in filters) {
+                foreach (var filter2 in filters) {
+                    if (filter == filter2) continue;
+                    meshDict.TryGetValue(filter.sharedMesh, out List<MeshFilter> list);
+                    if (list == null) {
+                        list = new List<MeshFilter>();
+                        meshDict.Add(filter.sharedMesh, list);
+                    }
+
+                    count++;
+                    list.Add(filter);
+                }
+            }
+            if (meshDict.Count > 0) {
+                Mesh[] meshes = new Mesh[meshDict.Count];
+                Vector3[][] vertices = new Vector3[meshDict.Count][];
+                Vector2[][] newUVs = new Vector2[meshDict.Count][];
+                float[] minVerts = new float[meshDict.Count];
+                float[] maxVerts = new float[meshDict.Count];
+                int i = 0;
+                foreach (var pair in meshDict) {
+                    meshes[i] = new Mesh();
+                    meshes[i].name = pair.Key.name + "_heightUV";
+                    meshes[i].vertices = pair.Key.vertices;
+                    meshes[i].triangles = pair.Key.triangles;
+                    meshes[i].uv = pair.Key.uv;
+                    meshes[i].uv2 = pair.Key.uv2;
+                    meshes[i].uv3 = pair.Key.uv3;
+                    meshes[i].uv4 = pair.Key.uv4;
+                    meshes[i].normals = pair.Key.normals;
+                    meshes[i].colors = pair.Key.colors;
+                    meshes[i].tangents = pair.Key.tangents;
+                    vertices[i] = pair.Key.vertices;
+                    minVerts[i] = float.MaxValue;
+                    maxVerts[i] = float.MinValue;
+                    i++;
+                }
+
+                Parallel.For(0, meshDict.Count, x => {
+                    foreach (var vert in vertices[x]) {
+                        if (vert.y < minVerts[x]) minVerts[x] = vert.y;
+                        if (vert.y > maxVerts[x]) maxVerts[x] = vert.y;
+                    }
+
+                    newUVs[x] = new Vector2[vertices[x].Length];
+                    for (int i = 0; i < vertices[x].Length; i++) {
+                        newUVs[x][i] = new Vector2(0, Utils.Remap(vertices[x][i].y, minVerts[x], maxVerts[x], flipped ? 1 : 0, flipped ? 0 : 1));
+                    }
+                });
+                int j = 0;
+                foreach (var pair in meshDict) {
+                    meshes[j].uv3 = newUVs[j];
+                    Debug.Log("Created mesh asset at " + "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV.asset");
+                    AssetDatabase.CreateAsset(meshes[j], "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV.asset");
+                    foreach (var mesh in pair.Value) {
+                        Undo.RecordObject(mesh, "CalculateHeightUVs");
+                        mesh.sharedMesh = meshes[j];
+                        EditorUtility.SetDirty(mesh);
+                    }
+                    j++;
+                }
+
+                Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
+                AssetDatabase.SaveAssets();
+            }
+            Debug.Log("Succesfully calculated height UVs for " + meshDict.Count + " new meshgroups and " + found + " existing meshes. Totalling " + count + " different meshes");
+        }
+        AssetDatabase.SaveAssets();
+    }
+
     private void CalculateHeightUVsForSelection(bool flipped) {
         if (Selection.objects.Length > 1) {
             List<Mesh> meshes = new List<Mesh>();
@@ -322,7 +419,6 @@ public class WAEMMeshesTab : IWAEMTab {
         }
 
         mesh.uv3 = newUVs;
-        AssetDatabase.CreateAsset(mesh, AssetDatabase.GetAssetPath(mesh));
     }
 
     private void CalculateLightmapUVsForSelection(float packMargin) {

@@ -54,17 +54,17 @@ public class PlayerMovement25D : MonoBehaviour {
 
     private bool stunned = false;
 
-    private PlayerVisualEffects visuals;
-
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         //groundCheckCollider = GetComponentInChildren<Collider2D>();
         animator = GetComponent<Animator>();
-        visuals = GetComponent<PlayerVisualEffects>();
     }
 
-    void Update() {
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Return)) Globals.Debugger.Print("a", "Hallo", 1.0f);
+        if (Input.GetKey(KeyCode.B)) Globals.Debugger.Print("a", "234345435", 10.0f);
         Jump();
         moveInput = Input.GetAxis("Horizontal");
     }
@@ -72,23 +72,28 @@ public class PlayerMovement25D : MonoBehaviour {
     bool justLanded = false;
     //bool wasTouching = false;
     private float previousYVelocity = 0.0f;
-
+    bool canJump = false;
     private void FixedUpdate() {
         //IsTouching is checked for this frame and the previous frame to prevent Elena from 'tripping' over adjecent colliders
         bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
-        //bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
+        bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
+
+        var hit = Physics2D.Raycast(transform.position, -Vector2.up, 10.0f, platformLayerMask);
+        Globals.Debugger.Print("hit", $"{rb.velocity.y}");
 
         ContactFilter2D filter = new ContactFilter2D();
         filter.useLayerMask = true;
         filter.layerMask = platformLayerMask;
 
-        // bool touching = wasTouching || isTouchingLayers;
+        //bool touching = wasTouching || isTouchingLayers;
         // wasTouching = isTouchingLayers;
-        bool isGroundedThisFrame = areFeetGrounded;
+        bool isGroundedThisFrame = areFeetGrounded && rb.velocity.y <= 0.001f;
 
         justLanded = !isGrounded && isGroundedThisFrame;
         if (justLanded) OnLand(previousYVelocity);
         isGrounded = isGroundedThisFrame;
+        if(isGrounded) canJump = true;
+
 
         float horizontal = moveInput;
         float animatorForwardSpeed = Mathf.Clamp01(Mathf.Abs(rb.velocity.x));
@@ -115,8 +120,10 @@ public class PlayerMovement25D : MonoBehaviour {
         else hangCounter -= Time.deltaTime;
 
         //Manage jump buffer
-        if (Input.GetKeyDown(KeyCode.Space)) jumpBufferCount = jumpBufferLength;
-        else jumpBufferCount -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space) && canJump) {
+            canJump = false;
+            jumpBufferCount = jumpBufferLength;
+        } else jumpBufferCount -= Time.deltaTime;
 
         //checks hangtime and jumpbuffer
         if (jumpBufferCount >= 0 && hangCounter > 0f) {

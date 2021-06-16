@@ -16,9 +16,11 @@ public class Globals : MonoBehaviour {
     private Player player;
     private MenuController menuController;
     private PersistenceManager persistenceManager;
+    private Debugger debugger;
 
     public GameObject persistenceManagerPrefab;
     public GameObject menuControllerPrefab;
+    public GameObject debuggerPrefab;
 
     //Oblivion
     private OblivionManager oblivionManager;
@@ -40,6 +42,11 @@ public class Globals : MonoBehaviour {
 
     private void GlobalInitialize() {
         player = Utils.FindUniqueObject<Player>();
+
+        Utils.FindOrInstantiateUniqueObject(out debugger, () => {
+            return Instantiate(debuggerPrefab, transform).GetComponent<Debugger>();
+        });
+
         Utils.FindOrInstantiateUniqueObject(out menuController, () => {
             return Instantiate(menuControllerPrefab, transform).GetComponent<MenuController>();
         });
@@ -63,6 +70,7 @@ public class Globals : MonoBehaviour {
     public static MenuController MenuController { get { return _Instance.menuController; } }
     public static PersistenceManager PersistenceManager { get { return _Instance.persistenceManager; } }
     public static Player Player { get { return _Instance.player; } }
+    public static Debugger Debugger => _Instance.debugger; 
 
     #endregion
 

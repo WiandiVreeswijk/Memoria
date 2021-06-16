@@ -109,7 +109,6 @@ public class MenuController : MonoBehaviour {
         GameObject obj = Instantiate(notificationPrefab, notificationsParent.transform);
         var rectTransform = obj.GetComponent<RectTransform>();
         obj.transform.position += new Vector3(0, (rectTransform.rect.height + 10f) * notificationIndex, 0);
-        obj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = message;
         var group = obj.GetComponent<CanvasGroup>();
         group.alpha = 0.0f;
 
