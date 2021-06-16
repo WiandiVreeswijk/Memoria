@@ -303,6 +303,7 @@ public class WAEMMeshesTab : IWAEMTab {
                 Debug.Log("Succesfully calculated height UVs");
             }
         }
+        AssetDatabase.SaveAssets();
     }
 
     private void CalculateHeightUVs(Mesh mesh, bool flipped) {
@@ -321,6 +322,7 @@ public class WAEMMeshesTab : IWAEMTab {
         }
 
         mesh.uv3 = newUVs;
+        AssetDatabase.CreateAsset(mesh, AssetDatabase.GetAssetPath(mesh));
     }
 
     private void CalculateLightmapUVsForSelection(float packMargin) {
