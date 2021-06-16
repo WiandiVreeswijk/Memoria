@@ -31,9 +31,10 @@ public class WAEMMeshesTab : IWAEMTab {
         packMargin = GUILayout.HorizontalSlider(packMargin, 0.004f, 0.1f);
         if (GUILayout.Button("Calculate lightmap UVs for mesh", layout)) CalculateLightmapUVsForSelection(packMargin);
         GUILayout.EndHorizontal();
-        if (GUILayout.Button("Calculate height UVs for mesh", layout)) CalculateHeightUVsForSelection(false);
-        if (GUILayout.Button("Calculate height UVs for mesh flipped", layout)) CalculateHeightUVsForSelection(true);
-        //if (GUILayout.Button("Fix height UVs for selected plant", layout)) FixHeightUVsForSelection(true);
+        //if (GUILayout.Button("Calculate height UVs for mesh", layout)) CalculateHeightUVsForSelection(false);
+        //if (GUILayout.Button("Calculate height UVs for mesh flipped", layout)) CalculateHeightUVsForSelection(true);
+        if (GUILayout.Button("Fix height UVs for selected plant", layout)) FixHeightUVsForSelection(false);
+        if (GUILayout.Button("Fix height UVs for selected plant flipped", layout)) FixHeightUVsForSelection(true);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Bake collider", layout)) BakeMeshCollider();
         GUILayout.EndHorizontal();
@@ -242,7 +243,7 @@ public class WAEMMeshesTab : IWAEMTab {
 
 
     private void FixHeightUVsForSelection(bool flipped) {
-        Undo.SetCurrentGroupName("CalculateHeightUVsGroup");
+        //Undo.SetCurrentGroupName("CalculateHeightUVsGroup");
         if (Selection.gameObjects.Length > 0) {
             List<MeshFilter> filters = new List<MeshFilter>();
             foreach (var obj in Selection.objects) {
@@ -252,18 +253,18 @@ public class WAEMMeshesTab : IWAEMTab {
                 }
             }
 
+            int found = 0;
             filters.RemoveAll(x => {
-                Mesh mesh = AssetDatabase.LoadAssetAtPath("Assets/ContentPacks/Tooling/VegetationMeshes/" + x.sharedMesh.name, typeof(Mesh)) as Mesh;
-                if (mesh == null) {
-                    Debug.Log("exists");
-                    return false;
-                }
+                if (x.sharedMesh.name.EndsWith("_heightUV")) return true;
+                Mesh mesh = AssetDatabase.LoadAssetAtPath("Assets/ContentPacks/Tooling/VegetationMeshes/" + x.sharedMesh.name + "_heightUV.asset", typeof(Mesh)) as Mesh;
+                if (mesh == null) return false;
+                found++;
                 Undo.RecordObject(x, "CalculateHeightUVs");
                 x.sharedMesh = mesh;
                 return true;
             });
 
-            Debug.Log(filters.Count + " new filters found");
+            Debug.Log(filters.Count + " new meshes and " + found + " existing meshes");
             if (filters.Count > 0) {
                 Mesh[] meshes = new Mesh[filters.Count];
                 Vector3[][] vertices = new Vector3[filters.Count][];
@@ -271,7 +272,17 @@ public class WAEMMeshesTab : IWAEMTab {
                 float[] minVerts = new float[filters.Count];
                 float[] maxVerts = new float[filters.Count];
                 for (int i = 0; i < filters.Count; i++) {
-                    meshes[i] = filters[i].mesh;
+                    meshes[i] = new Mesh();
+                    meshes[i].name = filters[i].sharedMesh.name + "_heightUV";
+                    meshes[i].vertices = filters[i].sharedMesh.vertices;
+                    meshes[i].triangles = filters[i].sharedMesh.triangles;
+                    meshes[i].uv = filters[i].sharedMesh.uv;
+                    meshes[i].uv2 = filters[i].sharedMesh.uv2;
+                    meshes[i].uv3 = filters[i].sharedMesh.uv3;
+                    meshes[i].uv4 = filters[i].sharedMesh.uv4;
+                    meshes[i].normals = filters[i].sharedMesh.normals;
+                    meshes[i].colors = filters[i].sharedMesh.colors;
+                    meshes[i].tangents = filters[i].sharedMesh.tangents;
                     vertices[i] = filters[i].sharedMesh.vertices;
                     minVerts[i] = float.MaxValue;
                     maxVerts[i] = float.MinValue;
@@ -292,33 +303,16 @@ public class WAEMMeshesTab : IWAEMTab {
 
                 for (int i = 0; i < filters.Count; i++) {
                     meshes[i].uv3 = newUVs[i];
+                    Debug.Log("Created mesh asset at " + "Assets/ContentPacks/Tooling/VegetationMeshes/" + filters[i].sharedMesh.name + "_heightUV.asset");
+                    AssetDatabase.CreateAsset(meshes[i], "Assets/ContentPacks/Tooling/VegetationMeshes/" + filters[i].sharedMesh.name + "_heightUV.asset");
+                    Undo.RecordObject(filters[i], "CalculateHeightUVs");
                     filters[i].sharedMesh = meshes[i];
-                    AssetDatabase.CreateAsset(meshes[i], "Assets/ContentPacks/Tooling/VegetationMeshes/" + filters[i].sharedMesh.name + "_heightUV");
+                    EditorUtility.SetDirty(filters[i]);
                 }
 
                 Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 AssetDatabase.SaveAssets();
                 Debug.Log("Succesfully calculated height UVs for " + filters.Count + " meshes");
-            } else Debug.LogError("No mesh found in selected Objects.");
-        } else {
-
-            Mesh mesh = null;
-            if (Selection.activeObject.GetType() == typeof(Mesh)) {
-                mesh = Selection.activeObject as Mesh;
-
-            } else if (Selection.activeGameObject != null) {
-                mesh = Selection.activeGameObject.GetComponent<MeshFilter>()?.sharedMesh;
-                if (mesh == null) {
-                    Debug.LogError("No mesh found in selected GameObject.");
-                    return;
-                }
-            } else {
-                Debug.LogError("No GameObject or Mesh selected.");
-            }
-
-            if (mesh != null) {
-                CalculateHeightUVs(mesh, flipped);
-                Debug.Log("Succesfully calculated height UVs");
             }
         }
         AssetDatabase.SaveAssets();
