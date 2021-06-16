@@ -10,8 +10,9 @@ public class Globals : MonoBehaviour {
         OBLIVION,
     }
 
-    //Global
     private static Globals _Instance;
+
+    //Global
     private Player player;
     private MenuController menuController;
     private PersistenceManager persistenceManager;

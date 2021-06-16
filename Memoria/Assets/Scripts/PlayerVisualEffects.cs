@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerVisualEffects : MonoBehaviour
-{
+public class PlayerVisualEffects : MonoBehaviour {
     public SkinnedMeshRenderer elenaMesh;
     public ParticleSystem deathParticles;
 
@@ -17,35 +16,29 @@ public class PlayerVisualEffects : MonoBehaviour
     public Color stunnedColor = Color.white;
 
 
-    private void Start()
-    {
+    private void Start() {
         playerMaterial = elenaMesh.material;
         deathParticles.Stop();
     }
     #region Blinking
 
-    public void DoBlink(float speed, int times)
-    {
+    public void DoBlink(float speed, int times) {
         if (isBlinking) return;
         isBlinking = true;
         playerMaterial.DOColor(stunnedColor, 0.1f);
         BlinkOff(speed, times);
     }
 
-    void BlinkOn(float speed, int times)
-    {
+    void BlinkOn(float speed, int times) {
         elenaMesh.enabled = true;
         if (times > 0) Utils.DelayedAction(speed, () => BlinkOff(speed, times));
-        else
-        {
+        else {
             isBlinking = false;
             playerMaterial.DOColor(Color.white, 0.1f);
         }
-
     }
 
-    void BlinkOff(float speed, int times)
-    {
+    void BlinkOff(float speed, int times) {
         elenaMesh.enabled = false;
         Utils.DelayedAction(speed, () => BlinkOn(speed, times - 1));
     }
@@ -53,10 +46,8 @@ public class PlayerVisualEffects : MonoBehaviour
     #endregion
 
     #region Death
-    public void Death()
-    {
-        if (!isDeath)
-        {
+    public void Death() {
+        if (!isDeath) {
             elenaMesh.enabled = false;
             deathParticles.Play();
             isDeath = true;
@@ -67,28 +58,22 @@ public class PlayerVisualEffects : MonoBehaviour
     #endregion
 
     #region Dust
-    public void Jump(float direction)
-    {
+    public void Jump(float direction) {
         PlayDust(0.075f, 200, direction);
     }
-    public void Land(float direction)
-    {
+    public void Land(float direction) {
         PlayDust(0.075f, 100, direction);
     }
-    private void PlayDust(float duration, int count, float velocity)
-    {
+    private void PlayDust(float duration, int count, float velocity) {
         ParticleSystem particleSystem = null;
-        foreach (var ps in dustParticleSystems)
-        {
-            if (ps.isStopped)
-            {
+        foreach (var ps in dustParticleSystems) {
+            if (ps.isStopped) {
                 particleSystem = ps;
                 continue;
             }
         }
 
-        if (particleSystem != null)
-        {
+        if (particleSystem != null) {
             var m = particleSystem.main;
             m.duration = duration;
             var e = particleSystem.emission;
