@@ -50,6 +50,24 @@ public class OblivionManager : MonoBehaviour {
         Utils.EnsureOnlyOneInstanceInScene<OblivionManager>();
 
         if (!isInEditor) oblivionPosition = -5;
+
+        Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
+        Shader.SetGlobalFloat("_OblivionPositionOffset", oblivionPositionOffset);
+        Shader.SetGlobalFloat("_PerlinScale", perlinScale);
+        Shader.SetGlobalFloat("_PerlinAmount", perlinAmount);
+        Shader.SetGlobalFloat("_VoronoiAmount", voronoiAmount);
+        Shader.SetGlobalFloat("_VoronoiSpeed", voronoiSpeed);
+        Shader.SetGlobalFloat("_VoronoiDensity", voronoiDensity);
+        Shader.SetGlobalFloat("_VoronoiNormalStrength", voronoiNormalStrength);
+        Shader.SetGlobalFloat("_CreepIntensity", creepIntensity);
+        Shader.SetGlobalFloat("_CreepMultiplier", creepMultiplier);
+        Shader.SetGlobalFloat("_AltColorIntensity", altColorIntensity);
+        Shader.SetGlobalFloat("_BumpsNormalStrength", bumpsNormalStrength);
+        Shader.SetGlobalFloat("_BumpsNoiseScale", bumpsNoiseScale);
+        Shader.SetGlobalFloat("_AltColorEdgeIntensity", altColorEdgeIntensity);
+        Shader.SetGlobalFloat("_Smoothness", smoothness);
+        Shader.SetGlobalColor("_OblivionColor", oblivionColor);
+        Shader.SetGlobalColor("_AltColor", altColor);
     }
 
     void Update() {
