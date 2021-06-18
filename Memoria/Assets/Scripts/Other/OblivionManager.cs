@@ -17,7 +17,7 @@ public class OblivionManager : MonoBehaviour {
     [SerializeField] private float oblivionPositionOffset = 0.0f;
 
     [Header("Perlin")]
-    [Range(0.0f, 20.0f)] [SerializeField] private float perlinAmount = 8.0f;
+    [Range(0.0f, 100.0f)] [SerializeField] private float perlinAmount = 8.0f;
     [Range(0.0f, 10.0f)] [SerializeField] private float perlinScale = 5.0f;
     [Header("Voronoi")]
     [Range(0.0f, 10.0f)] [SerializeField] private float voronoiAmount = 4.75f;
