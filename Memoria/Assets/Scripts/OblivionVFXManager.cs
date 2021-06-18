@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class OblivionVFXManager : MonoBehaviour
-{
+public class OblivionVFXManager : MonoBehaviour {
     private OblivionManager oblivion;
-    private VisualEffect oblivionParticles;
+    private VisualEffect[] oblivionParticles;
     public float offset = 5.0f;
 
-    private void Start()
-    {
+    private void Start() {
         oblivion = GetComponent<OblivionManager>();
-        oblivionParticles = GetComponentInChildren<VisualEffect>();
+        oblivionParticles = GetComponentsInChildren<VisualEffect>();
     }
-    private void FixedUpdate()
-    {
-        var temp = oblivionParticles.transform.position;
-        temp.x = oblivion.GetOblivionPosition() - offset;
-        oblivionParticles.transform.position = temp;
+
+    private void FixedUpdate() {
+        foreach (var fvx in oblivionParticles) {
+            var temp = fvx.transform.position;
+            temp.x = oblivion.GetOblivionPosition() - offset;
+            fvx.transform.position = temp;
+        }
     }
 }

@@ -14,29 +14,29 @@ public class Elena25DCameraController : MonoBehaviour {
     private float cameraZoomIn = 10.0f;
     private float cameraZoomOut = 15.0f;
 
-    void Start() {
-        cam = Utils.FindUniqueObject<CinemachineVirtualCamera>();
-        transposer = cam.GetCinemachineComponent<CinemachineFramingTransposer>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-        float mapped = Utils.Remap(Mathf.Clamp(transform.position.y, minPlayerHeight, maxPlayerHeight), minPlayerHeight, maxPlayerHeight, minCameraY, maxCameraY);
-        transposer.m_ScreenY = Mathf.Lerp(transposer.m_ScreenY, mapped, Time.deltaTime);
-        //transposer.m_ScreenY;
-    }
-
-    Tween zoomTween;
-    private void SetZoom(float zoom) {
-        zoomTween?.Kill();
-        zoomTween = DOTween.To(() => transposer.m_CameraDistance, x => transposer.m_CameraDistance = x, zoom, 0.5f).SetEase(Ease.OutQuart);
-    }
+    //void Start() {
+    //    cam = Utils.FindUniqueObject<CinemachineVirtualCamera>();
+    //    transposer = cam.GetCinemachineComponent<CinemachineFramingTransposer>();
+    //}
+    //
+    //// Update is called once per frame
+    //void Update() {
+    //    float mapped = Utils.Remap(Mathf.Clamp(transform.position.y, minPlayerHeight, maxPlayerHeight), minPlayerHeight, maxPlayerHeight, minCameraY, maxCameraY);
+    //    transposer.m_ScreenY = Mathf.Lerp(transposer.m_ScreenY, mapped, Time.deltaTime);
+    //    //transposer.m_ScreenY;
+    //}
+    //
+    //Tween zoomTween;
+    //private void SetZoom(float zoom) {
+    //    zoomTween?.Kill();
+    //    zoomTween = DOTween.To(() => transposer.m_CameraDistance, x => transposer.m_CameraDistance = x, zoom, 0.5f).SetEase(Ease.OutQuart);
+    //}
 
     public void ZoomIn() {
-        SetZoom(cameraZoomIn);
+       // SetZoom(cameraZoomIn);
     }
 
     public void ZoomOut() {
-        SetZoom(cameraZoomOut);
+       // SetZoom(cameraZoomOut);
     }
 }
