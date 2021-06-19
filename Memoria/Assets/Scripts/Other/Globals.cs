@@ -24,6 +24,7 @@ public class Globals : MonoBehaviour {
 
     //Oblivion
     private OblivionManager oblivionManager;
+    private OblivionVFXManager oblivionVFXManager;
     private CheckpointManager checkpointManager;
 
     private void Awake() {
@@ -62,15 +63,16 @@ public class Globals : MonoBehaviour {
 
     private void InitializeOblivion() {
         oblivionManager = Utils.FindUniqueObject<OblivionManager>();
+        oblivionVFXManager = Utils.FindUniqueObject<OblivionVFXManager>();
         checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
     }
 
     #region GlobalGlobals
 
-    public static MenuController MenuController { get { return _Instance.menuController; } }
-    public static PersistenceManager PersistenceManager { get { return _Instance.persistenceManager; } }
-    public static Player Player { get { return _Instance.player; } }
-    public static Debugger Debugger => _Instance.debugger; 
+    public static MenuController MenuController => _Instance.menuController;
+    public static PersistenceManager PersistenceManager => _Instance.persistenceManager;
+    public static Player Player => _Instance.player;
+    public static Debugger Debugger => _Instance.debugger;
 
     #endregion
 
@@ -80,8 +82,9 @@ public class Globals : MonoBehaviour {
 
     #region OblivionGlobals
 
-    public static OblivionManager OblivionManager { get { return _Instance.oblivionManager; } }
-    public static CheckpointManager CheckpointManager { get { return _Instance.checkpointManager; } }
+    public static OblivionManager OblivionManager => _Instance.oblivionManager;
+    public static OblivionVFXManager OblivionVFXManager => _Instance.oblivionVFXManager;
+    public static CheckpointManager CheckpointManager => _Instance.checkpointManager;
 
     #endregion
 }

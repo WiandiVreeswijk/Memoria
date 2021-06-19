@@ -14,10 +14,21 @@ public class OblivionVFXManager : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        foreach (var fvx in oblivionParticles) {
-            var temp = fvx.transform.position;
+        SetPosition();
+    }
+
+    private void SetPosition() {
+        foreach (var vfx in oblivionParticles) {
+            var temp = vfx.transform.position;
             temp.x = oblivion.GetOblivionPosition() - offset;
-            fvx.transform.position = temp;
+            vfx.transform.position = temp;
+        }
+    }
+
+    public void ClearParticles() {
+        SetPosition();
+        foreach (var vfx in oblivionParticles) {
+            vfx.Reinit();
         }
     }
 }

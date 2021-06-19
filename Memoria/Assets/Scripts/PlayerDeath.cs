@@ -4,14 +4,15 @@ using UnityEngine;
 using DG.Tweening;
 
 public class PlayerDeath : MonoBehaviour {
-    Sequence deathDelay;
+    Sequence deathDelaySequence;
+    Sequence respawningSequence;
 
     private void FixedUpdate() {
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
-            if (deathDelay == null) deathDelay = Utils.DelayedAction(1.0f, Respawn);
+            if (deathDelaySequence == null) deathDelaySequence = Utils.DelayedAction(1.0f, Respawn);
         } else {
-            deathDelay?.Kill();
-            deathDelay = null;
+            deathDelaySequence?.Kill();
+            deathDelaySequence = null;
         }
 
         if (transform.position.y < -2.0f) {
@@ -19,17 +20,18 @@ public class PlayerDeath : MonoBehaviour {
         }
     }
 
-    private void Respawn()
-    {
-        VisualFX();
-        Utils.DelayedAction(1.0f, RespawnPosition);
+    private void Respawn() {
+        if (respawningSequence == null) {
+            VisualFX();
+            respawningSequence = Utils.DelayedAction(1.0f, RespawnPosition);
+        }
     }
 
     private void RespawnPosition() {
         Checkpoint lastCheckpoint = Globals.CheckpointManager.GetLastCheckpoint();
         if (lastCheckpoint == null) {
             Globals.Player.transform.position = Globals.CheckpointManager.GetSpawn();
-            Globals.OblivionManager.SetOblivionPosition(-5);
+            Globals.OblivionManager.SetDefaultOblivionPosition();
         } else {
             Globals.Player.transform.position = lastCheckpoint.GetRespawnPoint();
             Globals.OblivionManager.SetOblivionPosition(lastCheckpoint.GetOblivionStopPoint().x);
@@ -37,14 +39,14 @@ public class PlayerDeath : MonoBehaviour {
 
         Globals.Player.VisualEffects.elenaMesh.enabled = true;
         Globals.Player.VisualEffects.respawnParticles.Play();
-
-        deathDelay?.Kill();
-        deathDelay = null;
+        Globals.OblivionVFXManager.ClearParticles();
+        deathDelaySequence?.Kill();
+        deathDelaySequence = null;
+        respawningSequence = null;
     }
 
 
-    private void VisualFX()
-    {
+    private void VisualFX() {
         Globals.Player.VisualEffects.Death();
         Globals.Player.VisualEffects.isDeath = false;
     }

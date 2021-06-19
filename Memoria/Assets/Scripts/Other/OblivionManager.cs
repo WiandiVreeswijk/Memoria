@@ -15,6 +15,7 @@ public class OblivionManager : MonoBehaviour {
     [Space(30.0f)]
     [SerializeField] private float oblivionPosition = 0.0f;
     [SerializeField] private float oblivionPositionOffset = 0.0f;
+    [SerializeField] private float defaultOblivionPosition = -15.0f;
 
     [Header("Perlin")]
     [Range(0.0f, 100.0f)] [SerializeField] private float perlinAmount = 8.0f;
@@ -49,7 +50,7 @@ public class OblivionManager : MonoBehaviour {
         isInEditor = !Application.isPlaying;
         Utils.EnsureOnlyOneInstanceInScene<OblivionManager>();
 
-        if (!isInEditor) oblivionPosition = -5;
+        if (!isInEditor) oblivionPosition = defaultOblivionPosition;
 
         Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
         Shader.SetGlobalFloat("_OblivionPositionOffset", oblivionPositionOffset);
@@ -143,6 +144,10 @@ public class OblivionManager : MonoBehaviour {
 
     public void SetOblivionPosition(float position) {
         oblivionPosition = position;
+    }
+
+    public void SetDefaultOblivionPosition() {
+        oblivionPosition = defaultOblivionPosition;
     }
 
 }
