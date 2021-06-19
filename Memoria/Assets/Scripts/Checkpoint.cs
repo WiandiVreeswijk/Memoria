@@ -20,7 +20,9 @@ public class Checkpoint : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision) {
         Globals.Player.CameraController.ZoomOut();
         if (collision.CompareTag("Player")) {
-            Globals.OblivionManager.ContinueFromSaveArea(oblivionContinuePoint);
+            if (!Globals.Player.PlayerDeath.IsDying()) {
+                Globals.OblivionManager.ContinueFromSaveArea(oblivionContinuePoint);
+            }
         }
     }
 

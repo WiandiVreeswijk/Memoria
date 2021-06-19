@@ -56,6 +56,7 @@ public class PlayerMovement25D : MonoBehaviour {
     private float fallTimeoutDelta;
 
     private bool stunned = false;
+    private bool allowMovement = true;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -66,6 +67,7 @@ public class PlayerMovement25D : MonoBehaviour {
     }
 
     void Update() {
+        if (!allowMovement) return;
         Jump();
         moveInput = Input.GetAxis("Horizontal");
     }
@@ -75,6 +77,7 @@ public class PlayerMovement25D : MonoBehaviour {
     private float previousYVelocity = 0.0f;
     bool canJump = false;
     private void FixedUpdate() {
+        if (!allowMovement) return;
         //IsTouching is checked for this frame and the previous frame to prevent Elena from 'tripping' over adjecent colliders
         bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
         bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
@@ -171,5 +174,9 @@ public class PlayerMovement25D : MonoBehaviour {
 
     private void OnDrawGizmos() {
         Gizmos.DrawWireCube(transform.position, new Vector3(groundColliderCheckSize.x, groundColliderCheckSize.y, 0.02f));
+    }
+
+    public void AllowMovement(bool toggle) {
+        allowMovement = toggle;
     }
 }
