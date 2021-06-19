@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MemoryCollectible : MonoBehaviour {
+    private bool triggered = false;
     public float rotationSpeed = 2f;
 
     public ParticleSystem hoveringParticles, collectedParticles;
@@ -16,9 +17,12 @@ public class MemoryCollectible : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        collectedAnimation.Play("MemoryCollected");
-        hoveringParticles.Stop();
-        collectedParticles.Play();
+        if (!triggered) {
+            collectedAnimation.Play("MemoryCollected");
+            hoveringParticles.Stop();
+            collectedParticles.Play();
+            triggered = true;
+        }
     }
 
     private void FixedUpdate() {
