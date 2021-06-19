@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 
 public class PlayerDeath : MonoBehaviour {
+    private bool isDying = false;
     Sequence deathDelaySequence;
     Sequence respawningSequence;
 
@@ -21,7 +22,8 @@ public class PlayerDeath : MonoBehaviour {
     }
 
     private void Respawn() {
-        if (respawningSequence == null) {
+        if (!isDying) {
+            isDying = true;
             VisualFX();
             respawningSequence = Utils.DelayedAction(1.0f, RespawnPosition);
         }
@@ -43,11 +45,15 @@ public class PlayerDeath : MonoBehaviour {
         deathDelaySequence?.Kill();
         deathDelaySequence = null;
         respawningSequence = null;
+        isDying = false;
     }
-
 
     private void VisualFX() {
         Globals.Player.VisualEffects.Death();
         Globals.Player.VisualEffects.isDeath = false;
+    }
+
+    public bool IsDying() {
+        return isDying;
     }
 }
