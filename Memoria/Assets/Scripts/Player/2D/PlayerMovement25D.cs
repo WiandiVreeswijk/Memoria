@@ -61,10 +61,7 @@ public class PlayerMovement25D : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.Return)) Globals.Debugger.Print("a", "Hallo", 1.0f);
-        if (Input.GetKey(KeyCode.B)) Globals.Debugger.Print("a", "234345435", 10.0f);
+    void Update() {
         Jump();
         moveInput = Input.GetAxis("Horizontal");
     }
@@ -79,7 +76,6 @@ public class PlayerMovement25D : MonoBehaviour {
         bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
 
         var hit = Physics2D.Raycast(transform.position, -Vector2.up, 10.0f, platformLayerMask);
-        Globals.Debugger.Print("hit", $"{rb.velocity.y}");
 
         ContactFilter2D filter = new ContactFilter2D();
         filter.useLayerMask = true;
@@ -92,7 +88,8 @@ public class PlayerMovement25D : MonoBehaviour {
         justLanded = !isGrounded && isGroundedThisFrame;
         if (justLanded) OnLand(previousYVelocity);
         isGrounded = isGroundedThisFrame;
-        if(isGrounded) canJump = true;
+        if (isGrounded) { canJump = true; }
+        if (isGrounded || rb.velocity.y <= 0) isJumping = false;
 
 
         float horizontal = moveInput;
@@ -114,6 +111,7 @@ public class PlayerMovement25D : MonoBehaviour {
         }
     }
 
+    bool isJumping = false;
     private void Jump() {
         //Manage hang time
         if (isGrounded) hangCounter = hangTime;
@@ -129,6 +127,7 @@ public class PlayerMovement25D : MonoBehaviour {
         if (jumpBufferCount >= 0 && hangCounter > 0f) {
             if (jumpBufferCount == jumpBufferLength) {
                 //Just jumped
+                isJumping = true;
             }
             rb.velocity = Vector2.up * jumpForce;
             jumpBufferCount = 0;
@@ -142,10 +141,10 @@ public class PlayerMovement25D : MonoBehaviour {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
         //Check if player is going up and jump button is released
-        else if (rb.velocity.y > 0 && !Input.GetKeyDown(KeyCode.Space)) {
+        else if (rb.velocity.y > 0 && (!isJumping || !Input.GetKeyDown(KeyCode.Space))) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        if (rb.velocity.y > 0 && Input.GetKeyUp(KeyCode.Space)) {
+        if (rb.velocity.y > 0 && isJumping && Input.GetKeyUp(KeyCode.Space)) {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
     }

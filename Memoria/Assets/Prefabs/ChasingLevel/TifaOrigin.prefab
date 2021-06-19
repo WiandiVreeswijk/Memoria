@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2101716174113280781}
   - component: {fileID: 4237391302815639495}
   - component: {fileID: 2436096105583756819}
-  m_Layer: 0
+  - component: {fileID: 397475899065892821}
+  m_Layer: 13
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +109,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.1413536, y: 2.0083094}
   m_EdgeRadius: 0
+--- !u!114 &397475899065892821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436096105583756818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853dec2ab41146a4ca087a5d2f183932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchForce: 20
+  punch: {x: 0.1, y: -0.1, z: 0.1}
+  duration: 0.3
+  elasticity: 0.5
+  vibrato: 5
+  dust: {fileID: 4129539841943172843}
 --- !u!1 &7923216813136205908
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +168,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7923216813136205908}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 853dec2ab41146a4ca087a5d2f183932, type: 3}
   m_Name: 
@@ -159,6 +178,7 @@ MonoBehaviour:
   duration: 0.3
   elasticity: 0.5
   vibrato: 5
+  dust: {fileID: 0}
 --- !u!61 &7923216813136205910
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,7 +186,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7923216813136205908}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -194,7 +214,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1698068915230344, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
       propertyPath: m_Name
-      value: FX_Cartoony_Jump_01
+      value: JumpParticles
       objectReference: {fileID: 0}
     - target: {fileID: 4361429739378172, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
       propertyPath: m_RootOrder
@@ -269,5 +289,10 @@ PrefabInstance:
 --- !u!4 &4323370171890977383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361429739378172, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
+  m_PrefabInstance: {fileID: 4319177380762541979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4129539841943172843 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198121459679799664, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
   m_PrefabInstance: {fileID: 4319177380762541979}
   m_PrefabAsset: {fileID: 0}
