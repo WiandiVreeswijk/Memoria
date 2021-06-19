@@ -9869,10 +9869,11 @@ MonoBehaviour:
     m_Bits: 4096
   fallMultiplier: 7
   lowJumpMultiplier: 5
-  groundColliderCheckSize: {x: 0.2, y: 0.2}
+  groundColliderCheckSize: {x: 0.6, y: 0.2}
   extraJumpsValue: 0
   hangTime: 0.2
   jumpBufferLength: 0
+  fallTimeout: 0.05
 --- !u!114 &402376488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9890,7 +9891,7 @@ MonoBehaviour:
   dustParticleSystems:
   - {fileID: 6270867047844948966}
   - {fileID: 3976581246718254070}
-  respawnParticles: {fileID: 0}
+  respawnParticles: {fileID: 2834196960257717987}
   isDeath: 0
   stunnedColor: {r: 1, g: 0.4675499, b: 0.18396229, a: 1}
 --- !u!114 &402376493
@@ -16313,7 +16314,7 @@ SkinnedMeshRenderer:
     firstSubMesh: 0
     subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
+  m_ProbeAnchor: {fileID: 212280919995136073}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_ReceiveGI: 1
@@ -16552,5 +16553,10 @@ PrefabInstance:
 --- !u!4 &2709783237957863579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4367362870695974, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+  m_PrefabInstance: {fileID: 2707949154441236669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2834196960257717987 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198587703769245278, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
   m_PrefabInstance: {fileID: 2707949154441236669}
   m_PrefabAsset: {fileID: 0}

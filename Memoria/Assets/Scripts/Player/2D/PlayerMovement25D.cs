@@ -52,6 +52,9 @@ public class PlayerMovement25D : MonoBehaviour {
     public float jumpBufferLength;
     private float jumpBufferCount;
 
+    public float fallTimeout = 0.15f;
+    private float fallTimeoutDelta;
+
     private bool stunned = false;
 
     void Start() {
@@ -59,6 +62,7 @@ public class PlayerMovement25D : MonoBehaviour {
         playerCollider = GetComponent<Collider2D>();
         //groundCheckCollider = GetComponentInChildren<Collider2D>();
         animator = GetComponent<Animator>();
+        fallTimeoutDelta = fallTimeout;
     }
 
     void Update() {
@@ -88,8 +92,21 @@ public class PlayerMovement25D : MonoBehaviour {
         justLanded = !isGrounded && isGroundedThisFrame;
         if (justLanded) OnLand(previousYVelocity);
         isGrounded = isGroundedThisFrame;
-        if (isGrounded) { canJump = true; }
+        bool jumpAnimation = false;
+        if (isGrounded) {
+            fallTimeoutDelta = fallTimeout;
+            canJump = true;
+        }
         if (isGrounded || rb.velocity.y <= 0) isJumping = false;
+
+        if (fallTimeoutDelta >= 0.0f) {
+            fallTimeoutDelta -= Time.deltaTime;
+        } else {
+            jumpAnimation = true;
+        }
+        //Probably temporary as we'll need jump/hover/landing animations
+
+        animator.SetFloat("Jump", jumpAnimation ? 1 : 0);
 
 
         float horizontal = moveInput;
@@ -132,9 +149,6 @@ public class PlayerMovement25D : MonoBehaviour {
             rb.velocity = Vector2.up * jumpForce;
             jumpBufferCount = 0;
         }
-
-        //Probably temporary as we'll need jump/hover/landing animations
-        animator.SetFloat("Jump", isGrounded ? 0 : 1);
 
         //Check if player is falling down
         if (rb.velocity.y < 0) {
