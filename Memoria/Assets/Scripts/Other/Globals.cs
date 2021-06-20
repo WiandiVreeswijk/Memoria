@@ -26,6 +26,7 @@ public class Globals : MonoBehaviour {
     private OblivionManager oblivionManager;
     private OblivionVFXManager oblivionVFXManager;
     private CheckpointManager checkpointManager;
+    private SoundManagerChase soundManagerChase;
 
     private void Awake() {
         DontDestroyOnLoad(this);
@@ -65,6 +66,7 @@ public class Globals : MonoBehaviour {
         oblivionManager = Utils.FindUniqueObject<OblivionManager>();
         oblivionVFXManager = Utils.FindUniqueObject<OblivionVFXManager>();
         checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
+        soundManagerChase = Utils.FindUniqueObject<SoundManagerChase>();
     }
 
     #region GlobalGlobals
@@ -85,6 +87,7 @@ public class Globals : MonoBehaviour {
     public static OblivionManager OblivionManager => _Instance.oblivionManager;
     public static OblivionVFXManager OblivionVFXManager => _Instance.oblivionVFXManager;
     public static CheckpointManager CheckpointManager => _Instance.checkpointManager;
+    public static SoundManagerChase SoundManagerChase => _Instance.soundManagerChase;
 
     #endregion
 }
