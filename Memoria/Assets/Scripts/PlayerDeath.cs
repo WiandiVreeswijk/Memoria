@@ -10,10 +10,16 @@ public class PlayerDeath : MonoBehaviour {
 
     private void FixedUpdate() {
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
-            if (deathDelaySequence == null) deathDelaySequence = Utils.DelayedAction(1.0f, Respawn);
+            if (deathDelaySequence == null) {
+                Globals.SoundManagerChase.FadeDeath(1.0f, 1.0f);
+                deathDelaySequence = Utils.DelayedAction(1.0f, Respawn);
+            }
         } else {
-            deathDelaySequence?.Kill();
-            deathDelaySequence = null;
+            if (deathDelaySequence != null) {
+                Globals.SoundManagerChase.FadeDeath(0.0f);
+                deathDelaySequence?.Kill();
+                deathDelaySequence = null;
+            }
         }
 
         if (transform.position.y < -2.0f) {
@@ -25,7 +31,8 @@ public class PlayerDeath : MonoBehaviour {
         if (!isDying) {
             isDying = true;
             VisualFX();
-            respawningSequence = Utils.DelayedAction(1.0f, RespawnPosition);
+            Globals.SoundManagerChase.FadeDeath(1.0f);
+            respawningSequence = Utils.DelayedAction(2.0f, RespawnPosition);
         }
     }
 
@@ -42,6 +49,7 @@ public class PlayerDeath : MonoBehaviour {
         Globals.Player.VisualEffects.elenaMesh.enabled = true;
         Globals.Player.VisualEffects.respawnParticles.Play();
         Globals.OblivionVFXManager.ClearParticles();
+        Globals.SoundManagerChase.FadeDeath(0.0f, 0.0f);
         deathDelaySequence?.Kill();
         deathDelaySequence = null;
         respawningSequence = null;

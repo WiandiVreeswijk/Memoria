@@ -14,6 +14,7 @@ public class Checkpoint : MonoBehaviour {
         Globals.CheckpointManager.SetCheckpoint(this);
         if (collision.CompareTag("Player")) {
             Globals.OblivionManager.SetNextSafeArea(oblivionStopPoint);
+            Globals.SoundManagerChase.FadeIntensity(0.0f);
         }
     }
 
@@ -22,6 +23,7 @@ public class Checkpoint : MonoBehaviour {
         if (collision.CompareTag("Player")) {
             if (!Globals.Player.PlayerDeath.IsDying()) {
                 Globals.OblivionManager.ContinueFromSaveArea(oblivionContinuePoint);
+                Globals.SoundManagerChase.FadeIntensity(1.0f);
             }
         }
     }

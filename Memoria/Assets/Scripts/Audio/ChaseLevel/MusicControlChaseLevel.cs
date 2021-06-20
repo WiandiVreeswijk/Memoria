@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicControlChaseLevel : MonoBehaviour
-{
+public class MusicControlChaseLevel : MonoBehaviour {
 
     [Header("FMOD Event")]
     [FMODUnity.EventRef]
@@ -21,12 +20,7 @@ public class MusicControlChaseLevel : MonoBehaviour
     [Range(0f, 1f)]
     public float deathValue = 0f;
 
-    private bool gameHasStarted = false;
-    private float lerpValue = 0.1f;
-
-    private void Start()
-    {
-
+    private void Start() {
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
 
         FMOD.Studio.EventDescription intensityDescription;
@@ -43,24 +37,35 @@ public class MusicControlChaseLevel : MonoBehaviour
 
         FMOD.Studio.PLAYBACK_STATE PbState;
         audio.getPlaybackState(out PbState);
-        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
+        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
             audio.start();
         }
     }
-    private void FixedUpdate()
-    {
-        audio.setParameterByID(intensityParameter, intensityValue);
-        audio.setParameterByID(deathParameter, deathValue);
-        if (gameHasStarted)
-        {
-            deathValue = Mathf.Lerp(deathValue, 0, lerpValue * Time.fixedDeltaTime);
-        }
-        audio.setParameterByID(deathParameter, deathValue);
+
+    //private void FixedUpdate() {
+    //    audio.setParameterByID(intensityParameter, intensityValue);
+    //    audio.setParameterByID(deathParameter, deathValue);
+    //    if (gameHasStarted) {
+    //        deathValue = Mathf.Lerp(deathValue, 0, lerpValue * Time.fixedDeltaTime);
+    //    }
+    //    audio.setParameterByID(deathParameter, deathValue);
+    //}
+
+    public void SetIntensity(float intensity) {
+        intensityValue = intensity;
+        audio.setParameterByID(intensityParameter, intensity);
     }
 
-    public void GameStarted()
-    {
-        gameHasStarted = true;
+    public void SetDeath(float death) {
+        deathValue = death;
+        audio.setParameterByID(deathParameter, death);
+    }
+
+    public float GetIntensity() {
+        return intensityValue;
+    }
+
+    public float GetDeath() {
+        return deathValue;
     }
 }
