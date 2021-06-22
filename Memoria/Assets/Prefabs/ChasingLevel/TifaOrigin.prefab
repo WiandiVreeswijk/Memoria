@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4237391302815639495}
   - component: {fileID: 2436096105583756819}
   - component: {fileID: 397475899065892821}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ MonoBehaviour:
   duration: 0.3
   elasticity: 0.5
   vibrato: 5
-  dust: {fileID: 0}
+  dust: {fileID: 4129539841943172843}
 --- !u!61 &7923216813136205910
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215,6 +215,10 @@ PrefabInstance:
     - target: {fileID: 1698068915230344, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
       propertyPath: m_Name
       value: JumpParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698068915230344, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4361429739378172, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
       propertyPath: m_RootOrder
