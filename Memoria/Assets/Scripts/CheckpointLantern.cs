@@ -3,12 +3,11 @@ using DG.Tweening;
 using UnityEngine;
 
 public class CheckpointLantern : MonoBehaviour, IActivatable {
-    public GameObject lightObject;
+    public Light lightInLantern;
+    public Light lightInSafeArea;
     public ParticleSystem particles;
     public ParticleSystem embers;
 
-    [Tooltip("External light to flicker; you can leave this null if you attach script to a light")]
-    public new Light light;
     [Tooltip("Minimum random light intensity")]
     public float minIntensity = 0f;
     [Tooltip("Maximum random light intensity")]
@@ -25,25 +24,26 @@ public class CheckpointLantern : MonoBehaviour, IActivatable {
     private bool activated = false;
     private bool igniting = true;
     public void Start() {
-        lightObject.SetActive(false);
-
+        lightInLantern.gameObject.SetActive(false);
+        lightInSafeArea.gameObject.SetActive(false);
         smoothQueue = new Queue<float>(smoothing);
-        // External or internal light?
-        if (light == null) {
-            light = lightObject.GetComponent<Light>();
-        }
     }
 
     public void Activate() {
         if (!activated) {
-            lightObject.SetActive(true);
-            particles.Play();
-
             activated = true;
-            Light light = lightObject.GetComponent<Light>();
-            light.intensity = 0;
+            particles.Play();
             embers.Play();
-            DOTween.To(() => light.intensity, x => light.intensity = x, 3.0f, 0.2f).SetEase(Ease.InBounce)
+
+            lightInLantern.gameObject.SetActive(true);
+            lightInSafeArea.gameObject.SetActive(true);
+            lightInLantern.intensity = 0;
+            lightInSafeArea.intensity = 0;
+
+            DOTween.To(() => lightInLantern.intensity, x => {
+                lightInLantern.intensity = x;
+                lightInSafeArea.intensity = x;
+            }, 3.0f, 0.2f).SetEase(Ease.InBounce)
                 .OnComplete(() => {
                     igniting = false;
                 });
@@ -69,7 +69,8 @@ public class CheckpointLantern : MonoBehaviour, IActivatable {
         lastSum += newVal;
 
         // Calculate new smoothed average
-        light.intensity = lastSum / (float)smoothQueue.Count;
+        lightInLantern.intensity = lastSum / (float)smoothQueue.Count;
+        lightInSafeArea.intensity = lightInLantern.intensity;
     }
 
     public void EmitRespawnParticles() {

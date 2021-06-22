@@ -106,6 +106,99 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.95, y: 4.4}
   m_EdgeRadius: 0
+--- !u!1 &9120194742954611698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 560134604104630189}
+  - component: {fileID: 2156508921878907772}
+  m_Layer: 0
+  m_Name: ExternalLamp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &560134604104630189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120194742954611698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.95, z: 4.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 721842528437866262}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &2156508921878907772
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120194742954611698}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 0, g: 1, b: 0.29213476, a: 1}
+  m_Intensity: 2.75
+  m_Range: 6.42
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 1
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &51342116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,6 +295,18 @@ PrefabInstance:
     - target: {fileID: 721842529294559077, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
       propertyPath: maxIntensity
       value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 721842529294559077, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
+      propertyPath: lightInLantern
+      value: 
+      objectReference: {fileID: 721842528843708052}
+    - target: {fileID: 721842529294559077, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
+      propertyPath: lightInSafeArea
+      value: 
+      objectReference: {fileID: 2156508921878907772}
+    - target: {fileID: 721842529632503280, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 721842529634475074, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
       propertyPath: m_Name
@@ -347,12 +452,21 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.maxCurve.m_Curve.Array.data[2].outWeight
       value: 0.33333334
       objectReference: {fileID: 0}
+    - target: {fileID: 721842529767948634, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 721842529824141232, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
+--- !u!108 &721842528843708052 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 721842529767948632, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
+  m_PrefabInstance: {fileID: 1240020940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &721842528437866262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 721842529634760922, guid: 3a879b46c28bf514f813413e2f63a633, type: 3}
