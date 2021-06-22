@@ -8,6 +8,8 @@ public class OblivionManager : MonoBehaviour {
     private bool isInEditor = false;
     private Transform nextSafeAreaPoint;
 
+    public Light pointlight;
+
     [Header("Game")]
     [Range(0.1f, 10.0f)] [SerializeField] private float oblivionSpeed = 1.0f;
 
@@ -119,6 +121,11 @@ public class OblivionManager : MonoBehaviour {
             moving = false;
             LerpOblivionToPosition(nextGoal.x, 1.5f, Ease.OutSine);
         }
+
+        var pos = pointlight.transform.position;
+        pos.x = oblivionPosition - 1.0f;
+        pos.y = Globals.Player.transform.position.y;
+        pointlight.transform.position = pos;
     }
 
     public void SetNextSafeArea(Transform point) {

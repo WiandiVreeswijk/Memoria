@@ -15,12 +15,15 @@ public class PlayerVisualEffects : MonoBehaviour {
     public bool isDeath = false;
     private bool isBlinking = false;
     private Material playerMaterial;
+    private int oblivionPositionPropertyID;
     public Color stunnedColor = Color.white;
-
+    private Tween fadeDeathTween;
 
     private void Start() {
         playerMaterial = elenaMesh.material;
+        oblivionPositionPropertyID = Shader.PropertyToID("_OblivionPosition");
         deathParticles.Stop();
+        CancelFadeDeath(0.0f);
     }
     #region Blinking
 
@@ -85,6 +88,26 @@ public class PlayerVisualEffects : MonoBehaviour {
             l.x = force;
             particleSystem.Play();
         }
+    }
+    #endregion
+
+    #region Oblivion
+
+    private void FadeOblivion(float value, float duration) {
+        fadeDeathTween?.Kill();
+        if (duration == 0.0f) playerMaterial.SetFloat(oblivionPositionPropertyID, value);
+        else {
+            fadeDeathTween = DOTween.To(() => playerMaterial.GetFloat(oblivionPositionPropertyID),
+                x => playerMaterial.SetFloat(oblivionPositionPropertyID, x), value, duration).SetEase(Ease.OutQuad);
+        }
+    }
+
+    public void FadeDeath(float duration) {
+        FadeOblivion(0.5f, duration);
+    }
+
+    public void CancelFadeDeath(float duration) {
+        FadeOblivion(-2.0f, duration);
     }
     #endregion
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 
 public class PlayerDeath : MonoBehaviour {
+    private float playerDeathDuration = 2.0f;
+    private float recoverDuration = 0.5f;
     private bool isDying = false;
     Sequence deathDelaySequence;
     Sequence respawningSequence;
@@ -11,12 +13,14 @@ public class PlayerDeath : MonoBehaviour {
     private void FixedUpdate() {
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
             if (deathDelaySequence == null) {
-                Globals.SoundManagerChase.FadeDeath(1.0f, 1.0f);
-                deathDelaySequence = Utils.DelayedAction(1.0f, Respawn);
+                Globals.SoundManagerChase.FadeDeath(1.0f, playerDeathDuration);
+                Globals.Player.VisualEffects.FadeDeath(playerDeathDuration);
+                deathDelaySequence = Utils.DelayedAction(playerDeathDuration, Respawn);
             }
         } else {
             if (deathDelaySequence != null) {
-                Globals.SoundManagerChase.FadeDeath(0.0f);
+                Globals.SoundManagerChase.FadeDeath(0.0f, recoverDuration);
+                Globals.Player.VisualEffects.CancelFadeDeath(recoverDuration);
                 deathDelaySequence?.Kill();
                 deathDelaySequence = null;
             }
@@ -50,6 +54,7 @@ public class PlayerDeath : MonoBehaviour {
         Globals.Player.VisualEffects.respawnParticles.Play();
         Globals.OblivionVFXManager.ClearParticles();
         Globals.SoundManagerChase.FadeDeath(0.0f, 0.0f);
+        Globals.Player.VisualEffects.CancelFadeDeath(0.0f);
         deathDelaySequence?.Kill();
         deathDelaySequence = null;
         respawningSequence = null;
