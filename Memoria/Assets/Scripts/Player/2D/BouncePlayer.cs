@@ -23,6 +23,7 @@ public class BouncePlayer : MonoBehaviour {
                     tween?.Kill(true);
                     tween = transform.DOPunchScale(punch, duration, vibrato, elasticity);
                     dust.Play();
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/TifaJump", transform.position);
                 }
             }
         }
