@@ -28,6 +28,10 @@ public class Checkpoint : MonoBehaviour {
         }
     }
 
+    public void OnRespawn() {
+        lantern.EmitRespawnParticles();
+    }
+
     public Vector3 GetRespawnPoint() {
         return respawnPoint.position;
     }

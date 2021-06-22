@@ -23,4 +23,8 @@ public class CheckpointManager : MonoBehaviour {
     public Vector3 GetSpawn() {
         return spawn;
     }
+
+    public void OnRespawn() {
+        if (lastCheckpoint != null) lastCheckpoint.OnRespawn();
+    }
 }

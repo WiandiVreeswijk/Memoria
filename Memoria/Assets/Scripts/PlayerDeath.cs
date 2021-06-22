@@ -52,9 +52,11 @@ public class PlayerDeath : MonoBehaviour {
 
         Globals.Player.VisualEffects.elenaMesh.enabled = true;
         Globals.Player.VisualEffects.respawnParticles.Play();
-        Globals.OblivionVFXManager.ClearParticles();
-        Globals.SoundManagerChase.FadeDeath(0.0f, 0.0f);
         Globals.Player.VisualEffects.CancelFadeDeath(0.0f);
+        Globals.SoundManagerChase.FadeDeath(0.0f, 0.0f);
+        Globals.OblivionVFXManager.ClearParticles();
+        Globals.CheckpointManager.OnRespawn();
+
         deathDelaySequence?.Kill();
         deathDelaySequence = null;
         respawningSequence = null;

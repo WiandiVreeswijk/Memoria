@@ -55,4 +55,8 @@ public class CheckpointLantern : MonoBehaviour, IActivatable {
         // Calculate new smoothed average
         light.intensity = lastSum / (float)smoothQueue.Count;
     }
+
+    public void EmitRespawnParticles() {
+        embers.Play();
+    }
 }

@@ -5,9 +5,11 @@ using DG.Tweening;
 
 [ExecuteInEditMode]
 public class OblivionManager : MonoBehaviour {
-    private bool isInEditor = false;
     private Transform nextSafeAreaPoint;
-
+    private Tween oblivionTween;
+    private bool isInEditor = false;
+    private bool reachedFirstCheckpoint = false;
+    private int oblivionPositionPropertyID;
 
     [Header("Game")]
     [Range(0.1f, 10.0f)] [SerializeField] private float oblivionSpeed = 1.0f;
@@ -49,12 +51,12 @@ public class OblivionManager : MonoBehaviour {
     public Light oblivionLight;
 
     void Start() {
+        oblivionPositionPropertyID = Shader.PropertyToID("_OblivionPosition");
         isInEditor = !Application.isPlaying;
         Utils.EnsureOnlyOneInstanceInScene<OblivionManager>();
-
         if (!isInEditor) oblivionPosition = defaultOblivionPosition;
 
-        Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
+        Shader.SetGlobalFloat(oblivionPositionPropertyID, oblivionPosition);
         Shader.SetGlobalFloat("_OblivionPositionOffset", oblivionPositionOffset);
         Shader.SetGlobalFloat("_PerlinScale", perlinScale);
         Shader.SetGlobalFloat("_PerlinAmount", perlinAmount);
@@ -79,7 +81,7 @@ public class OblivionManager : MonoBehaviour {
     }
 
     void EditorUpdate() {
-        Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
+        Shader.SetGlobalFloat(oblivionPositionPropertyID, oblivionPosition);
         Shader.SetGlobalFloat("_OblivionPositionOffset", oblivionPositionOffset);
         Shader.SetGlobalFloat("_PerlinScale", perlinScale);
         Shader.SetGlobalFloat("_PerlinAmount", perlinAmount);
@@ -104,23 +106,20 @@ public class OblivionManager : MonoBehaviour {
         }
     }
 
-    bool moving = true;
-    Tween tween;
     void GameUpdate() {
-        Shader.SetGlobalFloat("_OblivionPosition", oblivionPosition);
-        if (!moving) return;
-        Vector3 nextGoal = endPoint.transform.position;
-        if (nextSafeAreaPoint != null) {
-            nextGoal = nextSafeAreaPoint.position;
+        Shader.SetGlobalFloat(oblivionPositionPropertyID, oblivionPosition);
+        if (oblivionTween == null && reachedFirstCheckpoint) {
+            Vector3 nextGoal = endPoint.transform.position;
+            if (nextSafeAreaPoint != null) {
+                nextGoal = nextSafeAreaPoint.position;
+            }
+
+            float distance = Utils.Distance(oblivionPosition, nextGoal.x);
+            oblivionPosition += oblivionSpeed * Time.deltaTime;
+
+            if (distance < 2.0f) LerpOblivionToPosition(nextGoal.x, 1.5f, Ease.OutSine);
         }
 
-        float distance = Utils.Distance(oblivionPosition, nextGoal.x);
-        oblivionPosition += oblivionSpeed * Time.deltaTime;
-
-        if (distance < 2.0f) {
-            moving = false;
-            LerpOblivionToPosition(nextGoal.x, 1.5f, Ease.OutSine);
-        }
 
         var pos = oblivionLight.transform.position;
         pos.x = oblivionPosition - 1.0f;
@@ -129,20 +128,21 @@ public class OblivionManager : MonoBehaviour {
     }
 
     public void SetNextSafeArea(Transform point) {
+        reachedFirstCheckpoint = true;
         nextSafeAreaPoint = point;
     }
 
     public void ContinueFromSaveArea(Transform oblivionContinuePosition) {
         nextSafeAreaPoint = null;
         LerpOblivionToPosition(oblivionContinuePosition.position.x, 1.0f, Ease.InQuad).OnComplete(() => {
-            moving = true;
+            oblivionTween = null;
         });
     }
 
     private Tween LerpOblivionToPosition(float position, float duration, Ease ease) {
-        tween?.Kill();
-        tween = DOTween.To(() => oblivionPosition, x => oblivionPosition = x, position, duration).SetEase(ease);
-        return tween;
+        oblivionTween?.Kill();
+        oblivionTween = DOTween.To(() => oblivionPosition, x => oblivionPosition = x, position, duration).SetEase(ease);
+        return oblivionTween;
     }
 
     public float GetOblivionPosition() {
