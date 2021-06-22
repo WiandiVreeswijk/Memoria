@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class CheckpointLantern : MonoBehaviour, IActivatable {
@@ -22,7 +23,7 @@ public class CheckpointLantern : MonoBehaviour, IActivatable {
     float lastSum = 0;
 
     private bool activated = false;
-
+    private bool igniting = true;
     public void Start() {
         lightObject.SetActive(false);
 
@@ -37,12 +38,27 @@ public class CheckpointLantern : MonoBehaviour, IActivatable {
         if (!activated) {
             lightObject.SetActive(true);
             particles.Play();
-            embers.Play();
+
             activated = true;
+            Light light = lightObject.GetComponent<Light>();
+            light.intensity = 0;
+            embers.Play();
+            DOTween.To(() => light.intensity, x => light.intensity = x, 3.0f, 0.2f).SetEase(Ease.InBounce)
+                .OnComplete(() => {
+                    igniting = false;
+                });
         }
     }
 
     public void Update() {
+        //if (Input.GetKey(KeyCode.R)) {
+        //    igniting = true;
+        //    activated = false;
+        //    Activate();
+        //}
+
+
+        if (igniting) return;
         while (smoothQueue.Count >= smoothing) {
             lastSum -= smoothQueue.Dequeue();
         }
