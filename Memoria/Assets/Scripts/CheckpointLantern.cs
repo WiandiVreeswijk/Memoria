@@ -34,6 +34,7 @@ public class CheckpointLantern : MonoBehaviour, IActivatable {
             activated = true;
             particles.Play();
             embers.Play();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/CheckpointBurstFlame");
 
             lightInLantern.gameObject.SetActive(true);
             lightInSafeArea.gameObject.SetActive(true);
