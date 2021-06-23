@@ -17,7 +17,7 @@ public class BouncePlayer : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
-            if (collision.contactCount > 0) {
+            if (collision.contactCount > 0 && collision.relativeVelocity.y < -3.0f) {
                 if (cooldown.Ready(0.1f) && Vector2.Dot(collision.contacts[0].normal, upNormal) > 0.9f) {
                     collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * launchForce, ForceMode2D.Impulse);
                     tween?.Kill(true);
