@@ -56,7 +56,7 @@ public class PlayerDeath : MonoBehaviour {
         Globals.SoundManagerChase.FadeDeath(0.0f, 0.0f);
         Globals.OblivionVFXManager.ClearParticles();
         Globals.CheckpointManager.OnRespawn();
-
+        Globals.Player.CameraController.SetCameraTargetPosition(Globals.Player.transform.position);
         deathDelaySequence?.Kill();
         deathDelaySequence = null;
         respawningSequence = null;

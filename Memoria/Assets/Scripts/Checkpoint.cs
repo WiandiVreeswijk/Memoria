@@ -9,7 +9,6 @@ public class Checkpoint : MonoBehaviour {
     public CheckpointLantern lantern;
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        Globals.Player.CameraController.ZoomIn();
         if (lantern != null) lantern.Activate();
         Globals.CheckpointManager.SetCheckpoint(this);
         if (collision.CompareTag("Player")) {
@@ -19,7 +18,6 @@ public class Checkpoint : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        Globals.Player.CameraController.ZoomOut();
         if (collision.CompareTag("Player")) {
             if (!Globals.Player.PlayerDeath.IsDying()) {
                 Globals.OblivionManager.ContinueFromSaveArea(oblivionContinuePoint);
