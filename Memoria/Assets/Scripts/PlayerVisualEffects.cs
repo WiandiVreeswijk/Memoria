@@ -36,7 +36,7 @@ public class PlayerVisualEffects : MonoBehaviour {
 
     void BlinkOn(float speed, int times) {
         elenaMesh.enabled = true;
-        if (times > 0) Utils.DelayedAction(speed, () => BlinkOff(speed, times));
+        if (times > 0) Utils.DelayedAction(speed + speed / 2.0f, () => BlinkOff(speed, times));
         else {
             isBlinking = false;
             playerMaterial.DOColor(Color.white, 0.1f);
@@ -45,7 +45,7 @@ public class PlayerVisualEffects : MonoBehaviour {
 
     void BlinkOff(float speed, int times) {
         elenaMesh.enabled = false;
-        Utils.DelayedAction(speed, () => BlinkOn(speed, times - 1));
+        Utils.DelayedAction(speed / 2.0f, () => BlinkOn(speed, times - 1));
     }
 
     #endregion
