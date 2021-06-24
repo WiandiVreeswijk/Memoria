@@ -41,6 +41,7 @@ public class PlayerDeath : MonoBehaviour {
             Globals.Player.VisualEffects.isDeath = false;
             Globals.SoundManagerChase.FadeDeath(1.0f);
             respawningSequence = Utils.DelayedAction(2.0f, RespawnPosition);
+            Utils.DelayedAction(1.0f, () => Globals.MenuController.BlackScreenFadeIn(0.5f));
         }
     }
 
@@ -53,7 +54,7 @@ public class PlayerDeath : MonoBehaviour {
             Globals.Player.transform.position = lastCheckpoint.GetRespawnPoint();
             Globals.OblivionManager.SetOblivionPosition(lastCheckpoint.GetOblivionStopPoint().x);
         }
-
+        Globals.MenuController.BlackScreenFadeOut(0.1f);
         Globals.Player.PlayerMovement25D.SetStunned(false, false);
         Globals.Player.VisualEffects.elenaMesh.enabled = true;
         Globals.Player.VisualEffects.respawnParticles.Play();
