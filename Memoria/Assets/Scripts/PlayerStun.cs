@@ -22,7 +22,7 @@ public class PlayerStun : MonoBehaviour {
                     bounceForce -= collision.relativeVelocity.x / 2.0f;
                 }
 
-                rb.AddForce(new Vector2(0, bounceBack * 5), ForceMode2D.Impulse);
+                rb.velocity = new Vector2(rb.velocity.x, bounceBack * 5);
                 Utils.DelayedAction(0.1f, () => { //Delayed action so the player doesn't touch the ground when being launched backwards.
                     rb.AddForce(new Vector2(bounceForce, 0), ForceMode2D.Impulse);
                 });

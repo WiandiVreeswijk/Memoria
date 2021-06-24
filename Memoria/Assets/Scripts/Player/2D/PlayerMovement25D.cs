@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerMovement25D : MonoBehaviour {
@@ -56,7 +57,6 @@ public class PlayerMovement25D : MonoBehaviour {
     private float fallTimeoutDelta;
 
     private bool stunned = false;
-    private bool allowMovement = true;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -67,7 +67,6 @@ public class PlayerMovement25D : MonoBehaviour {
     }
 
     void Update() {
-        if (!allowMovement) return;
         Jump();
         moveInput = Input.GetAxis("Horizontal");
     }
@@ -77,7 +76,6 @@ public class PlayerMovement25D : MonoBehaviour {
     private float previousYVelocity = 0.0f;
     bool canJump = false;
     private void FixedUpdate() {
-        if (!allowMovement) return;
         //IsTouching is checked for this frame and the previous frame to prevent Elena from 'tripping' over adjecent colliders
         bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
         bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
@@ -107,10 +105,9 @@ public class PlayerMovement25D : MonoBehaviour {
         } else {
             jumpAnimation = true;
         }
+
         //Probably temporary as we'll need jump/hover/landing animations
-
         animator.SetFloat("Jump", jumpAnimation ? 1 : 0);
-
 
         float horizontal = moveInput;
         float animatorForwardSpeed = Mathf.Clamp01(Mathf.Abs(rb.velocity.x));
@@ -138,7 +135,7 @@ public class PlayerMovement25D : MonoBehaviour {
         else hangCounter -= Time.deltaTime;
 
         //Manage jump buffer
-        if (Input.GetKeyDown(KeyCode.Space) && canJump) {
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && !stunned) {
             canJump = false;
             jumpBufferCount = jumpBufferLength;
         } else jumpBufferCount -= Time.deltaTime;
@@ -158,25 +155,28 @@ public class PlayerMovement25D : MonoBehaviour {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
         //Check if player is going up and jump button is released
-        else if (rb.velocity.y > 0 && (!isJumping || !Input.GetKeyDown(KeyCode.Space))) {
+        else if (rb.velocity.y > 0 && (stunned || !isJumping || !Input.GetKeyDown(KeyCode.Space))) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        if (rb.velocity.y > 0 && isJumping && Input.GetKeyUp(KeyCode.Space)) {
+        if (!stunned && rb.velocity.y > 0 && isJumping && Input.GetKeyUp(KeyCode.Space)) {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
     }
 
+    Tween stunnedTween = null;
     public void Stunned(float duration) {
         stunned = true;
         if (stunned) gameObject.GetComponent<PlayerVisualEffects>().DoBlink(0.1f, 4);
-        Utils.DelayedAction(duration, () => stunned = false);
+        stunnedTween = Utils.DelayedAction(duration, () => stunned = false);
     }
 
     private void OnDrawGizmos() {
         Gizmos.DrawWireCube(transform.position, new Vector3(groundColliderCheckSize.x, groundColliderCheckSize.y, 0.02f));
     }
 
-    public void AllowMovement(bool toggle) {
-        allowMovement = toggle;
+    public void SetStunned(bool toggle, bool stopMovement) {
+        stunnedTween?.Kill();
+        stunned = toggle;
+        if (stopMovement) rb.velocity = Vector2.zero;
     }
 }

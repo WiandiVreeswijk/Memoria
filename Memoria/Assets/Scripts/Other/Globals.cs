@@ -17,6 +17,7 @@ public class Globals : MonoBehaviour {
     private MenuController menuController;
     private PersistenceManager persistenceManager;
     private Debugger debugger;
+    private bool isInitialized = false;
 
     public GameObject persistenceManagerPrefab;
     public GameObject menuControllerPrefab;
@@ -33,6 +34,10 @@ public class Globals : MonoBehaviour {
         _Instance = this;
     }
 
+    public static bool IsInitialized() {
+        return _Instance != null && _Instance.isInitialized;
+    }
+
     public static void Initialize(GlobalsType type) {
         if (_Instance == null) Debug.LogError("No globals found in scene.");
         _Instance.GlobalInitialize();
@@ -40,6 +45,7 @@ public class Globals : MonoBehaviour {
             case GlobalsType.NEIGHTBORHOOD: _Instance.InitializeNeighborhood(); break;
             case GlobalsType.OBLIVION: _Instance.InitializeOblivion(); break;
         }
+        _Instance.isInitialized = true;
     }
 
     private void GlobalInitialize() {
