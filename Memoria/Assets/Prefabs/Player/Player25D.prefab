@@ -9748,9 +9748,9 @@ GameObject:
   - component: {fileID: 3722081597033926480}
   - component: {fileID: 3722081597033926482}
   - component: {fileID: 402376488}
-  - component: {fileID: 402376493}
   - component: {fileID: 402376495}
   - component: {fileID: 2104120328}
+  - component: {fileID: 3722081596282771653}
   m_Layer: 7
   m_Name: Player25D
   m_TagString: Player
@@ -9871,7 +9871,7 @@ MonoBehaviour:
   lowJumpMultiplier: 5
   groundColliderCheckSize: {x: 0.6, y: 0.2}
   extraJumpsValue: 0
-  hangTime: 0.2
+  hangTime: 0.25
   jumpBufferLength: 0
   fallTimeout: 0.05
 --- !u!114 &402376488
@@ -9894,22 +9894,6 @@ MonoBehaviour:
   respawnParticles: {fileID: 2834196960257717987}
   isDeath: 0
   stunnedColor: {r: 1, g: 0.4675499, b: 0.18396229, a: 1}
---- !u!114 &402376493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2650534466570212205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0182c385de4b943999bfb3c67fb9ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minPlayerHeight: 2
-  maxPlayerHeight: 8
-  minCameraY: 0.75
-  maxCameraY: 0.25
 --- !u!114 &402376495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9934,6 +9918,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8376ad763c13f624f92878b9c9cfce27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3722081596282771653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650534466570212205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d878a10555277b4697de459e2e50554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  cameraTarget: {fileID: 0}
 --- !u!1 &3722081595164302892
 GameObject:
   m_ObjectHideFlags: 0
