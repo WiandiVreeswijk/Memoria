@@ -278,6 +278,9 @@
         },
         {
             "m_Id": "bf6fbd147fa3444789a058a9a9496996"
+        },
+        {
+            "m_Id": "3c01bf16c7494bb7b8ccebda53d82a08"
         }
     ],
     "m_GroupDatas": [
@@ -404,6 +407,20 @@
                     "m_Id": "f0915175ea62437bb9f4c2aa47371d6a"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "3c01bf16c7494bb7b8ccebda53d82a08"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "cf9f2e1770f84385a2bd79887b86954f"
+                },
+                "m_SlotId": -1784057162
             }
         },
         {
@@ -2208,6 +2225,41 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "3c01bf16c7494bb7b8ccebda53d82a08",
+    "m_Group": {
+        "m_Id": "5c466e9db3f74e1884c85291db62f763"
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1897.0,
+            "y": -95.0,
+            "width": 121.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "4881f24f3f464747aee01c83880d9200"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "634dab01fc434a91b8666d2b11742e02"
+    }
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
     "m_ObjectId": "3cb700b9004c4225abb7089a54016ae0",
@@ -2479,6 +2531,27 @@
     "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "4881f24f3f464747aee01c83880d9200",
+    "m_Id": 0,
+    "m_DisplayName": "UVScale",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
     "m_Labels": []
 }
 
@@ -4064,8 +4137,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1933.0001220703125,
-            "y": -194.00001525878907,
+            "x": -1938.0,
+            "y": -170.0,
             "width": 162.0,
             "height": 34.0
         }
@@ -4856,7 +4929,7 @@
     ],
     "synonyms": [],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
