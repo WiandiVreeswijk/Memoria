@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Cloud : MonoBehaviour {
     private float speed = 0;
     private float maxDistance = -1;
@@ -11,12 +12,13 @@ public class Cloud : MonoBehaviour {
         startX = transform.position.x;
     }
 
-    void FixedUpdate() {
-        transform.position += new Vector3(speed * Time.fixedDeltaTime, 0.0f, 0.0f);
-        if (transform.position.x - startX > maxDistance) Destroy(gameObject);
-        if (maxDistance == -1f) {
-            Destroy(gameObject);
-            throw new System.MissingMemberException("Max distance has not been set for cloud!");
+    void Update() {
+        transform.position += new Vector3(speed * Time.deltaTime, 0.0f, 0.0f);
+        if (transform.position.x - startX > maxDistance) {
+            if (gameObject != null) {
+                if (Application.isPlaying) Destroy(gameObject);
+                else DestroyImmediate(gameObject);
+            }
         }
     }
 
