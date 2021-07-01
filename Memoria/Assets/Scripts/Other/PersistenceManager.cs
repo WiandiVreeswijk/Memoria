@@ -10,7 +10,6 @@ public class PersistenceManager : MonoBehaviour {
     public CinemachineVirtualCamera cam;
     public string wijkSceneName;
     public string memorySceneName;
-    public UnityEngine.UI.Image image;
 
     void Start() {
 
@@ -18,14 +17,14 @@ public class PersistenceManager : MonoBehaviour {
 
 
     public void EnterMemory() {
-        StartCoroutine(EnterMemoryCoroutine());
+        StartCoroutine(LoadScene(memorySceneName));
     }
 
-    IEnumerator EnterMemoryCoroutine() {
+    IEnumerator LoadScene(string name) {
         bool finishedTransition = false;
         DOTween.To(() => cam.m_Lens.FieldOfView, x => cam.m_Lens.FieldOfView = x, 120, 1.0f).SetEase(Ease.InExpo);
-        DOTween.To(() => image.color, x => image.color = x, Color.black, 1.0f).SetEase(Ease.InExpo).OnComplete(() => finishedTransition = true);
-        var asyncTask = SceneManager.LoadSceneAsync(memorySceneName);
+        Globals.MenuController.BlackScreenFadeIn(1.0f);
+        var asyncTask = SceneManager.LoadSceneAsync(name);
         asyncTask.allowSceneActivation = false;
         while (!finishedTransition || asyncTask.progress < 0.9f) {
             yield return null;
@@ -34,6 +33,6 @@ public class PersistenceManager : MonoBehaviour {
     }
 
     public void LeaveMemory() {
-
+        StartCoroutine(LoadScene(wijkSceneName));
     }
 }

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class EnterMemoryInteractable : MonoBehaviour, iInteractable {
     public void Interact() {
-        Globals.PersistenceManager.EnterMemory();
+        Globals.Persistence.EnterMemory();
     }
 }

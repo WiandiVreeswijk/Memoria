@@ -8,6 +8,7 @@ public class MemoryCollectible : MonoBehaviour {
     public float rotationSpeed = 2f;
 
     public ParticleSystem hoveringParticles, collectedParticles;
+    public ParticleSystem portal;
     public MeshRenderer render;
 
     public Animator collectedAnimation;
@@ -21,6 +22,7 @@ public class MemoryCollectible : MonoBehaviour {
             collectedAnimation.Play("MemoryCollected");
             hoveringParticles.Stop();
             collectedParticles.Play();
+            Utils.DelayedAction(1.0f, () => portal.Play());
             triggered = true;
         }
     }

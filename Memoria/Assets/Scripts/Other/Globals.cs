@@ -78,7 +78,7 @@ public class Globals : MonoBehaviour {
     #region GlobalGlobals
 
     public static MenuController MenuController => _Instance.menuController;
-    public static PersistenceManager PersistenceManager => _Instance.persistenceManager;
+    public static PersistenceManager Persistence => _Instance.persistenceManager;
     public static Player Player => _Instance.player;
     public static Debugger Debugger => _Instance.debugger;
 
