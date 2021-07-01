@@ -42,6 +42,7 @@ public class SceneManager : MonoBehaviour {
         } else Debug.LogError($"[SceneManager] scene has not been registered {sceneName}");
     }
 
+    //#Todo Teleport back to previous position in wijk scene?
     //#Todo Fix audio not stopping on scene switch. 
     //#Todo Global camera FOV change. 
     private IEnumerator LoadScene(SceneDefinition scene) {
