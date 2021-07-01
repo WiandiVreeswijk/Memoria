@@ -15,10 +15,12 @@ public class Globals : MonoBehaviour {
     //Global
     private Player player;
     private MenuController menuController;
-    private PersistenceManager persistenceManager;
+    private Persistence persistenceManager;
+    private SceneManager sceneManager;
     private Debugger debugger;
     private bool isInitialized = false;
 
+    //Prefabs
     public GameObject persistenceManagerPrefab;
     public GameObject menuControllerPrefab;
     public GameObject debuggerPrefab;
@@ -30,8 +32,13 @@ public class Globals : MonoBehaviour {
     private SoundManagerChase soundManagerChase;
 
     private void Awake() {
-        DontDestroyOnLoad(this);
-        _Instance = this;
+        if (_Instance != null) {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        } else {
+            _Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
     public static bool IsInitialized() {
@@ -49,19 +56,11 @@ public class Globals : MonoBehaviour {
     }
 
     private void GlobalInitialize() {
-        player = Utils.FindUniqueObject<Player>();
-
-        Utils.FindOrInstantiateUniqueObject(out debugger, () => {
-            return Instantiate(debuggerPrefab, transform).GetComponent<Debugger>();
-        });
-
-        Utils.FindOrInstantiateUniqueObject(out menuController, () => {
-            return Instantiate(menuControllerPrefab, transform).GetComponent<MenuController>();
-        });
-
-        Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => {
-            return Instantiate(persistenceManagerPrefab, transform).GetComponent<PersistenceManager>();
-        });
+        Utils.FindUniqueObject(out player);
+        Utils.FindUniqueObject(out sceneManager);
+        Utils.FindOrInstantiateUniqueObject(out debugger, () => Instantiate(debuggerPrefab, transform).GetComponent<Debugger>());
+        Utils.FindOrInstantiateUniqueObject(out menuController, () => Instantiate(menuControllerPrefab, transform).GetComponent<MenuController>());
+        Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
     }
 
     private void InitializeNeighborhood() {
@@ -78,7 +77,8 @@ public class Globals : MonoBehaviour {
     #region GlobalGlobals
 
     public static MenuController MenuController => _Instance.menuController;
-    public static PersistenceManager Persistence => _Instance.persistenceManager;
+    public static Persistence Persistence => _Instance.persistenceManager;
+    public static SceneManager SceneManager => _Instance.sceneManager;
     public static Player Player => _Instance.player;
     public static Debugger Debugger => _Instance.debugger;
 

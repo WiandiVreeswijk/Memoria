@@ -119,7 +119,7 @@ namespace Lux_SRP_GrassDisplacement
         {
             CommandBuffer cmd = CommandBufferPool.Get(k_RenderGrassDisplacementFXTag);
 
-            using (new ProfilingSample(cmd, k_RenderGrassDisplacementFXTag))
+            using (new ProfilingScope(cmd, new ProfilingSampler(k_RenderGrassDisplacementFXTag)))
             {
                 context.ExecuteCommandBuffer(cmd);
                 cmd.Clear();
@@ -131,7 +131,7 @@ namespace Lux_SRP_GrassDisplacement
                 var cameraTransform = camera.transform;
                 var cameraPos = cameraTransform.position;
 
-                var isStereoEnabled = renderingData.cameraData.isStereoEnabled;
+                var isStereoEnabled = renderingData.cameraData.xrRendering;
                 if (isStereoEnabled) {
                     cmd.SetSinglePassStereo(SinglePassStereoMode.None);
                 }

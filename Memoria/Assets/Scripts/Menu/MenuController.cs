@@ -57,19 +57,19 @@ public class MenuController : MonoBehaviour {
     }
 
     private Tween blackScreenTween;
-    public void BlackScreenFadeIn(float duration) {
+    public Tween BlackScreenFadeIn(float duration) {
         blackScreenTween?.Kill();
-        DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 1.0f, duration).OnComplete(() => {
+        return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 1.0f, duration).OnComplete(() => {
             blackScreen.blocksRaycasts = false;
             blackScreen.interactable = false;
         });
     }
 
-    public void BlackScreenFadeOut(float duration) {
+    public Tween BlackScreenFadeOut(float duration) {
         blackScreenTween?.Kill();
-        DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration);
         blackScreen.blocksRaycasts = false;
         blackScreen.interactable = false;
+        return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration);
     }
 
     public void ReloadScene() {

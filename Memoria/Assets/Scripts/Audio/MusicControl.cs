@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicControl : MonoBehaviour
-{
-
+//#Todo we really need some proper sound wrappers. This is horrible to work with
+public class MusicControl : MonoBehaviour {
     [Header("FMOD Event")]
     [FMODUnity.EventRef]
     public string SelectAudio;
@@ -24,8 +23,7 @@ public class MusicControl : MonoBehaviour
     private bool gameHasStarted = false;
     private float lerpValue = 0.1f;
 
-    private void Start()
-    {
+    private void Start() {
 
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
 
@@ -43,24 +41,20 @@ public class MusicControl : MonoBehaviour
 
         FMOD.Studio.PLAYBACK_STATE PbState;
         audio.getPlaybackState(out PbState);
-        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
+        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
             audio.start();
         }
     }
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         audio.setParameterByID(relaxedParameter, relaxedValue);
         audio.setParameterByID(energeticParameter, energeticValue);
-        if (gameHasStarted)
-        {
+        if (gameHasStarted) {
             energeticValue = Mathf.Lerp(energeticValue, 0, lerpValue * Time.fixedDeltaTime);
         }
         audio.setParameterByID(energeticParameter, energeticValue);
     }
 
-    public void GameStarted()
-    {
+    public void GameStarted() {
         gameHasStarted = true;
     }
 }

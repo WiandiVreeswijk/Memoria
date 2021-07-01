@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GlobalInitializer : MonoBehaviour {
     public Globals.GlobalsType type;
+
     void Start() {
         Globals.Initialize(type);
     }

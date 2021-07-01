@@ -18,7 +18,10 @@ public static class Utils {
     public delegate T InstantiateCallback<T>();
     public static void FindOrInstantiateUniqueObject<T>(out T obj, InstantiateCallback<T> callback) where T : Object {
         obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name, false);
-        if (obj == null) obj = callback();
+        if (obj == null) {
+            //Debug.Log($"Object of type {typeof(T).Name} instantiated because it could not be found in scene.");
+            obj = callback();
+        }
     }
 
     public static bool FindUniqueObject<T>(out T obj) where T : Object {

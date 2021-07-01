@@ -12,6 +12,7 @@ public class TriggerActivator : MonoBehaviour {
     [Tooltip("The activatable object that should be triggered")]
     public GameObject activatable;
 
+    //#Todo Allow for multiple activatables connected to trigger activator (including self)
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag(triggerName)) {
             GameObject obj = activatablesAttachedToThisObject ? gameObject : activatable;
