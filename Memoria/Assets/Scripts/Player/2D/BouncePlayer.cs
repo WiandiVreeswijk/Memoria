@@ -24,7 +24,7 @@ public class BouncePlayer : MonoBehaviour {
                     tween = transform.DOPunchScale(punch, duration, vibrato, elasticity);
                     dust.Play();
                     //#Todo Audio wrapper?
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/TifaJump", transform.position);
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/TifaJump");
                 }
             }
         }
