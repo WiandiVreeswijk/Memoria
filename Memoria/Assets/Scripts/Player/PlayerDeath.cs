@@ -10,6 +10,8 @@ public class PlayerDeath : MonoBehaviour {
     Sequence deathDelaySequence;
     Sequence respawningSequence;
 
+    private bool hasPlayed = false;
+
     private void FixedUpdate() {
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
             if (deathDelaySequence == null) {
@@ -27,6 +29,11 @@ public class PlayerDeath : MonoBehaviour {
         }
 
         if (transform.position.y < -2.0f) {
+            if (!hasPlayed)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/WaterSplash");
+                hasPlayed = true;
+            }
             deathDelaySequence?.Kill();
             deathDelaySequence = null;
             Respawn();
@@ -43,6 +50,7 @@ public class PlayerDeath : MonoBehaviour {
             respawningSequence = Utils.DelayedAction(2.0f, RespawnPosition);
             Utils.DelayedAction(1.0f, () => Globals.MenuController.BlackScreenFadeIn(0.5f));
         }
+
     }
 
     private void RespawnPosition() {
@@ -67,6 +75,7 @@ public class PlayerDeath : MonoBehaviour {
         deathDelaySequence = null;
         respawningSequence = null;
         isDying = false;
+        hasPlayed = false;
     }
 
     public bool IsDying() {
