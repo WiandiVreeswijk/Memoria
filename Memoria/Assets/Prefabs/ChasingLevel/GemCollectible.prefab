@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 299046157634096765}
   - component: {fileID: 7534783082992282872}
   - component: {fileID: 8911561364429901909}
+  - component: {fileID: 5407583648475498071}
   m_Layer: 0
   m_Name: GemCollectible
   m_TagString: Untagged
@@ -88,6 +89,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundEffect: event:/SFX/Collectible
+--- !u!114 &5407583648475498071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299046157634096767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb0248faeb314c48baa41e7b9c3f4f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6696327257233387900
 GameObject:
   m_ObjectHideFlags: 0
@@ -4903,7 +4916,6 @@ GameObject:
   - component: {fileID: 9188688678267056169}
   - component: {fileID: 9180488528096850571}
   - component: {fileID: 3272282407608941642}
-  - component: {fileID: 4960860158464691733}
   m_Layer: 0
   m_Name: Gem
   m_TagString: Untagged
@@ -5008,15 +5020,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4960860158464691733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9188688678269231013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22a95f9df733444680e600fdf46ba0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
