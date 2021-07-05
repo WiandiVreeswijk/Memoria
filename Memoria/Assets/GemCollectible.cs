@@ -7,8 +7,7 @@ public class GemCollectible : MonoBehaviour {
 
     public void Start() {
         Animator animator = GetComponentInChildren<Animator>();
-        float val = ((transform.position.x % 5) / 2.5f) - 1.0f;
-        animator.Play("GemAnimation", 0, val);
+        animator.Play("GemAnimation", 0, ((transform.position.x % 5) / 2.5f) - 1.0f);
         pSystem = GetComponentInChildren<ParticleSystem>();
     }
 
