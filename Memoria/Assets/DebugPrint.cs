@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DebugPrint : MonoBehaviour
-{
+public class DebugPrint : MonoBehaviour {
     private class DebugText {
         public string text;
         public float duration;
@@ -38,5 +37,9 @@ public class DebugPrint : MonoBehaviour
             dText.hasDuration = true;
             dText.duration = duration;
         }
+    }
+
+    public void SetTextVisible(bool toggle) {
+        debugText.gameObject.SetActive(toggle);
     }
 }

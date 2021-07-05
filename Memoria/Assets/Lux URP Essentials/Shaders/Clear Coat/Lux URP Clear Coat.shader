@@ -38,7 +38,7 @@ Shader "Lux URP/Clear Coat"
         
         [Toggle(_SECONDARYCOLOR)]
         _EnableSecColor             ("Enable Secondary Color", Float) = 0.0
-        _SecondaryColor             ("     Secondary Color", Color) = (1,1,1,1)
+        [HDR]_SecondaryColor             ("     Secondary Color", Color) = (1,1,1,1)
 
         [Space(5)]
         _Smoothness                 ("Smoothness", Range(0.0, 1.0)) = 0.5
