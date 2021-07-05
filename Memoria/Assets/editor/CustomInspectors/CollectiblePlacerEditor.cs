@@ -11,7 +11,8 @@ public class CollectiblePlacerEditor : Editor {
 
     private enum CollectiblePlacerPreset {
         Default,
-        Straight,
+        Horizontal,
+        Vertical,
         Jump,
         TifaJump,
         HopDown,
@@ -190,11 +191,19 @@ public class CollectiblePlacerEditor : Editor {
                     placer.spaceBetweenPoints = 0.75f;
                 }
                 break;
-            case CollectiblePlacerPreset.Straight: {
+            case CollectiblePlacerPreset.Horizontal: {
                     placer.start.point = new Vector3(-2.0f, 0.0f, 0.0f);
                     placer.startTangent.point = new Vector3(-0.2f, 0.0f, 0.0f);
                     placer.end.point = new Vector3(2.0f, 0.0f, 0.0f);
                     placer.endTangent.point = new Vector3(0.2f, 0.0f, 0.0f);
+                    placer.spaceBetweenPoints = 0.75f;
+                }
+                break;
+            case CollectiblePlacerPreset.Vertical: {
+                    placer.start.point = new Vector3(0.0f, -2.0f, 0.0f);
+                    placer.startTangent.point = new Vector3(0.0f, -0.2f, 0.0f);
+                    placer.end.point = new Vector3(0.0f, 2.0f, 0.0f);
+                    placer.endTangent.point = new Vector3(0.0f, 0.2f, 0.0f);
                     placer.spaceBetweenPoints = 0.75f;
                 }
                 break;
