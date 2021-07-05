@@ -130,7 +130,12 @@ public class CollectiblePlacerEditor : Editor {
         CollectiblePlacer placer = target as CollectiblePlacer;
         while (placer.transform.childCount > 0) {
             GameObject child = placer.transform.GetChild(0).gameObject;
-            if (child.name.StartsWith("_collectible_")) DestroyImmediate(child);
+            if (child.name.StartsWith("_collectible_")) {
+                DestroyImmediate(child);
+            } else {
+                Debug.LogError($"Please remove all random children objects from CollectiblePlacer {placer.name}");
+                return;
+            }
         }
         if (placer.prefab != null) {
             foreach (var point in pointsOnCurve) {
