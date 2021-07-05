@@ -47,9 +47,6 @@ public class OblivionManager : MonoBehaviour {
     [Header("Debug")]
     [SerializeField] private bool debug = false;
 
-    [Header("Sound")]
-    public Transform soundObject;
-
     public GameObject endPoint;
     public Light oblivionLight;
 
@@ -130,10 +127,6 @@ public class OblivionManager : MonoBehaviour {
         pos.y = Globals.Player.transform.position.y;
         oblivionLight.transform.position = pos;
 
-        //sound object moves with oblivion
-        Vector3 tempPos = soundObject.position;
-        tempPos.x = oblivionPosition;
-        soundObject.position = tempPos;
     }
 
     public void SetNextSafeArea(Transform point) {
