@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -89,5 +90,12 @@ public static class Utils {
         }
     }
 
+    #endregion
+
+    #region Extentions
+    /*Remove all matches from a dictionary*/
+    public static void RemoveAll<K, V>(this Dictionary<K, V> dict, Func<K, V, bool> match) {
+        foreach (var key in dict.Keys.ToArray().Where(key => match(key, dict[key]))) dict.Remove(key);
+    }
     #endregion
 }
