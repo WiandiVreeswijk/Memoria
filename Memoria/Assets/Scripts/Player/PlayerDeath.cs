@@ -17,7 +17,7 @@ public class PlayerDeath : MonoBehaviour {
             if (deathDelaySequence == null) {
                 Globals.SoundManagerChase.FadeDeath(1.0f, playerDeathDuration);
                 Globals.Player.VisualEffects.FadeDeath(playerDeathDuration);
-                deathDelaySequence = Utils.DelayedAction(playerDeathDuration, Respawn);
+                deathDelaySequence = Utils.DelayedAction(playerDeathDuration, ()=>Respawn(false));
             }
         } else {
             if (deathDelaySequence != null) {
@@ -36,16 +36,19 @@ public class PlayerDeath : MonoBehaviour {
             }
             deathDelaySequence?.Kill();
             deathDelaySequence = null;
-            Respawn();
+            Respawn(true);
         }
     }
 
-    private void Respawn() {
+    private void Respawn(bool water) {
         if (!isDying) {
             isDying = true;
             Globals.Player.PlayerMovement25D.SetStunned(true, true);
             Globals.Player.VisualEffects.Death();
             Globals.Player.VisualEffects.isDeath = false;
+
+                FMODUnity.RuntimeManager.PlayOneShot(water? "event:/SFXChasingLevel/WaterSplash" : "event:/SFXChasingLevel/OblivionExplode");
+
             Globals.SoundManagerChase.FadeDeath(1.0f);
             respawningSequence = Utils.DelayedAction(2.0f, RespawnPosition);
             Utils.DelayedAction(1.0f, () => Globals.MenuController.BlackScreenFadeIn(0.5f));
