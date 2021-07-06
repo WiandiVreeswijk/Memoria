@@ -22,6 +22,7 @@ public class MemoryCollectible : MonoBehaviour {
             collectedAnimation.Play("MemoryCollected");
             hoveringParticles.Stop();
             collectedParticles.Play();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/MemoryCollected");
             Utils.DelayedAction(1.0f, () => portal.Play());
             triggered = true;
         }
