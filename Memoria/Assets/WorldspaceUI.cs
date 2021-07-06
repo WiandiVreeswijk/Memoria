@@ -11,7 +11,7 @@ public class WorldspaceUI : MonoBehaviour {
 
     }
 
-    void LateUpdate() {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.T)) {
             GameObject obj = Instantiate(gameObject, transform);
             obj.transform.position += new Vector3(0, 20, 100);

@@ -2,45 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
+using DG.Tweening;
 
 public class GemCollectible : MonoBehaviour, IActivatable {
     [EventRef]
     public string soundEffect = "";
+    public GameObject visualPrefab;
+    [Range(1, 100)] public int points = 1;
+
     private ParticleSystem pSystem;
-    private bool collected = false;
+    private Animator animator;
 
     public void Start() {
-        Animator animator = GetComponentInChildren<Animator>();
-        animator.Play("GemAnimation", 0, ((transform.position.x % 10) / 5.0f) - 1.0f);
         pSystem = GetComponentInChildren<ParticleSystem>();
+        animator = GetComponentInChildren<Animator>();
+        animator.Play("GemAnimation", 0, ((transform.position.x % 10) / 5.0f) - 1.0f);
     }
 
-    private Vector3 pos;
     public void Activate() {
-        //Destroy(gameObject);
-        GetComponent<Collider2D>().enabled = false;
-        FMODUnity.RuntimeManager.PlayOneShot(soundEffect, transform.position);
-        collected = true;
-        //pos = transform.position - Camera.main.transform.position;
-        transform.parent = Globals.GetInstance().canvas.transform;
-        gameObject.layer = 5;
+        animator.enabled = false;
+        Utils.RepeatAction(points, 0.1f, () => EmitVisual(visualPrefab, soundEffect));
+        Destroy(gameObject);
+    }
+
+    static void EmitVisual(GameObject visualPrefab, string soundEffect) {
+        GameObject instantiated = Instantiate(visualPrefab);
+        instantiated.transform.position = new Vector3(Globals.Player.HeadPosition.x, Globals.Player.HeadPosition.y + 0.5f, Globals.Player.HeadPosition.z);
+        instantiated.transform.parent = Globals.GetInstance().canvas.transform;
+        FMODUnity.RuntimeManager.PlayOneShot(soundEffect, instantiated.transform.position);
     }
 
     public void PlayPFX() {
         pSystem.Play();
-    }
-
-    void LateUpdate() {
-        if (collected) {
-            //Vector3 position = Camera.main.ViewportToWorldPoint(new Vector3(0.1f, 0.9f, Camera.main.nearClipPlane));
-            //transform.position = Vector3.Lerp(transform.position + pos, position, Time.deltaTime * 2.5f);
-            //float distance = Vector3.Distance(transform.position + pos, position);
-            //if (distance > 15.0f) distance = 15.0f;
-            //float a = distance;
-            //distance = Utils.Remap(distance, 0.0f, 15.0f, 1.0f, 1.0f);
-            //Globals.Debugger.Print("a", a + " + " + distance, 1.0f);
-            //transform.localScale = new Vector3(distance, distance, distance);
-            //if (distance < 0.2f) Destroy(gameObject);
-        }
     }
 }

@@ -179,4 +179,8 @@ public class PlayerMovement25D : MonoBehaviour {
         stunned = toggle;
         if (stopMovement) rb.velocity = Vector2.zero;
     }
+
+    public Vector2 GetVelocity() {
+        return rb.velocity;
+    }
 }

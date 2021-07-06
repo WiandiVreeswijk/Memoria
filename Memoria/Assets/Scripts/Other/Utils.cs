@@ -16,6 +16,13 @@ public static class Utils {
         return null;
     }
 
+    private static T CheckTransforms<T>(T[] collection, string transformName, string name, bool errorWhenNoneFound = true) where T : class {
+        if (errorWhenNoneFound && collection.Length == 0) Debug.LogError($"No children of {transformName} named {name} could be found. This will probably break a lot of stuff!");
+        if (collection.Length == 1) return collection[0];
+        if (collection.Length > 1) Debug.LogError($"Multiple children of {transformName} named {name} could be found. This will probably break a lot of stuff!");
+        return null;
+    }
+
     public delegate T InstantiateCallback<T>();
     public static void FindOrInstantiateUniqueObject<T>(out T obj, InstantiateCallback<T> callback) where T : Object {
         obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name, false);
@@ -47,13 +54,18 @@ public static class Utils {
         FindUniqueObject<T>();
     }
 
+    public static Transform FindUniqueChildInTransform(Transform transform, string name) {
+        var children = transform.FindChildren(name);
+        return CheckTransforms(children, transform.name, name, true);
+    }
+
     #endregion
 
     #region Math
 
     /*Maps a float from one range to another*/
-    public static float Remap(float val, float in1, float in2, float out1, float out2) {
-        return out1 + (val - in1) * (out2 - out1) / (in2 - in1);
+    public static float Remap(float val, float minIn, float maxIn, float minOut, float maxOut) {
+        return minOut + (val - minIn) * (maxOut - minOut) / (maxIn - minIn);
     }
 
 
@@ -81,6 +93,15 @@ public static class Utils {
         return DOTween.Sequence().AppendInterval(delay).AppendCallback(() => action());
     }
 
+    public static Sequence RepeatAction(int amount, float delay, Action action) {
+        Sequence sequence = DOTween.Sequence();
+        for (int i = 0; i < amount; i++) {
+            sequence.AppendCallback(() => action());
+            if (i != amount - 1) sequence.AppendInterval(delay);
+        }
+        return sequence;
+    }
+
     public struct Cooldown {
         public float time;
 
@@ -99,4 +120,8 @@ public static class Utils {
         foreach (var key in dict.Keys.ToArray().Where(key => match(key, dict[key]))) dict.Remove(key);
     }
     #endregion
+
+    public static Transform[] FindChildren(this Transform transform, string name) {
+        return transform.GetComponentsInChildren<Transform>().Where(t => t.name == name).ToArray();
+    }
 }

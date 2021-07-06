@@ -19,11 +19,15 @@ public class Player : MonoBehaviour {
     private PlayerDeath playerDeath;
     public PlayerDeath PlayerDeath => playerDeath;
 
+    private Transform povPoint;
+    public Vector3 HeadPosition => povPoint.position;
+
     void Start() {
         cameraController = GetComponent<PlayerCameraController>();
         playerMovement25D = GetComponent<PlayerMovement25D>();
         visualEffects = GetComponent<PlayerVisualEffects>();
         playerMovementAdventure = GetComponent<PlayerMovementAdventure>();
         playerDeath = GetComponent<PlayerDeath>();
+        povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");
     }
 }
