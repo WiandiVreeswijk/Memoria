@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 
-public class GemCollectionActivator : MonoBehaviour, IActivatable {
-    [EventRef]
-    public string soundEffect = "";
+public class GemCollectionActivator : MonoBehaviour {
 
-    public void Activate() {
-        Destroy(gameObject);
-        FMODUnity.RuntimeManager.PlayOneShot(soundEffect, transform.position);
-    }
 }

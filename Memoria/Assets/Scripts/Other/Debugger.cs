@@ -20,7 +20,8 @@ public class Debugger : MonoBehaviour {
         SetVisible(false);
     }
 
-    public void Print(string keyword, string text, float duration = -1) {
+    public void Print(string keyword, string text, float duration = -1)
+    {
         if (!isActive) return;
         debugPrint.Print(keyword, text, duration);
     }
@@ -37,13 +38,13 @@ public class Debugger : MonoBehaviour {
             debugMenuPanel.blocksRaycasts = true;
             debugMenuPanel.interactable = true;
             debugMenuVisible = true;
-            debugPrint.SetTextVisible(true);
+            debugPrint.SetTextVisible(false);
         } else {
             debugMenuPanel.alpha = 0.0f;
             debugMenuPanel.blocksRaycasts = false;
             debugMenuPanel.interactable = false;
             debugMenuVisible = false;
-            debugPrint.SetTextVisible(false);
+            debugPrint.SetTextVisible(true);
         }
     }
 }

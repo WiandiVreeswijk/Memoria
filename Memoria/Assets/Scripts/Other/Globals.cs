@@ -25,6 +25,8 @@ public class Globals : MonoBehaviour {
     public GameObject menuControllerPrefab;
     public GameObject debuggerPrefab;
 
+    public GameObject canvas;
+
     //Oblivion
     private OblivionManager oblivionManager;
     private OblivionVFXManager oblivionVFXManager;
@@ -96,4 +98,8 @@ public class Globals : MonoBehaviour {
     public static SoundManagerChase SoundManagerChase => _Instance.soundManagerChase;
 
     #endregion
+
+    public static Globals GetInstance() {
+        return _Instance;
+    }
 }
