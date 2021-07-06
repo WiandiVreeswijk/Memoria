@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class CheckpointLantern : MonoBehaviour, IActivatable {
+public class CheckpointLantern : MonoBehaviour, IEnterActivatable {
     public Light lightInLantern;
     public Light lightInSafeArea;
     public ParticleSystem particles;
@@ -29,7 +29,7 @@ public class CheckpointLantern : MonoBehaviour, IActivatable {
         smoothQueue = new Queue<float>(smoothing);
     }
 
-    public void Activate() {
+    public void ActivateEnter() {
         if (!activated) {
             activated = true;
             particles.Play();

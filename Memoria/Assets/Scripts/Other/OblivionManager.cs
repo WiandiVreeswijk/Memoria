@@ -5,10 +5,8 @@ using DG.Tweening;
 
 [ExecuteInEditMode]
 public class OblivionManager : MonoBehaviour {
-    private Transform nextSafeAreaPoint;
     private Tween oblivionTween;
     private bool isInEditor = false;
-    private bool reachedFirstCheckpoint = false;
     private int oblivionPositionPropertyID;
 
     [Header("Game")]
@@ -73,7 +71,6 @@ public class OblivionManager : MonoBehaviour {
         Shader.SetGlobalFloat("_Smoothness", smoothness);
         Shader.SetGlobalColor("_OblivionColor", oblivionColor);
         Shader.SetGlobalColor("_AltColor", altColor);
-
     }
 
     void Update() {
@@ -107,38 +104,31 @@ public class OblivionManager : MonoBehaviour {
         }
     }
 
+    private float goalPosition;
     void GameUpdate() {
         Shader.SetGlobalFloat(oblivionPositionPropertyID, oblivionPosition);
-        if (oblivionTween == null && reachedFirstCheckpoint) {
-            Vector3 nextGoal = endPoint.transform.position;
-            if (nextSafeAreaPoint != null) {
-                nextGoal = nextSafeAreaPoint.position;
-            }
-
-            float distance = Utils.Distance(oblivionPosition, nextGoal.x);
+        if (oblivionTween == null && Globals.CheckpointManager.FirstCheckpointReached()) {
+            float distance = Utils.Distance(oblivionPosition, goalPosition);
             oblivionPosition += oblivionSpeed * Time.deltaTime;
 
-            if (distance < 2.0f) LerpOblivionToPosition(nextGoal.x, 1.5f, Ease.OutSine);
+            if (distance < 2.0f) LerpOblivionToPosition(goalPosition, 1.5f, Ease.OutSine);
         }
-
 
         var pos = oblivionLight.transform.position;
         pos.x = oblivionPosition - 1.0f;
         pos.y = Globals.Player.transform.position.y;
         oblivionLight.transform.position = pos;
-
     }
 
-    public void SetNextSafeArea(Transform point) {
-        reachedFirstCheckpoint = true;
-        nextSafeAreaPoint = point;
-    }
-
-    public void ContinueFromSaveArea(Transform oblivionContinuePosition) {
-        nextSafeAreaPoint = null;
-        LerpOblivionToPosition(oblivionContinuePosition.position.x, 1.0f, Ease.InQuad).OnComplete(() => {
+    public void SetGoalPosition(float position, bool lerp) {
+        goalPosition = position;
+        if (lerp) LerpOblivionToPosition(position, 1.0f, Ease.InQuad).OnComplete(() => {
             oblivionTween = null;
         });
+    }
+
+    public void SetGoalPositionToEndPosition() {
+        SetGoalPosition(endPoint.transform.position.x, false);
     }
 
     private Tween LerpOblivionToPosition(float position, float duration, Ease ease) {
@@ -152,11 +142,12 @@ public class OblivionManager : MonoBehaviour {
     }
 
     public void SetOblivionPosition(float position) {
+        goalPosition = position;
         oblivionPosition = position;
     }
 
     public void SetDefaultOblivionPosition() {
+        goalPosition = defaultOblivionPosition;
         oblivionPosition = defaultOblivionPosition;
     }
-
 }

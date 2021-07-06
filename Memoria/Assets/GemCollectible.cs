@@ -4,7 +4,7 @@ using FMODUnity;
 using UnityEngine;
 using DG.Tweening;
 
-public class GemCollectible : MonoBehaviour, IActivatable {
+public class GemCollectible : MonoBehaviour, IEnterActivatable {
     [EventRef]
     public string soundEffect = "";
     public GameObject visualPrefab;
@@ -19,7 +19,7 @@ public class GemCollectible : MonoBehaviour, IActivatable {
         animator.Play("GemAnimation", 0, ((transform.position.x % 10) / 5.0f) - 1.0f);
     }
 
-    public void Activate() {
+    public void ActivateEnter() {
         animator.enabled = false;
         Utils.RepeatAction(points, 0.1f, () => EmitVisual(visualPrefab, soundEffect));
         Destroy(gameObject);
