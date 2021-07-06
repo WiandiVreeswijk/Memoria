@@ -26,7 +26,7 @@ public class MusicControlChaseLevel : MonoBehaviour {
         FMOD.Studio.EventDescription intensityDescription;
         audio.getDescription(out intensityDescription);
         FMOD.Studio.PARAMETER_DESCRIPTION intensityParameterDescription;
-        intensityDescription.getParameterDescriptionByName("Intensity", out intensityParameterDescription);
+        intensityDescription.getParameterDescriptionByName("BeingChased", out intensityParameterDescription);
         intensityParameter = intensityParameterDescription.id;
 
         FMOD.Studio.EventDescription deathDescription;

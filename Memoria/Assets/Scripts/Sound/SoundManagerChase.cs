@@ -25,7 +25,7 @@ public class SoundManagerChase : MonoBehaviour {
             musicControl.SetIntensity(intensity);
         } else {
             intensityFadeTween = DOTween
-                .To(() => musicControl.GetIntensity(), x => musicControl.SetIntensity(x), intensity, 2.5f)
+                .To(() => musicControl.GetIntensity(), x => musicControl.SetIntensity(x), intensity, 0.5f)
                 .SetEase(Ease.Linear);
         }
     }
