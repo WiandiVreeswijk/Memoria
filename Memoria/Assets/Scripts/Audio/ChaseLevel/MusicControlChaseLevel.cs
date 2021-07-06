@@ -11,6 +11,7 @@ public class MusicControlChaseLevel : MonoBehaviour {
     public new FMOD.Studio.EventInstance audio;
     private PARAMETER_ID intensityParameter;
     private PARAMETER_ID deathParameter;
+    private PARAMETER_ID chorusParameter;
 
     [Header("Intensity Value")]
     [Range(0f, 1f)]
@@ -20,13 +21,19 @@ public class MusicControlChaseLevel : MonoBehaviour {
     [Range(0f, 1f)]
     public float deathValue = 0f;
 
+    [Header("Chorus Value")]
+    [Range(0f, 1f)]
+    public float chorusValue = 0f;
+
+    public GameObject memory;
+
     private void Start() {
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
 
         FMOD.Studio.EventDescription intensityDescription;
         audio.getDescription(out intensityDescription);
         FMOD.Studio.PARAMETER_DESCRIPTION intensityParameterDescription;
-        intensityDescription.getParameterDescriptionByName("Intensity", out intensityParameterDescription);
+        intensityDescription.getParameterDescriptionByName("BeingChased", out intensityParameterDescription);
         intensityParameter = intensityParameterDescription.id;
 
         FMOD.Studio.EventDescription deathDescription;
@@ -35,6 +42,12 @@ public class MusicControlChaseLevel : MonoBehaviour {
         deathDescription.getParameterDescriptionByName("Death", out deathParameterDescription);
         deathParameter = deathParameterDescription.id;
 
+        FMOD.Studio.EventDescription chorusDescription;
+        audio.getDescription(out chorusDescription);
+        FMOD.Studio.PARAMETER_DESCRIPTION chorusParameterDescription;
+        chorusDescription.getParameterDescriptionByName("NearingEnd", out chorusParameterDescription);
+        chorusParameter = chorusParameterDescription.id;
+
         FMOD.Studio.PLAYBACK_STATE PbState;
         audio.getPlaybackState(out PbState);
         if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
@@ -42,14 +55,12 @@ public class MusicControlChaseLevel : MonoBehaviour {
         }
     }
 
-    //private void FixedUpdate() {
-    //    audio.setParameterByID(intensityParameter, intensityValue);
-    //    audio.setParameterByID(deathParameter, deathValue);
-    //    if (gameHasStarted) {
-    //        deathValue = Mathf.Lerp(deathValue, 0, lerpValue * Time.fixedDeltaTime);
-    //    }
-    //    audio.setParameterByID(deathParameter, deathValue);
-    //}
+    private void FixedUpdate()
+    {
+        float distance = Utils.Distance(Globals.Player.transform.position.x, memory.transform.position.x);
+        chorusValue = Mathf.Lerp(1.0f, 0, distance * 0.005f);
+        audio.setParameterByID(chorusParameter, chorusValue);
+    }
 
     public void SetIntensity(float intensity) {
         intensityValue = intensity;
@@ -61,11 +72,21 @@ public class MusicControlChaseLevel : MonoBehaviour {
         audio.setParameterByID(deathParameter, death);
     }
 
+    public void SetChorus(float chorus)
+    {
+        chorusValue = chorus;
+        audio.setParameterByID(deathParameter, chorus);
+    }
+
     public float GetIntensity() {
         return intensityValue;
     }
 
     public float GetDeath() {
         return deathValue;
+    }
+    public float GetChorus()
+    {
+        return chorusValue;
     }
 }
