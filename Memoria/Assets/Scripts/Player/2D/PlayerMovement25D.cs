@@ -125,7 +125,7 @@ public class PlayerMovement25D : MonoBehaviour {
     private void OnLand(float landingVelocity) {
         if (Mathf.Abs(landingVelocity) > 5.0f) {
             Globals.Player.VisualEffects.Land(rb.velocity.x);
-            Globals.Player.PlayerSound.PlayJumpSound();
+            Globals.Player.PlayerSound.PlayJumpLandSound();
         }
     }
 
@@ -139,6 +139,7 @@ public class PlayerMovement25D : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && canJump && !stunned) {
             canJump = false;
             jumpBufferCount = jumpBufferLength;
+            Globals.Player.PlayerSound.PlayJumpingSound();
         } else jumpBufferCount -= Time.deltaTime;
 
         //checks hangtime and jumpbuffer

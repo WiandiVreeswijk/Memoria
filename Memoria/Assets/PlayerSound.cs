@@ -51,7 +51,14 @@ public class PlayerSound : MonoBehaviour
         Footsteps.release();
     }
 
-    public void PlayJumpSound()
+    public void PlayJumpingSound()
+    {
+        FMOD.Studio.EventInstance jump = FMODUnity.RuntimeManager.CreateInstance("event:/SFXChasingLevel/Player/Jumping");
+        jump.start();
+        jump.release();
+    }
+
+    public void PlayJumpLandSound()
     {
         FMOD.Studio.EventInstance jump = FMODUnity.RuntimeManager.CreateInstance("event:/SFXChasingLevel/Player/JumpLanding");
         jump.setParameterByName("Mute", mute);
