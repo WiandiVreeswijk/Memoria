@@ -40,6 +40,9 @@
             "m_Id": "cecf5253f09e4474bb7d9f2317a05928"
         },
         {
+            "m_Id": "02f3718400474bfc8363fc5d90375291"
+        },
+        {
             "m_Id": "cf7cf303d83a41639f8e2f3e2f07bac2"
         },
         {
@@ -212,6 +215,9 @@
         },
         {
             "m_Id": "ce25bd88dfbd4e4aad9a0fd73df9fe01"
+        },
+        {
+            "m_Id": "271bc86864864e378e4e9da4b97b4018"
         }
     ],
     "m_GroupDatas": [
@@ -290,6 +296,20 @@
                     "m_Id": "bb96c70a30c643399a335a4929d7a2c2"
                 },
                 "m_SlotId": -127307339
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "271bc86864864e378e4e9da4b97b4018"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "bb96c70a30c643399a335a4929d7a2c2"
+                },
+                "m_SlotId": -617935362
             }
         },
         {
@@ -1002,6 +1022,29 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "02f3718400474bfc8363fc5d90375291",
+    "m_Guid": {
+        "m_GuidSerialized": "a1b7c0ef-6284-41cc-80c8-c5721d738b87"
+    },
+    "m_Name": "VoronoiNoiseFalloffScale",
+    "m_DefaultReferenceName": "",
+    "m_OverrideReferenceName": "_Smoothness_1",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.699999988079071,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "039f43526dfb4fb48a10f2063849ec32",
@@ -1402,6 +1445,41 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.Alpha"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "271bc86864864e378e4e9da4b97b4018",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -713.0,
+            "y": 1101.0,
+            "width": 198.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "e7ee9b31adb34cc597eb9ee4f6b87e19"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "02f3718400474bfc8363fc5d90375291"
+    }
 }
 
 {
@@ -3476,6 +3554,21 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "9ef9a054223a45419ff15c730217b279",
+    "m_Id": -617935362,
+    "m_DisplayName": "VoronoisNoiseFalloffScale",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Vector1_ea387d59b2dc4da78e5534c45aefcb33",
+    "m_StageCapability": 2,
+    "m_Value": 0.5,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a40c395b62ba43fd951c72c7fe015293",
     "m_Id": -667759315,
     "m_DisplayName": "BumpsNoiseScale",
@@ -4006,6 +4099,9 @@
             "m_Id": "a4d7e8476e5f4ea7a8904d0c3dcaf9c4"
         },
         {
+            "m_Id": "9ef9a054223a45419ff15c730217b279"
+        },
+        {
             "m_Id": "57a254c4a32d47688cade70d1d481dd7"
         },
         {
@@ -4088,7 +4184,8 @@
         "529ec9f9-3b33-40d3-8d07-ecad2a5c61bd",
         "610e0422-247d-4614-9efe-22b624740094",
         "1ed9e8f6-9d62-4cbb-b837-56c86f6c75d4",
-        "cca0153c-4ec6-4f00-b163-c5072f8f2d69"
+        "cca0153c-4ec6-4f00-b163-c5072f8f2d69",
+        "3ec84b79-f8e3-466e-a69c-1de5d0efc0e9"
     ],
     "m_PropertyIds": [
         -856110104,
@@ -4110,7 +4207,8 @@
         -2052224617,
         1735606946,
         -709122919,
-        1197890133
+        1197890133,
+        -617935362
     ]
 }
 
@@ -5016,6 +5114,21 @@
     "m_ObjectId": "e65aa2c78a524a6a87eb9fb89e6a58f9",
     "m_Id": 0,
     "m_DisplayName": "Smoothness",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "e7ee9b31adb34cc597eb9ee4f6b87e19",
+    "m_Id": 0,
+    "m_DisplayName": "VoronoiNoiseFalloffScale",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
