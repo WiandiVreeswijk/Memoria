@@ -7,6 +7,7 @@ public class PlayerSound : MonoBehaviour
 {
     private float distance = 0.1f;
     private float material;
+    private float mute;
 
     public LayerMask ground;
 
@@ -25,11 +26,20 @@ public class PlayerSound : MonoBehaviour
         if (hit.collider)
         {
             if (hit.collider.tag == "Material: Wood")
+            {
+                mute = 0f;
                 material = 1f;
+            }
             else if (hit.collider.tag == "Material: Stone")
+            {
+                mute = 0f;
                 material = 2f;
+            }
             else
+            {
                 material = 1f;
+                mute = 1f;
+            }
         }
     }
 
@@ -39,5 +49,14 @@ public class PlayerSound : MonoBehaviour
         Footsteps.setParameterByName("Material", material);
         Footsteps.start();
         Footsteps.release();
+    }
+
+    public void PlayJumpSound()
+    {
+        FMOD.Studio.EventInstance jump = FMODUnity.RuntimeManager.CreateInstance("event:/SFXChasingLevel/Player/JumpLanding");
+        jump.setParameterByName("Mute", mute);
+        jump.setParameterByName("MaterialJump", material);
+        jump.start();
+        jump.release();
     }
 }

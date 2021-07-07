@@ -125,6 +125,7 @@ public class PlayerMovement25D : MonoBehaviour {
     private void OnLand(float landingVelocity) {
         if (Mathf.Abs(landingVelocity) > 5.0f) {
             Globals.Player.VisualEffects.Land(rb.velocity.x);
+            Globals.Player.PlayerSound.PlayJumpSound();
         }
     }
 

@@ -22,6 +22,8 @@ public class Player : MonoBehaviour {
     private Transform povPoint;
     public Vector3 HeadPosition => povPoint.position;
 
+    private PlayerSound playerSound;
+    public PlayerSound PlayerSound => playerSound;
     void Start() {
         cameraController = GetComponent<PlayerCameraController>();
         playerMovement25D = GetComponent<PlayerMovement25D>();
@@ -29,5 +31,6 @@ public class Player : MonoBehaviour {
         playerMovementAdventure = GetComponent<PlayerMovementAdventure>();
         playerDeath = GetComponent<PlayerDeath>();
         povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");
+        playerSound = GetComponent<PlayerSound>();
     }
 }
