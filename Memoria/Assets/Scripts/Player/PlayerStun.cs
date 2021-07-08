@@ -16,6 +16,8 @@ public class PlayerStun : MonoBehaviour {
                 Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
                 player.Stunned(stunDuration);
 
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/OblivionPoolHit");
+
                 //Bounce away from the fire
                 float bounceForce = collision.relativeVelocity.x < 0 ? bounceBack : -bounceBack;
                 if (collision.contacts[0].normal.y < -0.1f) { //If landing on top of the fire, remove a bit more vertical velocity.
