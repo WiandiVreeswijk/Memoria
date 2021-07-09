@@ -73,6 +73,7 @@ public class CollectiblePlacerEditor : Editor {
         dirty |= MovePoint(ref placer.endTangent);
         if (dirty) {
             GeneratePointsOnCurve();
+            Debug.Log("CollectiblePlacer");
             EditorUtility.SetDirty(placer);
         }
         Bezier(placer.start.point, placer.end.point, placer.startTangent.point, placer.endTangent.point, Color.green);

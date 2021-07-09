@@ -60,6 +60,7 @@ public class SceneManagerEditor : Editor {
     private void AddItem(ReorderableList list) {
         SceneManager mgr = target as SceneManager;
         mgr.sceneDefinitions.Add(new SceneManager.SceneDefinition());
+        Debug.Log("SceneManager");
         EditorUtility.SetDirty(target);
     }
 

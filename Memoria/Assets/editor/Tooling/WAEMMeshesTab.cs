@@ -323,6 +323,7 @@ public class WAEMMeshesTab : IWAEMTab {
                     foreach (var mesh in pair.Value) {
                         Undo.RecordObject(mesh, "CalculateHeightUVs");
                         mesh.sharedMesh = meshes[j];
+                        Debug.Log("MeshesTab1");
                         EditorUtility.SetDirty(mesh);
                     }
                     j++;

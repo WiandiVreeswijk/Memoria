@@ -18,10 +18,12 @@ public class MenuController : MonoBehaviour {
     public class WAEMDictUIElement {
         public CanvasGroup panel;
         public Tween tween;
+        public string name;
 
-        public WAEMDictUIElement(CanvasGroup panel) {
+        public WAEMDictUIElement(CanvasGroup panel, string name) {
             this.panel = panel;
             this.tween = null;
+            this.name = name;
         }
     }
 
@@ -39,13 +41,13 @@ public class MenuController : MonoBehaviour {
     private Dictionary<string, WAEMDictUIElement> uiElementsDict = new Dictionary<string, WAEMDictUIElement>();
     private int notificationIndex = 0;
 
-
     private bool initialized = false;
     private string afterInitializationPanel = "";
+
     void Start() {
         foreach (var element in uiElements) {
             if (element.panel != null) {
-                uiElementsDict.Add(element.name, new WAEMDictUIElement(element.panel));
+                uiElementsDict.Add(element.name, new WAEMDictUIElement(element.panel, element.name));
                 element.panel.blocksRaycasts = false;
                 element.panel.alpha = 0.0f;
             } else Debug.LogError($"A UIElement named {element.name} is null");
@@ -89,6 +91,10 @@ public class MenuController : MonoBehaviour {
     public void SetMenu(string name) {
         if (name == "Notification") collectedThingies.SetActive(true);
         SetMenu(name, fadeTime);
+    }
+
+    public string GetActiveMenu() {
+        return activePanel == null ? "" : activePanel.name;
     }
 
     public void SetMenu(string name, float time) {
@@ -153,14 +159,20 @@ public class MenuController : MonoBehaviour {
     }
 
     private void Update() {
-        //if (Input.GetKeyDown(KeyCode.Alpha1)) NotifyPlayer("Hallo!");
-        //if (Input.GetKeyDown(KeyCode.Alpha2)) NotifyPlayer("Notificatie!");
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            CloseMenu();
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            SetMenu("Main");
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            SetMenu("Options");
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            TogglePause();
+        }
+    }
+
+    private void TogglePause() {
+        string active = GetActiveMenu();
+        if (active == "") {
+            SetMenu("Pause");
+            Time.timeScale = 0f;
+        } else if (active == "Pause") {
+            Globals.MenuController.CloseMenu();
+            Time.timeScale = 1f;
+        }
     }
 
     // Update is called once per frame

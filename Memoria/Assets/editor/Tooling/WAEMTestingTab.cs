@@ -56,6 +56,7 @@ public class WAEMTestingTab : IWAEMTab {
         thirdPersonCameraObject = EditorGUILayout.ObjectField("tp camera object", thirdPersonCameraObject, typeof(GameObject), true) as GameObject;
         if (thirdPersonCameraObject != null) {
             thirdPersonCamera = thirdPersonCameraObject.GetComponent<CinemachineFreeLook>();
+            Debug.Log("TestingTab");
             EditorUtility.SetDirty(thirdPersonCameraObject);
 
             EditorGUILayout.LabelField("Third person camera options", EditorStyles.boldLabel);

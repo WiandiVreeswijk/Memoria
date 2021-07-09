@@ -39,6 +39,7 @@ public class TestMenu : EditorWindow {
         thirdPersonCameraObject = EditorGUILayout.ObjectField("tp camera object", thirdPersonCameraObject, typeof(GameObject), true) as GameObject;
         if (thirdPersonCameraObject != null) {
             thirdPersonCamera = thirdPersonCameraObject.GetComponent<CinemachineFreeLook>();
+            Debug.Log("ThirdPersonCamera");
             EditorUtility.SetDirty(thirdPersonCameraObject);
 
             GUILayout.Label("Third person camera options", EditorStyles.boldLabel);

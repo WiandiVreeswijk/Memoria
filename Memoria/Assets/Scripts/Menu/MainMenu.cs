@@ -14,7 +14,9 @@ public class MainMenu : MonoBehaviour {
     public CursorLocker cursorLocker;
 
     private void Start() {
-        cursorLocker.UnlockMouse();
+        //#Todo This is extremely dirty and will break very soon
+        director = FindObjectOfType<PlayableDirector>();
+        //cursorLocker.UnlockMouse();
         director.stopped += Director_stopped;
     }
 
@@ -31,19 +33,13 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void PlayGame() {
-        cursorLocker.LockMouse();
-        StartTimeLine();
-        mainMenuCamera.Priority = 10;
-        print("Play");
+        FindObjectOfType<WijkOpeningCutscene>().Trigger();
+        Globals.MenuController.CloseMenu();
     }
 
     public void QuitGame() {
         Debug.Log("Quit");
         Application.Quit();
     }
-    public void StartTimeLine() {
-        director.time = 0;
-        director.Evaluate();
-        director.Play();
-    }
+
 }

@@ -35,6 +35,7 @@ public class CloudSpawnerEditor : Editor {
             cSpawner.spawnArea.center = boxBounds.center - cSpawner.transform.position;
             cSpawner.spawnArea.size = boxBounds.size;
             cSpawner.Reset();
+            Debug.Log("CloudSpawnerSetDirty");
             EditorUtility.SetDirty(target);
         }
     }

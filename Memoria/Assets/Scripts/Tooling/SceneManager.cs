@@ -58,4 +58,15 @@ public class SceneManager : MonoBehaviour {
         isLoadingScene = false;
         asyncTask.allowSceneActivation = true;
     }
+
+    public void LoadUI() {
+        StartCoroutine(LoadScene());
+    }
+
+    private IEnumerator LoadScene() {
+        AsyncOperation asyncLoadLevel = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+        while (!asyncLoadLevel.isDone) yield return null;
+        yield return new WaitForEndOfFrame();
+        Globals.InitializeUI();
+    }
 }
