@@ -112,10 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1443c18686e664389c39d4d35608a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightObject: {fileID: 721842529767948634}
+  lightInLantern: {fileID: 0}
+  lightInSafeArea: {fileID: 0}
   particles: {fileID: 721842529824141237}
   embers: {fileID: 721842529715502539}
-  light: {fileID: 0}
   minIntensity: 2
   maxIntensity: 3.5
   smoothing: 10
@@ -4684,6 +4684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 721842529767948633}
   - component: {fileID: 721842529767948632}
+  - component: {fileID: 1129629561509383501}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -4767,6 +4768,38 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1129629561509383501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721842529767948634}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UID: 434561060
+  color: {r: 0, g: 1, b: 0.29213476, a: 1}
+  intensity: 2.75
+  shadowSpread: 0.05
+  cutoff: 6.42
+  realisticFalloff: 1
+  samples: 8
+  projMode: 0
+  cookie: {fileID: 0}
+  angle: 30
+  innerAngle: 0
+  cubemap: {fileID: 0}
+  iesFile: {fileID: 0}
+  bitmask: 1
+  bakeToIndirect: 0
+  shadowmask: 1
+  indirectIntensity: 0
+  falloffMinRadius: 0.01
+  shadowmaskGroupID: 0
+  directionMode: 0
 --- !u!1 &721842529824141232
 GameObject:
   m_ObjectHideFlags: 0
