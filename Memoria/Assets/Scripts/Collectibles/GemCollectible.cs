@@ -29,7 +29,7 @@ public class GemCollectible : MonoBehaviour, IEnterActivatable {
         GameObject instantiated = Instantiate(visualPrefab);
         instantiated.transform.position = new Vector3(Globals.Player.HeadPosition.x, Globals.Player.HeadPosition.y + 0.5f, Globals.Player.HeadPosition.z);
         instantiated.transform.parent = Globals.UIManager.ScreenspaceCanvas.transform;
-        FMODUnity.RuntimeManager.PlayOneShot(soundEffect, instantiated.transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
     }
 
     public void PlayPFX() {
