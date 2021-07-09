@@ -9121,6 +9121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5329337506582461658}
   - component: {fileID: 1888440215302759299}
+  - component: {fileID: 6471227246433766033}
   m_Layer: 0
   m_Name: Baked
   m_TagString: Untagged
@@ -9154,7 +9155,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6650394, b: 0.2783019, a: 1}
-  m_Intensity: 3
+  m_Intensity: 1.7
   m_Range: 25
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -9196,7 +9197,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 2
+  m_BounceIntensity: 3
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -9204,6 +9205,38 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0.1
   m_ShadowAngle: 0
+--- !u!114 &6471227246433766033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954748499233961130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UID: -1806465885
+  color: {r: 1, g: 0.6650394, b: 0.2783019, a: 1}
+  intensity: 1.7
+  shadowSpread: 0.05
+  cutoff: 25
+  realisticFalloff: 0
+  samples: 8
+  projMode: 0
+  cookie: {fileID: 0}
+  angle: 30
+  innerAngle: 0
+  cubemap: {fileID: 0}
+  iesFile: {fileID: 0}
+  bitmask: 1
+  bakeToIndirect: 1
+  shadowmask: 0
+  indirectIntensity: 3
+  falloffMinRadius: 0.01
+  shadowmaskGroupID: 0
+  directionMode: 0
 --- !u!1 &7215815735262244238
 GameObject:
   m_ObjectHideFlags: 0
