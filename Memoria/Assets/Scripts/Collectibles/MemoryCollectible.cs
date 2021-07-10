@@ -23,6 +23,8 @@ public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
 
     public void ActivateEnter() {
         if (!triggered) {
+            //#Todo OnLevelEnded should not be called here
+            Globals.AnalyticsManager.OnLevelEnded();
             collectedAnimation.Play("MemoryCollected");
             hoveringParticles.Stop();
             collectedParticles.Play();

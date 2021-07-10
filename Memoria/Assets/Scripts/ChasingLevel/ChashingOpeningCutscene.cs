@@ -9,6 +9,7 @@ public class ChashingOpeningCutscene : MonoBehaviour {
     void Start() {
         if (!isEnabled && Application.isEditor) {
             GetComponentInChildren<PlayableDirector>().enabled = false;
+            Globals.AnalyticsManager.OnLevelStarted();
         }
     }
 }

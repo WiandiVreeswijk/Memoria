@@ -19,7 +19,9 @@ public class Globals : MonoBehaviour {
     private Persistence persistenceManager;
     private SceneManager sceneManager;
     private Screenshake screenshake;
+    private ScoreManager scoreManager;
     private Debugger debugger;
+    private AnalyticsManager analyticsManager;
     private bool isInitialized = false;
 
     //UI
@@ -69,6 +71,8 @@ public class Globals : MonoBehaviour {
     private void GlobalInitialize() {
         Utils.FindUniqueObject(out player);
         Utils.FindUniqueObject(out screenshake);
+        Utils.FindUniqueObject(out scoreManager);
+        Utils.FindUniqueObject(out analyticsManager);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
     }
 
@@ -101,6 +105,8 @@ public class Globals : MonoBehaviour {
     public static Screenshake Screenshake => _Instance.screenshake;
     public static SceneManager SceneManager => _Instance.sceneManager;
     public static UIManager UIManager => _Instance.uiManager;
+    public static ScoreManager ScoreManager => _Instance.scoreManager;
+    public static AnalyticsManager AnalyticsManager => _Instance.analyticsManager;
     public static Player Player => _Instance.player;
     public static Debugger Debugger => _Instance.debugger;
 
