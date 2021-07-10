@@ -15,6 +15,6 @@ public class AnalyticsManager : MonoBehaviour {
     }
 
     public void OnLevelEnded() {
-
+        Globals.ScoreManager.GetCollectibleCount();
     }
 }
