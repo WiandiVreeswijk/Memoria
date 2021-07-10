@@ -27,7 +27,7 @@ public class GemCollectible : MonoBehaviour, IEnterActivatable {
 
     static void EmitVisual(GameObject visualPrefab, string soundEffect) {
         GameObject instantiated = Instantiate(visualPrefab);
-        instantiated.transform.position = new Vector3(Globals.Player.HeadPosition.x, Globals.Player.HeadPosition.y + 0.5f, Globals.Player.HeadPosition.z);
+        instantiated.transform.position = new Vector3(Globals.Player.HeadPosition.x, Globals.Player.HeadPosition.y, Globals.Player.HeadPosition.z);
         instantiated.transform.parent = Globals.UIManager.ScreenspaceCanvas.transform;
         FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
     }

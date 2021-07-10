@@ -69,7 +69,7 @@ public class PlayerDeath : MonoBehaviour {
         }
         Globals.MenuController.BlackScreenFadeOut(0.1f);
         Globals.Player.PlayerMovement25D.SetStunned(false, false, false);
-        Globals.Player.VisualEffects.elenaMesh.enabled = true;
+        Globals.Player.VisualEffects.SetMeshEnabled(true);
         Globals.Player.VisualEffects.respawnParticles.Play();
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/Player/Respawn");
         Globals.Player.VisualEffects.CancelFadeDeath(0.0f);

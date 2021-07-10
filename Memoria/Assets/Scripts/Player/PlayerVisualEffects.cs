@@ -4,23 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVisualEffects : MonoBehaviour {
-    public SkinnedMeshRenderer elenaMesh;
+    private List<Renderer> skinnedRenderers;
     public ParticleSystem deathParticles;
 
     public ParticleSystem[] dustParticleSystems;
-
     public ParticleSystem respawnParticles;
+
+    public GameObject elenaMeshesObject;
 
     [HideInInspector]
     public bool isDeath = false;
     private bool isBlinking = false;
-    private Material playerMaterial;
+    private List<Material> playerMaterials;
     private int oblivionPositionPropertyID;
     public Color stunnedColor = Color.white;
     private Tween fadeDeathTween;
 
     private void Start() {
-        playerMaterial = elenaMesh.material;
+        skinnedRenderers = new List<Renderer>(elenaMeshesObject.GetComponentsInChildren<Renderer>());
+        playerMaterials = new List<Material>();
+
+        foreach (var renderer in skinnedRenderers) playerMaterials.Add(renderer.material);
+
         oblivionPositionPropertyID = Shader.PropertyToID("_OblivionPosition");
         deathParticles.Stop();
         CancelFadeDeath(0.0f);
@@ -30,21 +35,21 @@ public class PlayerVisualEffects : MonoBehaviour {
     public void DoBlink(float speed, int times) {
         if (isBlinking) return;
         isBlinking = true;
-        playerMaterial.DOColor(stunnedColor, 0.1f);
+        playerMaterials.ForEach(x => x.DOColor(stunnedColor, 0.1f));
         BlinkOff(speed, times);
     }
 
     void BlinkOn(float speed, int times) {
-        elenaMesh.enabled = true;
+        SetMeshEnabled(true);
         if (times > 0) Utils.DelayedAction(speed + speed / 2.0f, () => BlinkOff(speed, times));
         else {
             isBlinking = false;
-            playerMaterial.DOColor(Color.white, 0.1f);
+            playerMaterials.ForEach(x => x.DOColor(Color.white, 0.1f));
         }
     }
 
     void BlinkOff(float speed, int times) {
-        elenaMesh.enabled = false;
+        SetMeshEnabled(false);
         Utils.DelayedAction(speed / 2.0f, () => BlinkOn(speed, times - 1));
     }
 
@@ -53,7 +58,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     #region Death
     public void Death() {
         if (!isDeath) {
-            elenaMesh.enabled = false;
+            skinnedRenderers.ForEach(x => x.enabled = false);
             deathParticles.Play();
             isDeath = true;
         }
@@ -72,7 +77,8 @@ public class PlayerVisualEffects : MonoBehaviour {
     private void PlayDust(float duration, int count, float velocity) {
         ParticleSystem particleSystem = null;
         foreach (var ps in dustParticleSystems) {
-            if (ps.isStopped) {
+            if (ps.isStopped)
+            {
                 particleSystem = ps;
                 continue;
             }
@@ -95,10 +101,14 @@ public class PlayerVisualEffects : MonoBehaviour {
 
     private void FadeOblivion(float value, float duration) {
         fadeDeathTween?.Kill();
-        if (duration == 0.0f) playerMaterial.SetFloat(oblivionPositionPropertyID, value);
+        if (duration == 0.0f) playerMaterials.ForEach(x => x.SetFloat(oblivionPositionPropertyID, value));
         else {
-            fadeDeathTween = DOTween.To(() => playerMaterial.GetFloat(oblivionPositionPropertyID),
-                x => playerMaterial.SetFloat(oblivionPositionPropertyID, x), value, duration).SetEase(Ease.OutQuad);
+            fadeDeathTween = DOTween.To(() => playerMaterials[0].GetFloat(oblivionPositionPropertyID),
+                x => {
+                    foreach (var mat in playerMaterials) {
+                        mat.SetFloat(oblivionPositionPropertyID, x);
+                    }
+                }, value, duration).SetEase(Ease.OutQuad);
         }
     }
 
@@ -110,4 +120,8 @@ public class PlayerVisualEffects : MonoBehaviour {
         FadeOblivion(-2.0f, duration);
     }
     #endregion
+
+    public void SetMeshEnabled(bool b) {
+        skinnedRenderers.ForEach(x => x.enabled = b);
+    }
 }
