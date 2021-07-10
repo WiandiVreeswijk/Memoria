@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
     private bool triggered = false;
@@ -31,6 +32,11 @@ public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/MemoryCollected");
             Utils.DelayedAction(1.0f, () => portal.Play());
             triggered = true;
+
+            AnalyticsResult analyticsResult = Analytics.CustomEvent("Level completed", new Dictionary<string, object> {
+                //{"Gems collected", /*amount of gems variable*/ portal},
+                {"Play duration level", Time.timeSinceLevelLoad}
+            }); ;
         }
     }
 }
