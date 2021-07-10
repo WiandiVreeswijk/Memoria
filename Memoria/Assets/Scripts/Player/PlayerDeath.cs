@@ -13,11 +13,12 @@ public class PlayerDeath : MonoBehaviour {
     private bool hasPlayed = false;
 
     private void FixedUpdate() {
+        Globals.Screenshake.rumble = (1.0f - Mathf.Clamp(transform.position.x - Globals.OblivionManager.GetOblivionPosition(), 0.0f, 5.0f) / 5.0f)/2.0f;
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
             if (deathDelaySequence == null) {
                 Globals.SoundManagerChase.FadeDeath(1.0f, playerDeathDuration);
                 Globals.Player.VisualEffects.FadeDeath(playerDeathDuration);
-                deathDelaySequence = Utils.DelayedAction(playerDeathDuration, ()=>Respawn(false));
+                deathDelaySequence = Utils.DelayedAction(playerDeathDuration, () => Respawn(false));
             }
         } else {
             if (deathDelaySequence != null) {
@@ -29,8 +30,7 @@ public class PlayerDeath : MonoBehaviour {
         }
 
         if (transform.position.y < -2.0f) {
-            if (!hasPlayed)
-            {
+            if (!hasPlayed) {
                 FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/WaterSplash");
                 hasPlayed = true;
             }
@@ -43,11 +43,12 @@ public class PlayerDeath : MonoBehaviour {
     private void Respawn(bool water) {
         if (!isDying) {
             isDying = true;
-            Globals.Player.PlayerMovement25D.SetStunned(true, true);
+            Globals.Screenshake.Shake(water ? 1.0f : 2.0f, water ? 0.2f : 0.5f);
+            Globals.Player.PlayerMovement25D.SetStunned(true, true, true);
             Globals.Player.VisualEffects.Death();
             Globals.Player.VisualEffects.isDeath = false;
 
-                FMODUnity.RuntimeManager.PlayOneShot(water? "event:/SFXChasingLevel/WaterSplash" : "event:/SFXChasingLevel/OblivionExplode");
+            FMODUnity.RuntimeManager.PlayOneShot(water ? "event:/SFXChasingLevel/WaterSplash" : "event:/SFXChasingLevel/OblivionExplode");
 
             Globals.SoundManagerChase.FadeDeath(1.0f);
             respawningSequence = Utils.DelayedAction(2.0f, RespawnPosition);
@@ -66,7 +67,7 @@ public class PlayerDeath : MonoBehaviour {
             Globals.OblivionManager.SetOblivionPosition(lastCheckpoint.GetOblivionStopPoint().x);
         }
         Globals.MenuController.BlackScreenFadeOut(0.1f);
-        Globals.Player.PlayerMovement25D.SetStunned(false, false);
+        Globals.Player.PlayerMovement25D.SetStunned(false, false, false);
         Globals.Player.VisualEffects.elenaMesh.enabled = true;
         Globals.Player.VisualEffects.respawnParticles.Play();
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/Player/Respawn");

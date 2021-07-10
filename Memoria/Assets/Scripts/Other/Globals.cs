@@ -18,6 +18,7 @@ public class Globals : MonoBehaviour {
     private MenuController menuController;
     private Persistence persistenceManager;
     private SceneManager sceneManager;
+    private Screenshake screenshake;
     private Debugger debugger;
     private bool isInitialized = false;
 
@@ -67,6 +68,7 @@ public class Globals : MonoBehaviour {
 
     private void GlobalInitialize() {
         Utils.FindUniqueObject(out player);
+        Utils.FindUniqueObject(out screenshake);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
     }
 
@@ -96,6 +98,7 @@ public class Globals : MonoBehaviour {
 
     public static MenuController MenuController => _Instance.menuController;
     public static Persistence Persistence => _Instance.persistenceManager;
+    public static Screenshake Screenshake => _Instance.screenshake;
     public static SceneManager SceneManager => _Instance.sceneManager;
     public static UIManager UIManager => _Instance.uiManager;
     public static Player Player => _Instance.player;

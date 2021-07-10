@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -113,6 +114,7 @@ public class MenuController : MonoBehaviour {
 
     public void NotifyPlayer(string message, float delay = 0.0f) {
         GameObject obj = Instantiate(notificationPrefab, notificationsParent.transform);
+        obj.GetComponentInChildren<TextMeshProUGUI>().text = message;
         var rectTransform = obj.GetComponent<RectTransform>();
         obj.transform.position += new Vector3(0, (rectTransform.rect.height + 10f) * notificationIndex, 0);
         var group = obj.GetComponent<CanvasGroup>();
@@ -173,6 +175,10 @@ public class MenuController : MonoBehaviour {
             Globals.MenuController.CloseMenu();
             Time.timeScale = 1f;
         }
+    }
+
+    public void BackToWijk() {
+        Globals.SceneManager.SetScene("Wijk");
     }
 
     // Update is called once per frame

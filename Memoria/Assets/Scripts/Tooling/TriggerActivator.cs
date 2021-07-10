@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TriggerActivatorType {
+    ENTER,
+    EXIT
+}
+
 public class TriggerActivator : MonoBehaviour {
     [Tooltip("Name of the trigger. Probably 'Player'")]
     public string triggerName;

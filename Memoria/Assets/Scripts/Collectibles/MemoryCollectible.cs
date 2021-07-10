@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryCollectible : MonoBehaviour {
+public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
     private bool triggered = false;
     public float rotationSpeed = 2f;
 
@@ -17,7 +17,11 @@ public class MemoryCollectible : MonoBehaviour {
         collectedParticles.Pause();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void FixedUpdate() {
+        render.transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f));
+    }
+
+    public void ActivateEnter() {
         if (!triggered) {
             collectedAnimation.Play("MemoryCollected");
             hoveringParticles.Stop();
@@ -26,9 +30,5 @@ public class MemoryCollectible : MonoBehaviour {
             Utils.DelayedAction(1.0f, () => portal.Play());
             triggered = true;
         }
-    }
-
-    private void FixedUpdate() {
-        render.transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f));
     }
 }

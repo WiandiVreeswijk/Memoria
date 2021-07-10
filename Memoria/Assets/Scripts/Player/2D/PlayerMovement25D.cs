@@ -176,10 +176,11 @@ public class PlayerMovement25D : MonoBehaviour {
         Gizmos.DrawWireCube(transform.position, new Vector3(groundColliderCheckSize.x, groundColliderCheckSize.y, 0.02f));
     }
 
-    public void SetStunned(bool toggle, bool stopMovement) {
+    public void SetStunned(bool toggle, bool stopMovement, bool freeze) {
         stunnedTween?.Kill();
         stunned = toggle;
         if (stopMovement) rb.velocity = Vector2.zero;
+        rb.isKinematic = freeze;
     }
 
     public Vector2 GetVelocity() {
