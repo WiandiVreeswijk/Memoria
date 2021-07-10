@@ -13,7 +13,7 @@ public class PlayerDeath : MonoBehaviour {
     private bool hasPlayed = false;
 
     private void FixedUpdate() {
-        Globals.Screenshake.rumble = (1.0f - Mathf.Clamp(transform.position.x - Globals.OblivionManager.GetOblivionPosition(), 0.0f, 5.0f) / 5.0f)/2.0f;
+        Globals.Screenshake.rumble = (1.0f - Mathf.Clamp(transform.position.x - Globals.OblivionManager.GetOblivionPosition(), 0.0f, 5.0f) / 5.0f) / 2.0f;
         if (Globals.OblivionManager.GetOblivionPosition() > transform.position.x) {
             if (deathDelaySequence == null) {
                 Globals.SoundManagerChase.FadeDeath(1.0f, playerDeathDuration);
@@ -43,6 +43,7 @@ public class PlayerDeath : MonoBehaviour {
     private void Respawn(bool water) {
         if (!isDying) {
             isDying = true;
+            Globals.AnalyticsManager.OnPlayerDeath(Globals.Player.transform.position, water);
             Globals.Screenshake.Shake(water ? 1.0f : 2.0f, water ? 0.2f : 0.5f);
             Globals.Player.PlayerMovement25D.SetStunned(true, true, true);
             Globals.Player.VisualEffects.Death();

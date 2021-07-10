@@ -21,7 +21,9 @@ public class CheckpointManager : MonoBehaviour {
     }
 
     public void SetCheckpoint(Checkpoint checkpoint) {
-        if (checkpoint.GetCheckpointIndex() > lastCheckpointIndex) {
+        if (checkpoint.GetCheckpointIndex() > lastCheckpointIndex)
+        {
+            Globals.AnalyticsManager.OnCheckpointReached(checkpoint.GetCheckpointIndex());
             lastCheckpointIndex = checkpoint.GetCheckpointIndex();
             Globals.OblivionManager.SetGoalPosition(checkpoint.oblivionStopPoint.position.x, false);
         }
