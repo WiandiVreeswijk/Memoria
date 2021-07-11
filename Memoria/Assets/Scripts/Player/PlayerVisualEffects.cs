@@ -13,7 +13,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     public GameObject elenaMeshesObject;
 
     [HideInInspector]
-    public bool isDeath = false;
+    public bool isDead = false;
     private bool isBlinking = false;
     private List<Material> playerMaterials;
     private int oblivionPositionPropertyID;
@@ -56,11 +56,11 @@ public class PlayerVisualEffects : MonoBehaviour {
     #endregion
 
     #region Death
-    public void Death() {
-        if (!isDeath) {
+    public void Death(bool particles) {
+        if (!isDead) {
             skinnedRenderers.ForEach(x => x.enabled = false);
-            deathParticles.Play();
-            isDeath = true;
+            if (particles) deathParticles.Play();
+            isDead = true;
         }
 
     }
@@ -77,8 +77,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     private void PlayDust(float duration, int count, float velocity) {
         ParticleSystem particleSystem = null;
         foreach (var ps in dustParticleSystems) {
-            if (ps.isStopped)
-            {
+            if (ps.isStopped) {
                 particleSystem = ps;
                 continue;
             }

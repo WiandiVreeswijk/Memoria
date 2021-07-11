@@ -10,6 +10,7 @@ public class ChashingOpeningCutscene : MonoBehaviour {
         if (!isEnabled && Application.isEditor) {
             GetComponentInChildren<PlayableDirector>().enabled = false;
             Globals.AnalyticsManager.OnLevelStarted();
+            FindObjectOfType<ChasingMovementTooltips>().OnLevelStarted();
         }
     }
 }
