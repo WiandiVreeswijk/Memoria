@@ -36,9 +36,9 @@ RenderSettings:
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
-  m_CustomReflection: {fileID: 8900000, guid: cf3868853bca3554b8c7504794472f3b, type: 3}
+  m_CustomReflection: {fileID: 8900000, guid: 50565774999841d4c9c156fe27fb7061, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17293295, g: 0.51023537, b: 0.6991609, a: 1}
+  m_IndirectSpecularColor: {r: 0.17279312, g: 0.51019526, b: 0.6991304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -322,7 +322,7 @@ MonoBehaviour:
   UID: 905896801
   color: {r: 1, g: 1, b: 1, a: 1}
   intensity: 2
-  shadowSpread: 0.05
+  shadowSpread: 0.1
   cutoff: 10
   realisticFalloff: 0
   samples: 8
@@ -360,7 +360,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106978416}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -608,7 +608,7 @@ MonoBehaviour:
   indirectIntensity: 1
   tangentSH: 0
   correctRotation: 0
-  cubemap: {fileID: 8900000, guid: cf3868853bca3554b8c7504794472f3b, type: 3}
+  cubemap: {fileID: 8900000, guid: 50565774999841d4c9c156fe27fb7061, type: 3}
   UID: -732616828
 --- !u!4 &375841506
 Transform:
@@ -768,88 +768,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &691339131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: LightingTest_LM0
-  m_EditorClassIdentifier: 
-  resolution: 2048
-  bitmask: 1
-  id: 0
-  sortingID: 0
-  isImplicit: 1
-  area: 2582.9036
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: 
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
---- !u!114 &922295623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: LightingTest_LMA1
-  m_EditorClassIdentifier: 
-  resolution: 2048
-  bitmask: 1
-  id: 1
-  sortingID: 1
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: 
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &1067811218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +934,88 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 179128, guid: 7faac9e46c092bf43a71b66a76456b49, type: 3}
   m_PrefabInstance: {fileID: 1104953140}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1280471299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: LightingTest_LMA2
+  m_EditorClassIdentifier: 
+  resolution: 256
+  bitmask: 1
+  id: 2
+  sortingID: 2
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: 
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
+--- !u!114 &1295747503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: LightingTest_LM0
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 0
+  sortingID: 0
+  isImplicit: 1
+  area: 2582.9036
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: 
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &1355299272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1111,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &1359403538
+--- !u!114 &1390524981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1121,12 +1121,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: LightingTest_LMA2
+  m_Name: LightingTest_LMA1
   m_EditorClassIdentifier: 
-  resolution: 1024
+  resolution: 512
   bitmask: 1
-  id: 2
-  sortingID: 2
+  id: 1
+  sortingID: 1
   isImplicit: 1
   area: 0
   totalVertexCount: 0
@@ -1328,7 +1328,7 @@ MonoBehaviour:
   renderSettingsGIBackFaceWeight: 0
   renderSettingsTileSize: 1024
   renderSettingsPriority: 3
-  renderSettingsTexelsPerUnit: 40
+  renderSettingsTexelsPerUnit: 10
   renderSettingsForceRefresh: 1
   renderSettingsForceRebuildGeometry: 1
   renderSettingsPerformRendering: 1
@@ -1398,7 +1398,7 @@ MonoBehaviour:
   renderSettingsRTPVSceneView: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
-  lastBakeTime: 99
+  lastBakeTime: 45
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
   lightUIDs: 61e3fe35842755d4
@@ -1423,7 +1423,7 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     intensity: 2
     range: 10
-    radius: 0.05
+    radius: 0.1
     samples: 8
     samples2: 0
     bitmask: 0
@@ -1461,18 +1461,18 @@ MonoBehaviour:
     selfShadow: 0
     realisticFalloff: 0
     projMode: 0
-    cookie: {fileID: 8900000, guid: cf3868853bca3554b8c7504794472f3b, type: 3}
+    cookie: {fileID: 8900000, guid: 50565774999841d4c9c156fe27fb7061, type: 3}
     angle: 30
   implicitGroups:
-  - {fileID: 691339131}
-  - {fileID: 691339131}
-  - {fileID: 691339131}
-  - {fileID: 691339131}
-  - {fileID: 922295623}
-  - {fileID: 691339131}
-  - {fileID: 1359403538}
-  - {fileID: 691339131}
-  - {fileID: 691339131}
+  - {fileID: 1295747503}
+  - {fileID: 1295747503}
+  - {fileID: 1295747503}
+  - {fileID: 1295747503}
+  - {fileID: 1390524981}
+  - {fileID: 1295747503}
+  - {fileID: 1280471299}
+  - {fileID: 1295747503}
+  - {fileID: 1295747503}
   implicitGroupedObjects:
   - {fileID: 9769713}
   - {fileID: 39064381}
@@ -1516,37 +1516,37 @@ MonoBehaviour:
   modifiedAssets:
   - meshName:
     - SM_Prop_Crate_01
-    padding: 1f000000
+    padding: 7f000000
     unwrapper: 00000000
   - meshName:
     - SM_Prop_Grave_05
-    padding: 0a000000
+    padding: 28000000
     unwrapper: 00000000
   - meshName:
     - SM_Env_Beach_02
-    padding: 0d000000
+    padding: 36000000
     unwrapper: 00000000
   - meshName:
     - SM_Prop_Crate_Covered_01
-    padding: 2f000000
+    padding: bc000000
     unwrapper: 00000000
   - meshName:
     - SM_Prop_Cart_01
-    padding: 0c000000
+    padding: 31000000
     unwrapper: 00000000
   - meshName:
     - SM_Prop_Cannon_LowDetail_01
-    padding: 16000000
+    padding: 5a000000
     unwrapper: 00000000
   maps:
-  - {fileID: 2800000, guid: 910e18e468e8c0b40976cfab69759cea, type: 3}
-  - {fileID: 2800000, guid: 87541e60dfb34334085e16200fb7ae9d, type: 3}
-  - {fileID: 2800000, guid: 6622a846e85bdf34b87f99ecc734c0eb, type: 3}
+  - {fileID: 2800000, guid: 2d73bf6041684d94bb18918727f825e2, type: 3}
+  - {fileID: 2800000, guid: bf8b6ca961ac58c47932286e69d512a5, type: 3}
+  - {fileID: 2800000, guid: 6b1d0495422dafa4bb29977025526e67, type: 3}
   masks: []
   dirMaps:
-  - {fileID: 2800000, guid: 0eae8d9f5f022e3439736fe7eb3919a9, type: 3}
-  - {fileID: 2800000, guid: ea89507d414629046ad704bea194dc1d, type: 3}
-  - {fileID: 2800000, guid: 66ef481657562d843822d477f07810d3, type: 3}
+  - {fileID: 2800000, guid: 7fe0466b747d11242adcef7e116e06bd, type: 3}
+  - {fileID: 2800000, guid: 0b8b1f950cf91b64b98a1b0a872cb5c0, type: 3}
+  - {fileID: 2800000, guid: a1723fb112fa5f145a9b872c6ebfda40, type: 3}
   rnmMaps0: []
   rnmMaps1: []
   rnmMaps2: []
@@ -1563,15 +1563,15 @@ MonoBehaviour:
   - {fileID: 1556989018}
   bakedIDs: 000000000000000000000000000000000100000000000000020000000000000000000000
   bakedScaleOffset:
-  - {x: 0.91522866, y: 0.9136559, z: -0.002238961, w: -0.0022325823}
-  - {x: 0.062927276, y: 0.06292435, z: 0.91097206, w: 0.08811666}
-  - {x: 0.1963461, y: 0.19634663, z: 0.0014729926, w: 0.5971807}
-  - {x: 0.21511038, y: 0.21377155, z: 0.1970557, w: 0.5944668}
-  - {x: 1.0041963, y: 1.0024706, z: -0.0024566061, w: -0.0024496072}
-  - {x: 0.042824406, y: 0.0428107, z: 0.9109115, w: 0.15093642}
-  - {x: 1.0045013, y: 1.3146008, z: -0.002609179, w: -0.0038668702}
-  - {x: 0.16319643, y: 0.16319497, z: -0.00043946577, w: 0.79361606}
-  - {x: 0.088496834, y: 0.08849522, z: 0.91097575, w: -0.00042827174}
+  - {x: 0.9062272, y: 0.89993644, z: 0.0022158895, w: 0.0022414033}
+  - {x: 0.053826123, y: 0.05378086, z: 0.91552824, w: 0.09276288}
+  - {x: 0.19035354, y: 0.19034949, z: 0.005891335, w: 0.60153484}
+  - {x: 0.2124312, y: 0.21799502, z: 0.19304793, w: 0.590039}
+  - {x: 0.99442697, y: 0.987524, z: 0.0024315545, w: 0.0024595514}
+  - {x: 0.033184204, y: 0.033218507, z: 0.9156741, w: 0.15577872}
+  - {x: 0.9956467, y: 1.3010538, z: 0.0018212645, w: 0.00058260467}
+  - {x: 0.1570265, y: 0.15702678, z: 0.0021343534, w: 0.7960701}
+  - {x: 0.08233344, y: 0.08231135, z: 0.91357905, w: 0.0022741372}
   bakedVertexOffset: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   bakedVertexColorMesh:
   - {fileID: 0}
@@ -1600,17 +1600,14 @@ MonoBehaviour:
   sectors:
   - name: $G
     maps:
-    - {fileID: 2800000, guid: 910e18e468e8c0b40976cfab69759cea, type: 3}
-    - {fileID: 2800000, guid: 87541e60dfb34334085e16200fb7ae9d, type: 3}
-    - {fileID: 2800000, guid: 6622a846e85bdf34b87f99ecc734c0eb, type: 3}
-    masks:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 2800000, guid: 2d73bf6041684d94bb18918727f825e2, type: 3}
+    - {fileID: 2800000, guid: bf8b6ca961ac58c47932286e69d512a5, type: 3}
+    - {fileID: 2800000, guid: 6b1d0495422dafa4bb29977025526e67, type: 3}
+    masks: []
     dirMaps:
-    - {fileID: 2800000, guid: 0eae8d9f5f022e3439736fe7eb3919a9, type: 3}
-    - {fileID: 2800000, guid: ea89507d414629046ad704bea194dc1d, type: 3}
-    - {fileID: 2800000, guid: 66ef481657562d843822d477f07810d3, type: 3}
+    - {fileID: 2800000, guid: 7fe0466b747d11242adcef7e116e06bd, type: 3}
+    - {fileID: 2800000, guid: 0b8b1f950cf91b64b98a1b0a872cb5c0, type: 3}
+    - {fileID: 2800000, guid: a1723fb112fa5f145a9b872c6ebfda40, type: 3}
     rnmMaps0: []
     rnmMaps1: []
     rnmMaps2: []
@@ -1629,15 +1626,15 @@ MonoBehaviour:
     bakedIDs: 000000000000000000000000000000000100000000000000020000000000000000000000
     bakedIDsTerrain: 
     bakedScaleOffset:
-    - {x: 0.91522866, y: 0.9136559, z: -0.002238961, w: -0.0022325823}
-    - {x: 0.062927276, y: 0.06292435, z: 0.91097206, w: 0.08811666}
-    - {x: 0.1963461, y: 0.19634663, z: 0.0014729926, w: 0.5971807}
-    - {x: 0.21511038, y: 0.21377155, z: 0.1970557, w: 0.5944668}
-    - {x: 1.0041963, y: 1.0024706, z: -0.0024566061, w: -0.0024496072}
-    - {x: 0.042824406, y: 0.0428107, z: 0.9109115, w: 0.15093642}
-    - {x: 1.0045013, y: 1.3146008, z: -0.002609179, w: -0.0038668702}
-    - {x: 0.16319643, y: 0.16319497, z: -0.00043946577, w: 0.79361606}
-    - {x: 0.088496834, y: 0.08849522, z: 0.91097575, w: -0.00042827174}
+    - {x: 0.9062272, y: 0.89993644, z: 0.0022158895, w: 0.0022414033}
+    - {x: 0.053826123, y: 0.05378086, z: 0.91552824, w: 0.09276288}
+    - {x: 0.19035354, y: 0.19034949, z: 0.005891335, w: 0.60153484}
+    - {x: 0.2124312, y: 0.21799502, z: 0.19304793, w: 0.590039}
+    - {x: 0.99442697, y: 0.987524, z: 0.0024315545, w: 0.0024595514}
+    - {x: 0.033184204, y: 0.033218507, z: 0.9156741, w: 0.15577872}
+    - {x: 0.9956467, y: 1.3010538, z: 0.0018212645, w: 0.00058260467}
+    - {x: 0.1570265, y: 0.15702678, z: 0.0021343534, w: 0.7960701}
+    - {x: 0.08233344, y: 0.08231135, z: 0.91357905, w: 0.0022741372}
     bakedScaleOffsetTerrain: []
     bakedVertexColorMesh:
     - {fileID: 0}
