@@ -133,7 +133,7 @@ public class OblivionManager : MonoBehaviour {
 
     private Tween LerpOblivionToPosition(float position, float duration, Ease ease) {
         oblivionTween?.Kill();
-        oblivionTween = DOTween.To(() => oblivionPosition, x => oblivionPosition = x, position, duration).SetEase(ease);
+        oblivionTween = DOTween.To(() => oblivionPosition, x => oblivionPosition = x, position, duration).SetEase(ease).OnComplete(() => oblivionTween = null);
         return oblivionTween;
     }
 
@@ -142,6 +142,8 @@ public class OblivionManager : MonoBehaviour {
     }
 
     public void SetOblivionPosition(float position) {
+        print($"Set oblivion position and tween {(oblivionTween == null ? "is" : "is not")} null");
+        oblivionTween?.Kill();
         goalPosition = position;
         oblivionPosition = position;
     }

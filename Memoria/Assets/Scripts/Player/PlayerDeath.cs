@@ -60,23 +60,15 @@ public class PlayerDeath : MonoBehaviour {
     }
 
     private void RespawnPosition() {
-        Checkpoint lastCheckpoint = Globals.CheckpointManager.GetLastCheckpoint();
-        if (lastCheckpoint == null) {
-            Globals.Player.transform.position = Globals.CheckpointManager.GetSpawn();
-            Globals.OblivionManager.SetDefaultOblivionPosition();
-        } else {
-            Globals.Player.transform.position = lastCheckpoint.GetRespawnPoint();
-            Globals.OblivionManager.SetOblivionPosition(lastCheckpoint.GetOblivionStopPoint().x);
-        }
         Globals.MenuController.BlackScreenFadeOut(0.1f);
         Globals.Player.PlayerMovement25D.SetStunned(false, false, false);
         Globals.Player.VisualEffects.SetMeshEnabled(true);
         Globals.Player.VisualEffects.respawnParticles.Play();
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/Player/Respawn");
         Globals.Player.VisualEffects.CancelFadeDeath(0.0f);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/Player/Respawn");
         Globals.SoundManagerChase.FadeDeath(0.0f, 0.0f);
         Globals.OblivionVFXManager.ClearParticles();
-        Globals.CheckpointManager.OnRespawn();
+        Globals.CheckpointManager.Respawn();
         Globals.Player.CameraController.SetCameraTargetPosition(Globals.Player.transform.position);
         deathDelaySequence?.Kill();
         deathDelaySequence = null;

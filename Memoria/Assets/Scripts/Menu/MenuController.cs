@@ -86,10 +86,11 @@ public class MenuController : MonoBehaviour {
             FadePanelOut(activePanel, instant ? 0.0f : fadeTime);
             activePanel = null;
         }
-        FadeMainPanelOut(instant ? 0.0f : fadeTime);
+        FadeMainPanelOut(instant ? 0.0f : fadeTime).OnComplete(()=> Time.timeScale = 1.0f);
     }
 
     public void SetMenu(string name) {
+        Time.timeScale = 0f;
         if (name == "Notification") collectedThingies.SetActive(true);
         SetMenu(name, fadeTime);
     }
@@ -153,11 +154,12 @@ public class MenuController : MonoBehaviour {
         mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true);
     }
 
-    private void FadeMainPanelOut(float time) {
+    private Tween FadeMainPanelOut(float time) {
         mainFade?.Kill();
         mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 0.0f, time).OnComplete(() => {
             mainPanel.gameObject.SetActive(false);
         }).SetEase(Ease.InCirc).SetUpdate(true);
+        return mainFade;
     }
 
     private void Update() {
@@ -170,10 +172,8 @@ public class MenuController : MonoBehaviour {
         string active = GetActiveMenu();
         if (active == "") {
             SetMenu("Pause");
-            Time.timeScale = 0f;
         } else if (active == "Pause") {
-            Globals.MenuController.CloseMenu();
-            Time.timeScale = 1f;
+            CloseMenu();
         }
     }
 

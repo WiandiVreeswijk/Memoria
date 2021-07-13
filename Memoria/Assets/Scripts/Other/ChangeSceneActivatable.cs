@@ -6,6 +6,7 @@ public class ChangeSceneActivatable : MonoBehaviour, IEnterActivatable {
     public string sceneName;
 
     public void ActivateEnter() {
+        Globals.Player.PlayerMovement25D.SetStunned(true, true, true);
         Globals.SceneManager.SetScene(sceneName);
     }
 }

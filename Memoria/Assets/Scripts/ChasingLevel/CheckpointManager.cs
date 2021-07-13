@@ -21,8 +21,7 @@ public class CheckpointManager : MonoBehaviour {
     }
 
     public void SetCheckpoint(Checkpoint checkpoint) {
-        if (checkpoint.GetCheckpointIndex() > lastCheckpointIndex)
-        {
+        if (checkpoint.GetCheckpointIndex() > lastCheckpointIndex) {
             Globals.AnalyticsManager.OnCheckpointReached(checkpoint.GetCheckpointIndex());
             lastCheckpointIndex = checkpoint.GetCheckpointIndex();
             Globals.OblivionManager.SetGoalPosition(checkpoint.oblivionStopPoint.position.x, false);
@@ -46,11 +45,14 @@ public class CheckpointManager : MonoBehaviour {
         return spawn;
     }
 
-    public void OnRespawn() {
+    public void Respawn() {
         Checkpoint lastCheckpoint = GetLastCheckpoint();
         if (lastCheckpoint != null) {
+            Globals.Player.transform.position = lastCheckpoint.GetRespawnPoint();
             Globals.OblivionManager.SetOblivionPosition(lastCheckpoint.oblivionStopPoint.position.x);
             lastCheckpoint.OnRespawn();
+        } else {
+            Globals.Player.transform.position = Globals.CheckpointManager.GetSpawn();
         }
     }
 

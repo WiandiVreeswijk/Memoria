@@ -90,7 +90,7 @@ public class PlayerMovement25D : MonoBehaviour {
         //bool touching = wasTouching || isTouchingLayers;
         // wasTouching = isTouchingLayers;
         bool isGroundedThisFrame = areFeetGrounded && rb.velocity.y <= 0.001f;
-        bool ignoreLanding = ignoreLandingSoundLayerMask.value == (ignoreLandingSoundLayerMask.value | (1 << hit.collider.gameObject.layer));
+        bool ignoreLanding = hit.collider == null ? true : ignoreLandingSoundLayerMask.value == (ignoreLandingSoundLayerMask.value | (1 << hit.collider.gameObject.layer));
 
         justLanded = !isGrounded && isGroundedThisFrame;
         if (justLanded && !ignoreLanding) OnLand(previousYVelocity);
@@ -98,7 +98,7 @@ public class PlayerMovement25D : MonoBehaviour {
         bool jumpAnimation = false;
         if (isGrounded) {
             fallTimeoutDelta = fallTimeout;
-            canJump = true;
+            if (!ignoreLanding) canJump = true;
         }
         if (isGrounded || rb.velocity.y <= 0) isJumping = false;
 

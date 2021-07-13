@@ -38,7 +38,7 @@ public class CloudSpawner : MonoBehaviour {
         GameObject randomPrefab = clouds[Random.Range(0, clouds.Length)];
         float y = Random.Range(spawnArea.center.y - spawnArea.size.y / 2, spawnArea.center.y + spawnArea.size.y / 2);
         float z = Random.Range(spawnArea.center.z - spawnArea.size.z / 2, spawnArea.center.z + spawnArea.size.z / 2);
-        GameObject cloud = Instantiate(randomPrefab, transform.position + new Vector3(distanceFromSpawn, y, z), Quaternion.Euler(0.0f, Random.Range(0f, 360f), 0.0f));
+        GameObject cloud = Instantiate(randomPrefab, transform.position + new Vector3(distanceFromSpawn, y, z), Quaternion.identity /*Quaternion.Euler(0.0f, Random.Range(0f, 360f), 0.0f)*/);
         cloud.transform.parent = transform;
         float size = Random.Range(minSize, maxSize);
         cloud.transform.localScale = new Vector3(size, size, size);
