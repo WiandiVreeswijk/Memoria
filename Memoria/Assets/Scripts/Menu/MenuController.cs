@@ -34,7 +34,7 @@ public class MenuController : MonoBehaviour {
 
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private WAEMUIElement[] uiElements;
-    [SerializeField] private float fadeTime = 1.0f;
+    [SerializeField] private float fadeTime = 0.25f;
     [SerializeField] private CanvasGroup blackScreen;
 
     private Tween mainFade;
@@ -65,14 +65,14 @@ public class MenuController : MonoBehaviour {
         return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 1.0f, duration).OnComplete(() => {
             blackScreen.blocksRaycasts = false;
             blackScreen.interactable = false;
-        });
+        }).SetUpdate(true);
     }
 
     public Tween BlackScreenFadeOut(float duration) {
         blackScreenTween?.Kill();
         blackScreen.blocksRaycasts = false;
         blackScreen.interactable = false;
-        return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration);
+        return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration).SetUpdate(true);
     }
 
     public void ReloadScene() {
@@ -129,14 +129,14 @@ public class MenuController : MonoBehaviour {
             .AppendCallback(() => {
                 Destroy(obj);
                 notificationIndex--;
-            });
+            }).SetUpdate(true);
     }
 
     private void FadePanelIn(WAEMDictUIElement group, float time) {
         group.tween?.Kill();
         group.panel.blocksRaycasts = true;
         group.panel.gameObject.SetActive(true);
-        group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 1.0f, time).SetEase(Ease.OutQuint);
+        group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 1.0f, time).SetEase(Ease.OutQuint).SetUpdate(true);
     }
 
     private void FadePanelOut(WAEMDictUIElement group, float time) {
@@ -144,20 +144,20 @@ public class MenuController : MonoBehaviour {
         group.panel.blocksRaycasts = false;
         group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 0.0f, time).OnComplete(() => {
             group.panel.gameObject.SetActive(false);
-        }).SetEase(Ease.OutQuint);
+        }).SetUpdate(true);
     }
 
     private void FadeMainPanelIn(float time) {
-        mainFade?.Kill(true);
+        mainFade?.Kill();
         mainPanel.gameObject.SetActive(true);
-        mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetEase(Ease.InCirc);
+        mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true);
     }
 
     private void FadeMainPanelOut(float time) {
-        mainFade?.Kill(true);
+        mainFade?.Kill();
         mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 0.0f, time).OnComplete(() => {
             mainPanel.gameObject.SetActive(false);
-        }).SetEase(Ease.InCirc);
+        }).SetEase(Ease.InCirc).SetUpdate(true);
     }
 
     private void Update() {
