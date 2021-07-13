@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5481402550804014307}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 6836267756602027872}
@@ -4857,13 +4857,13 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 0001030402050813
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -9756,13 +9756,13 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 0001030402050813
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -14592,13 +14592,13 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 0001030402050813
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -15584,7 +15584,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6836267756602520320}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.55, y: 0.146, z: -0.505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15677,12 +15677,15 @@ MonoBehaviour:
   jumpForce: 15
   platformLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 12288
+  ignoreLandingSoundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   fallMultiplier: 7
   lowJumpMultiplier: 5
-  groundColliderCheckSize: {x: 0.6, y: 0.2}
+  groundColliderCheckSize: {x: 0.55, y: 0.2}
   extraJumpsValue: 0
-  hangTime: 0.25
+  hangTime: 0.15
   jumpBufferLength: 0
   fallTimeout: 0.05
 --- !u!114 &6836267756602520380
@@ -15698,12 +15701,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathParticles: {fileID: 5481402551769594917}
+  waterDeathParticles: {fileID: 3010240170069244266, guid: d9f8f354e0b2aaf418a50a2b31509c5f, type: 3}
   dustParticleSystems:
   - {fileID: 5481402552458603297}
   - {fileID: 5481402550817959662}
   respawnParticles: {fileID: 5679141259371908516}
   elenaMeshesObject: {fileID: 5481402550804014307}
-  isDeath: 0
+  isDead: 0
   stunnedColor: {r: 0.6687383, g: 0.4292453, b: 1, a: 1}
 --- !u!114 &4964137834535866822
 MonoBehaviour:
@@ -16242,7 +16246,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6836267756602520384}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16839,7 +16843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6836267756602520440}
   m_LocalRotation: {x: 0.48650965, y: -0.53114796, z: -0.425479, w: 0.54786664}
-  m_LocalPosition: {x: 0.008518696, y: 0.47559097, z: 0.009599984}
+  m_LocalPosition: {x: 0.008518696, y: 0.47559094, z: 0.009599984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6836267756602027568}
@@ -17102,9 +17106,57 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199256865592472146, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199256865592472146, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 199256865592472146, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[4]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 199256865592472146, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 199256865592472146, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[6]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 199256865592472146, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[7]
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 199650048263207216, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199650048263207216, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199650048263207216, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 199650048263207216, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[4]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 199650048263207216, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 199650048263207216, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[6]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 199650048263207216, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[7]
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7f93a0255162fd47bbe40874f339bf4, type: 3}
