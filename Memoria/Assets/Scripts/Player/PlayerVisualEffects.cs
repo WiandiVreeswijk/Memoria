@@ -46,6 +46,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     }
 
     void BlinkOn(float speed, int times) {
+        if (isDead) return;
         SetMeshEnabled(true);
         if (times > 0) Utils.DelayedAction(speed + speed / 2.0f, () => BlinkOff(speed, times));
         else {
@@ -55,6 +56,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     }
 
     void BlinkOff(float speed, int times) {
+        if (isDead) return;
         SetMeshEnabled(false);
         Utils.DelayedAction(speed / 2.0f, () => BlinkOn(speed, times - 1));
     }
