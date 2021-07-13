@@ -3,9 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DeathType {
+    OBLIVION,
+    WATER
+}
+
 public class PlayerVisualEffects : MonoBehaviour {
     private List<Renderer> skinnedRenderers;
     public ParticleSystem deathParticles;
+    public GameObject waterDeathParticles;
 
     public ParticleSystem[] dustParticleSystems;
     public ParticleSystem respawnParticles;
@@ -56,10 +62,13 @@ public class PlayerVisualEffects : MonoBehaviour {
     #endregion
 
     #region Death
-    public void Death(bool particles) {
+    public void Death(DeathType type, Vector3 position) {
         if (!isDead) {
             skinnedRenderers.ForEach(x => x.enabled = false);
-            if (particles) deathParticles.Play();
+            switch (type) {
+                case DeathType.OBLIVION: deathParticles.Play(); break;
+                case DeathType.WATER: Instantiate(waterDeathParticles, position, Quaternion.identity); break;
+            }
             isDead = true;
         }
 

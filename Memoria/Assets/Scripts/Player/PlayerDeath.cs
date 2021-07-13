@@ -46,7 +46,9 @@ public class PlayerDeath : MonoBehaviour {
             Globals.AnalyticsManager.OnPlayerDeath(Globals.Player.transform.position, water);
             Globals.Screenshake.Shake(water ? 1.0f : 2.0f, water ? 0.2f : 0.5f);
             Globals.Player.PlayerMovement25D.SetStunned(true, true, true);
-            Globals.Player.VisualEffects.Death(!water);
+            Vector3 pos = Globals.Player.transform.position;
+            pos.y = -1.0f; //Water position fix
+            Globals.Player.VisualEffects.Death(water ? DeathType.WATER : DeathType.OBLIVION, pos);
             Globals.Player.VisualEffects.isDead = false;
 
             FMODUnity.RuntimeManager.PlayOneShot(water ? "event:/SFXChasingLevel/WaterSplash" : "event:/SFXChasingLevel/OblivionExplode");

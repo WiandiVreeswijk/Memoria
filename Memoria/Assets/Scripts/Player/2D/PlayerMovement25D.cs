@@ -38,6 +38,7 @@ public class PlayerMovement25D : MonoBehaviour {
 
     private Rigidbody2D rb;
     public LayerMask platformLayerMask;
+    public LayerMask ignoreLandingSoundLayerMask;
     private Collider2D playerCollider;
 
     private bool isGrounded;
@@ -89,9 +90,10 @@ public class PlayerMovement25D : MonoBehaviour {
         //bool touching = wasTouching || isTouchingLayers;
         // wasTouching = isTouchingLayers;
         bool isGroundedThisFrame = areFeetGrounded && rb.velocity.y <= 0.001f;
+        bool ignoreLanding = ignoreLandingSoundLayerMask.value == (ignoreLandingSoundLayerMask.value | (1 << hit.collider.gameObject.layer));
 
         justLanded = !isGrounded && isGroundedThisFrame;
-        if (justLanded) OnLand(previousYVelocity);
+        if (justLanded && !ignoreLanding) OnLand(previousYVelocity);
         isGrounded = isGroundedThisFrame;
         bool jumpAnimation = false;
         if (isGrounded) {
