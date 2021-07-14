@@ -14,13 +14,13 @@ public class GemCollectibleVisual : MonoBehaviour {
     void Start() {
         speed = maxSpeed;
         originalUIScale = transform.localScale;
-        Vector3 worldPosition = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.975f, Camera.main.nearClipPlane));
+        Vector3 worldPosition = Globals.Camera.ViewportToWorldPoint(new Vector3(0.0f, 0.975f, Globals.Camera.nearClipPlane));
         initialDistance = Vector3.Distance(transform.position, worldPosition);
     }
 
     void LateUpdate()
     {
-        Vector3 worldPosition = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.975f, Camera.main.nearClipPlane));
+        Vector3 worldPosition = Globals.Camera.ViewportToWorldPoint(new Vector3(0.0f, 0.975f, Globals.Camera.nearClipPlane));
         transform.position = Vector3.Lerp(transform.position, worldPosition, Time.deltaTime * speed);
         float distance = Vector3.Distance(transform.position, worldPosition);
         if (distance < 0.05f) {

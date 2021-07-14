@@ -22,6 +22,7 @@ public class Globals : MonoBehaviour {
     private ScoreManager scoreManager;
     private Debugger debugger;
     private AnalyticsManager analyticsManager;
+    private Camera camera;
     private bool isInitialized = false;
 
     //UI
@@ -76,6 +77,8 @@ public class Globals : MonoBehaviour {
     }
 
     private void GlobalInitialize() {
+        Utils.FindUniqueObject(out MainCamera mainCamera);
+        camera = mainCamera.GetComponent<Camera>();
         Utils.FindUniqueObject(out player);
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
@@ -85,6 +88,8 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out menuController);
         if (currentGlobalsType == GlobalsType.NEIGHBORHOOD) menuController.SetMenu("Main", 0.0f);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
+
+        uiManager.OnGlobalsInitialize();
     }
 
     private void InitializeNeighborhood() {
@@ -109,6 +114,7 @@ public class Globals : MonoBehaviour {
     public static AnalyticsManager AnalyticsManager => _Instance.analyticsManager;
     public static Player Player => _Instance.player;
     public static Debugger Debugger => _Instance.debugger;
+    public static Camera Camera => _Instance.camera;
 
     #endregion
 

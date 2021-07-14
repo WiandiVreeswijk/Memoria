@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour {
     private ChasingLevelUI chasingLevelUI;
     public ChasingLevelUI ChasingLevel => chasingLevelUI;
 
-    void Start() {
+    public void OnGlobalsInitialize() {
         chasingLevelUI = GetComponentInChildren<ChasingLevelUI>();
-        screenspaceCanvas.worldCamera = Camera.main;
+        screenspaceCanvas.worldCamera = Globals.Camera;
     }
 }

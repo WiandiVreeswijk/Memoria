@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2950172022640808346}
   - component: {fileID: 2950172022640808345}
   - component: {fileID: 582566164}
+  - component: {fileID: 1721988124}
   m_Layer: 0
   m_Name: Persistent
   m_TagString: Untagged
@@ -57,30 +58,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc2192431e05e441864267637c60386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wijkScene:
-    name: Wijk
-    scene:
-      sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
-      scenePath: Assets/Scenes/Wijk.unity
-    skybox: {fileID: 2100000, guid: 528363c5c1cf6a7458140c6851c77b68, type: 2}
-    fog: 1
   keySceneDefinitions:
   - name: UI
     scene:
       sceneAsset: {fileID: 102900000, guid: 588e0862e35350646a6b8031d3634f79, type: 3}
       scenePath: Assets/Scenes/UI.unity
-    skybox: {fileID: 0}
-    fog: 0
   - name: Persistent
     scene:
       sceneAsset: {fileID: 102900000, guid: 13fff34dfbb0bec4ab11c4d7d1491611, type: 3}
       scenePath: Assets/Scenes/Persistent.unity
-    skybox: {fileID: 0}
-    fog: 0
   levelSceneDefinitions:
+  - name: Wijk
+    scene:
+      sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+      scenePath: Assets/Scenes/Wijk.unity
   - name: Chasing1
     scene:
       sceneAsset: {fileID: 102900000, guid: f0ca69480d95ae242a94396808fead4d, type: 3}
       scenePath: Assets/Scenes/ChasingLevel/ChasingLevelScene.unity
-    skybox: {fileID: 2100000, guid: d0523d8917957bb429a32997cb0e52b2, type: 2}
-    fog: 0
+--- !u!114 &1721988124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950172022640808344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd9f66256ee5d946a77a8fd3d4800c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

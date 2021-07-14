@@ -8,13 +8,11 @@ using UnityEditorInternal;
 public class SceneManagerEditor : Editor {
     private ReorderableList listKey;
     private ReorderableList listLevels;
-    private SerializedProperty wijkSceneProperty;
     private SerializedProperty levelsceneDefinitionsProperty;
     private SerializedProperty keySceneDefinitionsProperty;
     private int globalIndex;
 
     private void OnEnable() {
-        wijkSceneProperty = serializedObject.FindProperty("wijkScene");
         levelsceneDefinitionsProperty = serializedObject.FindProperty("levelSceneDefinitions");
         keySceneDefinitionsProperty = serializedObject.FindProperty("keySceneDefinitions");
         listKey = new ReorderableList(serializedObject, keySceneDefinitionsProperty, true, true, true, true);
@@ -44,23 +42,6 @@ public class SceneManagerEditor : Editor {
         SceneManager mgr = target as SceneManager;
         EditorGUI.BeginChangeCheck();
         serializedObject.Update();
-        Rect rect = EditorGUILayout.BeginVertical();
-        GUI.Box(rect, GUIContent.none);
-
-        SerializedProperty wijkName = wijkSceneProperty.FindPropertyRelative("name");
-        SerializedProperty wijkScene = wijkSceneProperty.FindPropertyRelative("scene");
-        SerializedProperty wijkSkybox = wijkSceneProperty.FindPropertyRelative("skybox");
-        SerializedProperty wijkFog = wijkSceneProperty.FindPropertyRelative("fog");
-        EditorGUILayout.PropertyField(wijkName);
-        EditorGUILayout.Space();
-        EditorGUILayout.PropertyField(wijkFog);
-        EditorGUILayout.PropertyField(wijkSkybox);
-        EditorGUILayout.PropertyField(wijkScene);
-        EditorGUILayout.Space(-28);
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.Space(20);
-        EditorGUILayout.LabelField("Scenes");
         listKey.DoLayoutList();
         listLevels.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
@@ -74,13 +55,9 @@ public class SceneManagerEditor : Editor {
             SerializedProperty sceneDefinition = prop.GetArrayElementAtIndex(globalIndex);
             SerializedProperty name = sceneDefinition.FindPropertyRelative("name");
             SerializedProperty scene = sceneDefinition.FindPropertyRelative("scene");
-            SerializedProperty skybox = sceneDefinition.FindPropertyRelative("skybox");
-            SerializedProperty fog = sceneDefinition.FindPropertyRelative("fog");
 
             EditorGUILayout.PropertyField(name, new GUIContent("Name"));
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(fog);
-            EditorGUILayout.PropertyField(skybox);
             EditorGUILayout.PropertyField(scene);
             EditorGUILayout.Space(-28); //Fuck yeah, magic numbers
 
