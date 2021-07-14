@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistenceManagerPrefab: {fileID: 52193450365386718, guid: 47ceed972f74aeb40a438c6993e99e7e, type: 3}
-  menuControllerPrefab: {fileID: 2711970290939312148, guid: 3132401e2b2dc9748b34031651d7e855, type: 3}
-  debuggerPrefab: {fileID: 5173571786990098737, guid: 3ba433c7289485540b7c5833d027d4dd, type: 3}
-  canvas: {fileID: 0}
 --- !u!114 &582566164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,3 +70,7 @@ MonoBehaviour:
     scene:
       sceneAsset: {fileID: 102900000, guid: 588e0862e35350646a6b8031d3634f79, type: 3}
       scenePath: Assets/Scenes/UI.unity
+  - name: Persistent
+    scene:
+      sceneAsset: {fileID: 102900000, guid: 13fff34dfbb0bec4ab11c4d7d1491611, type: 3}
+      scenePath: Assets/Scenes/Persistent.unity

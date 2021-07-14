@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LookAtTest : MonoBehaviour {
     public Transform lookAtPoint;
-    public Transform PlayerLookAtPoint;
     private float lerp = 0.0f;
     private Tween tween;
     private bool toggle = false;
@@ -15,7 +14,7 @@ public class LookAtTest : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        float dist = Vector3.Distance(transform.position, PlayerLookAtPoint.position);
+        float dist = Vector3.Distance(transform.position, Globals.Player.HeadPosition);
         if (dist > 4.5f) {
             //Stop
             if (!toggle) {
@@ -34,7 +33,7 @@ public class LookAtTest : MonoBehaviour {
     }
 
     void OnAnimatorIK() {
-        animator.SetLookAtPosition(Vector3.Lerp(PlayerLookAtPoint.position, lookAtPoint.position, lerp));
+        animator.SetLookAtPosition(Vector3.Lerp(Globals.Player.HeadPosition, lookAtPoint.position, lerp));
         animator.SetLookAtWeight(1.0f);
     }
 }

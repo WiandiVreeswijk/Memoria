@@ -45,7 +45,7 @@ public class Globals : MonoBehaviour {
             _Instance = this;
             DontDestroyOnLoad(this);
             Utils.FindUniqueObject(out sceneManager);
-            SceneManager.LoadUI();
+            //SceneManager.LoadUI();
         }
     }
 
@@ -73,18 +73,11 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
         Utils.FindUniqueObject(out analyticsManager);
-        Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
-    }
-
-    public static void InitializeUI() {
-        _Instance._InitializeUI();
-    }
-
-    public void _InitializeUI() {
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
         Utils.FindUniqueObject(out menuController);
         if (currentGlobalsType == GlobalsType.NEIGHTBORHOOD) menuController.SetMenu("Main", 0.0f);
+        Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
     }
 
     private void InitializeNeighborhood() {

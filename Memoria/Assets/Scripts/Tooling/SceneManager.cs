@@ -59,14 +59,24 @@ public class SceneManager : MonoBehaviour {
         asyncTask.allowSceneActivation = true;
     }
 
-    public void LoadUI() {
-        StartCoroutine(LoadScene());
+    public static void LoadSceneIfNotActive(string sceneName) {
+        for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++) {
+            var scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
+            if (scene.name == sceneName && scene.isLoaded) return;
+        }
+
+        print("Loaded scene " + sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
 
-    private IEnumerator LoadScene() {
-        AsyncOperation asyncLoadLevel = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
-        while (!asyncLoadLevel.isDone) yield return null;
-        yield return new WaitForEndOfFrame();
-        Globals.InitializeUI();
-    }
+    //public void LoadUI() {
+    //    StartCoroutine(LoadScene());
+    //}
+    //
+    //private IEnumerator LoadScene() {
+    //    AsyncOperation asyncLoadLevel = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+    //    while (!asyncLoadLevel.isDone) yield return null;
+    //    yield return new WaitForEndOfFrame();
+    //    Globals.InitializeUI();
+    //}
 }

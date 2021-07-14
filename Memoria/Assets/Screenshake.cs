@@ -6,25 +6,38 @@ using DG.Tweening;
 
 //#Todo this is very barebones. Probably won't work on scene switch and should definitely be improved
 public class Screenshake : MonoBehaviour {
-    Tween tween;
     public float rumble = 0.0f;
-    private CinemachineBasicMultiChannelPerlin p;
+
+    private Tween tween;
+    private GameObject vCamObject;
+    private CinemachineBasicMultiChannelPerlin noise;
 
     public void Start() {
-        //How to handle cinemachine camera switches?
-        var brain = CinemachineCore.Instance.GetActiveBrain(0);
-        var Vcam = brain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
-        p = Vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        UpdateCameraIfNecessary();
     }
+
     public void Shake(float intensity, float duration) {
+        if (noise == null) return;
         tween?.Kill(true);
-        p.m_AmplitudeGain = intensity;
-        tween = DOTween.To(() => p.m_AmplitudeGain, x => p.m_AmplitudeGain = x, 0.0f, duration).SetEase(Ease.InExpo).OnComplete(() => tween = null);
+        noise.m_AmplitudeGain = intensity;
+        tween = DOTween.To(() => noise.m_AmplitudeGain, x => noise.m_AmplitudeGain = x, 0.0f, duration).SetEase(Ease.InExpo).OnComplete(() => tween = null);
     }
 
     public void Update() {
-        if (tween == null) {
-            p.m_AmplitudeGain = rumble;
+        UpdateCameraIfNecessary();
+        if (tween == null && noise != null) {
+            noise.m_AmplitudeGain = rumble;
+        }
+    }
+
+    void UpdateCameraIfNecessary() {
+        var brain = CinemachineCore.Instance.GetActiveBrain(0);
+        if (vCamObject != brain.ActiveVirtualCamera.VirtualCameraGameObject) {
+            tween?.Kill(true);
+            vCamObject = brain.ActiveVirtualCamera.VirtualCameraGameObject;
+            var camera = brain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
+            if (camera != null) noise = camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            else noise = null;
         }
     }
 }
