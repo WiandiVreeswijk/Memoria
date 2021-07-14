@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour {
     #region Interaction
     private void Interaction() {
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(0.5F, 0.5F, 0));
+        Ray ray = Camera.current.ScreenPointToRay(new Vector3(0.5F, 0.5F, 0));
         Debug.DrawRay(ray.origin, ray.direction, Color.red);
         GameObject hitObject = null;
         if (Physics.Raycast(ray, out hit)) {

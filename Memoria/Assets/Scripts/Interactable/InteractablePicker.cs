@@ -18,7 +18,7 @@ public class InteractablePicker : MonoBehaviour {
     }
     
     void FixedUpdate() {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        Ray ray = Camera.current.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         Debug.DrawRay(ray.origin, ray.direction, Color.red);
     
         GameObject hoveredObject = null;

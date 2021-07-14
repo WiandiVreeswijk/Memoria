@@ -10,7 +10,7 @@ public class PlayerMovementAdventure : MonoBehaviour {
     [SerializeField] public float movementDecreaseWhenNotMoving = 0.01f;
     [SerializeField] public float startMovingTreshold = 0.25f;
 
-    private Transform cam;
+    public Camera cam;
     private Animator animator;
 
     private Vector3 smoothedRotatedMovement = Vector3.zero;
@@ -32,7 +32,6 @@ public class PlayerMovementAdventure : MonoBehaviour {
     public bool canMove = false;
 
     private void Start() {
-        cam = Camera.main.transform;
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         inHouse = false;
@@ -81,11 +80,11 @@ public class PlayerMovementAdventure : MonoBehaviour {
             if (Input.GetButton("Sprint")) isRunning = false;
             movement += plainMovement; //Add input movement to movement resulting from the previous frame
 
-            Quaternion temporaryCameraRotation = cam.rotation;
-            cam.eulerAngles = new Vector3(0, cam.eulerAngles.y, 0);
-            smoothedRotatedMovement = cam.TransformDirection(movement); //Movement rotated with the camera
-            plainRotatedMovement = cam.TransformDirection(plainMovement); //Only used for debug
-            cam.rotation = temporaryCameraRotation;
+            Quaternion temporaryCameraRotation = cam.transform.rotation;
+            cam.transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, 0);
+            smoothedRotatedMovement = cam.transform.TransformDirection(movement); //Movement rotated with the camera
+            plainRotatedMovement = cam.transform.TransformDirection(plainMovement); //Only used for debug
+            cam.transform.rotation = temporaryCameraRotation;
 
             if (sharpTurn) transform.rotation = Quaternion.LookRotation(smoothedRotatedMovement); //Instant turn
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(smoothedRotatedMovement), Time.deltaTime * rotationSpeed); //Smooth turn
@@ -110,10 +109,10 @@ public class PlayerMovementAdventure : MonoBehaviour {
 
         Vector3 movement = new Vector3(horizontal, 0, vertical);
 
-        Quaternion temporaryCameraRotation = cam.rotation;
-        cam.eulerAngles = new Vector3(0, cam.eulerAngles.y, 0);
-        movement = cam.TransformDirection(movement); //Movement rotated with the camera
-        cam.rotation = temporaryCameraRotation;
+        Quaternion temporaryCameraRotation = cam.transform.rotation;
+        cam.transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, 0);
+        movement = cam.transform.transform.TransformDirection(movement); //Movement rotated with the camera
+        cam.transform.rotation = temporaryCameraRotation;
 
         movement.y -= gravity;
         controller.Move(movement * fpsSpeed * Time.deltaTime);

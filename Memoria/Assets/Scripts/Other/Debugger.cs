@@ -76,7 +76,14 @@ public class Debugger : MonoBehaviour {
 
         AddLabel("Debug menu");
         AddLabel("Scenes");
-        foreach (var scene in Globals.SceneManager.GetAllScenes()) {
+
+        bool isInWijk = Globals.SceneManager.IsInWijkScene();
+        AddButton("Back to wijk", !isInWijk, () => {
+            SetVisible(false);
+            Globals.SceneManager.SetWijkScene();
+        });
+
+        foreach (var scene in Globals.SceneManager.GetAllLevelScenes()) {
             if (scene.name == "UI" || scene.name == "Persistent") continue;
             bool activeScene = scene != Globals.SceneManager.GetActiveScene();
             AddButton(scene.name, activeScene, () => {

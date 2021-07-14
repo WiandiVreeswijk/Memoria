@@ -18,8 +18,8 @@ public class GemCollectibleVisual : MonoBehaviour {
         initialDistance = Vector3.Distance(transform.position, worldPosition);
     }
 
-    void LateUpdate() {
-        print(Camera.main);
+    void LateUpdate()
+    {
         Vector3 worldPosition = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.975f, Camera.main.nearClipPlane));
         transform.position = Vector3.Lerp(transform.position, worldPosition, Time.deltaTime * speed);
         float distance = Vector3.Distance(transform.position, worldPosition);
