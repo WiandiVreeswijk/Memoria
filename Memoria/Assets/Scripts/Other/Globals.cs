@@ -6,7 +6,7 @@ using UnityEngine;
 public class Globals : MonoBehaviour {
     [Serializable]
     public enum GlobalsType {
-        NEIGHTBORHOOD,
+        NEIGHBORHOOD,
         OBLIVION
     }
 
@@ -58,14 +58,21 @@ public class Globals : MonoBehaviour {
         _Instance.currentGlobalsType = type;
         _Instance.GlobalInitialize();
         switch (type) {
-            case GlobalsType.NEIGHTBORHOOD:
+            case GlobalsType.NEIGHBORHOOD:
                 _Instance.InitializeNeighborhood();
                 break;
             case GlobalsType.OBLIVION:
                 _Instance.InitializeOblivion();
                 break;
         }
+        Debugger.InitializeMenu(type);
         _Instance.isInitialized = true;
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Y)) {
+            Initialize(GlobalsType.OBLIVION);
+        }
     }
 
     private void GlobalInitialize() {
@@ -76,7 +83,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
         Utils.FindUniqueObject(out menuController);
-        if (currentGlobalsType == GlobalsType.NEIGHTBORHOOD) menuController.SetMenu("Main", 0.0f);
+        if (currentGlobalsType == GlobalsType.NEIGHBORHOOD) menuController.SetMenu("Main", 0.0f);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
     }
 

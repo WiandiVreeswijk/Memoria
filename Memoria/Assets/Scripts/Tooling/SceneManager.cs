@@ -18,18 +18,37 @@ public class SceneManager : MonoBehaviour {
         }
     }
 
+    public static List<string> loadedScenes = new List<string>();
     public List<SceneDefinition> sceneDefinitions = new List<SceneDefinition>();
     public Dictionary<string, SceneDefinition> sceneDefinitionsMap = new Dictionary<string, SceneDefinition>();
+    private SceneDefinition activeScene;
     private bool isLoadingScene = false;
 
-    private void Start() {
+    private void Awake() {
+        //UnityEngine.SceneManagement.SceneManager.sceneLoaded += SceneLoaded;
+        //UnityEngine.SceneManagement.SceneManager.sceneUnloaded += SceneUnloaded;
+
         for (int i = 0; i < sceneDefinitions.Count; i++) {
+            if (sceneDefinitions[i].scene.ScenePath
+                .Contains(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + ".unity"))
+                activeScene = sceneDefinitions[i];
             if (sceneDefinitions[i].name.Length == 0) continue;
             if (sceneDefinitionsMap.ContainsKey(sceneDefinitions[i].name))
                 Debug.LogError($"[SceneManager] duplicate scene definition registered under {sceneDefinitions[i].name}");
             else sceneDefinitionsMap.Add(sceneDefinitions[i].name, sceneDefinitions[i]);
         }
+        if (activeScene == null) {
+            Debug.LogError($"Current scene {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name} not found in scene manager!");
+        }
     }
+
+    //private void SceneLoaded(Scene scene, LoadSceneMode mode) {
+    //    loadedScenes.Add(scene.name);
+    //}
+    //
+    //private void SceneUnloaded(Scene scene) {
+    //    loadedScenes.Remove(scene.name);
+    //}
 
     public bool IsLoadingScene() {
         return isLoadingScene;
@@ -38,7 +57,9 @@ public class SceneManager : MonoBehaviour {
     public void SetScene(string sceneName) {
         if (sceneDefinitionsMap.TryGetValue(sceneName, out SceneDefinition scene)) {
             if (isLoadingScene) return;
-            StartCoroutine(LoadScene(scene));
+            Globals.MenuController.BlackScreenFadeIn(2.0f).OnComplete(() => StartCoroutine(LoadScene(scene)));
+
+            ;
         } else Debug.LogError($"[SceneManager] scene has not been registered {sceneName}");
     }
 
@@ -47,25 +68,31 @@ public class SceneManager : MonoBehaviour {
     //#Todo Global camera FOV change. 
     private IEnumerator LoadScene(SceneDefinition scene) {
         isLoadingScene = true;
-        bool finishedTransition = false;
         //DOTween.To(() => cam.m_Lens.FieldOfView, x => cam.m_Lens.FieldOfView = x, 120, 1.0f).SetEase(Ease.InExpo);
-        Globals.MenuController.BlackScreenFadeIn(2.0f).OnComplete(() => finishedTransition = true);
-        var asyncTask = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene.scene, LoadSceneMode.Single);
+        var asyncTask = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene.scene, LoadSceneMode.Additive);
         asyncTask.allowSceneActivation = false;
-        while (!finishedTransition || asyncTask.progress < 0.9f) {
-            yield return null;
+        foreach (var a in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()) {
+            a.SetActive(false);
         }
-        isLoadingScene = false;
+        while (asyncTask.progress < 0.9f) yield return null;
         asyncTask.allowSceneActivation = true;
+
+        activeScene = scene;
+        yield return new WaitForSeconds(1.0f);
+        isLoadingScene = false;
+        Globals.MenuController.BlackScreenFadeOut(2.0f);
     }
 
     public static void LoadSceneIfNotActive(string sceneName) {
-        for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++) {
-            var scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
-            if (scene.name == sceneName && scene.isLoaded) return;
-        }
+        if (loadedScenes.Contains(sceneName)) return;
+        //for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++) {
+        //    var scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
+        //    //print(scene.name + " + " + sceneName + " + " + loadedScenes.Contains(scene.name));
+        //    if (scene.name == sceneName && loadedScenes.Contains(scene.name)) return;
+        //}
 
-        print("Loaded scene " + sceneName);
+        loadedScenes.Add(sceneName);
+        print("Loaded scene " + sceneName + " + " + loadedScenes.Count);
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
 
@@ -79,4 +106,11 @@ public class SceneManager : MonoBehaviour {
     //    yield return new WaitForEndOfFrame();
     //    Globals.InitializeUI();
     //}
+    public List<SceneDefinition> GetAllScenes() {
+        return sceneDefinitions;
+    }
+
+    public SceneDefinition GetActiveScene() {
+        return activeScene;
+    }
 }

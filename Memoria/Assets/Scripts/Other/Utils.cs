@@ -25,7 +25,7 @@ public static class Utils {
 
     public delegate T InstantiateCallback<T>();
     public static void FindOrInstantiateUniqueObject<T>(out T obj, InstantiateCallback<T> callback) where T : Object {
-        obj = CheckObjects(GameObject.FindObjectsOfType<T>(true), typeof(T).Name, false);
+        obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name, false);
         if (obj == null) {
             //Debug.Log($"Object of type {typeof(T).Name} instantiated because it could not be found in scene.");
             obj = callback();
@@ -33,12 +33,12 @@ public static class Utils {
     }
 
     public static bool FindUniqueObject<T>(out T obj) where T : Object {
-        obj = CheckObjects(GameObject.FindObjectsOfType<T>(true), typeof(T).Name);
+        obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name);
         return obj != null;
     }
 
     public static T FindUniqueObject<T>() where T : Object {
-        return CheckObjects(GameObject.FindObjectsOfType<T>(true), typeof(T).Name);
+        return CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name);
     }
 
     public static GameObject FindUniqueGameObjectWithTag(string tag) {
