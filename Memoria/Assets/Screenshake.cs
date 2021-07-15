@@ -37,7 +37,10 @@ public class Screenshake : MonoBehaviour {
             vCamObject = brain.ActiveVirtualCamera.VirtualCameraGameObject;
             var camera = brain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
             if (camera != null) noise = camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-            else noise = null;
+            else {
+                if(noise != null) noise.m_AmplitudeGain = rumble;
+                noise = null;
+            }
         }
     }
 }
