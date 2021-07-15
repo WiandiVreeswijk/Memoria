@@ -9,7 +9,7 @@ public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
     public float rotationSpeed = 2f;
 
     public ParticleSystem hoveringParticles, collectedParticles;
-    public ParticleSystem portal;
+    public PortalVisual portal;
     public MeshRenderer render;
 
     public Animator collectedAnimation;
@@ -30,7 +30,7 @@ public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
             hoveringParticles.Stop();
             collectedParticles.Play();
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFXChasingLevel/MemoryCollected");
-            Utils.DelayedAction(1.0f, () => portal.Play());
+            Utils.DelayedAction(1.0f, () => portal.Open());
             triggered = true;
         }
     }
