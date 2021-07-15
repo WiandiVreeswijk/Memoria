@@ -9,7 +9,33 @@ public class EditorCameraWindow : EditorWindow {
         GetWindow<EditorCameraWindow>("Editor camera");
     }
 
+    public Material mat;
+
     private void OnGUI() {
+
+
+        mat = EditorGUILayout.ObjectField(mat, typeof(Material), false) as Material; ;
+
+        if (GUILayout.Button("A")) {
+            MeshRenderer[] objs = GameObject.FindObjectsOfType<MeshRenderer>();
+            foreach (var obj in objs) {
+                bool nu = false;
+                for (int i = 0; i < obj.sharedMaterials.Length; i++) {
+                    if (obj.sharedMaterials[i] == null) {
+                        nu = true;
+                        continue;
+                    }
+
+                }
+
+                if (nu) {
+                    Debug.Log("Null");
+                    Material[] mats = new Material[obj.sharedMaterials.Length];
+                    for (int i = 0; i < obj.sharedMaterials.Length; i++) mats[i] = mat;
+                    obj.sharedMaterials = mats;
+                }
+            }
+        }
         Camera camera = SceneView.lastActiveSceneView.camera;
 
         EditorGUILayout.LabelField("Set the position of the editor camera");
