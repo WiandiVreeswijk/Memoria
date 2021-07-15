@@ -35,7 +35,7 @@ public class EditorCameraWindow : EditorWindow {
         //        }
         //    }
         //}
-        //Camera camera = SceneView.lastActiveSceneView.camera;
+        Camera camera = SceneView.lastActiveSceneView.camera;
 
         EditorGUILayout.LabelField("Set the position of the editor camera");
         EditorGUI.BeginChangeCheck();
