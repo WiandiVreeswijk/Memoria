@@ -6,18 +6,27 @@ using DG.Tweening;
 public class PortalVisual : MonoBehaviour {
     private bool isOpen = false;
     private Material material;
+    public GameObject player;
 
     void Start() {
         material = GetComponent<MeshRenderer>().material;
         material.SetFloat("_Width", 0);
         material.SetFloat("_Height", 0);
+        material.SetFloat("_Offset", 0.5f);
+    }
+
+    public void Update() {
+        if (isOpen) {
+            if (player != null && player.transform.position.z < transform.position.z) {
+                material.SetFloat("_Offset", 3f);
+            }
+        }
     }
 
     public void SetOpen(bool open) {
         if (open) Open();
         else Close();
     }
-
 
     public void Open() {
         Utils.DelayedAction(0.75f, () => Width(1.0f, 1f));
