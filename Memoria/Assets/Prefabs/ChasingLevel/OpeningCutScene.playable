@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9193027387920889493
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 1.95
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: c5dcbdb342dbd474f812421a2992fdc6, type: 2}
 --- !u!74 &-9162923406764956152
 AnimationClip:
   m_ObjectHideFlags: 0
@@ -242,6 +258,22 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &-5177302237322780627
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter(Clone)
+  m_EditorClassIdentifier: 
+  m_Time: 10
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: d9ea05bfba0060c4cb5940bd76d6d616, type: 2}
 --- !u!114 &-4519940149421714513
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -634,6 +666,8 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: 2671285486936138007}
+    - {fileID: -9193027387920889493}
+    - {fileID: 5937951712320235841}
 --- !u!114 &-1503749593268379318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -780,7 +814,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
   m_Clip: {fileID: -203655887218126122, guid: 3668b2236053b1941b93373bd42ce094, type: 3}
-  m_Position: {x: -6, y: 0.175, z: 1.5}
+  m_Position: {x: -6, y: 0.175, z: 0.7}
   m_EulerAngles: {x: 0, y: 180, z: 0}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
@@ -806,7 +840,6 @@ MonoBehaviour:
   - {fileID: 4404379236547430069}
   - {fileID: -5402071725344082752}
   - {fileID: 3668795511766712367}
-  - {fileID: -1066466991225726312}
   - {fileID: 9072385600444859497}
   - {fileID: 6620702542035559217}
   - {fileID: -3793851806710419766}
@@ -1128,6 +1161,22 @@ MonoBehaviour:
     m_DisplayName: DollyCamera
   m_Markers:
     m_Objects: []
+--- !u!114 &5937951712320235841
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 8.916666666666666
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 9f9384e1c6b30c343bd79ba0d90f9c73, type: 2}
 --- !u!114 &6620702542035559217
 MonoBehaviour:
   m_ObjectHideFlags: 1
