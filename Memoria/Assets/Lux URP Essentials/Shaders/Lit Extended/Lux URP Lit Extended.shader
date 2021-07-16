@@ -4,7 +4,7 @@
     {
 
         _Rim("Enable Rim Lighting", Float) = 0
-        _RimColor("Rim Color", Color) = (0.5,0.5,0.5,1)
+        [HDR] _RimColor("Rim Color", Color) = (0.5,0.5,0.5,1)
         _RimPower("Rim Power", Float) = 2
         _RimMinPower("Rim Min Power", Float) = 1
         _RimFrequency("Rim Frequency", Float) = 0

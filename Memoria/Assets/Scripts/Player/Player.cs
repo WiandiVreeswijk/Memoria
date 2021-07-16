@@ -4,14 +4,23 @@ using UnityEngine;
 
 //Keeps track of all player variables and components
 public class Player : MonoBehaviour {
-    private PlayerMovement25D playerMovement25D;
-    public PlayerMovement25D PlayerMovement25D => playerMovement25D;
+    //Global
+    private Transform povPoint;
+    public Vector3 HeadPosition => povPoint.position;
 
+    //Wijk
     private PlayerMovementAdventure playerMovementAdventure;
     public PlayerMovementAdventure PlayerMovementAdventure => playerMovementAdventure;
 
     private PlayerVisualEffects visualEffects;
     public PlayerVisualEffects VisualEffects => visualEffects;
+
+    //Levels
+    private PlayerMovement25D playerMovement25D;
+    public PlayerMovement25D PlayerMovement25D => playerMovement25D;
+
+    private Player25DVisualEffects visualEffects25D;
+    public Player25DVisualEffects VisualEffects25D => visualEffects25D;
 
     private PlayerCameraController cameraController;
     public PlayerCameraController CameraController => cameraController;
@@ -19,18 +28,17 @@ public class Player : MonoBehaviour {
     private PlayerDeath playerDeath;
     public PlayerDeath PlayerDeath => playerDeath;
 
-    private Transform povPoint;
-    public Vector3 HeadPosition => povPoint.position;
-
     private PlayerSound playerSound;
     public PlayerSound PlayerSound => playerSound;
+
     void Start() {
-        cameraController = GetComponent<PlayerCameraController>();
-        playerMovement25D = GetComponent<PlayerMovement25D>();
-        visualEffects = GetComponent<PlayerVisualEffects>();
         playerMovementAdventure = GetComponent<PlayerMovementAdventure>();
+        playerMovement25D = GetComponent<PlayerMovement25D>();
+        cameraController = GetComponent<PlayerCameraController>();
+        visualEffects25D = GetComponent<Player25DVisualEffects>();
+        visualEffects = GetComponent<PlayerVisualEffects>();
         playerDeath = GetComponent<PlayerDeath>();
-        povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");
         playerSound = GetComponent<PlayerSound>();
+        povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");
     }
 }

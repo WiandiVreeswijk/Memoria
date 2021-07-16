@@ -116,8 +116,10 @@ namespace UnityEditor.Rendering.URP.ShaderGUI
             var b_enableRim = (enableRim == 0.0) ? false : true;
             b_enableRim = EditorGUILayout.Toggle("Enable Rim Lighting", b_enableRim);
 
+            GUIContent label = new GUIContent();
+            label.text = "Rim Color";
             var rimColor = material.GetColor("_RimColor");
-            rimColor = EditorGUILayout.ColorField("Rim Color", rimColor);
+            rimColor = EditorGUILayout.ColorField(label, rimColor, true, true, true);
 
             var rimPower = material.GetFloat("_RimPower");
             rimPower = EditorGUILayout.FloatField("Rim Power", rimPower);

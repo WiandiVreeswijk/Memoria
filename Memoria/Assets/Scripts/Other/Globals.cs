@@ -49,7 +49,7 @@ public class Globals : MonoBehaviour {
             //SceneManager.LoadUI();
         }
     }
-
+    
     public static bool IsInitialized() {
         return _Instance != null && _Instance.isInitialized;
     }

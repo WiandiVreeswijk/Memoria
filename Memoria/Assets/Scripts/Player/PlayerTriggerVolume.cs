@@ -6,7 +6,6 @@ using DG.Tweening;
 
 public class PlayerTriggerVolume : MonoBehaviour {
     public PlayerTriggerVolumeType type;
-    public GameObject elenaMesh;
     public CinemachineVirtualCamera firstPersonCamera;
     private PlayerMovementAdventure adventureMovement;
     private AmbientControl sound;
@@ -14,7 +13,7 @@ public class PlayerTriggerVolume : MonoBehaviour {
 
     private void Start() {
         adventureMovement = FindObjectOfType<PlayerMovementAdventure>();
-        sound = GameObject.FindObjectOfType<AmbientControl>();
+        sound = FindObjectOfType<AmbientControl>();
     }
 
     public enum PlayerTriggerVolumeType {
@@ -45,11 +44,11 @@ public class PlayerTriggerVolume : MonoBehaviour {
         if (enter) {
             adventureMovement.inHouse = true;
             firstPersonCamera.Priority = 11;
-            elenaMesh.SetActive(false);
+            Globals.Player.VisualEffects.SetMeshEnabled(false);
         } else {
             adventureMovement.inHouse = false;
             firstPersonCamera.Priority = 9;
-            elenaMesh.SetActive(true);
+            Globals.Player.VisualEffects.SetMeshEnabled(true);
         }
     }
 

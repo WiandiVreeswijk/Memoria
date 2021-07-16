@@ -3,5 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface iInteractable {
-    void Interact();
+    void OnInteract();
+    void OnLookAt();
+    void OnStopLookAt();
 }

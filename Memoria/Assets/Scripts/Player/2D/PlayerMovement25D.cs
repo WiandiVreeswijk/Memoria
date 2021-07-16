@@ -126,7 +126,7 @@ public class PlayerMovement25D : MonoBehaviour {
 
     private void OnLand(float landingVelocity) {
         if (Mathf.Abs(landingVelocity) > 5.0f) {
-            Globals.Player.VisualEffects.Land(rb.velocity.x);
+            Globals.Player.VisualEffects25D.Land(rb.velocity.x);
             Globals.Player.PlayerSound.PlayJumpLandSound();
         }
     }
@@ -170,7 +170,7 @@ public class PlayerMovement25D : MonoBehaviour {
     Tween stunnedTween = null;
     public void Stunned(float duration) {
         stunned = true;
-        if (stunned) gameObject.GetComponent<PlayerVisualEffects>().DoBlink(0.1f, 4);
+        if (stunned) gameObject.GetComponent<Player25DVisualEffects>().DoBlink(0.1f, 4);
         stunnedTween = Utils.DelayedAction(duration, () => stunned = false);
     }
 

@@ -8,7 +8,7 @@ public enum DeathType {
     WATER
 }
 
-public class PlayerVisualEffects : MonoBehaviour {
+public class Player25DVisualEffects : MonoBehaviour {
     private List<Renderer> skinnedRenderers;
     public ParticleSystem deathParticles;
     public GameObject waterDeathParticles;
@@ -131,7 +131,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     }
     #endregion
 
-    public void SetMeshEnabled(bool b) {
-        skinnedRenderers.ForEach(x => x.enabled = b);
+    public void SetMeshEnabled(bool enabled) {
+        skinnedRenderers.ForEach(x => x.enabled = enabled);
     }
 }
