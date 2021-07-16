@@ -22,7 +22,7 @@ public class Globals : MonoBehaviour {
     private ScoreManager scoreManager;
     private Debugger debugger;
     private AnalyticsManager analyticsManager;
-    private Camera camera;
+    private new Camera camera;
     private bool isInitialized = false;
 
     //UI
