@@ -50,7 +50,7 @@ public class Globals : MonoBehaviour {
             //SceneManager.LoadUI();
         }
     }
-    
+
     public static bool IsInitialized() {
         return _Instance != null && _Instance.isInitialized;
     }
@@ -60,6 +60,9 @@ public class Globals : MonoBehaviour {
         _Instance.currentGlobalsType = type;
         _Instance.GlobalInitialize();
         switch (type) {
+            case GlobalsType.DEBUG:
+                _Instance.InitializeDebug();
+                break;
             case GlobalsType.NEIGHBORHOOD:
                 _Instance.InitializeNeighborhood();
                 break;
@@ -91,6 +94,10 @@ public class Globals : MonoBehaviour {
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
 
         uiManager.OnGlobalsInitialize();
+    }
+
+    private void InitializeDebug() {
+        player.PlayerMovementAdventure.canMove = true;
     }
 
     private void InitializeNeighborhood() {

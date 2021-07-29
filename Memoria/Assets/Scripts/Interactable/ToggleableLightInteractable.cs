@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 
-public class ToggleableLightInteractable : MonoBehaviour, iInteractable {
+public class ToggleableLightInteractable : iInteractable {
     [EventRef] public string soundEffect;
 
     public new Light light;
 
-    public void OnInteract() {
+    public override void OnInteract() {
         //#Todo play click sound?
         FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
         light.enabled ^= true;
     }
 
-    public void OnLookAt() { }
-    public void OnStopLookAt() { }
+    public override void OnLookAt() { }
+    public override void OnStopLookAt() { }
 }
