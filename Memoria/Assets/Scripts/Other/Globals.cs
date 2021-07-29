@@ -6,6 +6,7 @@ using UnityEngine;
 public class Globals : MonoBehaviour {
     [Serializable]
     public enum GlobalsType {
+        DEBUG,
         NEIGHBORHOOD,
         OBLIVION
     }
