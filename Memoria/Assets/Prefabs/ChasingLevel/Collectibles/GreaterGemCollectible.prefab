@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4833917338552152256}
   - component: {fileID: 7230458356849296055}
   m_Layer: 0
-  m_Name: GreaterGemCollectibleOLD
+  m_Name: GreaterGemCollectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerName: Player
-  activatablesAttachedToThisObject: 1
+  thisObject: 1
+  parentObject: 0
   activatables: []
 --- !u!114 &4833917338552152256
 MonoBehaviour:

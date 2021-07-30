@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnterMemoryInteractable : iInteractable {
+public class EnterMemoryInteractable : IInteractable {
     public override void OnInteract() {
         Globals.Persistence.EnterMemory();
     }

@@ -12,45 +12,43 @@ public class TriggerActivator : MonoBehaviour {
     public string triggerName;
 
     [Tooltip("Are the activatables attached to this object?")]
-    public bool activatablesAttachedToThisObject = false;
+    public bool thisObject = false;
+    [Tooltip("Are the activatables attached to this parent's object?")]
+    public bool parentObject = false;
 
     [Tooltip("The activatable object that should be triggered")]
     public GameObject[] activatables;
 
+    private List<T> GetActivatables<T>() {
+        List<T> activatablesList = new List<T>();
+        if (thisObject) activatablesList.AddRange(gameObject.GetComponents<T>());
+        if (parentObject && transform.parent != null) activatablesList.AddRange(transform.parent.GetComponents<T>());
+        foreach (var act in activatables) activatablesList.AddRange(act.GetComponents<T>());
+        return activatablesList;
+    }
+
     //#Todo Allow for multiple activatables connected to trigger activator (including self)
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag(triggerName)) {
-            List<IEnterActivatable> activatablesList = new List<IEnterActivatable>();
-            if (activatablesAttachedToThisObject) activatablesList.AddRange(gameObject.GetComponents<IEnterActivatable>());
-            foreach (var act in activatables) activatablesList.AddRange(act.GetComponents<IEnterActivatable>());
-            foreach (var activatable in activatablesList) activatable.ActivateEnter();
+            foreach (var activatable in GetActivatables<IEnterActivatable>()) activatable.ActivateEnter();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.CompareTag(triggerName)) {
-            List<IExitActivatable> activatablesList = new List<IExitActivatable>();
-            if (activatablesAttachedToThisObject) activatablesList.AddRange(gameObject.GetComponents<IExitActivatable>());
-            foreach (var act in activatables) activatablesList.AddRange(act.GetComponents<IExitActivatable>());
-            foreach (var activatable in activatablesList) activatable.ActivateExit();
+            foreach (var activatable in GetActivatables<IExitActivatable>()) activatable.ActivateExit();
         }
     }
 
     private void OnTriggerEnter(Collider collision) {
         if (collision.CompareTag(triggerName)) {
-            List<IEnterActivatable> activatablesList = new List<IEnterActivatable>();
-            if (activatablesAttachedToThisObject) activatablesList.AddRange(gameObject.GetComponents<IEnterActivatable>());
-            foreach (var act in activatables) activatablesList.AddRange(act.GetComponents<IEnterActivatable>());
-            foreach (var activatable in activatablesList) activatable.ActivateEnter();
+            foreach (var activatable in GetActivatables<IEnterActivatable>()) activatable.ActivateEnter();
         }
     }
 
     private void OnTriggerExit(Collider collision) {
         if (collision.CompareTag(triggerName)) {
-            List<IExitActivatable> activatablesList = new List<IExitActivatable>();
-            if (activatablesAttachedToThisObject) activatablesList.AddRange(gameObject.GetComponents<IExitActivatable>());
-            foreach (var act in activatables) activatablesList.AddRange(act.GetComponents<IExitActivatable>());
-            foreach (var activatable in activatablesList) activatable.ActivateExit();
+            foreach (var activatable in GetActivatables<IExitActivatable>()) activatable.ActivateExit();
         }
     }
 }

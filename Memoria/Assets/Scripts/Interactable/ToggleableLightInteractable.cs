@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 
-public class ToggleableLightInteractable : iInteractable {
+public class ToggleableLightInteractable : IInteractable {
     [EventRef] public string soundEffect;
 
     public new Light light;

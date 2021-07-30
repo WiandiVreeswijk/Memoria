@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(iInteractable), true)]
+[CustomEditor(typeof(IInteractable), true)]
 [CanEditMultipleObjects]
 public class iInteractableEditor : Editor {
     public override void OnInspectorGUI() {
-        iInteractable interactable = target as iInteractable;
+        IInteractable interactable = target as IInteractable;
         base.OnInspectorGUI();
-
-
-
-        if (GUILayout.Button("test")) {
-        }
     }
 
     public void OnSceneGUI() {
-        iInteractable interactable = target as iInteractable;
-        Vector3 newPos = Handles.FreeMoveHandle(interactable.iconPosition + interactable.transform.position, Quaternion.identity, 0.15f, new Vector3(0.25f, 0.25f, 0), Handles.SphereHandleCap) - interactable.transform.position;
-        if (interactable.iconPosition != newPos) {
-            interactable.iconPosition = newPos;
+        IInteractable interactable = target as IInteractable;
+
+        Vector3 rotatedPos = interactable.transform.rotation * interactable.iconOffset;
+        Vector3 newPos = Handles.FreeMoveHandle(rotatedPos + interactable.transform.position, Quaternion.identity, 0.15f, new Vector3(0.25f, 0.25f, 0), Handles.SphereHandleCap) - interactable.transform.position;
+        if (newPos != rotatedPos) {
+            interactable.iconOffset = Quaternion.Inverse(interactable.transform.rotation) * newPos;
             EditorUtility.SetDirty(interactable);
         }
 

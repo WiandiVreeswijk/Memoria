@@ -8,14 +8,14 @@ public class InteractablePicker : MonoBehaviour {
     private GameObject currentlyHoveredObject;
     private GameObject previouslyHoveredObject;
 
-    private iInteractable hoveredInteractable;
+    private IInteractable hoveredInteractable;
     private MeshRenderer hoveredRenderer;
     private Material oldMaterial;
     public Material hoverMaterial;
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E) && currentlyHoveredObject != null) {
-            iInteractable interactable = currentlyHoveredObject.GetComponent<iInteractable>();
+            IInteractable interactable = currentlyHoveredObject.GetComponent<IInteractable>();
             if (interactable == null) throw new System.Exception($"No interactable found on hovered object {currentlyHoveredObject.name}");
             interactable.OnInteract();
         }
@@ -39,7 +39,7 @@ public class InteractablePicker : MonoBehaviour {
 
         if (hoveredObject != null)
         {
-            hoveredInteractable = hoveredObject.GetComponent<iInteractable>();
+            hoveredInteractable = hoveredObject.GetComponent<IInteractable>();
             if (currentlyHoveredObject != hoveredObject && hoveredInteractable != null) {
                 currentlyHoveredObject = hoveredObject;
                 hoveredRenderer = currentlyHoveredObject.GetComponent<MeshRenderer>();

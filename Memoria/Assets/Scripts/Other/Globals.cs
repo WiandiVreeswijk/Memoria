@@ -32,6 +32,9 @@ public class Globals : MonoBehaviour {
     //Prefabs
     public GameObject persistenceManagerPrefab;
 
+    //Wijk
+    private InteractableManager interactableManager;
+
     //Oblivion
     private OblivionManager oblivionManager;
     private OblivionVFXManager oblivionVFXManager;
@@ -90,7 +93,6 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
         Utils.FindUniqueObject(out menuController);
-        if (currentGlobalsType == GlobalsType.NEIGHBORHOOD) menuController.SetMenu("Main", 0.0f);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
 
         uiManager.OnGlobalsInitialize();
@@ -101,7 +103,8 @@ public class Globals : MonoBehaviour {
     }
 
     private void InitializeNeighborhood() {
-
+        Utils.FindUniqueObject(out interactableManager);
+        menuController.SetMenu("Main", 0.0f);
     }
 
     private void InitializeOblivion() {
@@ -127,7 +130,7 @@ public class Globals : MonoBehaviour {
     #endregion
 
     #region NeighbourhoodGlobals
-
+    public static InteractableManager InteractableManager => _Instance.interactableManager;
     #endregion
 
     #region OblivionGlobals

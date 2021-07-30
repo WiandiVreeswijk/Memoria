@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 
-public class SoundInteractable : iInteractable {
+public class SoundInteractable : IInteractable {
     [EventRef] public string soundEffect;
-
-    void Start() {
-        Resources.Load("Interactable/InteractableIconActiveMaterial");
-        Resources.Load("Interactable/InteractableIconMaterial");
-    }
 
     void Update() {
 
