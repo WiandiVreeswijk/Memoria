@@ -48,6 +48,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.94, z: 0}
+--- !u!114 &721435454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890214705831725178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16fd9a276f983547b1b3e6ff2e278fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverMaterial: {fileID: 2100000, guid: 7593219f0aab2804e9100160502e2def, type: 2}
 --- !u!114 &1449407018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,8 +81,6 @@ MonoBehaviour:
   cam: {fileID: 0}
   fpsSpeed: 2.5
   inHouse: 0
-  hasMoved: 0
-  canMove: 0
 --- !u!114 &1551395516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,19 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8376ad763c13f624f92878b9c9cfce27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &721435454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1890214705831725178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16fd9a276f983547b1b3e6ff2e278fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverMaterial: {fileID: 2100000, guid: 7593219f0aab2804e9100160502e2def, type: 2}
 --- !u!114 &6208774559576395859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +105,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f3a8b647f0123418012089a21b0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5602641666063726847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890214705831725178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d878a10555277b4697de459e2e50554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  cameraTarget: {fileID: 0}
 --- !u!1001 &1890214705831628498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
       propertyPath: m_Name
-      value: PlayerKid
+      value: Characters_Kids Variant
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
       propertyPath: m_Layer

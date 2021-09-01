@@ -25,7 +25,7 @@ public class PlayerTriggerVolume : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             switch (type) {
-                case PlayerTriggerVolumeType.EnterHouseCamera: HouseCamera(true); break;
+                case PlayerTriggerVolumeType.EnterHouseCamera: Globals.Player.CameraController.HouseCamera(true); break;
                 case PlayerTriggerVolumeType.HouseInterior: HouseInterior(true); break;
             }
         }
@@ -34,21 +34,9 @@ public class PlayerTriggerVolume : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
             switch (type) {
-                case PlayerTriggerVolumeType.LeaveHouseCamera: HouseCamera(false); break;
+                case PlayerTriggerVolumeType.LeaveHouseCamera: Globals.Player.CameraController.HouseCamera(false); break;
                 case PlayerTriggerVolumeType.HouseInterior: HouseInterior(false); break;
             }
-        }
-    }
-
-    private void HouseCamera(bool enter) {
-        if (enter) {
-            adventureMovement.inHouse = true;
-            firstPersonCamera.Priority = 11;
-            Globals.Player.VisualEffects.SetMeshEnabled(false);
-        } else {
-            adventureMovement.inHouse = false;
-            firstPersonCamera.Priority = 9;
-            Globals.Player.VisualEffects.SetMeshEnabled(true);
         }
     }
 
