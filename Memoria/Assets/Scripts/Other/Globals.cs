@@ -99,7 +99,6 @@ public class Globals : MonoBehaviour {
     }
 
     private void InitializeDebug() {
-        player.PlayerMovementAdventure.canMove = true;
     }
 
     private void InitializeNeighborhood() {

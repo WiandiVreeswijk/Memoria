@@ -15,13 +15,14 @@ public class WijkOpeningCutscene : MonoBehaviour {
         if (!isEnabled && Application.isEditor) {
             GetComponentInChildren<PlayableDirector>().enabled = false;
         }
+        Globals.Player.PlayerMovementAdventure.SetCanMove(false);
     }
 
     public void OnFinishCutscene() {
-        Globals.Player.PlayerMovementAdventure.canMove = true;
+        Globals.Player.PlayerMovementAdventure.SetCanMove(true);
         Globals.MenuController.NotifyPlayer("<font=\"Mouse SDF\"><size=36>u</size></font>  to move the camera");
         Utils.DelayedAction(10.0f, () => {
-            if (!Globals.Player.PlayerMovementAdventure.hasMoved) Globals.MenuController.NotifyPlayer("WASD to move");
+            if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.MenuController.NotifyPlayer("WASD to move");
         });
     }
 

@@ -28,8 +28,8 @@ public class PlayerMovementAdventure : MonoBehaviour {
     [HideInInspector]
     public bool inHouse;
 
-    public bool hasMoved = false;
-    public bool canMove = false;
+    private bool hasMoved = false;
+    private bool canMove = true;
 
     private void Start() {
         animator = GetComponent<Animator>();
@@ -53,6 +53,9 @@ public class PlayerMovementAdventure : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.ClampMagnitude(plainRotatedMovement, forwardSpeed)); //Direction the player is moving to
     }
+
+    public void SetCanMove(bool canMove) { this.canMove = canMove;}
+    public bool HasMoved() { return hasMoved; }
 
     private void Adventure() {
         bool isRunning = true;
