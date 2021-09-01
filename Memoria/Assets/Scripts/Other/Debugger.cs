@@ -84,8 +84,15 @@ public class Debugger : MonoBehaviour {
                 SetVisible(false);
                 Globals.SceneManager.SetScene(scene.name);
             });
-
         }
+
+        AddLabel("Camera");
+        AddButton("Switch camera", true, ()=>{
+            if(Globals.Player.CameraController.firstPersonCamera != null)
+            {
+                Globals.Player.CameraController.ToggleCamera();
+            }
+        });
 
         switch (type) {
             case Globals.GlobalsType.NEIGHBORHOOD: InitializeMenuNeighborhood(); break;
