@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class MemoryObject : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class MemoryObject : MonoBehaviour {
+    [SerializeField]
+    private UnityEvent onWatchUse;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void UseWatch() {
+        onWatchUse.Invoke();
     }
 }
