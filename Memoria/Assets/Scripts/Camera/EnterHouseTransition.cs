@@ -26,8 +26,7 @@ public class EnterHouseTransition : MonoBehaviour
         print("entered house");
         if (other.gameObject.tag == "Player")
         {
-            adventureMovement.inHouse = true;
-            firstPersonCamera.Priority = 11;
+            Globals.Player.CameraController.ChangeCamera(PlayerCameraController.CameraType.FIRSTPERSON);
         }
         elenaMesh.SetActive(false);
 
@@ -40,7 +39,7 @@ public class EnterHouseTransition : MonoBehaviour
         print("exit house");
         if (other.gameObject.tag == "Player")
         {
-            adventureMovement.inHouse = false;
+            Globals.Player.CameraController.ChangeCamera(PlayerCameraController.CameraType.THIRDPERSON);
             firstPersonCamera.Priority = 9;
         }
         elenaMesh.SetActive(true);

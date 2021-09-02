@@ -87,7 +87,7 @@ public class Debugger : MonoBehaviour {
         }
 
         AddLabel("Camera");
-        AddButton("Switch camera", true, ()=>{
+        AddButton("Switch camera type", true, ()=>{
             if(Globals.Player.CameraController.firstPersonCamera != null)
             {
                 Globals.Player.CameraController.ToggleCamera();

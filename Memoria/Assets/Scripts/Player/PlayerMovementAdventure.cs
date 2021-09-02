@@ -25,20 +25,16 @@ public class PlayerMovementAdventure : MonoBehaviour {
     public float fpsSpeed = 2.5f;
     private float gravity = 9.81f;
 
-    [HideInInspector]
-    public bool inHouse;
-
     private bool hasMoved = false;
     private bool canMove = true;
 
     private void Start() {
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        inHouse = false;
     }
 
     void Update() {
-        if (!inHouse) {
+        if (!Globals.Player.CameraController.IsInFirstPerson()) {
             animator.enabled = true;
             Adventure();
         } else {
@@ -54,9 +50,22 @@ public class PlayerMovementAdventure : MonoBehaviour {
         Gizmos.DrawLine(transform.position, transform.position + Vector3.ClampMagnitude(plainRotatedMovement, forwardSpeed)); //Direction the player is moving to
     }
 
-    public void SetCanMove(bool canMove) { this.canMove = canMove;}
+    public void SetCanMove(bool canMove) { this.canMove = canMove; }
     public bool HasMoved() { return hasMoved; }
 
+    private bool teleport = false;
+    private Vector3 teleportPosition;
+    public void Teleport(Vector3 position) {
+        teleportPosition = position;
+        teleport = true;
+    }
+
+    public void LateUpdate() {
+        if (teleport) {
+            transform.position = teleportPosition;
+            teleport = false;
+        }
+    }
     private void Adventure() {
         bool isRunning = true;
         float horizontal = canMove ? Input.GetAxis("Horizontal") : 0.0f;

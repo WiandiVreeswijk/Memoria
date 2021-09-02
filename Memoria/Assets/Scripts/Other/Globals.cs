@@ -34,6 +34,7 @@ public class Globals : MonoBehaviour {
 
     //Wijk
     private InteractableManager interactableManager;
+    private MemoryWatchManager memoryWatchManager;
 
     //Oblivion
     private OblivionManager oblivionManager;
@@ -93,6 +94,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
         Utils.FindUniqueObject(out menuController);
+        Utils.FindUniqueObject(out memoryWatchManager);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
 
         uiManager.OnGlobalsInitialize();
@@ -130,6 +132,7 @@ public class Globals : MonoBehaviour {
 
     #region NeighbourhoodGlobals
     public static InteractableManager InteractableManager => _Instance.interactableManager;
+    public static MemoryWatchManager MemoryWatchManager => _Instance.memoryWatchManager;
     #endregion
 
     #region OblivionGlobals
