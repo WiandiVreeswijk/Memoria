@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryWatchManager : MonoBehaviour
-{
-    public const int MAX_DISTANCE = 15;
+public class MemoryWatchManager : MonoBehaviour {
+    public const float MAX_DISTANCE = 15f;
+    public const float EXECUTION_DISTANCE = 2.5f;
     public MemoryWatch firstPersonWatch;
     public MemoryWatch thirdPersonWatch;
 
     public AnimationCurve rotationCurve;
     public AnimationCurve colorCurve;
+    public AnimationCurve processCurve;
+
 
     MemoryObject[] memoryObjects;
-
+    private MemoryObject withinExecutionRangeMemoryObject;
     void Start() {
         memoryObjects = FindObjectsOfType<MemoryObject>();
     }
@@ -36,6 +38,31 @@ public class MemoryWatchManager : MonoBehaviour
                 firstPersonWatch.SetActivity(0, null);
                 thirdPersonWatch.SetActivity(1.0f - (closestDistance / MAX_DISTANCE), closest);
             }
+        }
+
+        if (closestDistance < EXECUTION_DISTANCE) {
+            withinExecutionRangeMemoryObject = closest;
+        } else withinExecutionRangeMemoryObject = null;
+    }
+
+    private float progress = 0;
+    private bool pressed = false;
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) pressed = true;
+        if (!Input.GetKey(KeyCode.Space)) pressed = false;
+        if (pressed) {
+            if (withinExecutionRangeMemoryObject != null) {
+                progress += processCurve.Evaluate(progress) * Time.deltaTime;
+            } else pressed = false;
+        } else progress -= 0.5f * Time.deltaTime;
+
+        progress = Mathf.Clamp01(progress);
+        thirdPersonWatch.SetWatchEdgeProgress(progress);
+        firstPersonWatch.SetWatchEdgeProgress(progress);
+
+        if (progress == 1.0f) {
+            withinExecutionRangeMemoryObject.UseWatch();
+            pressed = false;
         }
     }
 }

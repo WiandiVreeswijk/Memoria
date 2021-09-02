@@ -16,6 +16,7 @@ public class MemoryWatch : MonoBehaviour {
 
     public MeshRenderer watchRenderer;
     private Material watchMaterial;
+    private Material watchEdgeMaterial;
 
     private float activity = 0.0f;
     private Color color1 = Color.gray;
@@ -26,6 +27,7 @@ public class MemoryWatch : MonoBehaviour {
 
     public void Start() {
         watchMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchMaterial"));
+        watchEdgeMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchEdgeMaterial"));
     }
 
     public void SetActivity(float activity, MemoryObject memoryObject) {
@@ -33,9 +35,12 @@ public class MemoryWatch : MonoBehaviour {
         this.memoryObject = memoryObject;
         shakeTween.Kill(true);
         shakeTween = DOTween.Shake(() => transform.localPosition, x => transform.localPosition = x, baseShakeDuration, baseShakeStrength * activity, baseShakeVibrato);
-        watchMaterial.color = Color.Lerp(color1, color2 * 5, Globals.MemoryWatchManager.colorCurve.Evaluate(activity));
+        watchMaterial.color = Color.Lerp(color1, color2 * 2, Globals.MemoryWatchManager.colorCurve.Evaluate(activity));
     }
 
+    public void SetWatchEdgeProgress(float progress) {
+        watchEdgeMaterial.SetFloat("_Rotation", progress);
+    }
     public void FixedUpdate() {
         //if(memoryObject != null)
         //bigArm.transform.LookAt(memoryObject.transform.position, Vector3.back);
