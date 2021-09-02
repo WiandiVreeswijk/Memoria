@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 935899b62f48ae5498594680ed17d133, type: 3}
-  m_Name: Dialogue Database
+  m_Name: Dialogue Database (Auto-Backup)
   m_EditorClassIdentifier: 
   version: 
   author: 
@@ -190,11 +190,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: Camera(Closeup,1); Camera(closeup,listener)@{{end}}
-        type: 0
-        typeString: 
-      - title: Response Menu Sequence
-        value: 
+        value: None()
         type: 0
         typeString: 
       conversationID: 1
@@ -252,7 +248,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: Camera(Closeup,1); Camera(closeup,listener)@{{end}}
+        value: 
         type: 0
         typeString: 
       conversationID: 1
@@ -504,8 +500,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.61000025
+    canvasScrollPosition: {x: 0, y: 7.8125}
+    canvasZoom: 0.64000034
   syncInfo:
     syncActors: 0
     syncItems: 0
