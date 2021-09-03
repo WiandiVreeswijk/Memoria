@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerMovementAdventure : MonoBehaviour {
@@ -53,19 +54,12 @@ public class PlayerMovementAdventure : MonoBehaviour {
     public void SetCanMove(bool canMove) { this.canMove = canMove; }
     public bool HasMoved() { return hasMoved; }
 
-    private bool teleport = false;
-    private Vector3 teleportPosition;
     public void Teleport(Vector3 position) {
-        teleportPosition = position;
-        teleport = true;
+        Utils.DelayedAction(0, () => {
+            transform.position = position;
+        }).SetUpdate(UpdateType.Late);
     }
 
-    public void LateUpdate() {
-        if (teleport) {
-            transform.position = teleportPosition;
-            teleport = false;
-        }
-    }
     private void Adventure() {
         bool isRunning = true;
         float horizontal = canMove ? Input.GetAxis("Horizontal") : 0.0f;
