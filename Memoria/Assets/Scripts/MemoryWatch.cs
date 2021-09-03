@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using JetBrains.Annotations;
 
 public class MemoryWatch : MonoBehaviour {
     public GameObject bigArm;
     public GameObject smallArm;
+    public WatchParticleSystem watchParticleSystem;
+    public WatchReleaseParticleSystem releaseParticleSystem;
 
     public float shakeTimeScale = 1.0f;
 
@@ -38,13 +41,17 @@ public class MemoryWatch : MonoBehaviour {
         watchMaterial.color = Color.Lerp(color1, color2 * 2, Globals.MemoryWatchManager.colorCurve.Evaluate(activity));
     }
 
-    public void SetWatchEdgeProgress(float progress) {
+    public void SetWatchEdgeProgress(float progress, bool isActive, bool shouldEmitParticles) {
         watchEdgeMaterial.SetFloat("_Rotation", progress);
+        if (shouldEmitParticles && isActive) watchParticleSystem.Emit((1.0f - progress) / 10);
     }
     public void FixedUpdate() {
-        //if(memoryObject != null)
-        //bigArm.transform.LookAt(memoryObject.transform.position, Vector3.back);
         bigArm.transform.Rotate(Vector3.up, 10.0f * Globals.MemoryWatchManager.rotationCurve.Evaluate(activity));
         smallArm.transform.Rotate(Vector3.up, 6.75f * activity);
+    }
+
+    public void Activate(MemoryObject memoryObject)
+    {
+        releaseParticleSystem.targetObject = memoryObject.gameObject;
     }
 }

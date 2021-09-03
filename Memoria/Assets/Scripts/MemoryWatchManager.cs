@@ -47,6 +47,7 @@ public class MemoryWatchManager : MonoBehaviour {
 
     private float progress = 0;
     private bool pressed = false;
+    private bool activated = false;
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) pressed = true;
         if (!Input.GetKey(KeyCode.Space)) pressed = false;
@@ -57,12 +58,17 @@ public class MemoryWatchManager : MonoBehaviour {
         } else progress -= 0.5f * Time.deltaTime;
 
         progress = Mathf.Clamp01(progress);
-        thirdPersonWatch.SetWatchEdgeProgress(progress);
-        firstPersonWatch.SetWatchEdgeProgress(progress);
+        thirdPersonWatch.SetWatchEdgeProgress(progress, pressed && progress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
+        firstPersonWatch.SetWatchEdgeProgress(progress, pressed && progress < 0.99f, Globals.Player.CameraController.IsInFirstPerson());
 
-        if (progress == 1.0f) {
-            withinExecutionRangeMemoryObject.UseWatch();
-            pressed = false;
+        if (!activated && progress >= 0.99f && !pressed) {
+            withinExecutionRangeMemoryObject.Activate();
+            if (Globals.Player.CameraController.IsInFirstPerson()) {
+                firstPersonWatch.Activate(withinExecutionRangeMemoryObject);
+            } else thirdPersonWatch.Activate(withinExecutionRangeMemoryObject);
+            activated = true;
         }
+
+        if (progress < 0.1f) activated = false;
     }
 }

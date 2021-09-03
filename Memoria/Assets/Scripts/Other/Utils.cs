@@ -87,6 +87,14 @@ public static class Utils {
         return Vector3.Lerp(p0, p1, t);
     }
 
+    public static Vector3 RandomPointOnSphereEdge(float radius) {
+        return UnityEngine.Random.insideUnitSphere.normalized * radius;
+    }
+
+    public static Vector3 RandomPointOnSphere(float radius) {
+        return UnityEngine.Random.insideUnitSphere * radius;
+    }
+
     #region Timing
 
     public static Sequence DelayedAction(float delay, Action action) {
