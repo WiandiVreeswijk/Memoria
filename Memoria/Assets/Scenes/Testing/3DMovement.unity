@@ -378,7 +378,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43424117}
-  m_LocalRotation: {x: -0.04095775, y: -0.041493565, z: 0.039356604, w: 0.9975229}
+  m_LocalRotation: {x: -0.04094894, y: -0.044125076, z: 0.04185253, w: 0.9973086}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -834,7 +834,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90029138}
-  m_LocalRotation: {x: -0.059095427, y: -0.04220256, z: 0.038595304, w: 0.9966128}
+  m_LocalRotation: {x: -0.05908271, y: -0.044879075, z: 0.041043025, w: 0.9963988}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2897,6 +2897,66 @@ Transform:
   m_Father: {fileID: 934109838}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 37.5}
+--- !u!1 &499541112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 499541113}
+  - component: {fileID: 499541115}
+  - component: {fileID: 499541114}
+  m_Layer: 0
+  m_Name: ParticleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &499541113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499541112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 779788960}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &499541114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499541112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3f28a57fb57b84f98d202e00d52d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7279712180945551401, guid: 869c1afc8913aec45b8448a5472ea263, type: 3}
+  maxParticles: 50
+--- !u!114 &499541115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499541112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9359f5975704c524a9663004614f01b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7279712180945551401, guid: 869c1afc8913aec45b8448a5472ea263, type: 3}
+  maxParticles: 50
 --- !u!1001 &504304122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3647,6 +3707,66 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623238023}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &664590114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664590116}
+  - component: {fileID: 664590117}
+  - component: {fileID: 664590115}
+  m_Layer: 0
+  m_Name: ParticleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &664590115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664590114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3f28a57fb57b84f98d202e00d52d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7279712180945551401, guid: 869c1afc8913aec45b8448a5472ea263, type: 3}
+  maxParticles: 50
+--- !u!4 &664590116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664590114}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7680748515358639526}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664590117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664590114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9359f5975704c524a9663004614f01b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7279712180945551401, guid: 869c1afc8913aec45b8448a5472ea263, type: 3}
+  maxParticles: 50
 --- !u!1 &686713013
 GameObject:
   m_ObjectHideFlags: 0
@@ -4089,6 +4209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bigArm: {fileID: 1111360135}
   smallArm: {fileID: 208528868}
+  watchParticleSystem: {fileID: 499541115}
+  releaseParticleSystem: {fileID: 499541114}
   shakeTimeScale: 1
   baseShakeDuration: 1
   baseShakeStrength: 0.025
@@ -4108,6 +4230,7 @@ Transform:
   - {fileID: 1111360136}
   - {fileID: 208528869}
   - {fileID: 1147907138}
+  - {fileID: 499541113}
   m_Father: {fileID: 1976757229}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 3.005, y: 73.423, z: -27.702}
@@ -5649,7 +5772,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256735151}
-  m_LocalRotation: {x: -0.07709357, y: -0.053735226, z: 0.04738103, w: 0.9944467}
+  m_LocalRotation: {x: -0.07707769, y: -0.055840254, z: 0.049237102, w: 0.9942418}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8705,19 +8828,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.668988
+      value: 0.66659373
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24679102
+      value: 0.2459078
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.65777504
+      value: -0.6602013
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.24265458
+      value: 0.24354964
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9217,6 +9340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bigArm: {fileID: 723514124}
   smallArm: {fileID: 921453130}
+  watchParticleSystem: {fileID: 664590117}
+  releaseParticleSystem: {fileID: 664590115}
   shakeTimeScale: 1
   baseShakeDuration: 1
   baseShakeStrength: 0.01
@@ -9236,6 +9361,7 @@ Transform:
   - {fileID: 723514125}
   - {fileID: 921453131}
   - {fileID: 2697393565649017847}
+  - {fileID: 664590116}
   m_Father: {fileID: 552451803}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}

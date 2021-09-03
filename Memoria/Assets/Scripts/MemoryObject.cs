@@ -7,7 +7,7 @@ public class MemoryObject : MonoBehaviour {
     [SerializeField]
     private UnityEvent onWatchUse;
 
-    public void UseWatch() {
+    public void Activate() {
         onWatchUse.Invoke();
     }
 }
