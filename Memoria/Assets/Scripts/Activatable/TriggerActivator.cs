@@ -41,6 +41,7 @@ public class TriggerActivator : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider collision) {
+        print(collision.name);
         if (collision.CompareTag(triggerName)) {
             foreach (var activatable in GetActivatables<IEnterActivatable>()) activatable.ActivateEnter();
         }
