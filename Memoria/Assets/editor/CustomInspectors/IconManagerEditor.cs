@@ -8,9 +8,11 @@ using UnityEditorInternal;
 public class IconManagerEditor : Editor {
     private ReorderableList iconsList;
     private SerializedProperty iconDefinitionsProperty;
+    private SerializedProperty iconPrefabProperty;
     private int globalIndex;
 
     private void OnEnable() {
+        iconPrefabProperty = serializedObject.FindProperty("iconPrefab");
         iconDefinitionsProperty = serializedObject.FindProperty("iconDefinitions");
         iconsList = new ReorderableList(serializedObject, iconDefinitionsProperty, true, true, true, true);
         iconsList.onAddCallback += AddItem;
@@ -21,8 +23,8 @@ public class IconManagerEditor : Editor {
     public override void OnInspectorGUI() {
         EditorGUI.BeginChangeCheck();
         serializedObject.Update();
+        EditorGUILayout.PropertyField(iconPrefabProperty);
         iconsList.DoLayoutList();
-        serializedObject.ApplyModifiedProperties();
         globalIndex = iconsList.index;
         if (globalIndex != -1 && globalIndex < iconDefinitionsProperty.arraySize) {
             EditorGUILayout.LabelField("Icon properties", EditorStyles.boldLabel);
@@ -31,16 +33,17 @@ public class IconManagerEditor : Editor {
             serializedObject.Update();
             SerializedProperty sceneDefinition = iconDefinitionsProperty.GetArrayElementAtIndex(globalIndex);
             SerializedProperty nameProp = sceneDefinition.FindPropertyRelative("name");
-            SerializedProperty imageProp = sceneDefinition.FindPropertyRelative("image");
+            SerializedProperty textureProp = sceneDefinition.FindPropertyRelative("texture");
 
             EditorGUILayout.PropertyField(nameProp, new GUIContent("Name"));
-            EditorGUILayout.PropertyField(imageProp);
+            EditorGUILayout.PropertyField(textureProp);
 
             EditorGUILayout.EndVertical();
         }
 
         if (EditorGUI.EndChangeCheck()) {
-            EditorUtility.SetDirty(target);
+            serializedObject.ApplyModifiedProperties();
+            //EditorUtility.SetDirty(target);
         }
     }
 

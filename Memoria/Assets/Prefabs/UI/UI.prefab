@@ -1960,7 +1960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c398cf31f4f375f4baed79301beee9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  director: {fileID: 0}
   controlPanel: {fileID: 988084627084775141}
   mainMenuCamera: {fileID: 0}
   cursorLocker: {fileID: 0}
@@ -3685,6 +3684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2888139039666430273}
   - component: {fileID: 2888139039666430272}
+  - component: {fileID: 208844295}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -3721,6 +3721,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenspaceCanvas: {fileID: 2888139040144005057}
+--- !u!114 &208844295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888139039666430303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd9f66256ee5d946a77a8fd3d4800c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2888139040144005086
 GameObject:
   m_ObjectHideFlags: 0
@@ -3733,7 +3745,6 @@ GameObject:
   - component: {fileID: 2888139040144005057}
   - component: {fileID: 2888139040144005056}
   - component: {fileID: 2888139040144005087}
-  - component: {fileID: 2888139040144005059}
   m_Layer: 0
   m_Name: UIScreenspace
   m_TagString: Untagged
@@ -3822,19 +3833,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2888139040144005059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2888139040144005086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cdffcb8a2e19e4429ec3737131f4c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 2888139041193145914}
 --- !u!1 &2888139041193145912
 GameObject:
   m_ObjectHideFlags: 0
