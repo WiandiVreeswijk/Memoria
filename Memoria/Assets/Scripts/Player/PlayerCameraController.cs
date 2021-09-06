@@ -37,13 +37,11 @@ public class PlayerCameraController : MonoBehaviour {
         tween?.Kill();
         if (type == CameraType.FIRSTPERSON) {
             firstPersonCamera.Priority = 11;
-            Globals.Player.VisualEffects.SetMeshEnabled(false);
-            tween = Utils.DelayedAction(2, () => arm.SetActive(true));
+            tween = Utils.DelayedAction(2, () => arm?.SetActive(true));
             isInFirstPerson = true;
         } else {
             firstPersonCamera.Priority = 9;
-            Globals.Player.VisualEffects.SetMeshEnabled(true);
-            arm.SetActive(false);
+            arm?.SetActive(false);
             isInFirstPerson = false;
         }
     }
