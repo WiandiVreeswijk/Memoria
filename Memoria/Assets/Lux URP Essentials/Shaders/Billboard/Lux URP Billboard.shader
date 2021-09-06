@@ -264,7 +264,7 @@
                 half4 albedoAlpha = SampleAlbedoAlpha(input.uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap));
                 half alpha = Alpha(albedoAlpha.a, _BaseColor, _Cutoff);
 
-                albedoAlpha.rgb *= _BaseColor.rgb;
+                albedoAlpha.rgba *= _BaseColor.rgba;
 
                 #ifdef _NORMALMAP
                     half3 normalTS = SampleNormal(input.uv, TEXTURE2D_ARGS(_BumpMap, sampler_BumpMap), _BumpScale);

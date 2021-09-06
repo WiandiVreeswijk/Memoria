@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IconMaterial
+  m_Name: IconMaterialZ
   m_Shader: {fileID: 4800000, guid: 0812536a32687450b928d1f47f21148b, type: 3}
-  m_ShaderKeywords: _NORMALMAP _RECEIVE_SHADOWS_OFF
+  m_ShaderKeywords: _ALPHATEST_ON _NORMALMAP _RECEIVE_SHADOWS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,10 +21,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: a14fbccc10e9aa743bf84e8360030892, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -86,8 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - PixelSnap: 0
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _AlphaFromMaskMap: 1
     - _Anisotropy: 0
     - _ApplyFog: 1
@@ -99,13 +94,11 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Culling: 0
-    - _Cutoff: 0.5
+    - _Cutoff: 0.012
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Distortion: 0.01
     - _DstBlend: 10
-    - _EnableBaseMap: 1
-    - _EnableExternalAlpha: 0
     - _EnableMaskMap: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -118,7 +111,6 @@ Material:
     - _Pivot: 0
     - _QueueOffset: 50
     - _ReadMask: 255
-    - _ReceiveSSAO: 1
     - _ReceiveShadows: 0
     - _Rim: 0
     - _RimFrequency: 0
@@ -150,14 +142,12 @@ Material:
     - _UseScattering: 0
     - _WorkflowMode: 1
     - _WriteMask: 255
-    - _ZTest: 2
+    - _ZTest: 5
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.16078432}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SheenColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
