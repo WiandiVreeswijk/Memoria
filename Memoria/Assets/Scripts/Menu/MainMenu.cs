@@ -18,8 +18,11 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void PlayGame() {
-        FindObjectOfType<WijkOpeningCutscene>().Trigger();
-        Globals.MenuController.CloseMenu();
+        Globals.MenuController.BlackScreenFadeIn(2.0f).OnComplete(() => {
+            Globals.MenuController.BlackScreenFadeOut(2.5f);
+            FindObjectOfType<WijkOpeningCutscene>().Trigger();
+            Globals.MenuController.CloseMenu();
+        });
     }
 
     public void QuitGame() {
