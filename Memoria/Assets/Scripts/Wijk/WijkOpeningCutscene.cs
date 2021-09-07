@@ -11,6 +11,8 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public CinemachineVirtualCamera thirdPerson;
     public PlayableDirector playableDirector;
 
+    public CarEngine busEngine;
+
     void Start() {
         if (!isEnabled && Application.isEditor) {
             GetComponentInChildren<PlayableDirector>().enabled = false;
@@ -31,6 +33,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
         playableDirector.time = 0;
         playableDirector.Evaluate();
         playableDirector.Play();
+        busEngine.isBraking = false;
         if (!isEnabled && Application.isEditor) {
             OnFinishCutscene();
         }
