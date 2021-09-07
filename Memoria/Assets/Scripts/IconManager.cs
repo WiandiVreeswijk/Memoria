@@ -29,7 +29,7 @@ public class IconManager : MonoBehaviour {
             }
         }
 
-        AddWorldIcon("test", new Vector3(15, 3, 6));
+        AddWorldIcon("quest", new Vector3(15, 3, 6));
     }
     public Icon AddWorldIcon(string name, Vector3 position) {
         
