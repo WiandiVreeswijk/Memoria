@@ -78,7 +78,10 @@ public class Globals : MonoBehaviour {
         _Instance.isInitialized = true;
     }
 
-    private void Update() {
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U)) Time.timeScale = 5.0f;
+        if (Input.GetKeyDown(KeyCode.P)) Time.timeScale = 1.0f;
         if (Input.GetKeyDown(KeyCode.Y)) {
             Initialize(GlobalsType.OBLIVION);
         }

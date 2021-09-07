@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class Icon : MonoBehaviour {
     public GameObject iconObject;
     public GameObject iconZObject;
+    public TextMesh distanceText;
+    public TextMesh distanceTextZ;
     public float size = 1.0f;
-    private RectTransform rt;
 
     public void SetImage(Texture texture) {
         Material mat = iconObject.GetComponent<MeshRenderer>().material;
@@ -16,12 +17,13 @@ public class Icon : MonoBehaviour {
         matZ.SetTexture("_BaseMap", texture);
     }
 
-    void Start() {
-        rt = GetComponent<RectTransform>();
+    public void SetText(string text) {
+        distanceText.text = text;
+        distanceTextZ.text = text;
     }
 
-    void LateUpdate()
-    {
+    void LateUpdate() {
+        SetText(Mathf.Round(Vector3.Distance(Globals.Camera.transform.position, transform.position)) + "M");
         float scale = (Globals.Camera.transform.position - transform.position).magnitude * size;
         transform.localScale = new Vector3(scale, scale, scale);
 
