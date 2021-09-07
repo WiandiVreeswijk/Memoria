@@ -15,6 +15,7 @@ public class IconManager : MonoBehaviour {
             texture = null;
         }
     }
+
     public List<IconDefinition> iconDefinitions = new List<IconDefinition>();
     public Dictionary<string, IconDefinition> iconDefinitionsDict = new Dictionary<string, IconDefinition>();
     public GameObject iconPrefab;
@@ -34,7 +35,7 @@ public class IconManager : MonoBehaviour {
         
         if (iconDefinitionsDict.TryGetValue(name, out IconDefinition def)) {
             Icon icon = Instantiate(iconPrefab, position, Quaternion.identity).GetComponent<Icon>();
-            icon.transform.parent = Globals.UIManager.ScreenspaceCanvas.transform;
+            icon.transform.parent = Globals.UIManager.OverlayCanvas.transform;
             icon.SetImage(def.texture);
             return icon;
         }
