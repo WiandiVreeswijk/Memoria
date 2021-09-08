@@ -21,18 +21,21 @@ public class IconManager : MonoBehaviour {
     public GameObject iconPrefab;
 
     public void Start() {
-        foreach (IconDefinition def in iconDefinitions) {
-            if (iconDefinitionsDict.ContainsKey(def.name)) {
+        foreach (IconDefinition def in iconDefinitions)
+        {
+            string name = def.name.ToLower();
+            if (iconDefinitionsDict.ContainsKey(name)) {
                 Debug.LogError("Duplicate icon definition found in IconManager: " + name);
             } else {
-                iconDefinitionsDict.Add(def.name, def);
+                iconDefinitionsDict.Add(name, def);
             }
         }
-
-        AddWorldIcon("quest", new Vector3(15, 3, 6));
     }
-    public Icon AddWorldIcon(string name, Vector3 position) {
-        
+
+    public Icon AddWorldIcon(string name, Vector3 position)
+    {
+
+        name = name.ToLower();
         if (iconDefinitionsDict.TryGetValue(name, out IconDefinition def)) {
             Icon icon = Instantiate(iconPrefab, position, Quaternion.identity).GetComponent<Icon>();
             icon.transform.parent = Globals.UIManager.OverlayCanvas.transform;
