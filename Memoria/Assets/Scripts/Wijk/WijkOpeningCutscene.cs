@@ -24,11 +24,11 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public void OnFinishCutscene() {
         Globals.Player.PlayerMovementAdventure.SetCanMove(true);
         Globals.MenuController.NotifyPlayer("<font=\"Mouse SDF\"><size=36>u</size></font>  to move the camera");
-        Utils.DelayedAction(10.0f, () => {
+        Utils.DelayedAction(45.0f, () => {
             if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.MenuController.NotifyPlayer("WASD to move");
         });
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
     }
 
     public void Trigger() {
