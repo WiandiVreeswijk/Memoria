@@ -20,22 +20,18 @@ public class IconManager : MonoBehaviour {
     public Dictionary<string, IconDefinition> iconDefinitionsDict = new Dictionary<string, IconDefinition>();
     public GameObject iconPrefab;
 
-    public void Start() {
-        foreach (IconDefinition def in iconDefinitions)
-        {
-            string name = def.name.ToLower();
-            if (iconDefinitionsDict.ContainsKey(name)) {
+    public void Awake() {
+        foreach (IconDefinition def in iconDefinitions) {
+            if (iconDefinitionsDict.ContainsKey(def.name)) {
                 Debug.LogError("Duplicate icon definition found in IconManager: " + name);
             } else {
-                iconDefinitionsDict.Add(name, def);
+                iconDefinitionsDict.Add(def.name, def);
             }
         }
     }
 
-    public Icon AddWorldIcon(string name, Vector3 position)
-    {
-
-        name = name.ToLower();
+    public Icon AddWorldIcon(string name, Vector3 position) {
+        
         if (iconDefinitionsDict.TryGetValue(name, out IconDefinition def)) {
             Icon icon = Instantiate(iconPrefab, position, Quaternion.identity).GetComponent<Icon>();
             icon.transform.parent = Globals.UIManager.OverlayCanvas.transform;
