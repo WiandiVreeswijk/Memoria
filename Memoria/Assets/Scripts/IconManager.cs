@@ -20,7 +20,7 @@ public class IconManager : MonoBehaviour {
     public Dictionary<string, IconDefinition> iconDefinitionsDict = new Dictionary<string, IconDefinition>();
     public GameObject iconPrefab;
 
-    public void Start() {
+    public void Awake() {
         foreach (IconDefinition def in iconDefinitions) {
             if (iconDefinitionsDict.ContainsKey(def.name)) {
                 Debug.LogError("Duplicate icon definition found in IconManager: " + name);
@@ -28,9 +28,8 @@ public class IconManager : MonoBehaviour {
                 iconDefinitionsDict.Add(def.name, def);
             }
         }
-
-        AddWorldIcon("quest", new Vector3(15, 3, 6));
     }
+
     public Icon AddWorldIcon(string name, Vector3 position) {
         
         if (iconDefinitionsDict.TryGetValue(name, out IconDefinition def)) {

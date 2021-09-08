@@ -28,6 +28,7 @@ public class Globals : MonoBehaviour {
 
     //UI
     private UIManager uiManager;
+    private IconManager iconManager;
 
     //Prefabs
     public GameObject persistenceManagerPrefab;
@@ -91,6 +92,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out MainCamera mainCamera);
         camera = mainCamera.GetComponent<Camera>();
         Utils.FindUniqueObject(out player);
+        Utils.FindUniqueObject(out iconManager);
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
         Utils.FindUniqueObject(out analyticsManager);
@@ -125,6 +127,7 @@ public class Globals : MonoBehaviour {
     public static Screenshake Screenshake => _Instance.screenshake;
     public static SceneManager SceneManager => _Instance.sceneManager;
     public static UIManager UIManager => _Instance.uiManager;
+    public static IconManager IconManager => _Instance.iconManager;
     public static ScoreManager ScoreManager => _Instance.scoreManager;
     public static AnalyticsManager AnalyticsManager => _Instance.analyticsManager;
     public static Player Player => _Instance.player;

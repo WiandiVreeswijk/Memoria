@@ -9,6 +9,8 @@ public class Icon : MonoBehaviour {
     public TextMesh distanceText;
     public TextMesh distanceTextZ;
     public float size = 1.0f;
+    public float minScale = 1.0f;
+    public float maxScale = 1.0f;
 
     public void SetImage(Texture texture) {
         Material mat = iconObject.GetComponent<MeshRenderer>().material;
@@ -25,6 +27,7 @@ public class Icon : MonoBehaviour {
     void LateUpdate() {
         SetText(Mathf.Round(Vector3.Distance(Globals.Camera.transform.position, transform.position)) + "M");
         float scale = (Globals.Camera.transform.position - transform.position).magnitude * size;
+        scale = Mathf.Clamp(scale, minScale, maxScale);
         transform.localScale = new Vector3(scale, scale, scale);
 
         //Globals.Camera.ResetWorldToCameraMatrix();
