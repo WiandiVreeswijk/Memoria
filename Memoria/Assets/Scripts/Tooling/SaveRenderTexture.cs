@@ -30,7 +30,7 @@ public class SaveRenderTexture : MonoBehaviour {
         yield return null;
 
         //Encode the texture data into .png formatted bytes
-        byte[] data = tex.EncodeToJPG();
+        byte[] data = tex.EncodeToJPG(100);
 
         //Wait another frame
         yield return null;
