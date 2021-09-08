@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -198,5 +199,10 @@ public class CarEngine : MonoBehaviour, IEnterActivatable
     public void ActivateEnter()
     {
         isBraking = true;
+        Globals.MenuController.BlackScreenFadeIn(2f).OnComplete(() =>
+        {
+            Utils.DelayedAction(3, ()=> Globals.MenuController.BlackScreenFadeOut(3f));
+        });
+            Utils.DelayedAction(6, ()=> isBraking = false);
     }
 }
