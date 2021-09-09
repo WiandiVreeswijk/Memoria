@@ -132,4 +132,9 @@ public static class Utils {
     public static Transform[] FindChildren(this Transform transform, string name) {
         return transform.GetComponentsInChildren<Transform>().Where(t => t.name == name).ToArray();
     }
+
+    public static void SetPositionAndRotation(this Transform transform, Transform newTransform) {
+        transform.position = newTransform.position;
+        transform.rotation = newTransform.rotation;
+    }
 }
