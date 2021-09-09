@@ -95,11 +95,11 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out iconManager);
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
-        Utils.FindUniqueObject(out analyticsManager);
+        Utils.FindUniqueObject(out analyticsManager, false);
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
         Utils.FindUniqueObject(out menuController);
-        Utils.FindUniqueObject(out memoryWatchManager);
+        Utils.FindUniqueObject(out memoryWatchManager, false);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
 
         uiManager.OnGlobalsInitialize();
