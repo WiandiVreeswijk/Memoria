@@ -23,6 +23,8 @@ public class MainMenu : MonoBehaviour {
             Utils.DelayedAction(3,()=> Globals.MenuController.BlackScreenFadeOut(2.5f));
             FindObjectOfType<WijkOpeningCutscene>().Trigger();
             Globals.MenuController.CloseMenu();
+            Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
+            Globals.SoundManagerWijk.FadeVolume(1.0f);
         });
     }
 
