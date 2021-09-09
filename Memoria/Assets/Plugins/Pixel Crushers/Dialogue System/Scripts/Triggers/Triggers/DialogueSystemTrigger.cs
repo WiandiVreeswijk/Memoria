@@ -400,8 +400,7 @@ namespace PixelCrushers.DialogueSystem
                 if (!found && GetComponent<Collider2D>() != null) found = true;
 #endif
                 if (!found && DialogueDebug.logWarnings) Debug.LogWarning("Dialogue System: Dialogue System Trigger is set to a mode that requires a collider, but it has no collider component. If your project is 2D, did you enable 2D support? (Tools > Pixel Crushers > Dialogue System > Welcome Window)", this);
-            }
-            else if (trigger == DialogueSystemTriggerEvent.OnStart)
+            } else if (trigger == DialogueSystemTriggerEvent.OnStart)
             {
                 // Wait until end of frame to allow all other components to finish their Start() methods:
                 StartCoroutine(StartAtEndOfFrame());
@@ -569,8 +568,14 @@ namespace PixelCrushers.DialogueSystem
             }
         }
 
+        //Custom
+        void OnControllerColliderHit(ControllerColliderHit hit) {
+            if (enabled && (trigger == DialogueSystemTriggerEvent.OnCollisionEnter)) TryStart(hit.transform);
+        }
+
         public void OnCollisionEnter(Collision collision)
         {
+            print(collision.gameObject.name);
             if (enabled && (trigger == DialogueSystemTriggerEvent.OnCollisionEnter)) TryStart(collision.collider.transform);
         }
 
