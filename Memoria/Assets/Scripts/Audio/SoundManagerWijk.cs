@@ -18,7 +18,7 @@ public class SoundManagerWijk : MonoBehaviour {
         }
     }
 
-    public void FadeEngineVolume(float volumeValue, float duration = 2.5f) {
+    public void FadeEngineVolume(float volumeValue, float duration = 5f) {
         volumeFadeTween?.Kill();
         if (duration == 0.0f) {
             busEngineSound.SetVolume(volumeValue);

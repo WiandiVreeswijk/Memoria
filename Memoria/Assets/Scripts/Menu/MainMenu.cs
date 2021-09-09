@@ -20,11 +20,11 @@ public class MainMenu : MonoBehaviour {
     public void PlayGame() {
         Globals.MenuController.BlackScreenFadeIn(2.0f).OnComplete(() => {
 
-            Utils.DelayedAction(3,()=> Globals.MenuController.BlackScreenFadeOut(2.5f));
+            Utils.DelayedAction(6,()=> Globals.MenuController.BlackScreenFadeOut(2.5f));
             FindObjectOfType<WijkOpeningCutscene>().Trigger();
             Globals.MenuController.CloseMenu();
             Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
-            Globals.SoundManagerWijk.FadeEngineVolume(1.0f);
+            Globals.SoundManagerWijk.FadeEngineVolume(0.4f);
         });
     }
 
