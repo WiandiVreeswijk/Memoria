@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour {
             FindObjectOfType<WijkOpeningCutscene>().Trigger();
             Globals.MenuController.CloseMenu();
             Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
-            Globals.SoundManagerWijk.FadeVolume(1.0f);
+            Globals.SoundManagerWijk.FadeEngineVolume(1.0f);
         });
     }
 

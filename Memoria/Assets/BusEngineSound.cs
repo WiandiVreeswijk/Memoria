@@ -44,7 +44,7 @@ public class BusEngineSound : MonoBehaviour
         }
 
         SetVolume(0f);
-        SetEngineStatus(0.7f);
+        SetEngineStatus(0f);
     }
     private void FixedUpdate()
     {
