@@ -24,17 +24,14 @@ public class Icon : MonoBehaviour {
         distanceTextZ.text = text;
     }
 
+    public void SetPosition(Vector3 position) {
+        transform.position = position;
+    }
+
     void LateUpdate() {
         SetText(Mathf.Round(Vector3.Distance(Globals.Camera.transform.position, transform.position)) + "M");
         float scale = (Globals.Camera.transform.position - transform.position).magnitude * size;
         scale = Mathf.Clamp(scale, minScale, maxScale);
         transform.localScale = new Vector3(scale, scale, scale);
-
-        //Globals.Camera.ResetWorldToCameraMatrix();
-        //var sp = Globals.Camera.WorldToScreenPoint(new Vector3(15, 3, 18));
-        //print(sp.x + " + " + sp.y);
-        //if (sp.z > 0) {
-        //    rt.SetPositionAndRotation(new Vector3(sp.x, sp.y, 0), Quaternion.identity);
-        //} else rt.position = new Vector2(-1000, -1000);
     }
 }

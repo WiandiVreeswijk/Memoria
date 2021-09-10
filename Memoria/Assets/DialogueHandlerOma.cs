@@ -9,9 +9,10 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
     public Transform teleportPoint;
     public Transform omaWoonkamerPoint;
     private CinemachineCameraPriorityOnDialogueEvent dialogueCameraPriority;
-
+    private Icon questIcon;
     public void Start() {
         dialogueCameraPriority = GetComponent<CinemachineCameraPriorityOnDialogueEvent>();
+        questIcon = Globals.IconManager.AddWorldIcon("oma", transform.position + new Vector3(0, 2.25f, 0));
     }
     public void ConversationStart(string conversationName, GameObject conversationPlayer) {
         print("Conversation with oma started: " + conversationName);
@@ -26,6 +27,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
 
         if (conversationName == "introduction") {
             transform.SetPositionAndRotation(omaWoonkamerPoint);
+            questIcon.SetPosition(transform.position + new Vector3(0, 2.25f, 0));
         } else if (conversationName == "watch") {
             transform.DORotate(new Vector3(0, 720, 0), 10.0f, RotateMode.FastBeyond360);
         }
