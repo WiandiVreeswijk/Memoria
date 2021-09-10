@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour {
             Globals.MenuController.CloseMenu();
             Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
             Globals.SoundManagerWijk.FadeEngineVolume(0.4f);
+            Globals.MusicManagerWijk.FadeMusicVolume(1.0f);
         });
     }
 

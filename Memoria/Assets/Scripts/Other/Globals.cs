@@ -37,6 +37,7 @@ public class Globals : MonoBehaviour {
     private InteractableManager interactableManager;
     private MemoryWatchManager memoryWatchManager;
     private SoundManagerWijk soundManagerWijk;
+    private MusicManagerWijk musicManagerWijk;
 
     //Oblivion
     private OblivionManager oblivionManager;
@@ -112,6 +113,7 @@ public class Globals : MonoBehaviour {
     private void InitializeNeighborhood() {
         Utils.FindUniqueObject(out interactableManager);
         Utils.FindUniqueObject(out soundManagerWijk);
+        Utils.FindUniqueObject(out musicManagerWijk);
         menuController.SetMenu("Main", 0.0f);
     }
 
@@ -142,6 +144,7 @@ public class Globals : MonoBehaviour {
     public static InteractableManager InteractableManager => _Instance.interactableManager;
     public static MemoryWatchManager MemoryWatchManager => _Instance.memoryWatchManager;
     public static SoundManagerWijk SoundManagerWijk => _Instance.soundManagerWijk;
+    public static MusicManagerWijk MusicManagerWijk => _Instance.musicManagerWijk;
     #endregion
 
     #region OblivionGlobals
