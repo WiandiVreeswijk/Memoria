@@ -13,7 +13,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
     public void Start() {
         dialogueCameraPriority = GetComponent<CinemachineCameraPriorityOnDialogueEvent>();
     }
-    public void ConversationStart(string conversationName) {
+    public void ConversationStart(string conversationName, GameObject conversationPlayer) {
         print("Conversation with oma started: " + conversationName);
 
         if (conversationName == "watch") {
@@ -21,7 +21,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
         }
     }
 
-    public void ConversationEnd(string conversationName) {
+    public void ConversationEnd(string conversationName, GameObject conversationPlayer) {
         print("Conversation with oma ended: " + conversationName);
 
         if (conversationName == "introduction") {
@@ -31,7 +31,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
         }
     }
 
-    public void ConversationLine(string conversationName, string line) {
+    public void ConversationLine(string conversationName, string line, GameObject conversationPlayer) {
     }
 
     public Transform GetElenaConversationTransform() {
