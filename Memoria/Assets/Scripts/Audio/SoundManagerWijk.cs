@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class SoundManagerWijk : MonoBehaviour {
     public BusEngineSound busEngineSound;
+    private RainAmbientSound rainAmbientSound;
     private Tween engineStatusFadeTween;
     private Tween volumeFadeTween;
+
+    private void Start()
+    {
+        rainAmbientSound = GetComponent<RainAmbientSound>();
+    }
     public void FadeEngineStatus(float engineValue, float duration = 2.5f) {
         engineStatusFadeTween?.Kill();
         if (duration == 0.0f) {
@@ -29,9 +35,25 @@ public class SoundManagerWijk : MonoBehaviour {
         }
     }
 
+    public void FadeRainStatus(float insideValue, float duration = 5f)
+    {
+        volumeFadeTween?.Kill();
+        if (duration == 0.0f)
+        {
+            rainAmbientSound.SetInsideStatus(insideValue);
+        }
+        else
+        {
+            volumeFadeTween = DOTween
+                .To(() => rainAmbientSound.GetInsideStatus(), x => rainAmbientSound.SetInsideStatus(x), insideValue, 1f)
+                .SetEase(Ease.Linear);
+        }
+    }
+
     public void FadeToIdle()
     {
         FadeEngineStatus(0f, 2f);
+        FadeRainStatus(0, 2f);
     }
 
     public void FadeToDriving()
@@ -42,4 +64,5 @@ public class SoundManagerWijk : MonoBehaviour {
     {
         FadeEngineVolume(0f, 10f);
     }
+
 }
