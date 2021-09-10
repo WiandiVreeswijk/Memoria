@@ -28,4 +28,18 @@ public class SoundManagerWijk : MonoBehaviour {
                 .SetEase(Ease.Linear);
         }
     }
+
+    public void FadeToIdle()
+    {
+        FadeEngineStatus(0f, 2f);
+    }
+
+    public void FadeToDriving()
+    {
+        FadeEngineStatus(1f, 2f);
+    }
+    public void FadeToNothing()
+    {
+        FadeEngineVolume(0f, 10f);
+    }
 }
