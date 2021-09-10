@@ -6,7 +6,9 @@ using System.Runtime.InteropServices;
 using DG.Tweening;
 using UnityEngine;
 
-public class DialogueSystemHandler : MonoBehaviour {
+public class DialogueSystemHandler : MonoBehaviour
+{
+    public GameObject conversationPlayer;
     private string activeConversation;
     private IDialogueHandler activeHandler;
     public void OnConversationStart(UnityEngine.Object actor) {
@@ -14,7 +16,7 @@ public class DialogueSystemHandler : MonoBehaviour {
             activeHandler = ((Transform)actor).GetComponent<IDialogueHandler>();
             if (activeHandler != null) {
                 activeConversation = DialogueLua.GetVariable("Progression").AsString;
-                activeHandler.ConversationStart(activeConversation);
+                activeHandler.ConversationStart(activeConversation, conversationPlayer);
                 Globals.Player.PlayerMovementAdventure.Teleport(activeHandler.GetElenaConversationTransform().position);
                 Globals.Player.transform.rotation = activeHandler.GetElenaConversationTransform().rotation;
             } else throw new Exception("No dialogue handler found on " + actor.name);
@@ -26,7 +28,7 @@ public class DialogueSystemHandler : MonoBehaviour {
             IDialogueHandler handler = ((Transform)actor).GetComponent<IDialogueHandler>();
             if (activeHandler != handler) throw new Exception("Active handler does not equal conversation end handler");
             if (handler != null) {
-                handler.ConversationEnd(activeConversation);
+                handler.ConversationEnd(activeConversation, conversationPlayer);
                 activeConversation = "";
                 activeHandler = null;
             } else throw new Exception("No dialogue handler found on " + actor.name);
@@ -35,6 +37,6 @@ public class DialogueSystemHandler : MonoBehaviour {
 
     public void OnConversationLine(Subtitle subtitle) {
         if (activeHandler == null) throw new Exception("No active conversation handler");
-        activeHandler.ConversationLine(activeConversation, subtitle.formattedText.text);
+        activeHandler.ConversationLine(activeConversation, subtitle.formattedText.text, conversationPlayer);
     }
 }
