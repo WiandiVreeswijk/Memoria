@@ -6,13 +6,10 @@ using DG.Tweening;
 
 public class PlayerTriggerVolume : MonoBehaviour {
     public PlayerTriggerVolumeType type;
-    public CinemachineVirtualCamera firstPersonCamera;
-    private PlayerMovementAdventure adventureMovement;
     private AmbientControl sound;
     private Tween tween = null;
 
     private void Start() {
-        adventureMovement = FindObjectOfType<PlayerMovementAdventure>();
         sound = FindObjectOfType<AmbientControl>();
     }
 

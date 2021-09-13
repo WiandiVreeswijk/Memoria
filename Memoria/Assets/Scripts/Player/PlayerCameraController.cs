@@ -8,6 +8,7 @@ using System;
 public class PlayerCameraController : MonoBehaviour {
     //3D
     public CinemachineVirtualCamera firstPersonCamera;
+    public CinemachineFreeLook thirdPersonCamera;
     public GameObject arm;
     public bool isInFirstPerson;
     //2D
@@ -37,11 +38,15 @@ public class PlayerCameraController : MonoBehaviour {
         tween?.Kill();
         if (type == CameraType.FIRSTPERSON) {
             firstPersonCamera.Priority = 11;
-            tween = Utils.DelayedAction(2, () => arm?.SetActive(true));
+            thirdPersonCamera.Priority = 9;
+            tween = Utils.DelayedAction(2, () => {
+                if (arm != null) arm.SetActive(true);
+            });
             isInFirstPerson = true;
         } else {
+            thirdPersonCamera.Priority = 11;
             firstPersonCamera.Priority = 9;
-            arm?.SetActive(false);
+            if (arm != null) arm.SetActive(false);
             isInFirstPerson = false;
         }
     }
