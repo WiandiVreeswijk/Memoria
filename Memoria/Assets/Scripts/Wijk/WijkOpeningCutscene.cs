@@ -13,6 +13,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public PlayableDirector playableDirector;
 
     public CarEngine busEngine;
+    public BusStop busStop;
 
     void Start() {
         Globals.Player.PlayerMovementAdventure.SetCanMove(false);
@@ -24,12 +25,9 @@ public class WijkOpeningCutscene : MonoBehaviour {
         Utils.DelayedAction(45.0f, () => {
             if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.MenuController.NotifyPlayer("WASD to move");
         });
-        //Cursor.visible = true;
-        //Cursor.lockState = CursorLockMode.None;
     }
 
-    private bool ShouldSkip()
-    {
+    private bool ShouldSkip() {
         return !isEnabled && Application.isEditor;
     }
 
@@ -38,14 +36,14 @@ public class WijkOpeningCutscene : MonoBehaviour {
         playableDirector.time = ShouldSkip() ? playableDirector.duration : 0;
         playableDirector.Evaluate();
         playableDirector.Play();
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         busEngine.isBraking = false;
-        playableDirector.Evaluate();
         if (ShouldSkip()) {
+            busStop.Skip();
             OnFinishCutscene();
         }
-        //cursorLocker.LockMouse();
     }
 }

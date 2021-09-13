@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarEngine : MonoBehaviour, IEnterActivatable
+public class CarEngine : MonoBehaviour
 {
     public Transform path;
     public float maxSteerAngle = 45f;
@@ -194,15 +194,5 @@ public class CarEngine : MonoBehaviour, IEnterActivatable
     {
         wheelFL.steerAngle = Mathf.Lerp(wheelFL.steerAngle, targetSteerAngle, Time.deltaTime * turnSpeed);
         wheelFR.steerAngle = Mathf.Lerp(wheelFR.steerAngle, targetSteerAngle, Time.deltaTime * turnSpeed);
-    }
-
-    public void ActivateEnter()
-    {
-        isBraking = true;
-        Globals.MenuController.BlackScreenFadeIn(2f).OnComplete(() =>
-        {
-            Utils.DelayedAction(3, ()=> Globals.MenuController.BlackScreenFadeOut(3f));
-        });
-            Utils.DelayedAction(6, ()=> isBraking = false);
     }
 }

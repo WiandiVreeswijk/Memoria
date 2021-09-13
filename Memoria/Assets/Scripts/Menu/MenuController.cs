@@ -61,6 +61,11 @@ public class MenuController : MonoBehaviour {
 
     private Tween blackScreenTween;
     public Tween BlackScreenFadeIn(float duration) {
+        try {
+            throw new Exception("Fiets");
+        } catch (Exception ex) {
+            print("in " + ex.StackTrace);
+        }
         blackScreenTween?.Kill();
         return DOTween.Sequence().Append(DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 1.0f, duration).OnComplete(() => {
             blackScreen.blocksRaycasts = false;
@@ -70,6 +75,11 @@ public class MenuController : MonoBehaviour {
     }
 
     public Tween BlackScreenFadeOut(float duration) {
+        try {
+            throw new Exception("Fiets");
+        } catch (Exception ex) {
+            print("out " + ex.StackTrace);
+        }
         blackScreenTween?.Kill();
         blackScreen.blocksRaycasts = false;
         blackScreen.interactable = false;
