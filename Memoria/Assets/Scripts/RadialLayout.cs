@@ -51,7 +51,7 @@ namespace Assets.Scripts {
             CalculateRadial();
         }
 #endif
-        void CalculateRadial() {
+        public void CalculateRadial() {
             m_Tracker.Clear();
             if (transform.childCount == 0)
                 return;
