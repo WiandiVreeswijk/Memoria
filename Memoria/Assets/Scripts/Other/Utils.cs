@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using DG.Tweening;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -136,5 +137,14 @@ public static class Utils {
     public static void SetPositionAndRotation(this Transform transform, Transform newTransform) {
         transform.position = newTransform.position;
         transform.rotation = newTransform.rotation;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void PrintStackTrace(string name) {
+        try {
+            throw new Exception(name);
+        } catch (Exception ex) {
+            Debug.Log($"Stacktrace [{name}]: {ex.StackTrace}");
+        }
     }
 }
