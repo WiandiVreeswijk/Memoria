@@ -15,9 +15,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public CarEngine busEngine;
 
     void Start() {
-        if (!isEnabled && Application.isEditor) {
-            GetComponentInChildren<PlayableDirector>().enabled = false;
-        }
         Globals.Player.PlayerMovementAdventure.SetCanMove(false);
     }
 
@@ -31,16 +28,22 @@ public class WijkOpeningCutscene : MonoBehaviour {
         //Cursor.lockState = CursorLockMode.None;
     }
 
+    private bool ShouldSkip()
+    {
+        return !isEnabled && Application.isEditor;
+    }
+
     public void Trigger() {
         mainMenuCamera.Priority = 10;
-        playableDirector.time = 0;
+        playableDirector.time = ShouldSkip() ? playableDirector.duration : 0;
         playableDirector.Evaluate();
         playableDirector.Play();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         busEngine.isBraking = false;
-        if (!isEnabled && Application.isEditor) {
+        playableDirector.Evaluate();
+        if (ShouldSkip()) {
             OnFinishCutscene();
         }
         //cursorLocker.LockMouse();
