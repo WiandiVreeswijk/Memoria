@@ -54,14 +54,14 @@ public class Debugger : MonoBehaviour {
 
     private void SetVisible(bool toggle) {
         if (toggle) {
-            Time.timeScale = 0.0f;
+            Globals.TimescaleManager.PauseGame();
             debugMenuPanel.alpha = 1.0f;
             debugMenuPanel.blocksRaycasts = true;
             debugMenuPanel.interactable = true;
             debugMenuVisible = true;
             debugPrint.SetTextVisible(false);
         } else {
-            Time.timeScale = 1.0f;
+            Globals.TimescaleManager.UnPauseGame();
             debugMenuPanel.alpha = 0.0f;
             debugMenuPanel.blocksRaycasts = false;
             debugMenuPanel.interactable = false;
@@ -87,9 +87,8 @@ public class Debugger : MonoBehaviour {
         }
 
         AddLabel("Camera");
-        AddButton("Switch camera type", true, ()=>{
-            if(Globals.Player.CameraController.firstPersonCamera != null)
-            {
+        AddButton("Switch camera type", true, () => {
+            if (Globals.Player.CameraController.firstPersonCamera != null) {
                 Globals.Player.CameraController.ToggleCamera();
             }
         });

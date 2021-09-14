@@ -9,10 +9,6 @@ using UnityEngine;
 public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
     public List<DialogueData> dialogueData = new List<DialogueData>();
 
-    public Transform teleportPoint;
-    public Transform omaWoonkamerPoint;
-    public Transform watchPoint;
-    public GameObject watchObject;
     public GameObject fakeElena;
 
     private CinemachineCameraPriorityOnDialogueEvent dialogueCameraPriority;
@@ -20,7 +16,6 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
     public void Start() {
         dialogueCameraPriority = GetComponent<CinemachineCameraPriorityOnDialogueEvent>();
         questIcon = Globals.IconManager.AddWorldIcon("oma", transform.position + new Vector3(0, 2.25f, 0));
-        watchObject.SetActive(false);
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
@@ -50,7 +45,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
-            data.conversationStart.Invoke();
+            data.conversationEnd.Invoke();
             if (data.moveCharacterAfterConversation) {
                 transform.SetPositionAndRotation(data.newCharacterPosition);
             }
