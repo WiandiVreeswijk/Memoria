@@ -8,7 +8,7 @@ using UnityEngine;
 public class Debugger : MonoBehaviour {
     private bool debugMenuVisible = false;
     private bool isActive = false;
-    private print debugPrint;
+    private DebugPrint debugPrint;
 
     /*Debug menu*/
     public GameObject debuggerButtonPrefab;
@@ -21,7 +21,7 @@ public class Debugger : MonoBehaviour {
         gameObject.SetActive(isActive);
     }
     private void Start() {
-        debugPrint = GetComponent<print>();
+        debugPrint = GetComponent<DebugPrint>();
         SetVisible(false);
     }
 

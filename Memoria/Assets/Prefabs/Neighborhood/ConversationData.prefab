@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2733913525172872214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8990464946192437222}
+  m_Layer: 0
+  m_Name: TeleportPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8990464946192437222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2733913525172872214}
+  m_LocalRotation: {x: -0, y: -0.9411145, z: -0, w: 0.3380882}
+  m_LocalPosition: {x: -10.1679125, y: 0.30278397, z: 24.588646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3968469155015724824}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 7.751, y: -105.532, z: 25.885}
 --- !u!1 &3968469154899536514
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +41,7 @@ GameObject:
   - component: {fileID: 3968469154899536515}
   - component: {fileID: 3968469154899536540}
   m_Layer: 0
-  m_Name: WoonkamerDialogueCam
+  m_Name: DialogueCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,13 +54,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3968469154899536514}
-  m_LocalRotation: {x: -0.21813303, y: 0.34149784, z: -0.08180979, w: -0.91055167}
-  m_LocalPosition: {x: 1.464024, y: 1.907, z: -1.5430211}
+  m_LocalRotation: {x: 0.12963659, y: 0.8080171, z: -0.19356966, w: 0.54114103}
+  m_LocalPosition: {x: -2.428762, y: 1.907, z: 28.007484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3968469156246328534}
   m_Father: {fileID: 3968469155015724824}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 26.944, y: -41.117, z: 0}
 --- !u!114 &3968469154899536540
 MonoBehaviour:
@@ -90,8 +120,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3968469154973553667}
-  m_LocalRotation: {x: -0.1380595, y: -0.78332764, z: 0.187655, w: 0.5763012}
-  m_LocalPosition: {x: 0.19299972, y: -0.49999976, z: 3.7330003}
+  m_LocalRotation: {x: -0, y: -0.9411145, z: -0, w: 0.33808812}
+  m_LocalPosition: {x: -10.167908, y: 0.30278397, z: 24.588648}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3968469155175382326}
@@ -106,8 +136,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3968469155015724824}
+  - component: {fileID: 3996501625223043974}
   m_Layer: 0
-  m_Name: OmaWoonkamer
+  m_Name: WatchIntroduction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,14 +151,53 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3968469155015724831}
-  m_LocalRotation: {x: -0, y: -0.9733693, z: -0, w: -0.22924289}
-  m_LocalPosition: {x: -0.43, y: 0, z: 27.28}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 8990464946192437222}
   - {fileID: 3968469154899536515}
   m_Father: {fileID: 3968469155295899201}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -206.505, z: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3996501625223043974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968469155015724831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff17e9a708926c438ac6b8314fcae44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueName: watch
+  fakeElenaPoint: {fileID: 8990464946192437222}
+  cam: {fileID: 3968469154899536540}
+  moveQuestIconAfterConversation: 1
+  questIconPosition: {fileID: 6518991213305820754}
+  questIconOffset: {x: 0, y: 0, z: 0}
+  moveCharacterAfterConversation: 0
+  newCharacterPosition: {fileID: 0}
+  conversationStart:
+    m_PersistentCalls:
+      m_Calls: []
+  conversationEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &3968469155175382325
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,8 +207,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3968469155175382326}
+  - component: {fileID: 1331472670}
   m_Layer: 0
-  m_Name: IntroDialogue
+  m_Name: Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,15 +222,42 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3968469155175382325}
-  m_LocalRotation: {x: 0.22328112, y: -0.27753165, z: 0.066485874, w: 0.9320415}
-  m_LocalPosition: {x: -8.633, y: 2.44, z: 21.887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3968469154973553692}
   - {fileID: 3968469155999573274}
+  - {fileID: 1229119911501865767}
   m_Father: {fileID: 3968469155295899201}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1331472670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968469155175382325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff17e9a708926c438ac6b8314fcae44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueName: introduction
+  fakeElenaPoint: {fileID: 3968469154973553692}
+  cam: {fileID: 3968469155999573273}
+  moveQuestIconAfterConversation: 1
+  questIconPosition: {fileID: 0}
+  questIconOffset: {x: 0, y: 2.25, z: 0}
+  moveCharacterAfterConversation: 1
+  newCharacterPosition: {fileID: 1229119911501865767}
+  conversationStart:
+    m_PersistentCalls:
+      m_Calls: []
+  conversationEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3968469155295899200
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,8 +285,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3968469155015724824}
   - {fileID: 3968469155175382326}
+  - {fileID: 3968469155015724824}
   - {fileID: 4717784112291800685}
   - {fileID: 6518991213305820754}
   m_Father: {fileID: 0}
@@ -299,7 +397,7 @@ GameObject:
   - component: {fileID: 3968469155999573274}
   - component: {fileID: 3968469155999573273}
   m_Layer: 0
-  m_Name: IntroDialogueCam
+  m_Name: DialogueCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,14 +410,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3968469155999573272}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.20908329, y: -0.42893782, z: 0.102756895, w: 0.8727758}
+  m_LocalPosition: {x: -8.633, y: 2.44, z: 21.887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3968469155729038434}
   m_Father: {fileID: 3968469155175382326}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 26.944, y: -33.164, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.285, y: -17.036, z: 8.564}
 --- !u!114 &3968469155999573273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +547,36 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &5832820353448039368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1229119911501865767}
+  m_Layer: 0
+  m_Name: WoonkamerPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1229119911501865767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5832820353448039368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3968469155175382326}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6172623207712074741
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +616,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8532696270227418612, guid: 9ec1014509a9f314687731a63f34eaf3, type: 3}
       propertyPath: m_Name
-      value: PlayerKidConversation
+      value: FakeElena
       objectReference: {fileID: 0}
     - target: {fileID: 8532696270227418612, guid: 9ec1014509a9f314687731a63f34eaf3, type: 3}
       propertyPath: m_IsActive

@@ -17,8 +17,6 @@ public class DialogueSystemHandler : MonoBehaviour
             if (activeHandler != null) {
                 activeConversation = DialogueLua.GetVariable("Progression").AsString;
                 activeHandler.ConversationStart(activeConversation, conversationPlayer);
-                Globals.Player.PlayerMovementAdventure.Teleport(activeHandler.GetElenaConversationTransform().position);
-                Globals.Player.transform.rotation = activeHandler.GetElenaConversationTransform().rotation;
             } else throw new Exception("No dialogue handler found on " + actor.name);
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class print : MonoBehaviour {
+public class DebugPrint : MonoBehaviour {
     private class DebugText {
         public string text;
         public float duration;
