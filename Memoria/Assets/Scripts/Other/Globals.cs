@@ -18,6 +18,8 @@ public class Globals : MonoBehaviour {
     private Player player;
     private MenuController menuController;
     private Persistence persistenceManager;
+    private CinemachineManager cinemachineManager;
+    private TimescaleManager timescaleManager;
     private SceneManager sceneManager;
     private Screenshake screenshake;
     private ScoreManager scoreManager;
@@ -81,8 +83,7 @@ public class Globals : MonoBehaviour {
         _Instance.isInitialized = true;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (Input.GetKeyDown(KeyCode.U)) Time.timeScale = 5.0f;
         if (Input.GetKeyDown(KeyCode.P)) Time.timeScale = 1.0f;
         if (Input.GetKeyDown(KeyCode.Y)) {
@@ -101,6 +102,8 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
         Utils.FindUniqueObject(out menuController);
+        Utils.FindUniqueObject(out timescaleManager);
+        Utils.FindUniqueObject(out cinemachineManager);
         Utils.FindUniqueObject(out memoryWatchManager, false);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
 
@@ -128,6 +131,8 @@ public class Globals : MonoBehaviour {
 
     public static MenuController MenuController => _Instance.menuController;
     public static Persistence Persistence => _Instance.persistenceManager;
+    public static CinemachineManager CinemachineManager => _Instance.cinemachineManager;
+    public static TimescaleManager TimescaleManager => _Instance.timescaleManager;
     public static Screenshake Screenshake => _Instance.screenshake;
     public static SceneManager SceneManager => _Instance.sceneManager;
     public static UIManager UIManager => _Instance.uiManager;

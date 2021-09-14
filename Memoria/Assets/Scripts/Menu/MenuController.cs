@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -87,11 +88,12 @@ public class MenuController : MonoBehaviour {
             FadePanelOut(activePanel, instant ? 0.0f : fadeTime);
             activePanel = null;
         }
-        FadeMainPanelOut(instant ? 0.0f : fadeTime).OnComplete(() => Time.timeScale = 1.0f);
+        FadeMainPanelOut(instant ? 0.0f : fadeTime).OnComplete(() => Globals.TimescaleManager.UnPauseGame());
     }
 
-    public void SetMenu(string name) {
-        Time.timeScale = 0f;
+    public void SetMenu(string name)
+    {
+        Globals.TimescaleManager.PauseGame();
         if (name == "Notification") collectedThingies.SetActive(true);
         SetMenu(name, fadeTime);
     }
@@ -117,6 +119,11 @@ public class MenuController : MonoBehaviour {
     public void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             TogglePause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Globals.TimescaleManager.TogglePause();
         }
     }
 

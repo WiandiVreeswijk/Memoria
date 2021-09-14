@@ -34,7 +34,7 @@ public class IconManager : MonoBehaviour {
         
         if (iconDefinitionsDict.TryGetValue(name, out IconDefinition def)) {
             Icon icon = Instantiate(iconPrefab, position, Quaternion.identity).GetComponent<Icon>();
-            icon.transform.parent = Globals.UIManager.OverlayCanvas.transform;
+            icon.transform.parent = transform;
             icon.SetImage(def.texture);
             return icon;
         }
