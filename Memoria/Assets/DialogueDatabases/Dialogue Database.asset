@@ -57,6 +57,10 @@ MonoBehaviour:
       value: Elena
       type: 0
       typeString: 
+    - title: Name nl
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -66,7 +70,7 @@ MonoBehaviour:
     - title: Name
       value: Grandma
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Pictures
       value: '[]'
       type: 3
@@ -74,7 +78,7 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: IsPlayer
       value: False
       type: 2
@@ -82,7 +86,11 @@ MonoBehaviour:
     - title: Display Name
       value: Grandma
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
+    - title: Name nl
+      value: Oma
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -92,7 +100,7 @@ MonoBehaviour:
     - title: Name
       value: Villager
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Pictures
       value: '[]'
       type: 3
@@ -100,11 +108,15 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: IsPlayer
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Name nl
+      value: Bewoner
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -127,6 +139,10 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Name nl
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -149,6 +165,10 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Name nl
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -353,7 +373,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Elena! Kom eens hier lieverd
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -416,7 +436,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Help oma even Felix te vinden...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -491,7 +511,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Waar heeft u het over oma? Felix is al lang weggelopen!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -554,7 +574,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Oma! Ik ben net aangekomen met de bus!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -617,7 +637,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ja... maar help me eerst even met Felix zoeken...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -680,7 +700,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Stop met die onzin Elena, mijn kat zou nooit bij mij weggaan!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -732,6 +752,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: She always liked the fresh fish I got her... and the way she purred...
+          so sweet!
         type: 0
         typeString: 
       - title: Sequence
@@ -743,7 +764,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ze hield altijd erg van verse vis... en de manier hoe ze kon snorren...
+          zo lief!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -812,7 +834,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Gaat het wel oma? Ik weet dat u Felix mist...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -863,7 +885,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: I remember he loved fish...
+        value: I remember she loved fish...
         type: 0
         typeString: 
       - title: Sequence
@@ -875,7 +897,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik weet inderdaad nog dat ze van vis hield...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -899,7 +921,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 390
+        x: 392.32556
         y: 320
         width: 160
         height: 30
@@ -938,7 +960,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Maar Felix is 2 jaar geleden al weggelopen oma!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1001,7 +1023,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Wil je dat niet zeggen Elena. Je hebt geen idee waar je het over hebt
+          meisje!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1076,7 +1099,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Weet u dat niet meer oma!? Hoe kan u nou zoiets vergeten!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1127,7 +1150,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: I'm sorry grandma, I didn't want to be rude.
+        value: I'm sorry grandma, I didn't want to be rude!
         type: 0
         typeString: 
       - title: Sequence
@@ -1139,7 +1162,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Sorry oma, ik wilde niet brutaal zijn!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1202,7 +1225,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik wil naar huis oma! U doet zo raar!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1266,7 +1289,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Wil je niet zo naar mij schreeuwen alsjeblieft Elena. Ik... ik vind
+          het niet leuk als je zo naar mij schreeuwt...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1291,7 +1315,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 90
-        y: 520
+        y: 517.8261
         width: 160
         height: 30
     - id: 17
@@ -1329,7 +1353,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Geen zorgen lieverd... oma is gewoon een beetje moe.
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1393,7 +1417,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Zo snel al!? Maar... je bent hier pas net en ik vind het fijn als
+          je hier bent Elena...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1418,7 +1443,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 390
-        y: 520
+        y: 517.8261
         width: 160
         height: 30
     - id: 20
@@ -1456,7 +1481,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Misschien kunnen we een beetje tv gaan kijken in de woonkamer?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1519,7 +1544,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Waar?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1582,7 +1607,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: In de woonkamer!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1645,7 +1670,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Om wat te doen Elena? Felix te vinden?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1714,7 +1739,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Nee!! Om TV te gaan kijken!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1777,7 +1802,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ja.. oma... om Felix te vinden ja...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1840,7 +1865,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Misschien kunnen we ook TV kijken in de woonkamer!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1897,7 +1922,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ooh... Maar ik moet eerst Felix vinden hoor!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -1960,7 +1985,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Kunnen we niet eerst even in de woonkamer zitten?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2023,7 +2048,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Waarom kijkt u naar die kast oma?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2086,7 +2111,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Denkt u dat Felix in die kast zit oma?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2149,7 +2174,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Wie? Ik probeer mijn verzameldingetjes te vinden!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2218,7 +2243,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik denk... Ik denk dat ik wat van mijn verzameldingetjes kwijt ben
+          geraakt...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2281,7 +2307,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: wat precies?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2344,7 +2370,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik ben het weer vergeten...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2407,7 +2433,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik ben... het spijt me Elena...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2476,7 +2502,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik wil u helpen oma! Vertel mij hoe ik kan helpen!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2539,7 +2565,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Een horloge... Ik kan mij herinneren... een zakhorloge dat ik van
+          mijn vader heb gekregen...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2602,7 +2629,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Een horloge? Oma hoe gaat dat u nou helpen?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2665,7 +2692,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Het is niet zomaar een horloge Elena, het is een heel speciaal zakhorloge!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2734,7 +2761,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: ehm... oke oma....
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2797,7 +2824,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Waarom is het dan speciaal oma?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2861,7 +2888,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Mijn vader vertelde mij dat het zakhorloge gebruikt kan worden om
+          herinneringen terug te halen uit het verleden!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2930,7 +2958,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Het is echt waar Elena! Dat zakhorloge... het is echt speciaal!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2993,7 +3021,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Maar oma... waar is dat zakhorloge nu dan?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3056,7 +3084,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik zal dat zakhorloge vinden oma!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3119,7 +3147,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Misschien ligt het nog ergens in de schuur achter het huis....
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3257,7 +3285,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Sla over
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3275,7 +3303,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 390
+        x: 388.6842
         y: 170
         width: 160
         height: 30
@@ -3314,7 +3342,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Sla over
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3373,7 +3401,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Wat voor verzameldingetjes oma?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3493,7 +3521,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Uw verzameldingetjes? Welke verzameldingetjes oma?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3556,7 +3584,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Mijn kast stond helemaal vol met verzameldingetjes!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3619,7 +3647,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik heb dit verzameld toen ik nog jouw leeftijd was Elena...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3688,7 +3716,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Dat is bijzonder oma!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3713,7 +3741,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 390
-        y: 370
+        y: 367.82608
         width: 160
         height: 30
     - id: 66
@@ -3751,7 +3779,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Maar waar zijn ze nu dan?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3814,7 +3842,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ik... dat kan ik mij niet meer herinneren Elena.
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3877,7 +3905,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: U hoeft geen sorry te zeggen hoor oma!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -3901,7 +3929,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 690
+        x: 692.1739
         y: 620
         width: 160
         height: 30
@@ -3940,7 +3968,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Dankjewel lieverd...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4003,7 +4031,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Misschien is er een manier waarop je mij kan helpen...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4066,7 +4094,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Misschien kunnen we het zakhorloge gebruiken om uw verzameldingetjes
+          terug te halen!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4129,7 +4158,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Dus we kunnen het zakhorloge ook gebruiken om uw herinneringen terug
+          te halen!?
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4192,7 +4222,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Ja... misschien kan dat wel Elena... mijn verzameldingetjes is alles
+          wat ik nog heb.
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4255,7 +4286,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Het zou goed voor mij zijn om ze weer terug te zien!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4324,7 +4355,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Misschien kan je mijn verzameldingetjes wel vinden in deze herinneringen
+          Elena...
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4375,7 +4407,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: Use the pocketwatch to get back my trinkets from the oblivion Elena!
+        value: Find it! And use the pocketwatch to get back my trinkets from the
+          oblivion Elena!
         type: 0
         typeString: 
       - title: Sequence
@@ -4387,7 +4420,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: nl
-        value: 
+        value: Vind het Elena! En gebruik het zakhorloge om mijn verzameldingetjes
+          terug te krijgen van de vergetelheid!
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -4405,13 +4439,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 390
+        x: 387.82605
         y: 1220
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.33999997
+    canvasScrollPosition: {x: 0, y: 479.39188}
+    canvasZoom: 0.36999997
   - id: 5
     fields:
     - title: Title
@@ -6716,7 +6750,8 @@ MonoBehaviour:
     syncItemsDatabase: {fileID: 0}
     syncLocationsDatabase: {fileID: 0}
     syncVariablesDatabase: {fileID: 0}
-  templateJson: '{"treatItemsAsQuests":true,"actorFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"IsPlayer","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"itemFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Is
+  templateJson: '{"treatItemsAsQuests":true,"actorFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"IsPlayer","value":"False","type":2,"typeString":"CustomFieldType_Boolean"},{"title":"Name
+    nl","value":"","type":4,"typeString":"CustomFieldType_Localization"}],"itemFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Is
     Item","value":"True","type":2,"typeString":"CustomFieldType_Boolean"}],"questFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Success
     Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Failure
     Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"State","value":"unassigned","type":0,"typeString":"CustomFieldType_QuestState"},{"title":"Is
