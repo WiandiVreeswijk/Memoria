@@ -6,14 +6,16 @@ using DG.Tweening;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
-public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
+public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public List<DialogueData> dialogueData = new List<DialogueData>();
-
+    public string actorName;
     public GameObject fakeElena;
 
     private CinemachineCameraPriorityOnDialogueEvent dialogueCameraPriority;
     public void Start() {
         dialogueCameraPriority = GetComponent<CinemachineCameraPriorityOnDialogueEvent>();
+        actorName = actorName.ToLower();
+        //DialogueLua.GetVariable(actorName + "_Progression");
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
@@ -25,7 +27,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
     }
 
     public void ConversationStart(string conversationName, GameObject conversationPlayer) {
-        print("Conversation with oma started: " + conversationName);
+        print("Conversation with " + actorName + " started" + (conversationName.Length > 0 ? "L " + conversationName : ""));
         fakeElena.SetActive(true);
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
@@ -38,7 +40,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
     }
 
     public void ConversationEnd(string conversationName, GameObject conversationPlayer) {
-        print("Conversation with oma ended: " + conversationName);
+        print("Conversation with " + actorName + " ended" + (conversationName.Length > 0 ? "L " + conversationName : ""));
         fakeElena.SetActive(false);
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
@@ -59,5 +61,9 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
 
     public void ConversationLine(string conversationName, string line, GameObject conversationPlayer) {
 
+    }
+
+    public string GetActorName() {
+        return actorName;
     }
 }

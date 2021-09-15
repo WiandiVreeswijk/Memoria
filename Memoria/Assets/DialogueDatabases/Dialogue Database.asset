@@ -207,7 +207,7 @@ MonoBehaviour:
   - id: 3
     fields:
     - title: Name
-      value: Progression
+      value: oma_Progression
       type: 0
       typeString: 
     - title: Initial Value
@@ -390,8 +390,8 @@ MonoBehaviour:
         destinationDialogueID: 3
         isConnector: 0
         priority: 2
-      conditionsString: Variable["Progression"] == "introduction"
-      userScript: Variable["Progression"] = "watch"
+      conditionsString: Variable["oma_Progression"] == "introduction"
+      userScript: Variable["oma_Progression"] = "watch"
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -3239,8 +3239,8 @@ MonoBehaviour:
         destinationDialogueID: 59
         isConnector: 0
         priority: 2
-      conditionsString: Variable["Progression"] == "watch"
-      userScript: Variable["Progression"] = "schuur"
+      conditionsString: Variable["oma_Progression"] == "watch"
+      userScript: Variable["oma_Progression"] = "schuur"
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -4444,8 +4444,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 640.3052}
-    canvasZoom: 0.42999998
+    canvasScrollPosition: {x: 9.555112, y: 4.398382}
+    canvasZoom: 0.45999998
   - id: 5
     fields:
     - title: Title

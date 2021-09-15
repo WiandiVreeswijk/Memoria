@@ -14,8 +14,10 @@ public class DialogueSystemHandler : MonoBehaviour
     public void OnConversationStart(UnityEngine.Object actor) {
         if (actor.GetType() == typeof(Transform)) {
             activeHandler = ((Transform)actor).GetComponent<IDialogueHandler>();
-            if (activeHandler != null) {
-                activeConversation = DialogueLua.GetVariable("Progression").AsString;
+            if (activeHandler != null)
+            {
+                Lua.Result result = DialogueLua.GetVariable(activeHandler.GetActorName() + "_Progression");
+                activeConversation = result.IsString ? result.AsString : "";
                 activeHandler.ConversationStart(activeConversation, conversationPlayer);
             } else throw new Exception("No dialogue handler found on " + actor.name);
         }

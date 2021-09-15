@@ -8,7 +8,7 @@ public class ProgressionManager : MonoBehaviour {
 
 
     void Start() {
-        GameObject oma = FindObjectOfType<DialogueHandlerOma>().gameObject;
+        GameObject oma = FindObjectOfType<DialogueHandler>().gameObject;
         questIcon = Globals.IconManager.AddWorldIcon("oma", oma.transform.position + new Vector3(0, 2.25f, 0));
     }
 

@@ -32,11 +32,11 @@ public class WijkOpeningCutscene : MonoBehaviour {
         tween = Utils.DelayedAction(64.0f, () => {
             Globals.MenuController.NotifyPlayer("Follow the ! marker");
         }).OnUpdate(() => {
-            if (Vector3.Distance(Globals.Player.transform.position, Globals.ProgressionManager.GetIcon().transform.position) <
-                2.5f) {
-                print("Player got close to marker!");
-                tween.Kill();
-            }
+            //if (Vector3.Distance(Globals.Player.transform.position, Globals.ProgressionManager.GetIcon().transform.position) <
+            //    2.5f) {
+            //    print("Player got close to marker!");
+            //    tween.Kill();
+            //}
         });
     }
 
