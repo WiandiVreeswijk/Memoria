@@ -10,8 +10,6 @@ public class MainMenu : MonoBehaviour {
 
     public CinemachineVirtualCamera mainMenuCamera;
 
-    public Texture2D cursorTexture;
-
     private void Start() {
         //#Todo This is extremely dirty and will break very soon
         //cursorLocker.UnlockMouse();
