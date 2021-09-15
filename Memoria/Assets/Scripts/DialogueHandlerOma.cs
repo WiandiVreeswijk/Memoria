@@ -12,10 +12,8 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
     public GameObject fakeElena;
 
     private CinemachineCameraPriorityOnDialogueEvent dialogueCameraPriority;
-    private Icon questIcon;
     public void Start() {
         dialogueCameraPriority = GetComponent<CinemachineCameraPriorityOnDialogueEvent>();
-        questIcon = Globals.IconManager.AddWorldIcon("oma", transform.position + new Vector3(0, 2.25f, 0));
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
@@ -54,7 +52,7 @@ public class DialogueHandlerOma : MonoBehaviour, IDialogueHandler {
                 Vector3 pos = data.questIconPosition == null
                     ? transform.position + data.questIconOffset
                     : data.questIconPosition.position;
-                questIcon.SetPosition(pos);
+                Globals.ProgressionManager.GetIcon().SetPosition(pos);
             }
         }
     }

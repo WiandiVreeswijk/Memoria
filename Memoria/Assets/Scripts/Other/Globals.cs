@@ -18,6 +18,7 @@ public class Globals : MonoBehaviour {
     private Player player;
     private MenuController menuController;
     private Persistence persistenceManager;
+    private ProgressionManager progressionManager;
     private CinemachineManager cinemachineManager;
     private TimescaleManager timescaleManager;
     private SceneManager sceneManager;
@@ -98,6 +99,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out iconManager);
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
+        Utils.FindUniqueObject(out progressionManager);
         Utils.FindUniqueObject(out analyticsManager, false);
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
@@ -132,6 +134,7 @@ public class Globals : MonoBehaviour {
     public static MenuController MenuController => _Instance.menuController;
     public static Persistence Persistence => _Instance.persistenceManager;
     public static CinemachineManager CinemachineManager => _Instance.cinemachineManager;
+    public static ProgressionManager ProgressionManager => _Instance.progressionManager;
     public static TimescaleManager TimescaleManager => _Instance.timescaleManager;
     public static Screenshake Screenshake => _Instance.screenshake;
     public static SceneManager SceneManager => _Instance.sceneManager;
