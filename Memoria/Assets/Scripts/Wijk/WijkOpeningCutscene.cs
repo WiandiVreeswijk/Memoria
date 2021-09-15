@@ -9,7 +9,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
     [Tooltip("Disable this to disable the opening cutscene.")]
     public bool isEnabled = true;
     public CinemachineVirtualCamera mainMenuCamera;
-    public CinemachineVirtualCamera thirdPerson;
     public PlayableDirector playableDirector;
 
     public CarEngine busEngine;
