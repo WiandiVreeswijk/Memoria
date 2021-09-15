@@ -20,7 +20,6 @@ public class behaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         int randomNumber = Random.Range(1, 3);
-        Debug.Log(randomNumber);
         animator.SetInteger("isPointing", randomNumber);
     }
 
