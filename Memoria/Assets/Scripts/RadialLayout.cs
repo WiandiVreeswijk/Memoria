@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +31,18 @@ namespace Assets.Scripts {
         protected override void OnEnable() {
             base.OnEnable();
             CalculateRadial();
+#if UNITY_EDITOR
+            EditorApplication.delayCall += CalculateRadial;
+#endif
+
+        }
+
+        protected override void OnDisable() {
+            base.OnDisable();
+#if UNITY_EDITOR
+            EditorApplication.delayCall -= CalculateRadial;
+#endif
+
         }
 
         public override void SetLayoutHorizontal() {
@@ -45,12 +58,7 @@ namespace Assets.Scripts {
         public override void CalculateLayoutInputHorizontal() {
             CalculateRadial();
         }
-#if UNITY_EDITOR
-        protected override void OnValidate() {
-            base.OnValidate();
-            CalculateRadial();
-        }
-#endif
+        
         public void CalculateRadial() {
             m_Tracker.Clear();
             if (transform.childCount == 0)
