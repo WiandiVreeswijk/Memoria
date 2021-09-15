@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour {
-    
-
     private Icon questIcon;
     private bool watchCollected = false;
+
 
     void Start() {
         GameObject oma = FindObjectOfType<DialogueHandlerOma>().gameObject;
