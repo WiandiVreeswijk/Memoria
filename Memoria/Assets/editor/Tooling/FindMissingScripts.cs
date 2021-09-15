@@ -3,7 +3,7 @@ using UnityEditor;
 public class FindMissingScriptsRecursively : EditorWindow {
     static int go_count = 0, components_count = 0, missing_count = 0;
 
-    [MenuItem("WAEM/Find missing scripts")]
+    [MenuItem("WAEM/Find objects")]
     public static void ShowWindow() {
         EditorWindow.GetWindow(typeof(FindMissingScriptsRecursively));
     }
@@ -11,6 +11,9 @@ public class FindMissingScriptsRecursively : EditorWindow {
     public void OnGUI() {
         if (GUILayout.Button("Find Missing Scripts in selected GameObjects")) {
             FindInSelected();
+        }
+        if (GUILayout.Button("Find not navigation static objects")) {
+            FindNonStatic();
         }
     }
     private static void FindInSelected() {
@@ -22,6 +25,17 @@ public class FindMissingScriptsRecursively : EditorWindow {
             FindInGO(g);
         }
         Debug.Log(string.Format("Searched {0} GameObjects, {1} components, found {2} missing", go_count, components_count, missing_count));
+    }
+
+    private void FindNonStatic() {
+        string objectsString = "";
+        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject go in gameObjects) {
+            if (go.GetComponent<MeshRenderer>() != null && !GameObjectUtility.AreStaticEditorFlagsSet(go, StaticEditorFlags.NavigationStatic)) {
+                objectsString += go.name + "\n";
+            }
+        }
+        Debug.Log(objectsString);
     }
 
     private static void FindInGO(GameObject g) {
