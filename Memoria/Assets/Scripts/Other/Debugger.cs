@@ -97,6 +97,11 @@ public class Debugger : MonoBehaviour {
             case Globals.GlobalsType.NEIGHBORHOOD: InitializeMenuNeighborhood(); break;
             case Globals.GlobalsType.OBLIVION: InitializeMenuOblivion(); break;
         }
+
+        AddLabel("Wijk");
+        AddButton("Open Oma Door", true, () => {
+            FindObjectOfType<OmaHouseDoor>().OpenDoor();
+        });
     }
 
     private void InitializeMenuNeighborhood() {

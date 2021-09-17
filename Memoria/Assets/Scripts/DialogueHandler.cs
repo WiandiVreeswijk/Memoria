@@ -27,7 +27,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     }
 
     public void ConversationStart(string conversationName, GameObject conversationPlayer) {
-        print("Conversation with " + actorName + " started" + (conversationName.Length > 0 ? ": " + conversationName : ""));
+        print("Conversation with " + actorName + " started" + (conversationName.Length > 0 ? ": " + conversationName : "."));
         fakeElena.SetActive(true);
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
@@ -40,7 +40,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     }
 
     public void ConversationEnd(string conversationName, GameObject conversationPlayer) {
-        print("Conversation with " + actorName + " ended" + (conversationName.Length > 0 ? ": " + conversationName : ""));
+        print("Conversation with " + actorName + " ended" + (conversationName.Length > 0 ? ": " + conversationName : "."));
         fakeElena.SetActive(false);
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
@@ -53,7 +53,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             if (data.moveQuestIconAfterConversation) {
                 Vector3 pos = data.questIconPosition == null
                     ? transform.position + data.questIconOffset
-                    : data.questIconPosition.position;
+                    : data.questIconPosition.position + data.questIconOffset;
                 Globals.ProgressionManager.GetIcon().SetPosition(pos);
             }
         }
