@@ -8,8 +8,8 @@ public class ProgressionManager : MonoBehaviour {
 
 
     void Start() {
-        GameObject oma = FindObjectOfType<DialogueHandler>().gameObject;
-        questIcon = Globals.IconManager.AddWorldIcon("oma", oma.transform.position + new Vector3(0, 2.25f, 0));
+        GameObject manfred = GameObject.Find("Neighbour");
+        questIcon = Globals.IconManager.AddWorldIcon("oma", manfred.transform.position + new Vector3(0, 2.25f, 0));
     }
 
     public void CollectWatch() {

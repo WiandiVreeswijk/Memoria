@@ -13,6 +13,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
 
     public CarEngine busEngine;
     public BusStop busStop;
+    private bool isStarted = false;
 
     void Start() {
         Globals.Player.PlayerMovementAdventure.SetCanMove(false);
@@ -45,10 +46,13 @@ public class WijkOpeningCutscene : MonoBehaviour {
     }
 
     private void MouseNotification() {
+        Utils.PrintStackTrace("MouseNotification");
         Globals.MenuController.NotifyPlayer("<font=\"Mouse SDF\"><size=36>u</size></font>  to move the camera");
     }
 
     public void Trigger() {
+        if (isStarted) return;
+        isStarted = true;
         mainMenuCamera.Priority = 10;
         playableDirector.time = ShouldSkip() ? playableDirector.duration : 0;
         playableDirector.Evaluate();
