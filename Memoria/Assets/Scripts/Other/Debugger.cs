@@ -55,6 +55,7 @@ public class Debugger : MonoBehaviour {
     private void SetVisible(bool toggle) {
         if (toggle) {
             Globals.TimescaleManager.PauseGame();
+            Globals.CursorManager.UnlockMouse();
             debugMenuPanel.alpha = 1.0f;
             debugMenuPanel.blocksRaycasts = true;
             debugMenuPanel.interactable = true;
@@ -62,6 +63,7 @@ public class Debugger : MonoBehaviour {
             debugPrint.SetTextVisible(false);
         } else {
             Globals.TimescaleManager.UnPauseGame();
+            Globals.CursorManager.LockMouse();
             debugMenuPanel.alpha = 0.0f;
             debugMenuPanel.blocksRaycasts = false;
             debugMenuPanel.interactable = false;
