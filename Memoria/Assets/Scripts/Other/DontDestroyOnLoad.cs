@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DontDestroyOnLoad : MonoBehaviour {
     void Start() {
+        transform.parent = null;
         DontDestroyOnLoad(gameObject);
     }
 }

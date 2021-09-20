@@ -25,6 +25,7 @@ public class Globals : MonoBehaviour {
     private Screenshake screenshake;
     private ScoreManager scoreManager;
     private Debugger debugger;
+    private CursorManager cursorManager;
     private AnalyticsManager analyticsManager;
     private new Camera camera;
     private bool isInitialized = false;
@@ -96,6 +97,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out iconManager);
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
+        Utils.FindUniqueObject(out cursorManager);
         Utils.FindUniqueObject(out progressionManager);
         Utils.FindUniqueObject(out analyticsManager, false);
         Utils.FindUniqueObject(out debugger);
@@ -141,6 +143,7 @@ public class Globals : MonoBehaviour {
     public static AnalyticsManager AnalyticsManager => _Instance.analyticsManager;
     public static Player Player => _Instance.player;
     public static Debugger Debugger => _Instance.debugger;
+    public static CursorManager CursorManager => _Instance.cursorManager;
     public static Camera Camera => _Instance.camera;
 
     #endregion

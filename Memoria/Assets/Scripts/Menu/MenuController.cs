@@ -91,8 +91,7 @@ public class MenuController : MonoBehaviour {
         FadeMainPanelOut(instant ? 0.0f : fadeTime).OnComplete(() => Globals.TimescaleManager.UnPauseGame());
     }
 
-    public void SetMenu(string name)
-    {
+    public void SetMenu(string name) {
         Globals.TimescaleManager.PauseGame();
         if (name == "Notification") collectedThingies.SetActive(true);
         SetMenu(name, fadeTime);
@@ -117,12 +116,11 @@ public class MenuController : MonoBehaviour {
     }
 
     public void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !Globals.Debugger.IsOpen()) {
             TogglePause();
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
+        if (Input.GetKeyDown(KeyCode.N)) {
             Globals.TimescaleManager.TogglePause();
         }
     }
@@ -176,6 +174,9 @@ public class MenuController : MonoBehaviour {
         return mainFade;
     }
 
+    public bool IsOpen() {
+        return GetActiveMenu().Length != 0;
+    }
 
     private void TogglePause() {
         string active = GetActiveMenu();
