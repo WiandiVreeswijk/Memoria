@@ -47,7 +47,7 @@ public class Debugger : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.F1)) {
+        if (Input.GetKeyDown(KeyCode.F1) && !Globals.MenuController.IsOpen()) {
             SetVisible(!debugMenuVisible);
         }
     }
@@ -55,6 +55,7 @@ public class Debugger : MonoBehaviour {
     private void SetVisible(bool toggle) {
         if (toggle) {
             Globals.TimescaleManager.PauseGame();
+            Globals.CursorManager.UnlockMouse();
             debugMenuPanel.alpha = 1.0f;
             debugMenuPanel.blocksRaycasts = true;
             debugMenuPanel.interactable = true;
@@ -62,6 +63,7 @@ public class Debugger : MonoBehaviour {
             debugPrint.SetTextVisible(false);
         } else {
             Globals.TimescaleManager.UnPauseGame();
+            Globals.CursorManager.LockMouse();
             debugMenuPanel.alpha = 0.0f;
             debugMenuPanel.blocksRaycasts = false;
             debugMenuPanel.interactable = false;
@@ -110,5 +112,9 @@ public class Debugger : MonoBehaviour {
 
     private void InitializeMenuOblivion() {
 
+    }
+
+    public bool IsOpen() {
+        return isActive && debugMenuVisible;
     }
 }
