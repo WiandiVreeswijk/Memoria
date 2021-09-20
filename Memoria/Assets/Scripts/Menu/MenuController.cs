@@ -6,7 +6,6 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class MenuController : MonoBehaviour {
     //private Animator animator;
     // Start is called before the first frame update
@@ -136,6 +135,7 @@ public class MenuController : MonoBehaviour {
         var sequence = DOTween.Sequence()
             .AppendInterval(delay)
             .AppendCallback(() => { notificationIndex++; })
+            .AppendCallback(() => { FMODUnity.RuntimeManager.PlayOneShot("event:/SFXUI/NotificationPopUp"); })
             .Append(DOTween.To(() => group.alpha, x => group.alpha = x, 1.0f, 1.5f))
             .AppendInterval(5.0f)
             .Append(DOTween.To(() => group.alpha, x => group.alpha = x, 0.0f, 1.5f))
