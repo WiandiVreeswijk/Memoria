@@ -12,8 +12,6 @@ public class OptionsMenu : MonoBehaviour {
     public PlayableDirector director;
     public CinemachineVirtualCamera mainMenuCamera;
 
-    public CursorLocker cursorLocker;
-
     private void Update() {
         if (director.state != PlayState.Playing) {
             if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -30,7 +28,7 @@ public class OptionsMenu : MonoBehaviour {
         Globals.MenuController.SetMenu("Pause");
         //pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        cursorLocker.UnlockMouse();
+        Globals.CursorManager.UnlockMouse();
         gameIsPaused = true;
     }
 
@@ -38,7 +36,7 @@ public class OptionsMenu : MonoBehaviour {
         Globals.MenuController.CloseMenu();
         //pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        cursorLocker.LockMouse();
+        Globals.CursorManager.LockMouse();
         gameIsPaused = false;
     }
 
@@ -48,10 +46,9 @@ public class OptionsMenu : MonoBehaviour {
 
     public void LoadMenu() {
         Time.timeScale = 1f;
-        cursorLocker.UnlockMouse();
+        Globals.CursorManager.UnlockMouse();
         pauseMenuUI.SetActive(false);
         menuFadeAnimator.Play("FadeIn");
         mainMenuCamera.Priority = 12;
-
     }
 }

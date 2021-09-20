@@ -47,7 +47,7 @@ public class Debugger : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.F1)) {
+        if (Input.GetKeyDown(KeyCode.F1) && !Globals.MenuController.IsOpen()) {
             SetVisible(!debugMenuVisible);
         }
     }
@@ -110,5 +110,9 @@ public class Debugger : MonoBehaviour {
 
     private void InitializeMenuOblivion() {
 
+    }
+
+    public bool IsOpen() {
+        return isActive && debugMenuVisible;
     }
 }
