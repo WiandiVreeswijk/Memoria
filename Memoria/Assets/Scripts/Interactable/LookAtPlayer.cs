@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class LookAtTest : MonoBehaviour {
+public class LookAtPlayer : MonoBehaviour {
     public Transform lookAtPoint;
     private float lerp = 0.0f;
     private Tween tween;
