@@ -12,6 +12,9 @@ public class Player : MonoBehaviour {
     private PlayerMovementAdventure playerMovementAdventure;
     public PlayerMovementAdventure PlayerMovementAdventure => playerMovementAdventure;
 
+    private PlayerVisualEffects visualEffects;
+    public PlayerVisualEffects VisualEffects => visualEffects;
+
     //Levels
     private PlayerMovement25D playerMovement25D;
     public PlayerMovement25D PlayerMovement25D => playerMovement25D;
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour {
         playerMovement25D = GetComponent<PlayerMovement25D>();
         cameraController = GetComponent<PlayerCameraController>();
         visualEffects25D = GetComponent<Player25DVisualEffects>();
+        visualEffects = GetComponent<PlayerVisualEffects>();
         playerDeath = GetComponent<PlayerDeath>();
         playerSound = GetComponent<PlayerSound>();
         povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");

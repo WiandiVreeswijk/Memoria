@@ -11,6 +11,8 @@ public class DialogueData : MonoBehaviour
     public Transform fakeElenaPoint;
     public CinemachineVirtualCamera cam;
 
+    public Transform elenaLookAtPoint;
+
     public bool moveQuestIconAfterConversation;
     public Transform questIconPosition;
     public Vector3 questIconOffset;

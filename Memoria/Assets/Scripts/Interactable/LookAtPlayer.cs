@@ -8,6 +8,12 @@ public class LookAtPlayer : MonoBehaviour {
     private float lerp = 0.0f;
     private Tween tween;
     private bool toggle = false;
+    public float weight = 1.0f;
+
+    public float timeToLookAtPlayer = 2.0f;
+
+    [Range(0.5f, 10f)]
+    public float distance = 4.5f;
     Animator animator;
     void Start() {
         animator = GetComponent<Animator>();
@@ -15,18 +21,20 @@ public class LookAtPlayer : MonoBehaviour {
 
     private void FixedUpdate() {
         float dist = Vector3.Distance(transform.position, Globals.Player.HeadPosition);
-        if (dist > 4.5f) {
+        if (gameObject.name == "Hanna")
+            Globals.Debugger.Print("a", dist + "");
+        if (dist > distance) {
             //Stop
             if (!toggle) {
                 tween?.Kill();
-                tween = DOTween.To(() => lerp, x => lerp = x, 1.0f, 2.0f).SetEase(Ease.InOutQuad);
+                tween = DOTween.To(() => lerp, x => lerp = x, 1.0f, timeToLookAtPlayer).SetEase(Ease.InOutQuad);
                 toggle = true;
             }
-        } else if (dist < 4.0f) {
+        } else if (dist < (distance - 0.5f)) {
             //Start
             if (toggle) {
                 tween?.Kill();
-                tween = DOTween.To(() => lerp, x => lerp = x, 0.0f, 2.0f).SetEase(Ease.InOutQuad);
+                tween = DOTween.To(() => lerp, x => lerp = x, 0.0f, timeToLookAtPlayer).SetEase(Ease.InOutQuad);
                 toggle = false;
             }
         }
@@ -34,6 +42,6 @@ public class LookAtPlayer : MonoBehaviour {
 
     void OnAnimatorIK() {
         animator.SetLookAtPosition(Vector3.Lerp(Globals.Player.HeadPosition, lookAtPoint.position, lerp));
-        animator.SetLookAtWeight(1.0f);
+        animator.SetLookAtWeight(weight);
     }
 }

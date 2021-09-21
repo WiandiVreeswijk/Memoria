@@ -11,9 +11,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public string actorName;
     public GameObject fakeElena;
 
-    private CinemachineCameraPriorityOnDialogueEvent dialogueCameraPriority;
     public void Start() {
-        dialogueCameraPriority = GetComponent<CinemachineCameraPriorityOnDialogueEvent>();
         actorName = actorName.ToLower();
         //DialogueLua.GetVariable(actorName + "_Progression");
     }
@@ -26,17 +24,20 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         throw new Exception("No dialogue data found for conversation: " + name);
     }
 
-    public void ConversationStart(string conversationName, GameObject conversationPlayer) {
+    public KeyValuePair<Vector3, Quaternion>? ConversationStart(string conversationName, GameObject conversationPlayer) {
         print("Conversation with " + actorName + " started" + (conversationName.Length > 0 ? ": " + conversationName : "."));
         fakeElena.SetActive(true);
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
+            data.cam.Priority = 99;
+            fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(data.elenaLookAtPoint.position);
             fakeElena.transform.SetPositionAndRotation(data.fakeElenaPoint);
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
-            dialogueCameraPriority.virtualCamera = data.cam;
             data.conversationStart.Invoke();
+            return new KeyValuePair<Vector3, Quaternion>(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
         }
+        return null;
     }
 
     public void ConversationEnd(string conversationName, GameObject conversationPlayer) {
@@ -45,7 +46,8 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
-            data.conversationEnd.Invoke();
+            data.cam.Priority = 0;
+            fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(null);
             if (data.moveCharacterAfterConversation) {
                 transform.SetPositionAndRotation(data.newCharacterPosition);
             }
@@ -56,6 +58,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
                     : data.questIconPosition.position + data.questIconOffset;
                 Globals.ProgressionManager.GetIcon().SetPosition(pos);
             }
+            data.conversationEnd.Invoke();
         }
     }
 

@@ -178,8 +178,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397165414691326160}
-  m_LocalRotation: {x: 0.52020186, y: -0.46147606, z: -0.5355288, w: 0.4792066}
-  m_LocalPosition: {x: 0.000034749508, y: 0.8323275, z: -0.12570427}
+  m_LocalRotation: {x: 0.5202018, y: -0.46147603, z: -0.5355288, w: 0.4792066}
+  m_LocalPosition: {x: 0.00003476441, y: 0.83232754, z: -0.12570462}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6402651684066478808}
@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 5001213176511844467}
   - component: {fileID: 6524208660857085315}
   - component: {fileID: 3202999744675472633}
-  - component: {fileID: 2459193408753572706}
+  - component: {fileID: 1832917710}
   m_Layer: 0
   m_Name: Oma
   m_TagString: Untagged
@@ -1613,6 +1613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAtPoint: {fileID: 8030619592951623368}
+  weight: 1
+  distance: 4.5
 --- !u!114 &5001213176511844467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,6 +1630,7 @@ MonoBehaviour:
   dialogueData:
   - {fileID: 0}
   - {fileID: 0}
+  actorName: oma
   fakeElena: {fileID: 0}
 --- !u!114 &6524208660857085315
 MonoBehaviour:
@@ -1675,7 +1678,7 @@ MonoBehaviour:
   skipBarkIfNoValidEntries: 0
   cacheBarkLines: 0
   conversation: StoryIntroduction
-  conversationConversant: {fileID: 0}
+  conversationConversant: {fileID: 212851649387933638}
   conversationActor: {fileID: 0}
   startConversationEntryID: -1
   exclusive: 0
@@ -1722,24 +1725,20 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &2459193408753572706
-MonoBehaviour:
+--- !u!136 &1832917710
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551932347549416909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9452e0fbfa245c46aceceb551675604, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigger: 2
-  once: 0
-  selectedDatabase: {fileID: 0}
-  virtualCamera: {fileID: 0}
-  onStart: 99
-  onEnd: 0
+  m_Radius: 2.9
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5785480431602026709
 GameObject:
   m_ObjectHideFlags: 0

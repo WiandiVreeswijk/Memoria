@@ -11,6 +11,7 @@ public class PlayerCameraController : MonoBehaviour {
     public CinemachineFreeLook thirdPersonCamera;
     public GameObject arm;
     public bool isInFirstPerson;
+    public bool inputEnabled = true;
     //2D
     public CinemachineVirtualCamera cam;
     public GameObject cameraTarget;
@@ -22,6 +23,16 @@ public class PlayerCameraController : MonoBehaviour {
 
     public void Start() {
         //arm.SetActive(false);
+        CinemachineCore.GetInputAxis = CinemachineAxisInputDelegate;
+    }
+
+    public void SetInputEnabled(bool toggle) {
+        inputEnabled = toggle;
+    }
+
+    public float CinemachineAxisInputDelegate(string axisName) {
+        if (inputEnabled) return Input.GetAxis(axisName);
+        return 0;
     }
 
     public void SetCameraTargetPosition(Vector3 position) {
