@@ -27,7 +27,6 @@ public class TriggerActivator : MonoBehaviour {
         return activatablesList;
     }
 
-    //#Todo Allow for multiple activatables connected to trigger activator (including self)
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag(triggerName)) {
             foreach (var activatable in GetActivatables<IEnterActivatable>()) activatable.ActivateEnter();

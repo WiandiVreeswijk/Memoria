@@ -23,13 +23,4 @@ public class CollectiblePlacer : MonoBehaviour {
     [HideInInspector] public Point startTangent = new Point(new Vector3(-1.0f, 1.0f, 0.0f), true);
     [HideInInspector] public Point end = new Point(new Vector3(1.0f, 0.0f, 0.0f), false);
     [HideInInspector] public Point endTangent = new Point(new Vector3(1.0f, 1.0f, 0.0f), true);
-
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
 }
