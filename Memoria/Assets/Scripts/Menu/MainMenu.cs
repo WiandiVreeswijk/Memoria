@@ -13,6 +13,10 @@ public class MainMenu : MonoBehaviour {
     private void Start() {
         //#Todo This is extremely dirty and will break very soon
         //cursorLocker.UnlockMouse();
+
+        Globals.MusicManagerWijk.FadePianoVolume(1.0f, 2.0f);
+        Globals.MusicManagerWijk.FadeViolinVolume(1.0f, 2.0f);
+        Globals.MusicManagerWijk.FadeHarpVolume(1.0f, 2.0f);
     }
 
     public void PlayGame() {
@@ -23,7 +27,7 @@ public class MainMenu : MonoBehaviour {
             Globals.MenuController.CloseMenu();
             Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
             Globals.SoundManagerWijk.FadeEngineVolume(0.4f);
-            Globals.MusicManagerWijk.FadeMusicVolume(1.0f);
+            Globals.MusicManagerWijk.FadeFluteVolume(1.0f, 5.0f);
         });
     }
 
