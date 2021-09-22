@@ -34,7 +34,7 @@ public class PlayerFootStepsWijk : MonoBehaviour
         }
     }
 
-    private void PlayFootstepsEvent(string path)
+    public void PlayFootstepsEvent(string path)
     {
         FMOD.Studio.EventInstance Footsteps = FMODUnity.RuntimeManager.CreateInstance(path);
         Footsteps.setParameterByName("FootstepsMaterialWijk", material);
