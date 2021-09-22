@@ -88,16 +88,13 @@ namespace Assets.Scripts {
             Globals.SceneManager.SetScene(sceneName);
         }
 
-        public void Update() {
-            if (Input.GetKeyDown(KeyCode.V)) OnActivateWatch();
-        }
         public void FixedUpdate() {
-            //float distance = Vector3.Distance(Globals.Player.transform.position, transform.position);
-            //if (distance < 5 && !open) {
-            //    Open();
-            //} else if (distance > 5 && open) {
-            //    Close();
-            //}
+            float distance = Vector3.Distance(Globals.Player.transform.position, transform.position);
+            if (distance < 3 && !open) {
+                Open();
+            } else if (distance > 5 && open) {
+                Close();
+            }
         }
     }
 }
