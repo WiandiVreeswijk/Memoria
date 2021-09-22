@@ -22,7 +22,11 @@ public class Debugger : MonoBehaviour {
     }
     private void Start() {
         debugPrint = GetComponent<DebugPrint>();
-        SetVisible(false);
+        debugMenuPanel.alpha = 0.0f;
+        debugMenuPanel.blocksRaycasts = false;
+        debugMenuPanel.interactable = false;
+        debugMenuVisible = false;
+        debugPrint.SetTextVisible(true);
     }
 
     public void Print(string keyword, string text, float duration = -1) {
