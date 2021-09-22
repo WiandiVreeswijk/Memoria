@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
+using FMODUnity;
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public List<DialogueData> dialogueData = new List<DialogueData>();
     public string actorName;
+
+    [EventRef]
+    public string soundEffect;
     public GameObject fakeElena;
 
     public void Start() {
@@ -34,6 +39,8 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
             fakeElena.transform.SetPositionAndRotation(data.fakeElenaPoint);
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
+            if (soundEffect.Length > 0)
+                FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
             data.conversationStart.Invoke();
             return new KeyValuePair<Vector3, Quaternion>(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
         }
@@ -63,7 +70,10 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     }
 
     public void ConversationLine(string conversationName, string line, GameObject conversationPlayer) {
-
+        if (Random.Range(0, 4) < 1) {
+            if (soundEffect.Length > 0)
+                FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
+        }
     }
 
     public string GetActorName() {
