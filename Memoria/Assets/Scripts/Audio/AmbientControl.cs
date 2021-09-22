@@ -4,7 +4,6 @@ using UnityEngine;
 using FMOD.Studio;
 
 public class AmbientControl : MonoBehaviour {
-    private PlayerMovementAdventure adventureMovement;
 
     [Header("FMOD Event")]
     [FMODUnity.EventRef]
@@ -22,8 +21,6 @@ public class AmbientControl : MonoBehaviour {
     public float birdValue = 1f;
 
     private void Start() {
-        adventureMovement = FindObjectOfType<PlayerMovementAdventure>();
-
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
 
         FMOD.Studio.EventDescription volumeDescription;
