@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{ccd869d2-e1ff-400b-8265-7277d9fb635a}">
 		<property name="name">
-			<value>New Event</value>
+			<value>SurprisedVocalization</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
@@ -30,6 +30,9 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{73a168ef-1389-4c9f-8eb8-dc7956387fe8}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{8de627b5-4a9d-4e09-bbfb-147c2f4da841}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{bb83a30f-eaec-46cf-8643-bae01f45b6b1}">
@@ -170,9 +173,21 @@
 	<object class="MixerBusEffectChain" id="{8b6855a6-c0e6-470e-95b1-d97ac3bc45b0}">
 		<relationship name="effects">
 			<destination>{d4e007ae-389d-4cfe-936a-03cae286470f}</destination>
+			<destination>{0f3db7fa-cec1-49a8-8199-fca1c79bad4b}</destination>
+			<destination>{41c3409c-3da3-4f3a-ad4d-ee29254424c5}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1cb5eac4-10b2-4ab0-b2db-9c25fc7082cc}" />
 	<object class="MixerBusFader" id="{91a943a1-683b-4e3a-912f-80139f8690a5}" />
 	<object class="MixerBusFader" id="{d4e007ae-389d-4cfe-936a-03cae286470f}" />
+	<object class="CompressorEffect" id="{0f3db7fa-cec1-49a8-8199-fca1c79bad4b}">
+		<property name="gain">
+			<value>-9</value>
+		</property>
+	</object>
+	<object class="ThreeEQEffect" id="{41c3409c-3da3-4f3a-ad4d-ee29254424c5}">
+		<property name="highGain">
+			<value>-13</value>
+		</property>
+	</object>
 </objects>
