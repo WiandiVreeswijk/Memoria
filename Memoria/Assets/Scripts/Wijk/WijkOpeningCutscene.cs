@@ -46,7 +46,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
     }
 
     private void MouseNotification() {
-        Utils.PrintStackTrace("MouseNotification");
         Globals.MenuController.NotifyPlayer("<font=\"Mouse SDF\"><size=36>u</size></font>  to move the camera");
     }
 
