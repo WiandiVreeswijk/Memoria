@@ -70,7 +70,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     }
 
     public void ConversationLine(string conversationName, string line, GameObject conversationPlayer) {
-        if (Random.Range(0, 4) < 1) {
+        if (Random.Range(0, 10) < 1) {
             if (soundEffect.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
         }
