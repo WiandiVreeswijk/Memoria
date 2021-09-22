@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class MemoryWatchManager : MonoBehaviour {
     public const float MAX_DISTANCE = 15f;
     public const float EXECUTION_DISTANCE = 2.5f;
+    public GameObject arm;
     public MemoryWatch firstPersonWatch;
     public MemoryWatch thirdPersonWatch;
 
@@ -15,11 +17,13 @@ public class MemoryWatchManager : MonoBehaviour {
 
     MemoryObject[] memoryObjects;
     private MemoryObject withinExecutionRangeMemoryObject;
+
     void Start() {
         memoryObjects = FindObjectsOfType<MemoryObject>();
     }
 
     void FixedUpdate() {
+        //arm.transform.Rotate(Vector3.left, 0.1f, Space.Self);
         MemoryObject closest = null;
         float closestDistance = float.MaxValue;
         foreach (MemoryObject mo in memoryObjects) {
@@ -48,7 +52,33 @@ public class MemoryWatchManager : MonoBehaviour {
     private float progress = 0;
     private bool pressed = false;
     private bool activated = false;
+    private float rotateValue = 0;
+    private int rotateDir = 0;
+    private Tween tween;
     void Update() {
+        if (rotateDir == 1) {
+            if (rotateValue < 10) {
+                rotateValue += 0.1f * Time.deltaTime;
+                arm.transform.Rotate(Vector3.left, 0.1f * Time.deltaTime, Space.World);
+            }
+        }else if (rotateDir == -1)
+        {
+            if (rotateValue > 0) {
+                rotateValue -= 0.1f * Time.deltaTime;
+                arm.transform.Rotate(Vector3.left, -0.1f * Time.deltaTime, Space.World);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+
+            rotateDir++;
+            rotateDir = Mathf.Clamp(rotateDir, -1, 1);
+        }
+        if (Input.GetKeyDown(KeyCode.H)) {
+            rotateDir--;
+            rotateDir = Mathf.Clamp(rotateDir, -1, 1);
+        }
         if (Input.GetKeyDown(KeyCode.Space)) pressed = true;
         if (!Input.GetKey(KeyCode.Space)) pressed = false;
         if (pressed) {
@@ -63,6 +93,7 @@ public class MemoryWatchManager : MonoBehaviour {
 
         if (!activated && progress >= 0.99f && !pressed) {
             withinExecutionRangeMemoryObject.Activate();
+            print("activate watch");
             if (Globals.Player.CameraController.IsInFirstPerson()) {
                 firstPersonWatch.Activate(withinExecutionRangeMemoryObject);
             } else thirdPersonWatch.Activate(withinExecutionRangeMemoryObject);
