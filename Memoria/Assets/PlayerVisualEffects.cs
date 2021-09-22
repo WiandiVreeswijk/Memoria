@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerVisualEffects : MonoBehaviour {
     private Animator animator;
     private Renderer[] meshRenderers;
+    private bool shouldLookAt = false;
+    private Vector3 lookAtPoint;
+    private float lookAtWeight;
 
     void Start() {
         meshRenderers = GetComponentsInChildren<Renderer>();
@@ -17,13 +20,21 @@ public class PlayerVisualEffects : MonoBehaviour {
         }
     }
 
-    public void SetLookAt(Vector3? position) {
-        if (position.HasValue) {
-            print(position.Value);
-            GetComponent<Animator>().SetLookAtPosition(position.Value);
-            GetComponent<Animator>().SetLookAtWeight(1f);
+    public void SetLookAt(Vector3? position, float weight = 1.0f) {
+        shouldLookAt = position.HasValue;
+        if (shouldLookAt) {
+            lookAtPoint = position.Value;
+            lookAtWeight = weight;
+            shouldLookAt = true;
+        }
+    }
+
+    void OnAnimatorIK() {
+        if (shouldLookAt) {
+            animator.SetLookAtPosition(lookAtPoint);
+            animator.SetLookAtWeight(lookAtWeight);
         } else {
-            GetComponent<Animator>().SetLookAtWeight(0f);
+            animator.SetLookAtWeight(0.0f);
         }
     }
 }

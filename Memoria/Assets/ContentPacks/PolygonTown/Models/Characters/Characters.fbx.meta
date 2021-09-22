@@ -573,7 +573,8 @@ ModelImporter:
     - root/pelvis/thigh_r/calf_r/foot_r
     - root/pelvis/thigh_r/calf_r/foot_r/ball_r
     - root/pelvis/thigh_r/calf_r/foot_r/ball_r/toes_r
-    extraUserProperties: []
+    extraUserProperties:
+    - '#BAKERY{"meshName":["Character_Father_02"],"padding":[41],"unwrapper":[1]}'
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -589,7 +590,7 @@ ModelImporter:
     importLights: 0
     fileIdsGeneration: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 0
@@ -601,9 +602,9 @@ ModelImporter:
     meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
+    secondaryUVAreaDistortion: 15
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4

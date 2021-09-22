@@ -139,7 +139,6 @@ public static class Utils {
         transform.rotation = newTransform.rotation;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void PrintStackTrace(string name) {
         try {
             throw new Exception(name);
