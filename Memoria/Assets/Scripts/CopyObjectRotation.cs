@@ -9,9 +9,9 @@ public class CopyObjectRotation : MonoBehaviour {
     public bool fixedUpdate;
 
     void Update() {
-        if (update) transform.rotation = target.transform.rotation;
+        if (update && target != null) transform.rotation = target.transform.rotation;
     }
     void FixedUpdate() {
-        if (fixedUpdate) transform.rotation = target.transform.rotation;
+        if (fixedUpdate && target != null) transform.rotation = target.transform.rotation;
     }
 }

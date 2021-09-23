@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Cinemachine;
 using UnityEngine;
 
-public class DeleteBus : MonoBehaviour
+public class DeleteBus : MonoBehaviour, IEnterActivatable
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Bus"))
-        {
-            Destroy(other);
-        }
+    public GameObject cam;
+    public void ActivateEnter() {
+        Destroy(cam);
+        Destroy(gameObject);
     }
 }
