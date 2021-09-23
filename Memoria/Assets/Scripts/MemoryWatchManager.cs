@@ -56,50 +56,50 @@ public class MemoryWatchManager : MonoBehaviour {
     private int rotateDir = 0;
     private Tween tween;
     void Update() {
-        if (rotateDir == 1) {
-            if (rotateValue < 10) {
-                rotateValue += 0.1f * Time.deltaTime;
-                arm.transform.Rotate(Vector3.left, 0.1f * Time.deltaTime, Space.World);
-            }
-        }else if (rotateDir == -1)
-        {
-            if (rotateValue > 0) {
-                rotateValue -= 0.1f * Time.deltaTime;
-                arm.transform.Rotate(Vector3.left, -0.1f * Time.deltaTime, Space.World);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-
-            rotateDir++;
-            rotateDir = Mathf.Clamp(rotateDir, -1, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.H)) {
-            rotateDir--;
-            rotateDir = Mathf.Clamp(rotateDir, -1, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.Space)) pressed = true;
-        if (!Input.GetKey(KeyCode.Space)) pressed = false;
-        if (pressed) {
-            if (withinExecutionRangeMemoryObject != null) {
-                progress += processCurve.Evaluate(progress) * Time.deltaTime;
-            } else pressed = false;
-        } else progress -= 0.5f * Time.deltaTime;
-
-        progress = Mathf.Clamp01(progress);
-        thirdPersonWatch.SetWatchEdgeProgress(progress, pressed && progress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
-        firstPersonWatch.SetWatchEdgeProgress(progress, pressed && progress < 0.99f, Globals.Player.CameraController.IsInFirstPerson());
-
-        if (!activated && progress >= 0.99f && !pressed) {
-            withinExecutionRangeMemoryObject.Activate();
-            print("activate watch");
-            if (Globals.Player.CameraController.IsInFirstPerson()) {
-                firstPersonWatch.Activate(withinExecutionRangeMemoryObject);
-            } else thirdPersonWatch.Activate(withinExecutionRangeMemoryObject);
-            activated = true;
-        }
-
-        if (progress < 0.1f) activated = false;
+        //if (rotateDir == 1) {
+        //    if (rotateValue < 10) {
+        //        rotateValue += 0.1f * Time.deltaTime;
+        //        arm.transform.Rotate(Vector3.left, 0.1f * Time.deltaTime, Space.World);
+        //    }
+        //}else if (rotateDir == -1)
+        //{
+        //    if (rotateValue > 0) {
+        //        rotateValue -= 0.1f * Time.deltaTime;
+        //        arm.transform.Rotate(Vector3.left, -0.1f * Time.deltaTime, Space.World);
+        //    }
+        //}
+        //
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //
+        //    rotateDir++;
+        //    rotateDir = Mathf.Clamp(rotateDir, -1, 1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.H)) {
+        //    rotateDir--;
+        //    rotateDir = Mathf.Clamp(rotateDir, -1, 1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Space)) pressed = true;
+        //if (!Input.GetKey(KeyCode.Space)) pressed = false;
+        //if (pressed) {
+        //    if (withinExecutionRangeMemoryObject != null) {
+        //        progress += processCurve.Evaluate(progress) * Time.deltaTime;
+        //    } else pressed = false;
+        //} else progress -= 0.5f * Time.deltaTime;
+        //
+        //progress = Mathf.Clamp01(progress);
+        //thirdPersonWatch.SetWatchEdgeProgress(progress, pressed && progress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
+        //firstPersonWatch.SetWatchEdgeProgress(progress, pressed && progress < 0.99f, Globals.Player.CameraController.IsInFirstPerson());
+        //
+        //if (!activated && progress >= 0.99f && !pressed) {
+        //    withinExecutionRangeMemoryObject.Activate();
+        //    print("activate watch");
+        //    if (Globals.Player.CameraController.IsInFirstPerson()) {
+        //        firstPersonWatch.Activate(withinExecutionRangeMemoryObject);
+        //    } else thirdPersonWatch.Activate(withinExecutionRangeMemoryObject);
+        //    activated = true;
+        //}
+        //
+        //if (progress < 0.1f) activated = false;
     }
 }

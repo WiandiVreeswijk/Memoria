@@ -10,6 +10,12 @@ public class DialogueSystemHandler : MonoBehaviour {
     public GameObject conversationPlayer;
     private string activeConversation;
     private IDialogueHandler activeHandler;
+
+    //public void Start()
+    //{
+    //    DialogueSystemEvents events = GetComponent<DialogueSystemEvents>();
+    //    events.conversationEvents.onConversationStart
+    //}
     public void OnConversationStart(UnityEngine.Object actor) {
         if (actor.GetType() == typeof(Transform)) {
             activeHandler = ((Transform)actor).GetComponent<IDialogueHandler>();
