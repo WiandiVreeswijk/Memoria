@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class MenuController : MonoBehaviour {
     //private Animator animator;
     // Start is called before the first frame update
@@ -91,6 +92,7 @@ public class MenuController : MonoBehaviour {
             activePanel = null;
         }
         FadeMainPanelOut(fadeTime).OnComplete(() => Globals.TimescaleManager.UnPauseGame());
+        Globals.CursorManager.LockMouse();
     }
 
     public void SetMenu(string name) {
@@ -113,6 +115,7 @@ public class MenuController : MonoBehaviour {
             if (activePanel == null) FadeMainPanelIn(time);
             if (activePanel != null) FadePanelOut(activePanel, time / 2.0f);
             FadePanelIn(group, time);
+            Globals.CursorManager.UnlockMouse();
             activePanel = group;
         } else Debug.LogError($"UIElement {name} is unknown");
     }
@@ -145,7 +148,7 @@ public class MenuController : MonoBehaviour {
             .AppendCallback(() => {
                 Destroy(obj);
                 notificationIndex--;
-            }).SetUpdate(true);
+            });
     }
 
     private void FadePanelIn(WAEMDictUIElement group, float time) {
