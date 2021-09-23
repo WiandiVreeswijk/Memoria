@@ -11,14 +11,15 @@ using Random = UnityEngine.Random;
 public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public List<DialogueData> dialogueData = new List<DialogueData>();
     public string actorName;
+    public GameObject fakeElena;
 
+    [Space(20)]
     [EventRef]
     public string soundEffectStart;
 
     [EventRef]
     public string soundEffectEnd;
 
-    public GameObject fakeElena;
 
     public void Start() {
         actorName = actorName.ToLower();
