@@ -51,6 +51,8 @@ public class Debugger : MonoBehaviour {
     }
 
     private void Update() {
+        if (Input.GetKeyDown(KeyCode.U)) Time.timeScale = 5.0f;
+        if (Input.GetKeyDown(KeyCode.P)) Time.timeScale = 1.0f;
         if (Input.GetKeyDown(KeyCode.F1) && !Globals.MenuController.IsOpen()) {
             SetVisible(!debugMenuVisible);
         }

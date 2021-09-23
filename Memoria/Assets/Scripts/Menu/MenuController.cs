@@ -29,10 +29,6 @@ public class MenuController : MonoBehaviour {
         }
     }
 
-    public GameObject collectedThingies;
-    [SerializeField] private GameObject notificationPrefab;
-    [SerializeField] private GameObject notificationsParent;
-
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private WAEMUIElement[] uiElements;
     [SerializeField] private float fadeTime = 0.25f;
@@ -41,7 +37,6 @@ public class MenuController : MonoBehaviour {
     private Tween mainFade;
     private WAEMDictUIElement activePanel;
     private Dictionary<string, WAEMDictUIElement> uiElementsDict = new Dictionary<string, WAEMDictUIElement>();
-    private int notificationIndex = 0;
 
     private bool initialized = false;
     private string afterInitializationPanel = "";
@@ -76,10 +71,8 @@ public class MenuController : MonoBehaviour {
         return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration).SetUpdate(true);
     }
 
-    public void ReloadScene() {
+    public void QuitGame() {
         Application.Quit();
-        //DOTween.Clear();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void CloseMenu() {
@@ -97,7 +90,6 @@ public class MenuController : MonoBehaviour {
 
     public void SetMenu(string name) {
         Globals.TimescaleManager.PauseGame();
-        if (name == "Notification") collectedThingies.SetActive(true);
         SetMenu(name, fadeTime);
     }
 
@@ -124,31 +116,6 @@ public class MenuController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape) && !Globals.Debugger.IsOpen()) {
             TogglePause();
         }
-
-        if (Input.GetKeyDown(KeyCode.N)) {
-            Globals.TimescaleManager.TogglePause();
-        }
-    }
-
-    public void NotifyPlayer(string message, float delay = 0.0f) {
-        GameObject obj = Instantiate(notificationPrefab, notificationsParent.transform);
-        obj.GetComponentInChildren<TextMeshProUGUI>().text = message;
-        var rectTransform = obj.GetComponent<RectTransform>();
-        obj.transform.position = new Vector3(obj.transform.position.x, rectTransform.rect.height + 10f + (rectTransform.rect.height + 10f) * notificationIndex, 0.0f);
-        var group = obj.GetComponent<CanvasGroup>();
-        group.alpha = 0.0f;
-
-        var sequence = DOTween.Sequence()
-            .AppendInterval(delay)
-            .AppendCallback(() => { notificationIndex++; })
-            .AppendCallback(() => { FMODUnity.RuntimeManager.PlayOneShot("event:/SFXUI/NotificationPopUp"); })
-            .Append(DOTween.To(() => group.alpha, x => group.alpha = x, 1.0f, 1.5f))
-            .AppendInterval(5.0f)
-            .Append(DOTween.To(() => group.alpha, x => group.alpha = x, 0.0f, 1.5f))
-            .AppendCallback(() => {
-                Destroy(obj);
-                notificationIndex--;
-            });
     }
 
     private void FadePanelIn(WAEMDictUIElement group, float time) {

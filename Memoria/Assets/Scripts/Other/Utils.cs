@@ -33,6 +33,10 @@ public static class Utils {
         }
     }
 
+    public static bool FindUniqueObjectInChildren<T>(GameObject parent, out T obj, bool errorWhenNoneFound = true) where T : Object {
+        obj = CheckObjects(parent.GetComponentsInChildren<T>(true), typeof(T).Name, errorWhenNoneFound);
+        return obj != null;
+    }
     public static bool FindUniqueObject<T>(out T obj, bool errorWhenNoneFound = true) where T : Object {
         obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name, errorWhenNoneFound);
         return obj != null;

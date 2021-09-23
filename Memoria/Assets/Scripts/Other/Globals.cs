@@ -58,7 +58,6 @@ public class Globals : MonoBehaviour {
             _Instance = this;
             DontDestroyOnLoad(this);
             Utils.FindUniqueObject(out sceneManager);
-            //SceneManager.LoadUI();
         }
     }
 
@@ -81,13 +80,9 @@ public class Globals : MonoBehaviour {
                 _Instance.InitializeOblivion();
                 break;
         }
+        _Instance.uiManager.OnGlobalsInitializeType(type);
         Debugger.InitializeMenu(type);
         _Instance.isInitialized = true;
-    }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.U)) Time.timeScale = 5.0f;
-        if (Input.GetKeyDown(KeyCode.P)) Time.timeScale = 1.0f;
     }
 
     private void GlobalInitialize() {

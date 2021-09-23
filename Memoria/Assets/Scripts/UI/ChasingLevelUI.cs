@@ -20,4 +20,8 @@ public class ChasingLevelUI : MonoBehaviour {
     public void Update() {
         gemImage.transform.localScale = Vector3.Lerp(gemImage.transform.localScale, scale, Time.deltaTime * 2.0f);
     }
+
+    public void SetEnabled(bool toggle) {
+        gameObject.SetActive(toggle);
+    }
 }

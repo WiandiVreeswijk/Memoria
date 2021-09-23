@@ -22,7 +22,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public void OnFinishCutscene() {
         Globals.Player.PlayerMovementAdventure.SetCanMove(true);
         Utils.DelayedAction(7.5f, () => {
-            if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.MenuController.NotifyPlayer("WASD to move");
+            if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.UIManager.NotificationManager.NotifyPlayer("WASD to move");
         });
 
         StartMarkerNotification();
@@ -31,7 +31,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     private void StartMarkerNotification() {
         Tween tween = null;
         tween = Utils.DelayedAction(20.0f, () => {
-            Globals.MenuController.NotifyPlayer("Follow the ! marker");
+            Globals.UIManager.NotificationManager.NotifyPlayer("Follow the ! marker");
         }).OnUpdate(() => {
             if (Vector3.Distance(Globals.Player.transform.position, Globals.ProgressionManager.GetIcon().transform.position) <
                 3.5f) {
@@ -46,7 +46,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     }
 
     private void MouseNotification() {
-        Globals.MenuController.NotifyPlayer("<font=\"Mouse SDF\"><size=78>u</size></font>  to move the camera");
+        Globals.UIManager.NotificationManager.NotifyPlayer("<font=\"Mouse SDF\"><size=78>u</size></font>  to move the camera");
     }
 
     public void Trigger() {
