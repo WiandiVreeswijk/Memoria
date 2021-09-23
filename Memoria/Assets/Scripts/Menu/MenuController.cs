@@ -54,7 +54,7 @@ public class MenuController : MonoBehaviour {
             } else Debug.LogError($"A UIElement named {element.name} is null");
         }
 
-        CloseMenu(true);
+        CloseMenu(0.0f);
         initialized = true;
         if (afterInitializationPanel.Length != 0) SetMenu(afterInitializationPanel, 0.0f);
     }
@@ -65,7 +65,6 @@ public class MenuController : MonoBehaviour {
         return DOTween.Sequence().Append(DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 1.0f, duration).OnComplete(() => {
             blackScreen.blocksRaycasts = false;
             blackScreen.interactable = false;
-            CloseMenu(true);
         })).SetUpdate(true);
     }
 
@@ -82,12 +81,16 @@ public class MenuController : MonoBehaviour {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void CloseMenu(bool instant = false) {
+    public void CloseMenu() {
+        CloseMenu(fadeTime);
+    }
+
+    public void CloseMenu(float fadeTime) {
         if (activePanel != null) {
-            FadePanelOut(activePanel, instant ? 0.0f : fadeTime);
+            FadePanelOut(activePanel, fadeTime);
             activePanel = null;
         }
-        FadeMainPanelOut(instant ? 0.0f : fadeTime).OnComplete(() => Globals.TimescaleManager.UnPauseGame());
+        FadeMainPanelOut(fadeTime).OnComplete(() => Globals.TimescaleManager.UnPauseGame());
     }
 
     public void SetMenu(string name) {
