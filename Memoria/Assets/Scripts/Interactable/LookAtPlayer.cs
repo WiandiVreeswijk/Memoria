@@ -21,8 +21,6 @@ public class LookAtPlayer : MonoBehaviour {
 
     private void FixedUpdate() {
         float dist = Vector3.Distance(transform.position, Globals.Player.HeadPosition);
-        if (gameObject.name == "Hanna")
-            Globals.Debugger.Print("a", dist + "");
         if (dist > distance) {
             //Stop
             if (!toggle) {
