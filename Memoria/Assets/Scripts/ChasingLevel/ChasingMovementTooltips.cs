@@ -20,13 +20,13 @@ public class ChasingMovementTooltips : MonoBehaviour {
 
     public void OnJumpPointReached() {
         if (!hasJumpedOrBeenNotified) {
-            Globals.MenuController.NotifyPlayer("Space to jump");
+            Globals.UIManager.NotificationManager.NotifyPlayer("Space to jump");
             Destroy(gameObject);
             hasJumpedOrBeenNotified = true;
         }
     }
 
     public void OnLevelStarted() {
-        movementTween = Utils.DelayedAction(5.0f, () => Globals.MenuController.NotifyPlayer("WASD to move"));
+        movementTween = Utils.DelayedAction(5.0f, () => Globals.UIManager.NotificationManager.NotifyPlayer("WASD to move"));
     }
 }
