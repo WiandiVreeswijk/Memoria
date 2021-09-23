@@ -322,7 +322,8 @@ namespace EMX." + Root.PN_NS + @".Editor.Mods
 #if UNITY_2021_1_OR_NEWER
 SelectionMode.Editable
 #else
-SelectionMode.OnlyUserModifiable
+//SelectionMode.OnlyUserModifiable
+SelectionMode.Editable
 #endif
 ;
             }
