@@ -13,7 +13,11 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public string actorName;
 
     [EventRef]
-    public string soundEffect;
+    public string soundEffectStart;
+
+    [EventRef]
+    public string soundEffectEnd;
+
     public GameObject fakeElena;
 
     public void Start() {
@@ -39,8 +43,8 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
             fakeElena.transform.SetPositionAndRotation(data.fakeElenaPoint);
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
-            if (soundEffect.Length > 0)
-                FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
+            if (soundEffectStart.Length > 0)
+                FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
             data.conversationStart.Invoke();
             return new KeyValuePair<Vector3, Quaternion>(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
         }
@@ -65,15 +69,13 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
                     : data.questIconPosition.position + data.questIconOffset;
                 Globals.ProgressionManager.GetIcon().SetPosition(pos);
             }
+            if (soundEffectEnd.Length > 0)
+                FMODUnity.RuntimeManager.PlayOneShot(soundEffectEnd);
             data.conversationEnd.Invoke();
         }
     }
 
     public void ConversationLine(string conversationName, string line, GameObject conversationPlayer) {
-        if (Random.Range(0, 10) < 1) {
-            if (soundEffect.Length > 0)
-                FMODUnity.RuntimeManager.PlayOneShot(soundEffect);
-        }
     }
 
     public string GetActorName() {
