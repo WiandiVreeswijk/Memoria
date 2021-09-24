@@ -10,12 +10,11 @@ public class DialogueSystemHandler : MonoBehaviour {
     public GameObject conversationPlayer;
     private string activeConversation;
     private IDialogueHandler activeHandler;
-
+     
     public void OnConversationStart() {
         activeHandler = ((Transform)DialogueManager.CurrentConversant).GetComponent<IDialogueHandler>();
         if (activeHandler != null) {
             //Stop the player from moving and disable visibility
-            Globals.Player.CameraController.SetInputEnabled(false);
             Globals.Player.PlayerMovementAdventure.SetCanMove(false);
             Globals.Player.VisualEffects.SetVisible(false);
 
@@ -36,7 +35,6 @@ public class DialogueSystemHandler : MonoBehaviour {
             if (activeHandler != handler) throw new Exception("Active handler does not equal conversation end handler");
             if (handler != null) {
                 //Return movement and visibility
-                Globals.Player.CameraController.SetInputEnabled(true);
                 Globals.Player.PlayerMovementAdventure.SetCanMove(true);
                 Globals.Player.VisualEffects.SetVisible(true);
 
