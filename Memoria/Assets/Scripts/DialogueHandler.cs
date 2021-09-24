@@ -46,9 +46,12 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         if (data != null) {
             data.cam.Priority = 99;
             fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
-            fakeElena.transform.SetPositionAndRotation(data.fakeElenaPoint);
+            fakeElena.transform.position = data.fakeElenaPoint.position + new Vector3(0.0f, 0.05f, 0.0f);
+            fakeElena.transform.rotation = data.fakeElenaPoint.rotation;
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
             Globals.ProgressionManager.GetIcon().SetEnabled(true);
+            Globals.CinemachineManager.SetPausedState(true);
+            Globals.CinemachineManager.SetInputEnabled(false);
             if (soundEffectStart.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
             actorIdleSound.mute = true;
@@ -65,6 +68,11 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
             data.cam.Priority = 0;
+            Utils.DelayedAction(1.0f, () => //Wait for cameras to blend. 1.0f is default camera blend time
+            {
+                Globals.CinemachineManager.SetInputEnabled(true);
+            });
+
             fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(null);
             if (data.moveCharacterAfterConversation) {
                 transform.SetPositionAndRotation(data.newCharacterPosition);

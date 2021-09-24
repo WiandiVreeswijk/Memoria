@@ -21,20 +21,6 @@ public class PlayerCameraController : MonoBehaviour {
         THIRDPERSON
     }
 
-    public void Start() {
-        //arm.SetActive(false);
-        CinemachineCore.GetInputAxis = CinemachineAxisInputDelegate;
-    }
-
-    public void SetInputEnabled(bool toggle) {
-        inputEnabled = toggle;
-    }
-
-    public float CinemachineAxisInputDelegate(string axisName) {
-        if (inputEnabled) return Input.GetAxis(axisName);
-        return 0;
-    }
-
     public void SetCameraTargetPosition(Vector3 position) {
         cameraTarget.transform.position = position;
     }
