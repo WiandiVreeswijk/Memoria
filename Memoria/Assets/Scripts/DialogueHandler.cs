@@ -49,7 +49,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             fakeElena.transform.position = data.fakeElenaPoint.position + new Vector3(0.0f, 0.05f, 0.0f);
             fakeElena.transform.rotation = data.fakeElenaPoint.rotation;
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
-            Globals.ProgressionManager.GetIcon().SetEnabled(true);
+            Globals.ProgressionManager.GetIcon().SetEnabled(false);
             Globals.CinemachineManager.SetPausedState(true);
             Globals.CinemachineManager.SetInputEnabled(false);
             if (soundEffectStart.Length > 0)
@@ -83,11 +83,11 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
                     ? transform.position + data.questIconOffset
                     : data.questIconPosition.position + data.questIconOffset;
                 Globals.ProgressionManager.GetIcon().SetPosition(pos);
-                Globals.ProgressionManager.GetIcon().SetEnabled(true);
             }
+            Globals.ProgressionManager.GetIcon().SetEnabled(true);
             if (soundEffectEnd.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectEnd);
-                actorIdleSound.mute = false;
+            actorIdleSound.mute = false;
             data.conversationEnd.Invoke();
         }
     }

@@ -42,6 +42,7 @@ public class Globals : MonoBehaviour {
     private MemoryWatchManager memoryWatchManager;
     private SoundManagerWijk soundManagerWijk;
     private MusicManagerWijk musicManagerWijk;
+    private TrophyManager trophyManager;
 
     //Oblivion
     private OblivionManager oblivionManager;
@@ -97,6 +98,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out analyticsManager, false);
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
+        Utils.FindUniqueObject(out trophyManager);
         Utils.FindUniqueObject(out menuController);
         Utils.FindUniqueObject(out timescaleManager);
         Utils.FindUniqueObject(out cinemachineManager);
@@ -143,11 +145,12 @@ public class Globals : MonoBehaviour {
 
     #endregion
 
-    #region NeighbourhoodGlobals
+    #region WijkGlobals
     public static InteractableManager InteractableManager => _Instance.interactableManager;
     public static MemoryWatchManager MemoryWatchManager => _Instance.memoryWatchManager;
     public static SoundManagerWijk SoundManagerWijk => _Instance.soundManagerWijk;
     public static MusicManagerWijk MusicManagerWijk => _Instance.musicManagerWijk;
+    public static TrophyManager TrophyManager => _Instance.trophyManager;
     #endregion
 
     #region OblivionGlobals
