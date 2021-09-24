@@ -13,6 +13,8 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public string actorName;
     public GameObject fakeElena;
 
+    private ActorIdleSound actorIdleSound;
+
     [Space(20)]
     [EventRef]
     public string soundEffectStart;
@@ -24,6 +26,8 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public void Start() {
         actorName = actorName.ToLower();
         //DialogueLua.GetVariable(actorName + "_Progression");
+
+        actorIdleSound = GetComponent<ActorIdleSound>();
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
@@ -50,6 +54,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             Globals.CinemachineManager.SetInputEnabled(false);
             if (soundEffectStart.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
+            actorIdleSound.mute = true;
             data.conversationStart.Invoke();
             return new KeyValuePair<Vector3, Quaternion>(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
         }
@@ -82,6 +87,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             }
             if (soundEffectEnd.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectEnd);
+                actorIdleSound.mute = false;
             data.conversationEnd.Invoke();
         }
     }
