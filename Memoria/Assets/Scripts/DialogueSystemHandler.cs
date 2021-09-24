@@ -38,10 +38,10 @@ public class DialogueSystemHandler : MonoBehaviour {
                 Globals.Player.PlayerMovementAdventure.SetCanMove(true);
                 Globals.Player.VisualEffects.SetVisible(true);
 
+                handler.ConversationEnd(activeConversation, conversationPlayer);
+                
                 activeConversation = "";
                 activeHandler = null;
-
-                handler.ConversationEnd(activeConversation, conversationPlayer);
             } else throw new Exception("No dialogue handler found on " + actor.name);
         }
     }

@@ -28,7 +28,9 @@ public class MemoryWatch : MonoBehaviour {
     Tweener shakeTween;
     private MemoryObject memoryObject;
 
-    public void Start() {
+    public void Start()
+    {
+        enabled = false; //this is temporary
         watchMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchMaterial"));
         watchEdgeMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchEdgeMaterial"));
     }
