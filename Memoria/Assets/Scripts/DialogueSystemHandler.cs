@@ -11,30 +11,23 @@ public class DialogueSystemHandler : MonoBehaviour {
     private string activeConversation;
     private IDialogueHandler activeHandler;
 
-    //public void Start()
-    //{
-    //    DialogueSystemEvents events = GetComponent<DialogueSystemEvents>();
-    //    events.conversationEvents.onConversationStart
-    //}
-    public void OnConversationStart(UnityEngine.Object actor) {
-        if (actor.GetType() == typeof(Transform)) {
-            activeHandler = ((Transform)actor).GetComponent<IDialogueHandler>();
-            if (activeHandler != null) {
-                //Stop the player from moving and disable visibility
-                Globals.Player.CameraController.SetInputEnabled(false);
-                Globals.Player.PlayerMovementAdventure.SetCanMove(false);
-                Globals.Player.VisualEffects.SetVisible(false);
+    public void OnConversationStart() {
+        activeHandler = ((Transform)DialogueManager.CurrentConversant).GetComponent<IDialogueHandler>();
+        if (activeHandler != null) {
+            //Stop the player from moving and disable visibility
+            Globals.Player.CameraController.SetInputEnabled(false);
+            Globals.Player.PlayerMovementAdventure.SetCanMove(false);
+            Globals.Player.VisualEffects.SetVisible(false);
 
-                Lua.Result result = DialogueLua.GetVariable(activeHandler.GetActorName() + "_Progression");
-                activeConversation = result.IsString ? result.AsString : "";
-                KeyValuePair<Vector3, Quaternion>? positionData = activeHandler.ConversationStart(activeConversation, conversationPlayer);
-                if (positionData.HasValue) {
-                    Globals.Player.transform.position = positionData.Value.Key;
-                    Globals.Player.transform.rotation = positionData.Value.Value;
-                }
+            Lua.Result result = DialogueLua.GetVariable(activeHandler.GetActorName() + "_Progression");
+            activeConversation = result.IsString ? result.AsString : "";
+            KeyValuePair<Vector3, Quaternion>? positionData = activeHandler.ConversationStart(activeConversation, conversationPlayer);
+            if (positionData.HasValue) {
+                Globals.Player.transform.position = positionData.Value.Key;
+                Globals.Player.transform.rotation = positionData.Value.Value;
+            }
 
-            } else throw new Exception("No dialogue handler found on " + actor.name);
-        }
+        } else throw new Exception("No dialogue handler found on " + DialogueManager.CurrentConversant.name);
     }
 
     public void OnConversationEnd(UnityEngine.Object actor) {
