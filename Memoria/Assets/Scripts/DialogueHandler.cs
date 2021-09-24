@@ -44,6 +44,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
             fakeElena.transform.SetPositionAndRotation(data.fakeElenaPoint);
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
+            Globals.ProgressionManager.GetIcon().SetEnabled(true);
             if (soundEffectStart.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
             data.conversationStart.Invoke();
@@ -69,6 +70,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
                     ? transform.position + data.questIconOffset
                     : data.questIconPosition.position + data.questIconOffset;
                 Globals.ProgressionManager.GetIcon().SetPosition(pos);
+                Globals.ProgressionManager.GetIcon().SetEnabled(true);
             }
             if (soundEffectEnd.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectEnd);

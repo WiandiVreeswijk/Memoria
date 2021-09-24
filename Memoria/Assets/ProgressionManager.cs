@@ -8,7 +8,7 @@ public class ProgressionManager : MonoBehaviour {
 
 
     void Start() {
-        if (Globals.SceneManager.GetActiveScene().name == "Wijk") { //This is temporary
+        if (Globals.SceneManager.GetActiveScene().name == "Wijk") { //#TODO: This is temporary
             GameObject manfred = GameObject.Find("Neighbour");
             questIcon = Globals.IconManager.AddWorldIcon("oma", manfred.transform.position + new Vector3(0, 2.25f, 0));
         }
