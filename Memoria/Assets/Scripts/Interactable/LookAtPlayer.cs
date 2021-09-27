@@ -15,12 +15,13 @@ public class LookAtPlayer : MonoBehaviour {
     [Range(0.5f, 10f)]
     public float distance = 4.5f;
     Animator animator;
+
     void Start() {
         animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate() {
-        float dist = Vector3.Distance(transform.position, Globals.Player.HeadPosition);
+        float dist = Vector3.Distance(transform.position, Globals.Player.EyePosition);
         if (dist > distance) {
             //Stop
             if (!toggle) {
@@ -39,7 +40,7 @@ public class LookAtPlayer : MonoBehaviour {
     }
 
     void OnAnimatorIK() {
-        animator.SetLookAtPosition(Vector3.Lerp(Globals.Player.HeadPosition, lookAtPoint.position, lerp));
+        animator.SetLookAtPosition(Vector3.Lerp(Globals.Player.EyePosition, lookAtPoint.position, lerp));
         animator.SetLookAtWeight(weight);
     }
 }

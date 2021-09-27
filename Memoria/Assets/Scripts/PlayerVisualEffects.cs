@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerVisualEffects : MonoBehaviour {
     private Animator animator;
     private Renderer[] meshRenderers;
-    private bool shouldLookAt = false;
     private Vector3 lookAtPoint;
     private float lookAtWeight;
 
@@ -20,21 +20,19 @@ public class PlayerVisualEffects : MonoBehaviour {
         }
     }
 
+    Tween lookAtTween;
     public void SetLookAt(Vector3? position, float weight = 1.0f) {
-        shouldLookAt = position.HasValue;
-        if (shouldLookAt) {
+        lookAtTween?.Kill();
+        if (position.HasValue) {
+            lookAtTween = DOTween.To(() => lookAtWeight, x => lookAtWeight = x, weight, 2.0f);
             lookAtPoint = position.Value;
-            lookAtWeight = weight;
-            shouldLookAt = true;
+        } else {
+            lookAtTween = DOTween.To(() => lookAtWeight, x => lookAtWeight = x, 0, 2.0f);
         }
     }
 
     void OnAnimatorIK() {
-        if (shouldLookAt) {
-            animator.SetLookAtPosition(lookAtPoint);
-            animator.SetLookAtWeight(lookAtWeight);
-        } else {
-            animator.SetLookAtWeight(0.0f);
-        }
+        animator.SetLookAtPosition(lookAtPoint);
+        animator.SetLookAtWeight(lookAtWeight);
     }
 }

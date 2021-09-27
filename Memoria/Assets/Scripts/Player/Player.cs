@@ -8,6 +8,9 @@ public class Player : MonoBehaviour {
     private Transform povPoint;
     public Vector3 HeadPosition => povPoint.position;
 
+    private Transform eyePoint;
+    public Vector3 EyePosition => eyePoint.position;
+
     //Wijk
     private PlayerMovementAdventure playerMovementAdventure;
     public PlayerMovementAdventure PlayerMovementAdventure => playerMovementAdventure;
@@ -40,5 +43,6 @@ public class Player : MonoBehaviour {
         playerDeath = GetComponent<PlayerDeath>();
         playerSound = GetComponent<PlayerSound>();
         povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");
+        eyePoint = Utils.FindUniqueChildInTransform(transform, "EyeHeight");
     }
 }

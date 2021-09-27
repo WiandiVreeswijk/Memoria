@@ -45,9 +45,9 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
             data.cam.Priority = 99;
-            fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
             fakeElena.transform.position = data.fakeElenaPoint.position + new Vector3(0.0f, 0.05f, 0.0f);
             fakeElena.transform.rotation = data.fakeElenaPoint.rotation;
+            Globals.Player.VisualEffects.SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
             Globals.ProgressionManager.GetIcon().SetEnabled(false);
             Globals.CinemachineManager.SetPausedState(true);
@@ -74,7 +74,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
                 Globals.CinemachineManager.SetInputEnabled(true);
             });
 
-            fakeElena.GetComponent<PlayerVisualEffects>().SetLookAt(null);
+            Globals.Player.VisualEffects.SetLookAt(null);
             if (data.moveCharacterAfterConversation) {
                 transform.SetPositionAndRotation(data.newCharacterPosition);
             }
