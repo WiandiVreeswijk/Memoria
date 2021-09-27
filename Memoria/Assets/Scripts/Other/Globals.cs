@@ -66,6 +66,10 @@ public class Globals : MonoBehaviour {
         return _Instance != null && _Instance.isInitialized;
     }
 
+    public static GlobalsType GetCurrentGlobalsType() {
+        return _Instance.currentGlobalsType;
+    }
+
     public static void Initialize(GlobalsType type) {
         if (_Instance == null) Debug.LogError("No globals found in scene.");
         _Instance.currentGlobalsType = type;

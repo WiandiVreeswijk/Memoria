@@ -7,10 +7,9 @@ using System;
 
 public class PlayerCameraController : MonoBehaviour {
     //3D
-    public CinemachineVirtualCamera firstPersonCamera;
-    public CinemachineFreeLook thirdPersonCamera;
-    public GameObject arm;
-    public bool isInFirstPerson;
+    [SerializeField] private CinemachineVirtualCamera firstPersonCamera;
+    [SerializeField] private CinemachineFreeLook thirdPersonCamera;
+    private bool isInFirstPerson;
     public bool inputEnabled = true;
     //2D
     public CinemachineVirtualCamera cam;
@@ -27,7 +26,6 @@ public class PlayerCameraController : MonoBehaviour {
 
     public void ToggleCamera() {
         ChangeCamera(isInFirstPerson ? CameraType.THIRDPERSON : CameraType.FIRSTPERSON);
-        //arm.transform.DORotate(new Vector3(90, 0, 0), 0);
     }
 
     Tween tween;
@@ -36,14 +34,10 @@ public class PlayerCameraController : MonoBehaviour {
         if (type == CameraType.FIRSTPERSON) {
             firstPersonCamera.Priority = 11;
             thirdPersonCamera.Priority = 9;
-            tween = Utils.DelayedAction(2, () => {
-                if (arm != null) arm.SetActive(true);
-            });
             isInFirstPerson = true;
         } else {
             thirdPersonCamera.Priority = 11;
             firstPersonCamera.Priority = 9;
-            if (arm != null) arm.SetActive(false);
             isInFirstPerson = false;
         }
     }
