@@ -4,8 +4,11 @@ using DG.Tweening;
 using UnityEngine;
 
 public class MemoryWatchManager : MonoBehaviour {
-    public const float MAX_DISTANCE = 15f;
-    public const float EXECUTION_DISTANCE = 2.5f;
+    private const float MAX_DISTANCE = 5.5f;
+    private const float MIN_ARM_RAISE_DISTANCE = 5.0f;
+    private const float EXECUTION_DISTANCE = 2.5f;
+    private const float ARM_ROTATION = 70f;
+
     public GameObject arm;
     public GameObject armRotator;
     public MemoryWatch firstPersonWatch;
@@ -14,8 +17,6 @@ public class MemoryWatchManager : MonoBehaviour {
     public AnimationCurve rotationCurve;
     public AnimationCurve colorCurve;
     public AnimationCurve processCurve;
-
-    private bool armRaised = true;
 
     private float activationProgress = 0;
     private bool activationPressed = false;
@@ -55,24 +56,11 @@ public class MemoryWatchManager : MonoBehaviour {
             withinExecutionRangeMemoryObject = closest;
         } else withinExecutionRangeMemoryObject = null;
 
-        Globals.Debugger.Print("a", Globals.Player.CameraController.IsInFirstPerson() + " + " + armRaised, 0.1f);
-        if (Globals.Player.CameraController.IsInFirstPerson() && !armRaised) {
-            RaiseArm();
-        } else if (!Globals.Player.CameraController.IsInFirstPerson() && armRaised) {
-            LowerArm();
-        }
-    }
-
-    private void LowerArm() {
+        float clampedDistance = Mathf.Clamp(closestDistance, MIN_ARM_RAISE_DISTANCE, MAX_DISTANCE);
+        float remappedDistance = Utils.Remap(clampedDistance, MIN_ARM_RAISE_DISTANCE, MAX_DISTANCE, 0.0f, 1.0f);
+        float rotation = Globals.Player.CameraController.IsInFirstPerson() ? remappedDistance * (ARM_ROTATION - 10f) + 10f : ARM_ROTATION;
         armRotationTween?.Kill();
-        armRotationTween = armRotator.transform.DOLocalRotate(new Vector3(70f, 0f, 0f), 1.0f);
-        armRaised = false;
-    }
-
-    private void RaiseArm() {
-        armRotationTween?.Kill();
-        armRotationTween = armRotator.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 1.0f);
-        armRaised = true;
+        armRotationTween = armRotator.transform.DOLocalRotate(new Vector3(rotation, 0.0f, 0.0f), 0.5f).SetEase(Ease.Linear);
     }
 
     void Update() {

@@ -14,6 +14,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public CarEngine busEngine;
     public BusStop busStop;
     private bool isStarted = false;
+    Tween markerNotificationTween;
 
     void Start() {
         Globals.Player.PlayerMovementAdventure.SetCanMove(false);
@@ -28,15 +29,20 @@ public class WijkOpeningCutscene : MonoBehaviour {
         StartMarkerNotification();
     }
 
+    public void KillMarkerNotificationTween() {
+        markerNotificationTween.Kill();
+        print("Marker notification killed!");
+    }
+
     private void StartMarkerNotification() {
-        Tween tween = null;
-        tween = Utils.DelayedAction(20.0f, () => {
+        markerNotificationTween = Utils.DelayedAction(25.0f, () => {
             Globals.UIManager.NotificationManager.NotifyPlayer("Follow the ! marker");
+            markerNotificationTween.Restart();
         }).OnUpdate(() => {
             if (Vector3.Distance(Globals.Player.transform.position, Globals.ProgressionManager.GetIcon().transform.position) <
                 3.5f) {
                 print("Player got close to marker!");
-                tween.Kill();
+                markerNotificationTween.Restart();
             }
         });
     }
