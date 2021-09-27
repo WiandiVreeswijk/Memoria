@@ -16,7 +16,7 @@ public class DialogueSystemHandler : MonoBehaviour {
         if (activeHandler != null) {
             //Stop the player from moving and disable visibility
             Globals.Player.PlayerMovementAdventure.SetCanMove(false);
-            Globals.Player.VisualEffects.SetVisible(false);
+            //Globals.Player.VisualEffects.SetVisible(false);
 
             Lua.Result result = DialogueLua.GetVariable(activeHandler.GetActorName() + "_Progression");
             activeConversation = result.IsString ? result.AsString : "";
@@ -36,7 +36,7 @@ public class DialogueSystemHandler : MonoBehaviour {
             if (handler != null) {
                 //Return movement and visibility
                 Globals.Player.PlayerMovementAdventure.SetCanMove(true);
-                Globals.Player.VisualEffects.SetVisible(true);
+                //Globals.Player.VisualEffects.SetVisible(true);
 
                 handler.ConversationEnd(activeConversation, conversationPlayer);
                 

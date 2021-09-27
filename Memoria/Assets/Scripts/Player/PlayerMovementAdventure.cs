@@ -36,10 +36,12 @@ public class PlayerMovementAdventure : MonoBehaviour {
 
     void Update() {
         if (!Globals.Player.CameraController.IsInFirstPerson()) {
-            animator.enabled = true;
+            animator.applyRootMotion = true;
             Adventure();
         } else {
-            animator.enabled = false;
+            animator.applyRootMotion = false;
+            if (FPSLookAt.sqrMagnitude > 0.01f)
+                gameObject.transform.rotation = Quaternion.LookRotation(FPSLookAt, Vector3.up);
             FPS();
         }
     }
@@ -109,6 +111,7 @@ public class PlayerMovementAdventure : MonoBehaviour {
         animator.SetFloat("Running", runVariableSmoothed);
     }
 
+    private Vector3 FPSLookAt;
     private void FPS() {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -120,6 +123,8 @@ public class PlayerMovementAdventure : MonoBehaviour {
         movement = cam.transform.transform.TransformDirection(movement); //Movement rotated with the camera
         cam.transform.rotation = temporaryCameraRotation;
 
+        animator.SetFloat("Forward", movement.sqrMagnitude > 0f ? 1f : 0f);
+        FPSLookAt = movement;
         movement.y -= gravity;
         controller.Move(movement * fpsSpeed * Time.deltaTime);
     }

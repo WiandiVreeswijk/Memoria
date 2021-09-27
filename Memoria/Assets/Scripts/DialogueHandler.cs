@@ -40,7 +40,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
 
     public KeyValuePair<Vector3, Quaternion>? ConversationStart(string conversationName, GameObject conversationPlayer) {
         print("Conversation with " + actorName + " started" + (conversationName.Length > 0 ? ": " + conversationName : "."));
-        fakeElena.SetActive(true);
+        //fakeElena.SetActive(true);
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
@@ -63,13 +63,14 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
 
     public void ConversationEnd(string conversationName, GameObject conversationPlayer) {
         print("Conversation with " + actorName + " ended" + (conversationName.Length > 0 ? ": " + conversationName : "."));
-        fakeElena.SetActive(false);
+        //fakeElena.SetActive(false);
 
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
             data.cam.Priority = 0;
             Utils.DelayedAction(1.0f, () => //Wait for cameras to blend. 1.0f is default camera blend time
             {
+                Globals.CinemachineManager.SetPausedState(false);
                 Globals.CinemachineManager.SetInputEnabled(true);
             });
 
