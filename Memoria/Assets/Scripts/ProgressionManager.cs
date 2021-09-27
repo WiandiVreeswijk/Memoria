@@ -6,16 +6,17 @@ public class ProgressionManager : MonoBehaviour {
     private Icon questIcon;
     private bool watchCollected = false;
 
-
     void Start() {
-        if (Globals.SceneManager.GetActiveScene().name == "Wijk") { //#TODO: This is temporary
+        if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.NEIGHBORHOOD) { //#TODO: This is temporary
             GameObject manfred = GameObject.Find("Neighbour");
             questIcon = Globals.IconManager.AddWorldIcon("oma", manfred.transform.position + new Vector3(0, 2.25f, 0));
         }
     }
 
     public void CollectWatch() {
+        print("enabled1");
         watchCollected = true;
+        Globals.MemoryWatchManager.EnableMemoryWatch();
     }
 
     public Icon GetIcon() {

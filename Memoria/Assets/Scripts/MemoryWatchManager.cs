@@ -29,6 +29,7 @@ public class MemoryWatchManager : MonoBehaviour {
 
     void Start() {
         memoryObjects = FindObjectsOfType<MemoryObject>();
+        DisableMemoryWatch();
     }
 
     void FixedUpdate() {
@@ -61,6 +62,8 @@ public class MemoryWatchManager : MonoBehaviour {
         float rotation = Globals.Player.CameraController.IsInFirstPerson() ? remappedDistance * (ARM_ROTATION - 10f) + 10f : ARM_ROTATION;
         armRotationTween?.Kill();
         armRotationTween = armRotator.transform.DOLocalRotate(new Vector3(rotation, 0.0f, 0.0f), 0.5f).SetEase(Ease.Linear);
+
+        thirdPersonWatch.gameObject.SetActive(!Globals.Player.CameraController.IsInFirstPerson());
     }
 
     void Update() {
@@ -86,5 +89,15 @@ public class MemoryWatchManager : MonoBehaviour {
         }
 
         if (activationProgress < 0.1f) activated = false;
+    }
+
+    public void DisableMemoryWatch() {
+        enabled = false;
+        thirdPersonWatch.gameObject.SetActive(false);
+        armRotator.transform.localRotation = Quaternion.Euler(ARM_ROTATION, 0f, 0f);
+    }
+    public void EnableMemoryWatch() {
+        print("enabled2");
+        enabled = true;
     }
 }

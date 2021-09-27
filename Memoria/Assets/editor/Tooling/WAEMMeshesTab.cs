@@ -25,7 +25,8 @@ public class WAEMMeshesTab : IWAEMTab {
             "</size>", MessageType.Info, true);
         EditorGUI.indentLevel--;
         var layout = GUILayout.Height(40);
-        if (GUILayout.Button("Combine meshes", layout)) CombineSelectionMultiMat();
+        if (GUILayout.Button("Combine meshes", layout)) CombineSelectionMultiMat(false);
+        if (GUILayout.Button("Combine meshes and force one material", layout)) CombineSelectionMultiMat(true);
         if (GUILayout.Button("Separate submeshes", layout)) ExtractSelection();
         GUILayout.BeginHorizontal();
         packMargin = GUILayout.HorizontalSlider(packMargin, 0.004f, 0.1f);
@@ -53,7 +54,7 @@ public class WAEMMeshesTab : IWAEMTab {
 
     }
 
-    private void CombineSelectionMultiMat() {
+    private void CombineSelectionMultiMat(bool useOneMaterial) {
         if (Selection.objects.Length > 1) {
             Debug.LogError("Too many objects selected.");
             return;
@@ -89,7 +90,33 @@ public class WAEMMeshesTab : IWAEMTab {
         }
 
         List<Mesh> submeshes = new List<Mesh>();
-        foreach (Material material in materials) {
+        if (!useOneMaterial) {
+            foreach (Material material in materials) {
+                List<CombineInstance> combineInstances = new List<CombineInstance>();
+                foreach (MeshFilter filter in filters) {
+                    MeshRenderer renderer = filterRendererPairs[filter];
+                    if (renderer == null) {
+                        Debug.LogError(filter.name + "has no MeshRenderer");
+                        continue;
+                    }
+
+                    Material[] localMaterials = renderer.sharedMaterials;
+                    for (int materialIndex = 0; materialIndex < localMaterials.Length; materialIndex++) {
+                        if (localMaterials[materialIndex] != material) continue;
+                        CombineInstance ci = new CombineInstance();
+                        ci.mesh = filter.sharedMesh;
+                        ci.subMeshIndex = materialIndex;
+                        ci.transform = filter.transform.localToWorldMatrix;
+                        combineInstances.Add(ci);
+                    }
+                }
+
+                Mesh mesh = new Mesh();
+                mesh.CombineMeshes(combineInstances.ToArray(), true);
+                submeshes.Add(mesh);
+            }
+
+        } else {
             List<CombineInstance> combineInstances = new List<CombineInstance>();
             foreach (MeshFilter filter in filters) {
                 MeshRenderer renderer = filterRendererPairs[filter];
@@ -98,15 +125,11 @@ public class WAEMMeshesTab : IWAEMTab {
                     continue;
                 }
 
-                Material[] localMaterials = renderer.sharedMaterials;
-                for (int materialIndex = 0; materialIndex < localMaterials.Length; materialIndex++) {
-                    if (localMaterials[materialIndex] != material) continue;
-                    CombineInstance ci = new CombineInstance();
-                    ci.mesh = filter.sharedMesh;
-                    ci.subMeshIndex = materialIndex;
-                    ci.transform = filter.transform.localToWorldMatrix;
-                    combineInstances.Add(ci);
-                }
+                CombineInstance ci = new CombineInstance();
+                ci.mesh = filter.sharedMesh;
+                ci.subMeshIndex = 0;
+                ci.transform = filter.transform.localToWorldMatrix;
+                combineInstances.Add(ci);
             }
 
             Mesh mesh = new Mesh();
@@ -138,7 +161,11 @@ public class WAEMMeshesTab : IWAEMTab {
         var combinedObjectFilter = combinedObject.AddComponent<MeshFilter>();
         combinedObjectFilter.sharedMesh = finalMesh;
         var combinedObjectRenderer = combinedObject.AddComponent<MeshRenderer>();
-        combinedObjectRenderer.materials = materials.ToArray();
+        if (useOneMaterial) {
+            combinedObjectRenderer.material = materials[0];
+        } else {
+            combinedObjectRenderer.materials = materials.ToArray();
+        }
         Undo.RegisterCreatedObjectUndo(combinedObject, "combined");
 
         Debug.Log("Final mesh has " + submeshes.Count + " materials");

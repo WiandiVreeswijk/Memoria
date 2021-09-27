@@ -28,9 +28,7 @@ public class MemoryWatch : MonoBehaviour {
     Tweener shakeTween;
     private MemoryObject memoryObject;
 
-    public void Start()
-    {
-        enabled = false; //this is temporary
+    public void Start() {
         watchMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchMaterial"));
         watchEdgeMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchEdgeMaterial"));
     }
@@ -52,8 +50,7 @@ public class MemoryWatch : MonoBehaviour {
         smallArm.transform.Rotate(Vector3.up, 6.75f * activity);
     }
 
-    public void Activate(MemoryObject memoryObject)
-    {
+    public void Activate(MemoryObject memoryObject) {
         releaseParticleSystem.targetObject = memoryObject.gameObject;
     }
 }
