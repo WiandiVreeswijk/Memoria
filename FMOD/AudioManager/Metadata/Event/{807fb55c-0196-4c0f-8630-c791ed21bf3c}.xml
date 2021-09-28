@@ -165,6 +165,7 @@
 		<relationship name="effects">
 			<destination>{1c656224-2c92-494c-824e-4965ba64b326}</destination>
 			<destination>{999da81e-1ecf-4f1c-8a91-bb75056e847f}</destination>
+			<destination>{5bba3fbf-905a-4a09-b252-20a2f2ea5959}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{afd95fcc-f901-4c81-9f52-6318b420f2f3}" />
@@ -181,10 +182,15 @@
 	<object class="MixerBusFader" id="{1c656224-2c92-494c-824e-4965ba64b326}" />
 	<object class="CompressorEffect" id="{999da81e-1ecf-4f1c-8a91-bb75056e847f}">
 		<property name="threshold">
-			<value>-16.5</value>
+			<value>-25.5</value>
 		</property>
 		<property name="gain">
 			<value>-9</value>
+		</property>
+	</object>
+	<object class="ThreeEQEffect" id="{5bba3fbf-905a-4a09-b252-20a2f2ea5959}">
+		<property name="lowGain">
+			<value>-7.5</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{88cd08bd-bced-4ca5-aff4-c235949a05d3}">
