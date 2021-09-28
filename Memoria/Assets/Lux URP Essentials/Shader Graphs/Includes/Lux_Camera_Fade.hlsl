@@ -3,6 +3,8 @@ float Dither32(float2 Pos) {
     return frac(Ret);
 }
 
+#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
+
 void CameraFade_float(
 //  Base inputs
     float4 positionSS,
