@@ -22,7 +22,6 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     [EventRef]
     public string soundEffectEnd;
 
-
     public void Start() {
         actorName = actorName.ToLower();
         //DialogueLua.GetVariable(actorName + "_Progression");
@@ -41,7 +40,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public KeyValuePair<Vector3, Quaternion>? ConversationStart(string conversationName, GameObject conversationPlayer) {
         print("Conversation with " + actorName + " started" + (conversationName.Length > 0 ? ": " + conversationName : "."));
         //fakeElena.SetActive(true);
-
+        
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
             data.cam.Priority = 99;

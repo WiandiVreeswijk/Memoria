@@ -29,6 +29,7 @@ public class MemoryWatchManager : MonoBehaviour {
 
     void Start() {
         memoryObjects = FindObjectsOfType<MemoryObject>();
+        foreach (MemoryObject mo in memoryObjects) mo.UpdateDistance(float.MaxValue);
         DisableMemoryWatch();
     }
 
@@ -37,6 +38,7 @@ public class MemoryWatchManager : MonoBehaviour {
         float closestDistance = float.MaxValue;
         foreach (MemoryObject mo in memoryObjects) {
             float distance = Vector3.Distance(mo.transform.position, Globals.Player.transform.position);
+            mo.UpdateDistance(distance);
             if (distance < MAX_DISTANCE && distance < closestDistance) {
                 closest = mo;
                 closestDistance = distance;
@@ -97,7 +99,6 @@ public class MemoryWatchManager : MonoBehaviour {
         armRotator.transform.localRotation = Quaternion.Euler(ARM_ROTATION, 0f, 0f);
     }
     public void EnableMemoryWatch() {
-        print("enabled2");
         enabled = true;
     }
 }

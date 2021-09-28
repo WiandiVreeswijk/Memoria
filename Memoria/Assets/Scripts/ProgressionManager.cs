@@ -14,7 +14,6 @@ public class ProgressionManager : MonoBehaviour {
     }
 
     public void CollectWatch() {
-        print("enabled1");
         watchCollected = true;
         Globals.MemoryWatchManager.EnableMemoryWatch();
     }

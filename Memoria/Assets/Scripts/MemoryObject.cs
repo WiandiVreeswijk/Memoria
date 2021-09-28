@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MemoryObject : MonoBehaviour {
-    [SerializeField]
-    private UnityEvent onWatchUse;
-
-    public void Activate() {
-        onWatchUse.Invoke();
-    }
+public abstract class MemoryObject : MonoBehaviour {
+    public abstract void Activate();
+    public abstract void UpdateDistance(float distance);
 }

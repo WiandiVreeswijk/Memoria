@@ -6,7 +6,7 @@ using PixelCrushers.DialogueSystem;
 using TMPro;
 
 namespace Assets.Scripts {
-    public class MemoryEntrance : MonoBehaviour {
+    public class MemoryEntrance : MemoryObject {
         public string sceneName;
         public GameObject group;
         public GameObject portal;
@@ -40,9 +40,8 @@ namespace Assets.Scripts {
             }
         }
 
-        public void OnActivateWatch() {
-            if (open) Close();
-            else Open();
+        public override void Activate() {
+            Globals.SceneManager.SetScene(sceneName);
         }
 
         private void KillTweens() {
@@ -84,12 +83,7 @@ namespace Assets.Scripts {
             open = false;
         }
 
-        public void Enter() {
-            Globals.SceneManager.SetScene(sceneName);
-        }
-
-        public void FixedUpdate() {
-            float distance = Vector3.Distance(Globals.Player.transform.position, transform.position);
+        public override void UpdateDistance(float distance) {
             if (distance < 3 && !open) {
                 Open();
             } else if (distance > 5 && open) {

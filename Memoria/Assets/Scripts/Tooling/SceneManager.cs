@@ -48,7 +48,7 @@ public class SceneManager : MonoBehaviour {
         if (sceneDefinitionsMap.TryGetValue(sceneName, out SceneDefinition scene)) {
             if (isLoadingScene || scene == activeScene) return;
             Time.timeScale = 0.0f;
-            Globals.MenuController.BlackScreenFadeIn(2.0f).OnComplete(() => StartCoroutine(LoadScene(scene)));
+            Globals.MenuController.BlackScreenFadeIn(2.0f).OnComplete(() => StartCoroutine(LoadScene(scene))).SetUpdate(true);
         } else Debug.LogError($"[SceneManager] scene has not been registered {sceneName}");
     }
 
