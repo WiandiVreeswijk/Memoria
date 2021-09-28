@@ -18,7 +18,7 @@ public class BusStop : MonoBehaviour, IEnterActivatable {
     public void ActivateEnter() {
         if (skip) return;
         busEngine.isBraking = true;
-        Globals.MenuController.BlackScreenFadeIn(2f).OnComplete(() => {
+        Globals.MenuController.BlackScreenFadeIn(2f, false).OnComplete(() => {
             Utils.DelayedAction(3, () => Globals.MenuController.BlackScreenFadeOut(3f));
         });
         Utils.DelayedAction(6, () => busEngine.isBraking = false);

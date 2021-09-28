@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
     //private Animator animator;
@@ -33,6 +34,8 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private WAEMUIElement[] uiElements;
     [SerializeField] private float fadeTime = 0.25f;
     [SerializeField] private CanvasGroup blackScreen;
+    [SerializeField] private Image image;
+    private bool blackScreenActive = false;
 
     private Tween mainFade;
     private WAEMDictUIElement activePanel;
@@ -56,8 +59,10 @@ public class MenuController : MonoBehaviour {
     }
 
     private Tween blackScreenTween;
-    public Tween BlackScreenFadeIn(float duration) {
+    public Tween BlackScreenFadeIn(float duration, bool loadingIcon) {
+        image.gameObject.SetActive(loadingIcon);
         blackScreenTween?.Kill();
+        blackScreenActive = true;
         return DOTween.Sequence().Append(DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 1.0f, duration).OnComplete(() => {
             blackScreen.blocksRaycasts = false;
             blackScreen.interactable = false;
@@ -68,7 +73,11 @@ public class MenuController : MonoBehaviour {
         blackScreenTween?.Kill();
         blackScreen.blocksRaycasts = false;
         blackScreen.interactable = false;
-        return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration).SetUpdate(true);
+        return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration).SetUpdate(true)
+            .OnComplete(
+                () => {
+                    blackScreenActive = false;
+                });
     }
 
     public void QuitGame() {
@@ -153,7 +162,7 @@ public class MenuController : MonoBehaviour {
 
     private void TogglePause() {
         string active = GetActiveMenu();
-        if (active == "") {
+        if (active == "" && !blackScreenActive) {
             SetMenu("Pause");
         } else if (active == "Pause") {
             CloseMenu();

@@ -38,7 +38,7 @@ public static class Utils {
         return obj != null;
     }
     public static bool FindUniqueObject<T>(out T obj, bool errorWhenNoneFound = true) where T : Object {
-        obj = CheckObjects(GameObject.FindObjectsOfType<T>(), typeof(T).Name, errorWhenNoneFound);
+        obj = CheckObjects(GameObject.FindObjectsOfType<T>(true), typeof(T).Name, errorWhenNoneFound);
         return obj != null;
     }
 

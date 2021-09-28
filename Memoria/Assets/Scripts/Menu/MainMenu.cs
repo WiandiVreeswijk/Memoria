@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void PlayGame() {
-        Globals.MenuController.BlackScreenFadeIn(0.0f);
+        Globals.MenuController.BlackScreenFadeIn(0.0f, false);
         Utils.DelayedAction(6, () => Globals.MenuController.BlackScreenFadeOut(2.5f));
         FindObjectOfType<WijkOpeningCutscene>().Trigger();
         Globals.MenuController.CloseMenu(0.5f);
