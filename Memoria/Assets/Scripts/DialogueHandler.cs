@@ -14,6 +14,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public GameObject fakeElena;
 
     private ActorIdleSound actorIdleSound;
+    private HannaIdleSound hannaIdleSound;
 
     [Space(20)]
     [EventRef]
@@ -27,6 +28,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         //DialogueLua.GetVariable(actorName + "_Progression");
 
         actorIdleSound = GetComponent<ActorIdleSound>();
+        hannaIdleSound = GetComponent<HannaIdleSound>();
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
@@ -54,6 +56,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             if (soundEffectStart.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
             actorIdleSound.mute = true;
+            hannaIdleSound.mute = true;
             data.conversationStart.Invoke();
             return new KeyValuePair<Vector3, Quaternion>(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
         }
@@ -88,6 +91,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             if (soundEffectEnd.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectEnd);
             actorIdleSound.mute = false;
+            hannaIdleSound.mute = false;
             data.conversationEnd.Invoke();
         }
     }
