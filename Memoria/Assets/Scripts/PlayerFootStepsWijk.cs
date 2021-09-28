@@ -19,13 +19,17 @@ public class PlayerFootStepsWijk : MonoBehaviour
     {
         if(Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, distance, ground))
         {
-            if (hit.collider.tag == "Material: Stone")
+            if (hit.collider.tag == "Material: Grass")
             {
                 material = 1f;
             }
-            else if (hit.collider.tag == "Material: Grass")
+            else if (hit.collider.tag == "Material: Stone")
             {
                 material = 2f;
+            }
+            else if(hit.collider.tag =="Material: Wood")
+            {
+                material = 3f;
             }
             else
             {
