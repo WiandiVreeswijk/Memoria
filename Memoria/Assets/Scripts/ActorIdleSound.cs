@@ -9,6 +9,7 @@ public class ActorIdleSound : MonoBehaviour
     [Header("FMOD Event")]
     [FMODUnity.EventRef]
     public string SelectAudio;
+    public string parameterName;
     public new FMOD.Studio.EventInstance audio;
     private PARAMETER_ID volumeParameter;
 
@@ -26,7 +27,7 @@ public class ActorIdleSound : MonoBehaviour
         FMOD.Studio.EventDescription volumeDescription;
         audio.getDescription(out volumeDescription);
         FMOD.Studio.PARAMETER_DESCRIPTION volumeParameterDescription;
-        volumeDescription.getParameterDescriptionByName("Volume", out volumeParameterDescription);
+        volumeDescription.getParameterDescriptionByName(parameterName, out volumeParameterDescription);
         volumeParameter = volumeParameterDescription.id;
 
         FMOD.Studio.PLAYBACK_STATE PbState;

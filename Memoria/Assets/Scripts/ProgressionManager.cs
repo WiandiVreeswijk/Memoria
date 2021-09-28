@@ -8,7 +8,7 @@ public class ProgressionManager : MonoBehaviour {
 
     void Start() {
         if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.NEIGHBORHOOD) { //#TODO: This is temporary
-            GameObject manfred = GameObject.Find("Neighbour");
+            GameObject manfred = Utils.FindUniqueObject<Manfred>().gameObject;
             questIcon = Globals.IconManager.AddWorldIcon("oma", manfred.transform.position + new Vector3(0, 2.25f, 0));
         }
     }
