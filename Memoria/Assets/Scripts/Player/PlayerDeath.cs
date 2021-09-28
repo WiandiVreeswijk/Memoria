@@ -55,7 +55,7 @@ public class PlayerDeath : MonoBehaviour {
 
             Globals.SoundManagerChase.FadeDeath(1.0f);
             respawningSequence = Utils.DelayedAction(2.0f, RespawnPosition);
-            Utils.DelayedAction(1.0f, () => Globals.MenuController.BlackScreenFadeIn(0.5f));
+            Utils.DelayedAction(1.0f, () => Globals.MenuController.BlackScreenFadeIn(0.5f, false));
         }
     }
 
