@@ -18,6 +18,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
 
     void Start() {
         Globals.Player.PlayerMovementAdventure.SetCanMove(false);
+        Globals.Player.VisualEffects.SetVisible(false);
     }
 
     public void OnFinishCutscene() {
@@ -25,7 +26,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
         Utils.DelayedAction(7.5f, () => {
             if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.UIManager.NotificationManager.NotifyPlayer("WASD to move");
         });
-
         StartMarkerNotification();
     }
 
@@ -55,6 +55,10 @@ public class WijkOpeningCutscene : MonoBehaviour {
         Globals.UIManager.NotificationManager.NotifyPlayer("<font=\"Mouse SDF\"><size=78>u</size></font>  to move the camera");
     }
 
+    public void OnBusArrive() {
+        Globals.Player.VisualEffects.SetVisible(true);
+    }
+
     public void Trigger() {
         if (isStarted) return;
         isStarted = true;
@@ -70,6 +74,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
         if (ShouldSkip()) {
             busStop.Skip();
             MouseNotification();
+            Globals.Player.VisualEffects.SetVisible(true);
             OnFinishCutscene();
         } else {
             Utils.DelayedAction(15.0f, () => MouseNotification());
