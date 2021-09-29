@@ -37,6 +37,7 @@ public class ProgressionData : MonoBehaviour, IEnterActivatable {
 
         if (setDialogueProgression) {
             DialogueLua.SetVariable(actorName + "_Progression", dialogueProgressionName);
+            actor.GetComponent<Usable>().enabled = false;
         }
     }
 

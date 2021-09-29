@@ -31,7 +31,6 @@ public class IconManager : MonoBehaviour {
     }
 
     public Icon AddWorldIcon(string name, Vector3 position) {
-        
         if (iconDefinitionsDict.TryGetValue(name, out IconDefinition def)) {
             Icon icon = Instantiate(iconPrefab, position, Quaternion.identity).GetComponent<Icon>();
             icon.transform.parent = transform;

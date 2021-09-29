@@ -47,7 +47,7 @@ public class SceneManager : MonoBehaviour {
     public void SetScene(string sceneName) {
         if (sceneDefinitionsMap.TryGetValue(sceneName, out SceneDefinition scene)) {
             if (isLoadingScene || scene == activeScene) return;
-            Time.timeScale = 0.0f;
+            Globals.CinemachineManager.SetPausedState(true);
             Globals.MenuController.BlackScreenFadeIn(2.0f, true).OnComplete(() => StartCoroutine(LoadScene(scene))).SetUpdate(true);
         } else Debug.LogError($"[SceneManager] scene has not been registered {sceneName}");
     }
@@ -71,7 +71,7 @@ public class SceneManager : MonoBehaviour {
 
         yield return new WaitForSeconds(1.0f); //Prevent stutter
         isLoadingScene = false;
-        Globals.MenuController.BlackScreenFadeOut(2.0f).OnComplete(() => Time.timeScale = 1.0f);
+        Globals.MenuController.BlackScreenFadeOut(2.0f).OnComplete(() => Globals.CinemachineManager.SetPausedState(false)).SetUpdate(true);
     }
 
     public static void LoadSceneIfNotActive(string sceneName) {
