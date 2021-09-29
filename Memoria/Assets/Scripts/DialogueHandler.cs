@@ -26,7 +26,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         actorName = actorName.ToLower();
         //DialogueLua.GetVariable(actorName + "_Progression");
 
-        actorIdleSound = GetComponent<ActorIdleSound>();
+        if (actorIdleSound != null) actorIdleSound = GetComponent<ActorIdleSound>();
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
@@ -40,7 +40,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public KeyValuePair<Vector3, Quaternion>? ConversationStart(string conversationName, GameObject conversationPlayer) {
         print("Conversation with " + actorName + " started" + (conversationName.Length > 0 ? ": " + conversationName : "."));
         //fakeElena.SetActive(true);
-        
+
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
             data.cam.Priority = 99;
@@ -53,7 +53,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             Globals.CinemachineManager.SetInputEnabled(false);
             if (soundEffectStart.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
-            actorIdleSound.mute = true;
+            if (actorIdleSound != null) actorIdleSound.mute = true;
             data.conversationStart.Invoke();
             return new KeyValuePair<Vector3, Quaternion>(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
         }
@@ -87,7 +87,11 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             Globals.ProgressionManager.GetIcon().SetEnabled(true);
             if (soundEffectEnd.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectEnd);
-            actorIdleSound.mute = false;
+            if (actorIdleSound != null) actorIdleSound.mute = false;
+
+            if (data.disableActorAfterDialogue) {
+                GetComponent<Usable>().enabled = false;
+            }
             data.conversationEnd.Invoke();
         }
     }

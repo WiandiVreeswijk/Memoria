@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6564458149861848314}
   m_Layer: 0
   m_Name: Dog
-  m_TagString: Untagged
+  m_TagString: IgnoreCameraCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,10 @@ PrefabInstance:
     - target: {fileID: 1206288095452438, guid: 16e5f48d612f744039dbecb3e834b94f, type: 3}
       propertyPath: m_Name
       value: Doggo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1206288095452438, guid: 16e5f48d612f744039dbecb3e834b94f, type: 3}
+      propertyPath: m_TagString
+      value: IgnoreCameraCollider
       objectReference: {fileID: 0}
     - target: {fileID: 4853161833948474, guid: 16e5f48d612f744039dbecb3e834b94f, type: 3}
       propertyPath: m_RootOrder

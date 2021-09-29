@@ -22,4 +22,6 @@ public class DialogueData : MonoBehaviour
 
     public UnityEvent conversationStart;
     public UnityEvent conversationEnd;
+
+    public bool disableActorAfterDialogue;
 }
