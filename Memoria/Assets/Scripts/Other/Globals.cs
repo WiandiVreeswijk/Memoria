@@ -92,7 +92,6 @@ public class Globals : MonoBehaviour {
 
     private void GlobalInitialize() {
         Utils.FindUniqueObject(out MainCamera mainCamera);
-        camera = mainCamera.GetComponent<Camera>();
         Utils.FindUniqueObject(out iconManager);
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
@@ -107,9 +106,12 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out memoryWatchManager, false);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
         Utils.FindUniqueObject(out player);
+        camera = mainCamera.GetComponent<Camera>();
         player.OnGlobalsInitialize();
+        progressionManager.OnGlobalsInitializeType(currentGlobalsType);
         player.OnGlobalsInitializeType(currentGlobalsType);
         uiManager.OnGlobalsInitialize();
+        
     }
 
     private void InitializeDebug() {

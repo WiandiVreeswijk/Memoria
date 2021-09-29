@@ -28,9 +28,7 @@ public class PlayerCameraController : MonoBehaviour {
         ChangeCamera(isInFirstPerson ? CameraType.THIRDPERSON : CameraType.FIRSTPERSON);
     }
 
-    Tween tween;
     public void ChangeCamera(CameraType type) {
-        tween?.Kill();
         if (type == CameraType.FIRSTPERSON) {
             firstPersonCamera.Priority = 11;
             thirdPersonCamera.Priority = 9;
@@ -44,5 +42,19 @@ public class PlayerCameraController : MonoBehaviour {
 
     public bool IsInFirstPerson() {
         return isInFirstPerson;
+    }
+
+    public void ChangeCameraAndSetRotation(CameraType type, float x, float y) {
+        if (type == CameraType.FIRSTPERSON) {
+            firstPersonCamera.Priority = 11;
+            thirdPersonCamera.Priority = 9;
+            isInFirstPerson = true;
+        } else {
+            thirdPersonCamera.m_XAxis.Value = x;
+            thirdPersonCamera.m_YAxis.Value = y;
+            thirdPersonCamera.Priority = 11;
+            firstPersonCamera.Priority = 9;
+            isInFirstPerson = false;
+        }
     }
 }

@@ -31,7 +31,7 @@ public class PlayerTriggerVolume : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
             switch (type) {
-                case PlayerTriggerVolumeType.LeaveHouseCamera: Globals.Player.CameraController.ChangeCamera(PlayerCameraController.CameraType.THIRDPERSON); break;
+                case PlayerTriggerVolumeType.LeaveHouseCamera: Globals.Player.CameraController.ChangeCameraAndSetRotation(PlayerCameraController.CameraType.THIRDPERSON, 180f, 0.65f); break;
                 case PlayerTriggerVolumeType.HouseInterior: HouseInterior(false); break;
             }
         }
