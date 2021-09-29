@@ -32,7 +32,7 @@ public class MenuController : MonoBehaviour {
 
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private WAEMUIElement[] uiElements;
-    [SerializeField] private float fadeTime = 0.25f;
+    [SerializeField] private float fadeTime = 0.125f;
     [SerializeField] private CanvasGroup blackScreen;
     [SerializeField] private Image image;
     private bool blackScreenActive = false;
@@ -73,10 +73,10 @@ public class MenuController : MonoBehaviour {
         blackScreenTween?.Kill();
         blackScreen.blocksRaycasts = false;
         blackScreen.interactable = false;
+        blackScreenActive = false;
         return DOTween.To(() => blackScreen.alpha, x => blackScreen.alpha = x, 0.0f, duration).SetUpdate(true)
             .OnComplete(
                 () => {
-                    blackScreenActive = false;
                 });
     }
 
