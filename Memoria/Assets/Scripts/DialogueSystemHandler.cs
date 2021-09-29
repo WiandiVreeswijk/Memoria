@@ -15,6 +15,7 @@ public class DialogueSystemHandler : MonoBehaviour {
     {
         activeHandler = ((Transform)DialogueManager.CurrentConversant).GetComponent<IDialogueHandler>();
         if (activeHandler != null) {
+            Globals.UIManager.NotificationManager.CacheActiveNotifications();
             //Stop the player from moving and disable visibility
             Globals.Player.PlayerMovementAdventure.SetCanMove(false);
 
@@ -34,6 +35,8 @@ public class DialogueSystemHandler : MonoBehaviour {
             IDialogueHandler handler = ((Transform)actor).GetComponent<IDialogueHandler>();
             if (activeHandler != handler) throw new Exception("Active handler does not equal conversation end handler");
             if (handler != null) {
+                Globals.UIManager.NotificationManager.ReleaseCachedNotifications();
+
                 //Return movement and visibility
                 Globals.Player.PlayerMovementAdventure.SetCanMove(true);
 

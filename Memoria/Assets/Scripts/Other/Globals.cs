@@ -93,7 +93,6 @@ public class Globals : MonoBehaviour {
     private void GlobalInitialize() {
         Utils.FindUniqueObject(out MainCamera mainCamera);
         camera = mainCamera.GetComponent<Camera>();
-        Utils.FindUniqueObject(out player);
         Utils.FindUniqueObject(out iconManager);
         Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
@@ -102,13 +101,14 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out analyticsManager, false);
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
-        Utils.FindUniqueObject(out trophyManager);
         Utils.FindUniqueObject(out menuController);
         Utils.FindUniqueObject(out timescaleManager);
         Utils.FindUniqueObject(out cinemachineManager);
         Utils.FindUniqueObject(out memoryWatchManager, false);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
-
+        Utils.FindUniqueObject(out player);
+        player.OnGlobalsInitialize();
+        player.OnGlobalsInitializeType(currentGlobalsType);
         uiManager.OnGlobalsInitialize();
     }
 
@@ -119,6 +119,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out interactableManager);
         Utils.FindUniqueObject(out soundManagerWijk);
         Utils.FindUniqueObject(out musicManagerWijk);
+        Utils.FindUniqueObject(out trophyManager);
         menuController.SetMenu("Main", 0.0f);
     }
 

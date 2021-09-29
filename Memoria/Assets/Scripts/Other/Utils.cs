@@ -59,9 +59,9 @@ public static class Utils {
         FindUniqueObject<T>();
     }
 
-    public static Transform FindUniqueChildInTransform(Transform transform, string name) {
+    public static Transform FindUniqueChildInTransform(Transform transform, string name, bool errorWhenNoneFound = true) {
         var children = transform.FindChildren(name);
-        return CheckTransforms(children, transform.name, name, true);
+        return CheckTransforms(children, transform.name, name, errorWhenNoneFound);
     }
 
     #endregion

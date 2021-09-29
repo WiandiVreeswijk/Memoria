@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
     private PlayerSound playerSound;
     public PlayerSound PlayerSound => playerSound;
 
-    void Start() {
+    public void OnGlobalsInitialize() {
         playerMovementAdventure = GetComponent<PlayerMovementAdventure>();
         playerMovement25D = GetComponent<PlayerMovement25D>();
         cameraController = GetComponent<PlayerCameraController>();
@@ -43,6 +43,25 @@ public class Player : MonoBehaviour {
         playerDeath = GetComponent<PlayerDeath>();
         playerSound = GetComponent<PlayerSound>();
         povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");
+    }
+
+    public void OnGlobalsInitializeType(Globals.GlobalsType type) {
+        switch (type) {
+            case Globals.GlobalsType.DEBUG: OnGlobalsInitializeDebug(); break;
+            case Globals.GlobalsType.NEIGHBORHOOD: OnGlobalsInitializeNeighborhood(); break;
+            case Globals.GlobalsType.OBLIVION: OnGlobalsInitializeOblivion(); break;
+        }
+    }
+
+    private void OnGlobalsInitializeDebug() {
+
+    }
+
+    private void OnGlobalsInitializeNeighborhood() {
         eyePoint = Utils.FindUniqueChildInTransform(transform, "EyeHeight");
+    }
+
+    private void OnGlobalsInitializeOblivion() {
+
     }
 }
