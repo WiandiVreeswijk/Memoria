@@ -9,7 +9,7 @@ public class PlayerVisualEffects : MonoBehaviour {
     private Vector3 lookAtPoint;
     private float lookAtWeight;
 
-    void Start() {
+    void Awake() {
         meshRenderers = GetComponentsInChildren<Renderer>();
         animator = GetComponent<Animator>();
     }

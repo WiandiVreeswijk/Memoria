@@ -156,7 +156,7 @@ public class WAEMMeshesTab : IWAEMTab {
             parentOfObjectsToCombine.transform.position = originalPosition;
         }
         CalculateLightmapUVs(finalMesh);
-        AssetDatabase.CreateAsset(finalMesh, "Assets/ContentPacks/Tooling/CombinedMeshes/" + parentOfObjectsToCombine.name + "Combined.asset");
+        AssetDatabase.CreateAsset(finalMesh, "Assets/ContentPacks/Tooling/CombinedMeshes/" + parentOfObjectsToCombine.name + "Combined_" + GUID.Generate() + ".asset");
         GameObject combinedObject = new GameObject(parentOfObjectsToCombine.name + "Combined");
         var combinedObjectFilter = combinedObject.AddComponent<MeshFilter>();
         combinedObjectFilter.sharedMesh = finalMesh;
@@ -224,7 +224,7 @@ public class WAEMMeshesTab : IWAEMTab {
 
         for (int i = 0; i < selectedMeshFilter.sharedMesh.subMeshCount; i++) {
             Mesh extracted = ExtractMesh(selectedMeshFilter.sharedMesh, i);
-            AssetDatabase.CreateAsset(extracted, "Assets/ContentPacks/Tooling/ExtractedMeshes/" + selected.name + "Extracted" + i + ".asset");
+            AssetDatabase.CreateAsset(extracted, "Assets/ContentPacks/Tooling/ExtractedMeshes/" + selected.name + "Extracted" + i +  "_" + GUID.Generate() + ".asset");
             GameObject obj = new GameObject(selected.name + i);
             MeshFilter filter = obj.AddComponent<MeshFilter>();
             MeshRenderer renderer = obj.AddComponent<MeshRenderer>();
@@ -345,8 +345,8 @@ public class WAEMMeshesTab : IWAEMTab {
                 int j = 0;
                 foreach (var pair in meshDict) {
                     meshes[j].uv3 = newUVs[j];
-                    Debug.Log("Created mesh asset at " + "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV.asset");
-                    AssetDatabase.CreateAsset(meshes[j], "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV.asset");
+                    Debug.Log("Created mesh asset at " + "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV_" + GUID.Generate() + ".asset");
+                    AssetDatabase.CreateAsset(meshes[j], "Assets/ContentPacks/Tooling/VegetationMeshes/" + pair.Key.name + "_heightUV_" + GUID.Generate() + ".asset");
                     foreach (var mesh in pair.Value) {
                         Undo.RecordObject(mesh, "CalculateHeightUVs");
                         mesh.sharedMesh = meshes[j];
