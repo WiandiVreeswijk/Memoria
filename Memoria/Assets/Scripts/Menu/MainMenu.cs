@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour {
         Globals.MusicManagerWijk.FadeViolinVolume(1.0f, 2.0f);
         Globals.MusicManagerWijk.FadeHarpVolume(1.0f, 2.0f);
         Globals.SoundManagerWijk.FadeAmbientVolume(0.0f, 0.0f);
+        Globals.AmbientControl.SetVolume(0);
     }
 
     public void PlayGame() {
@@ -25,6 +26,7 @@ public class MainMenu : MonoBehaviour {
         Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
         Globals.SoundManagerWijk.FadeEngineVolume(0.4f);
         Globals.MusicManagerWijk.FadeFluteVolume(0.9f, 10.0f);
+        
     }
 
     public void QuitGame() {

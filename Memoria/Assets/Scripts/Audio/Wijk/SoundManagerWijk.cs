@@ -84,6 +84,8 @@ public class SoundManagerWijk : MonoBehaviour {
     public void FadeToNothing()
     {
         FadeEngineVolume(0f, 10f);
+        Globals.AmbientControl.SetBirds(0.9f);
+        Globals.AmbientControl.FadeAmbientVolume(0.95f, 4.0f);
     }
     #endregion
 }
