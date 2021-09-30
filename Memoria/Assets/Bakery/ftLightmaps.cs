@@ -46,7 +46,7 @@ public class ftLightmaps {
         {
             // Try default path
             // (start with AssetDatabase assuming it's faster than GetFiles)
-            var a = AssetDatabase.LoadAssetAtPath("Assets/Bakery/ftDefaultAreaLightMat.mat", typeof(Texture2D)) as Texture2D;
+            var a = AssetDatabase.LoadAssetAtPath("Assets/Bakery/ftDefaultAreaLightMat.mat", typeof(Material)) as Material;
             if (a == null)
             {
                 // Find elsewhere

@@ -18,6 +18,10 @@ public class BakeryProjectSettings : ScriptableObject
     [SerializeField]
     public FileFormat format8bit = FileFormat.TGA;
 
+    // Use high quality compression for directional and SH L1 maps? (on desktop, high = BC7, not high = DXT1)
+    [SerializeField]
+    public bool dirHighQuality = true;
+
     // Padding values for atlas packers
     [SerializeField]
     public int texelPaddingForDefaultAtlasPacker = 3;
@@ -51,6 +55,10 @@ public class BakeryProjectSettings : ScriptableObject
     // Make it work more similar to original Unity behaviour
     [SerializeField]
     public bool alternativeScaleInLightmap = false;
+
+    // Make xatlas align charts to 4x4 block boundaries to make texture compression happy
+    [SerializeField]
+    public bool alignToTextureBlocksWithXatlas = true;
 
     // Should we adjust sample positions to prevent incorrect shadowing on very low-poly meshes with smooth normals?
     [SerializeField]

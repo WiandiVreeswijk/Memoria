@@ -68,7 +68,7 @@
             //float2 resolution = float2(width, height);
 
             // Filtered checker from https://www.shadertoy.com/view/llffWs
-            float2 uv = IN.texcoord1 * bakeryLightmapSize * 0.5f;
+            float2 uv = IN.texcoord1 * bakeryLightmapSize;// * 0.5f;
             float2 uvDx = ddx(uv);
             float2 uvDy = ddy(uv);
 

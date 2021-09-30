@@ -26,6 +26,7 @@ public class BakeryDirectLight : MonoBehaviour
     public float cloudShadowTilingX = 0.01f;
     public float cloudShadowTilingY = 0.01f;
     public float cloudShadowOffsetX, cloudShadowOffsetY;
+    public bool supersample = false;
 
     public int UID;
 

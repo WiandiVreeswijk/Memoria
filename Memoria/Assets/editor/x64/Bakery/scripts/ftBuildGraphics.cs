@@ -325,6 +325,25 @@ public class ftBuildGraphics : ScriptableWizard
         if ((pstorage.logLevel & (int)BakeryProjectSettings.LogLevel.Warning) != 0) Debug.LogWarning(info);
     }
 
+    static string FilterNonASCII(string s)
+    {
+        if (Encoding.UTF8.GetByteCount(s) == s.Length) return s;
+        var bytes = Encoding.UTF8.GetBytes(s);
+        var newStr = "";
+        for(int i=0; i<bytes.Length; i++)
+        {
+            if (bytes[i] > 127)
+            {
+                newStr += "_" + (int)bytes[i];
+            }
+            else
+            {
+                newStr += Convert.ToChar(bytes[i]);
+            }
+        }
+        return newStr;
+    }
+
     static void exportVBPos(BinaryWriter f, Transform t, Mesh m, Vector3[] vertices)
     {
         for(int i=0;i<vertices.Length;i++)
@@ -1745,7 +1764,11 @@ public class ftBuildGraphics : ScriptableWizard
         float scaleZ = tdata.size.z / (res-1);
 
         int patchRes = res;
+#if UNITY_2017_3_OR_NEWER
+        // supports 32-bit indices
+#else
         while(patchRes > 254) patchRes = 254;//patchRes /= 2;
+#endif
         int numVerts = patchRes * patchRes;
         int numPatches = (int)Mathf.Ceil(res / (float)patchRes);
 
@@ -2081,6 +2104,9 @@ public class ftBuildGraphics : ScriptableWizard
                     }
 
                     var mesh = new Mesh();
+#if UNITY_2017_3_OR_NEWER
+                    mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+#endif
                     mesh.vertices = positions;
                     mesh.triangles = indices;
                     mesh.normals = normals;
@@ -3152,7 +3178,7 @@ public class ftBuildGraphics : ScriptableWizard
         var lmBounds = data.lmBounds;
 
         data.autoVertexGroup = ScriptableObject.CreateInstance<BakeryLightmapGroup>();
-        data.autoVertexGroup.name = (anyObj == null ? "scene" : anyObj.scene.name) + "_VLM";
+        data.autoVertexGroup.name = (anyObj == null ? "scene" : FilterNonASCII(anyObj.scene.name)) + "_VLM";
         data.autoVertexGroup.isImplicit = true;
         data.autoVertexGroup.resolution = 256;
         data.autoVertexGroup.bitmask = 1;
@@ -3291,6 +3317,11 @@ public class ftBuildGraphics : ScriptableWizard
                         {
                             if (!ExportSceneValidationMessage("Multiple LOD levels in " + group.name + ", this is only supported when xatlas is set as the atlas packer and post-packing is enabled.")) return false;
                         }
+                    }
+
+                    if (exportTerrainAsHeightmap && !group.isImplicit && obj.name == "__ExportTerrain")
+                    {
+                        if (!ExportSceneValidationMessage("Terrain Optimization is enabled and terrains are inside a lightmap group. This is not currently supported. Try disabling Terrain Optimization (" + group.name + ", " + group.isImplicit + ").")) return false;
                     }
 
                     if (splitByScene) group.sceneName = obj.scene.name;
@@ -3500,7 +3531,7 @@ public class ftBuildGraphics : ScriptableWizard
                     int lmNum = storages[sceneToID[holder.scene]].implicitGroups.Count;
                     if (ftRenderLightmap.lightProbeMode == ftRenderLightmap.LightProbeMode.L1 && ftRenderLightmap.hasAnyProbes && renderTextures && !atlasOnly) lmNum--;
 
-                    newGroup.name = holder.scene.name + "_LM" + autoAtlasGroups.Count;//lmNum;
+                    newGroup.name = FilterNonASCII(holder.scene.name) + "_LM" + autoAtlasGroups.Count;//lmNum;
                     newGroup.isImplicit = true;
                     newGroup.resolution = 256;
                     newGroup.bitmask = 1;
@@ -4330,7 +4361,9 @@ public class ftBuildGraphics : ScriptableWizard
 
     static void ApplyAreaToUVBounds(float area, Vector4 uvbounds, out float width, out float height)
     {
+        if (pstorage.alternativeScaleInLightmap) area *= 2;
         width = height = Mathf.Sqrt(area);
+        if (pstorage.alternativeScaleInLightmap) width = height = Mathf.Max(1.0f, Mathf.Floor(height * 0.5f));
         float uwidth = uvbounds.z - uvbounds.x;
         float uheight = uvbounds.w - uvbounds.y;
         if (uwidth == 0 && uheight == 0)
@@ -4538,7 +4571,7 @@ public class ftBuildGraphics : ScriptableWizard
                     if (goodGroup < 0)
                     {
                         newGroup = ScriptableObject.CreateInstance<BakeryLightmapGroup>();
-                        newGroup.name = holder.scene.name + "_LMA" + autoAtlasGroups.Count;
+                        newGroup.name = FilterNonASCII(holder.scene.name) + "_LMA" + autoAtlasGroups.Count;
                         newGroup.isImplicit = true;
                         newGroup.sceneLodLevel = lodLevel;
                         if (splitByScene) newGroup.sceneName = holderObjs[i].scene.name;
@@ -4792,7 +4825,22 @@ public class ftBuildGraphics : ScriptableWizard
         float area = 0;
         for(int i=start; i<=end; i++)
         {
-            area += holderObjArea[holderObjs[i]];
+            float a = holderObjArea[holderObjs[i]];
+            var mr = holderObjs[i].GetComponent<Renderer>();
+            if (mr != null)
+            {
+                var so = new SerializedObject(mr);
+                var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
+                if (pstorage.alternativeScaleInLightmap)
+                {
+                    a *= scaleInLm * scaleInLm;
+                }
+                else
+                {
+                    a *= scaleInLm;
+                }
+            }
+            area += a;
         }
         return area;
     }
@@ -4963,6 +5011,18 @@ public class ftBuildGraphics : ScriptableWizard
                 float width, height;
                 ApplyAreaToUVBounds(area, uvbounds, out width, out height);
 
+                if (pstorage.alternativeScaleInLightmap)
+                {
+                    var mr = holderObjs[i].GetComponent<Renderer>();
+                    if (mr != null)
+                    {
+                        var so = new SerializedObject(mr);
+                        var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
+                        width *= scaleInLm;
+                        height *= scaleInLm;
+                    }
+                }
+
                 // Clamp to full lightmap size
                 float twidth = width;
                 float theight = height;
@@ -5085,12 +5145,12 @@ public class ftBuildGraphics : ScriptableWizard
             }
 
             //xatlas.xatlasParametrize(atlas);
-            xatlas.xatlasPack(atlas, attempts, packTexelsPerUnit, packResolution, maxChartSize, padding, bruteForce, true);//, allowRotate);
+            xatlas.xatlasPack(atlas, attempts, packTexelsPerUnit, packResolution, maxChartSize, padding, bruteForce, pstorage.alignToTextureBlocksWithXatlas);//, allowRotate);
 
             int atlasCount = xatlas.xatlasGetAtlasCount(atlas);
             var atlasSizes = new int[atlasCount];
 
-            xatlas.xatlasNormalize(atlas, atlasSizes);
+            xatlas.xatlasNormalize(atlas, atlasSizes, pstorage.alternativeScaleInLightmap);
 
             // Create additional lightmaps
             AllocateAutoAtlas(atlasCount-1, lmgroup, data, atlasSizes);
@@ -5351,47 +5411,52 @@ public class ftBuildGraphics : ScriptableWizard
 
         // Pack atlases
         // Try to scale all objects to occupy all atlas space
-        foreach(var pair in groupToHolderObjects)
+        for(int pass=0; pass<2; pass++)
         {
-            // For every LMGroup with PackAtlas mode
-            var lmgroup = pair.Key;
-            var holderObjs = pair.Value; // get all objects
-
-            var pdata = new PackData();
-
-            // Normalize by worldspace area and uv area
-            // Read/write holderObjArea
-            NormalizeHolderArea(lmgroup, holderObjs, data);
-
-            // Sort objects by area and scene LOD level
-            // + optionally by scene
-            // + split by terrain
-            holderObjs.Sort(CompareGameObjectsForPacking);
-
-            var packer = lmgroup.atlasPacker == BakeryLightmapGroup.AtlasPacker.Auto ? atlasPacker : (ftGlobalStorage.AtlasPacker)lmgroup.atlasPacker;
-            if (packer == ftGlobalStorage.AtlasPacker.xatlas)
+            foreach(var pair in groupToHolderObjects)
             {
-                if (!PackWithXatlas(lmgroup, holderObjs, data, pdata))
-                {
-                    ExportSceneError("Failed packing atlas");
-                    return false;
-                }
-            }
-            else
-            {
-                // Calculate area sum for every scene LOD level in LMGroup
-                // Write remainingAreaPerLodLevel
-                SumHolderAreaPerLODLevel(holderObjs, data, pdata);
+                // For every LMGroup with PackAtlas mode
+                var lmgroup = pair.Key;
+                if (pass == 0 && !lmgroup.isImplicit) continue; // implicit groups get packed first
+                if (pass == 1 && lmgroup.isImplicit) continue;
+                var holderObjs = pair.Value; // get all objects
 
-                // Perform recursive packing
-                while(pdata.repack)
+                var pdata = new PackData();
+
+                // Normalize by worldspace area and uv area
+                // Read/write holderObjArea
+                NormalizeHolderArea(lmgroup, holderObjs, data);
+
+                // Sort objects by area and scene LOD level
+                // + optionally by scene
+                // + split by terrain
+                holderObjs.Sort(CompareGameObjectsForPacking);
+
+                var packer = lmgroup.atlasPacker == BakeryLightmapGroup.AtlasPacker.Auto ? atlasPacker : (ftGlobalStorage.AtlasPacker)lmgroup.atlasPacker;
+                if (packer == ftGlobalStorage.AtlasPacker.xatlas)
                 {
-                    pdata.continueRepack = true;
-                    if (!Pack(lmgroup, holderObjs, data, pdata)) return false;
-                    if (!pdata.continueRepack) break;
+                    if (!PackWithXatlas(lmgroup, holderObjs, data, pdata))
+                    {
+                        ExportSceneError("Failed packing atlas");
+                        return false;
+                    }
                 }
-                // Normalize atlas by largest axis
-                NormalizeAtlas(lmgroup, holderObjs, data, pdata);
+                else
+                {
+                    // Calculate area sum for every scene LOD level in LMGroup
+                    // Write remainingAreaPerLodLevel
+                    SumHolderAreaPerLODLevel(holderObjs, data, pdata);
+
+                    // Perform recursive packing
+                    while(pdata.repack)
+                    {
+                        pdata.continueRepack = true;
+                        if (!Pack(lmgroup, holderObjs, data, pdata)) return false;
+                        if (!pdata.continueRepack) break;
+                    }
+                    // Normalize atlas by largest axis
+                    NormalizeAtlas(lmgroup, holderObjs, data, pdata);
+                }
             }
         }
         cmp_objToLodLevel = null;
@@ -6038,8 +6103,11 @@ public class ftBuildGraphics : ScriptableWizard
 
                 if (atlasPacker == ftGlobalStorage.AtlasPacker.Default)
                 {
-                    NormalizeAutoAtlases(data);
-                    JoinAutoAtlases(data);
+                    if (!pstorage.alternativeScaleInLightmap)
+                    {
+                        NormalizeAutoAtlases(data);
+                        JoinAutoAtlases(data);
+                    }
                 }
 
                 if (!ValidateScaleOffsetImmutability(data))
@@ -6092,6 +6160,7 @@ public class ftBuildGraphics : ScriptableWizard
                     for(int i=0; i<objsToWrite.Count; i++)
                     {
                         var lmgroup = objsToWriteGroup[i];
+                        if (lmgroup != null && lmgroup.parentName != null && lmgroup.parentName != "|") continue;
                         var holderObj = objsToWriteHolder[i];
                         if (holderObj != null)
                         {
@@ -7907,18 +7976,6 @@ public class ftBuildGraphics : ScriptableWizard
                 userCanceled = true;
                 ProgressBarEnd(true);
                 yield break;
-            }
-        }
-
-        if (!pstorage.generateSmoothPos)
-        {
-            // further passes still require smooth pos, copy from pos
-            for(int i=0; i<groupList.Count; i++)
-            {
-                var lmgroup = groupList[i];
-                File.Copy(scenePath + "/uvpos_" + lmgroup.name + (ftRenderLightmap.compressedGBuffer ? ".lz4" : ".dds"),
-                          scenePath + "/uvsmoothpos_" + lmgroup.name + (ftRenderLightmap.compressedGBuffer ? ".lz4" : ".dds"),
-                          true);
             }
         }
 

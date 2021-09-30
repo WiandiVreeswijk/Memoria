@@ -10,8 +10,6 @@ float bakeryLightmapMode;
 
 //#define BAKERY_SSBUMP
 
-//#define BAKERY_COMPRESSED_VOLUME_RGBM
-
 // can't fit vertexLM SH to sm3_0 interpolators
 #ifndef SHADER_API_D3D11
     #undef BAKERY_VERTEXLMSH
@@ -680,12 +678,7 @@ half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
         tex1 = _Volume1.Sample(sampler_Volume0, lpUV) * 2 - 1;
         tex2 = _Volume2.Sample(sampler_Volume0, lpUV) * 2 - 1;
         tex3 = _Volume3.Sample(sampler_Volume0, lpUV) * 2 - 1;
-        #ifdef BAKERY_COMPRESSED_VOLUME_RGBM
-            L0 = tex0.xyz * (tex0.w * 8.0f);
-            L0 *= L0;
-        #else
-            L0 = tex0.xyz;
-        #endif
+        L0 = tex0.xyz;
         L1x = tex1.xyz * L0;
         L1y = tex2.xyz * L0;
         L1z = tex3.xyz * L0;
@@ -1103,12 +1096,7 @@ void bakeryFragDeferred(
         tex1 = _Volume1.Sample(sampler_Volume0, lpUV) * 2 - 1;
         tex2 = _Volume2.Sample(sampler_Volume0, lpUV) * 2 - 1;
         tex3 = _Volume3.Sample(sampler_Volume0, lpUV) * 2 - 1;
-        #ifdef BAKERY_COMPRESSED_VOLUME_RGBM
-            L0 = tex0.xyz * (tex0.w * 8.0f);
-            L0 *= L0;
-        #else
-            L0 = tex0.xyz;
-        #endif
+        L0 = tex0.xyz;
         L1x = tex1.xyz * L0;
         L1y = tex2.xyz * L0;
         L1z = tex3.xyz * L0;

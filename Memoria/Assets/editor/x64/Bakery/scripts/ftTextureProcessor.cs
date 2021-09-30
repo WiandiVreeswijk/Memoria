@@ -11,6 +11,7 @@ public class ftTextureProcessor : AssetPostprocessor
     public const int TEX_LMDEFAULT = 1;
     public const int TEX_MASK = 2;
     public const int TEX_DIR = 3;
+    public const int TEX_MASK_NO_ALPHA = 4;
 
     void OnPreprocessTexture()
     {
@@ -42,12 +43,20 @@ public class ftTextureProcessor : AssetPostprocessor
             {
                 importer.textureType = TextureImporterType.Default;
                 importer.textureCompression = TextureImporterCompression.CompressedHQ;
+                importer.alphaSource = TextureImporterAlphaSource.FromInput;
+                break;
+            }
+            case TEX_MASK_NO_ALPHA:
+            {
+                importer.textureType = TextureImporterType.Default;
+                importer.textureCompression = TextureImporterCompression.Compressed;
+                importer.alphaSource = TextureImporterAlphaSource.None;
                 break;
             }
             case TEX_DIR:
             {
                 importer.textureType = TextureImporterType.Default;
-                importer.textureCompression = TextureImporterCompression.CompressedHQ;
+                importer.textureCompression =  pstorage.dirHighQuality ? TextureImporterCompression.CompressedHQ : TextureImporterCompression.Compressed;
                 importer.sRGBTexture = (pstorage.format8bit == BakeryProjectSettings.FileFormat.PNG);
                 break;
             }
