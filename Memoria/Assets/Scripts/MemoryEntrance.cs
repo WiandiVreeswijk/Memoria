@@ -42,6 +42,7 @@ namespace Assets.Scripts {
 
         public override void Activate() {
             Globals.SceneManager.SetScene(sceneName);
+            Globals.MusicManagerWijk.FadeToMuteAll();
         }
 
         private void KillTweens() {
