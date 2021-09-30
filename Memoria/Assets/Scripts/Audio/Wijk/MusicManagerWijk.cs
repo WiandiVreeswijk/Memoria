@@ -275,4 +275,14 @@ public class MusicManagerWijk : MonoBehaviour
         FadeViolinVolume(0.0f, 5.0f);
         FadePianoVolume(0.6f, 5.0f);
     }
+
+    public void FadeToMuteAll()
+    {
+        FadeBassVolume(0, 1);
+        FadeCelloVolume(0, 1);
+        FadeFluteVolume(0, 1);
+        FadeHarpVolume(0, 1);
+        FadePianoVolume(0, 1);
+        FadeViolinVolume(0, 1);
+    }
 }

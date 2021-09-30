@@ -44,6 +44,7 @@ namespace Assets.Scripts {
         {
             Globals.Player.CameraController.EaseFOV(2.5f, 80f, true, Ease.InQuart);
             Globals.SceneManager.SetScene(sceneName);
+            Globals.MusicManagerWijk.FadeToMuteAll();
         }
 
         private void KillTweens() {
