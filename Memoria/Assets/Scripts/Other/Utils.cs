@@ -66,6 +66,22 @@ public static class Utils {
 
     #endregion
 
+    #region Misc
+
+    public static Dictionary<K, V> ListToDictionary<K, V>(List<V> list, string name, Func<V, K> listEntryToDictionaryKey) {
+        Dictionary<K, V> dict = new Dictionary<K, V>();
+        foreach (V entry in list) {
+            K key = listEntryToDictionaryKey(entry);
+            if (dict.ContainsKey(key)) {
+                Debug.LogError($"Duplicate dictionary entry found in {name}: {key}");
+            } else {
+                dict.Add(key, entry);
+            }
+        }
+        return dict;
+    }
+    #endregion
+
     #region Math
 
     /*Maps a float from one range to another*/

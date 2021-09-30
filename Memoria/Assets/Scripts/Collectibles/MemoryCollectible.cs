@@ -11,7 +11,7 @@ public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
     public ParticleSystem hoveringParticles, collectedParticles;
     public PortalVisual portal;
     public MeshRenderer render;
-
+    public TrophyType trophyType;
     public Animator collectedAnimation;
 
     private void Start() {
@@ -26,6 +26,7 @@ public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
         if (!triggered) {
             //#Todo OnLevelEnded should not be called here
             Globals.AnalyticsManager.OnLevelEnded();
+            Globals.TrophyManager.CollectTrophy(trophyType);
             collectedAnimation.Play("MemoryCollected");
             hoveringParticles.Stop();
             collectedParticles.Play();

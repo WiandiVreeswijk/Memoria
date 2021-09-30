@@ -21,13 +21,7 @@ public class IconManager : MonoBehaviour {
     public GameObject iconPrefab;
 
     public void Awake() {
-        foreach (IconDefinition def in iconDefinitions) {
-            if (iconDefinitionsDict.ContainsKey(def.name)) {
-                Debug.LogError("Duplicate icon definition found in IconManager: " + name);
-            } else {
-                iconDefinitionsDict.Add(def.name, def);
-            }
-        }
+        iconDefinitionsDict = Utils.ListToDictionary(iconDefinitions, "IconManager", x => x.name);
     }
 
     public Icon AddWorldIcon(string name, Vector3 position) {

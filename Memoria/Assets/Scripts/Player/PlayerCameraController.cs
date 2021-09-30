@@ -28,21 +28,28 @@ public class PlayerCameraController : MonoBehaviour {
         ChangeCamera(isInFirstPerson ? CameraType.THIRDPERSON : CameraType.FIRSTPERSON);
     }
 
-    public void ChangeCamera(CameraType type) {
+    public bool IsInFirstPerson() {
+        return isInFirstPerson;
+    }
+
+    Tween inputTween;
+    public void ChangeCamera(CameraType type)
+    {
+
         if (type == CameraType.FIRSTPERSON) {
             firstPersonCamera.Priority = 11;
             thirdPersonCamera.Priority = 9;
             isInFirstPerson = true;
         } else {
+            inputTween?.Kill();
+            Globals.CinemachineManager.SetInputEnabled(false);
+            inputTween = Utils.DelayedAction(1.0f, () => Globals.CinemachineManager.SetInputEnabled(true));
             thirdPersonCamera.Priority = 11;
             firstPersonCamera.Priority = 9;
             isInFirstPerson = false;
         }
     }
 
-    public bool IsInFirstPerson() {
-        return isInFirstPerson;
-    }
 
     public void ChangeCameraAndSetRotation(CameraType type, float x, float y) {
         if (type == CameraType.FIRSTPERSON) {
@@ -50,6 +57,9 @@ public class PlayerCameraController : MonoBehaviour {
             thirdPersonCamera.Priority = 9;
             isInFirstPerson = true;
         } else {
+            inputTween?.Kill();
+            Globals.CinemachineManager.SetInputEnabled(false);
+            inputTween = Utils.DelayedAction(1.0f, () => Globals.CinemachineManager.SetInputEnabled(true));
             thirdPersonCamera.m_XAxis.Value = x;
             thirdPersonCamera.m_YAxis.Value = y;
             thirdPersonCamera.Priority = 11;

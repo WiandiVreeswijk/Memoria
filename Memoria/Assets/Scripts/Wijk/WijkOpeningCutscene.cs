@@ -39,8 +39,8 @@ public class WijkOpeningCutscene : MonoBehaviour {
             Globals.UIManager.NotificationManager.NotifyPlayer("Follow the ! marker");
             markerNotificationTween.Restart();
         }).OnUpdate(() => {
-            if (Vector3.Distance(Globals.Player.transform.position, Globals.ProgressionManager.GetIcon().transform.position) <
-                3.5f) {
+            if (Globals.GetCurrentGlobalsType() != Globals.GlobalsType.NEIGHBORHOOD) markerNotificationTween.Kill();
+            if (Vector3.Distance(Globals.Player.transform.position, Globals.ProgressionManager.GetIcon().transform.position) < 3.5f) {
                 print("Player got close to marker!");
                 markerNotificationTween.Restart();
             }
