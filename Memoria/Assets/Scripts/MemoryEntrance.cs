@@ -40,7 +40,9 @@ namespace Assets.Scripts {
             }
         }
 
-        public override void Activate() {
+        public override void Activate()
+        {
+            Globals.Player.CameraController.EaseFOV(2.5f, 80f, true, Ease.InQuart);
             Globals.SceneManager.SetScene(sceneName);
         }
 

@@ -17,6 +17,7 @@ public class ftSettingsProvider
 
         EditorGUILayout.PropertyField(so.FindProperty("mipmapLightmaps"), new GUIContent("Mipmap Lightmaps", "Enable mipmapping on lightmap assets. Can cause leaks across UV charts as atlases get smaller."));
         EditorGUILayout.PropertyField(so.FindProperty("format8bit"), new GUIContent("Mask/Direction format", ""));
+        EditorGUILayout.PropertyField(so.FindProperty("dirHighQuality"), new GUIContent("High quality direction", "Use high quality compression for directional and SH L1 maps? (on desktop, high = BC7, not high = DXT1)"));
         EditorGUILayout.PropertyField(so.FindProperty("texelPaddingForDefaultAtlasPacker"), new GUIContent("Texel padding (Default atlas packer)", "How many empty texels to add between objects' UV layouts in lightmap atlases."), GUILayout.ExpandWidth(true));
         EditorGUILayout.PropertyField(so.FindProperty("texelPaddingForXatlasAtlasPacker"), new GUIContent("Texel padding (xatlas packer)", "How many empty texels to add between objects' UV layouts in lightmap atlases."));
         EditorGUILayout.PropertyField(so.FindProperty("alphaMetaPassResolutionMultiplier"), new GUIContent("Alpha Meta Pass resolution multiplier", "Scales resolution for alpha Meta Pass maps."));
@@ -29,6 +30,7 @@ public class ftSettingsProvider
         EditorGUILayout.PropertyField(so.FindProperty("deletePreviousLightmapsBeforeBake"), new GUIContent("Delete previous lightmaps before bake", "Should previously rendered Bakery lightmaps be deleted before the new bake?"));
         EditorGUILayout.PropertyField(so.FindProperty("logLevel"), new GUIContent("Log level", "Print information about the bake process to console? 0 = don't. 1 = info only; 2 = warnings only; 3 = everything."));
         EditorGUILayout.PropertyField(so.FindProperty("alternativeScaleInLightmap"), new GUIContent("Alternative Scale in Lightmap", "Make 'Scale in Lightmap' renderer property act more similar to built-in Unity behaviour."));
+        EditorGUILayout.PropertyField(so.FindProperty("alignToTextureBlocksWithXatlas"), new GUIContent("Align to texture compression blocks with xatlas", "Make xatlas align charts to 4x4 block boundaries to make texture compression happy."));
         EditorGUILayout.PropertyField(so.FindProperty("generateSmoothPos"), new GUIContent("Generate smooth positions", "Should we adjust sample positions to prevent incorrect shadowing on very low-poly meshes with smooth normals?"));
 
         EditorGUIUtility.labelWidth = prev;
@@ -49,6 +51,7 @@ public class ftSettingsProvider
                 so.FindProperty("deletePreviousLightmapsBeforeBake").boolValue = false;
                 so.FindProperty("logLevel").intValue = 3;
                 so.FindProperty("alternativeScaleInLightmap").boolValue = false;
+                so.FindProperty("alignToTextureBlocksWithXatlas").boolValue = true;
                 so.FindProperty("generateSmoothPos").boolValue = true;
             }
         }

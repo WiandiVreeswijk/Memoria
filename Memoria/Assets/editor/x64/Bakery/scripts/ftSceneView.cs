@@ -72,7 +72,7 @@ public class ftSceneView
         var ids = ftBuildGraphics.atlasOnlyID;
         var existingLmaps = LightmapSettings.lightmaps.ToList();
         tempTextures = new List<Texture2D>();
-        int maxLM = 0;
+        var usedLMIDs = new HashSet<int>();
         for(int i=0; i<objs.Count; i++)
         {
             if (objs[i] == null) continue;
@@ -98,14 +98,14 @@ public class ftSceneView
             int lmid = ids[i];
             if (lmid < 1000)
             {
-                if (lmid > maxLM) maxLM = lmid;
+                usedLMIDs.Add(lmid);
             }
             UnityEngine.Random.InitState(lmid);
             prop.SetVector("bakeryLightmapID", UnityEngine.Random.ColorHSV(0, 1, 0.3f, 0.3f, 1, 1));
             objs[i].SetPropertyBlock(prop);
         }
 
-        Debug.Log("Lightmap count with current settings: " + (maxLM+1));
+        Debug.Log("Lightmap count with current settings: " + usedLMIDs.Count);
 
         LightmapSettings.lightmaps = existingLmaps.ToArray();
     }

@@ -155,6 +155,7 @@ public class BakeryVolumeInspector : Editor
                     b.Encapsulate(mrs[i].bounds);
                 }
                 Undo.RecordObject(vol, "Change Bounds");
+                Undo.RecordObject(vol.transform, "Change Bounds");
                 vol.transform.position = b.center;
                 vol.bounds = b;
                 Debug.Log("Bounds set");
@@ -207,6 +208,7 @@ public class BakeryVolumeInspector : Editor
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(vol, "Change Bounds");
+            Undo.RecordObject(vol.transform, "Change Bounds");
 
             Bounds newBounds = new Bounds();
             newBounds.center = boundsHandle.center;

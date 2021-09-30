@@ -13,6 +13,7 @@ public class MemoryWatchManager : MonoBehaviour {
     public GameObject armRotator;
     public MemoryWatch firstPersonWatch;
     public MemoryWatch thirdPersonWatch;
+    public float watchActivationSpeed = 2.0f;
 
     public AnimationCurve rotationCurve;
     public AnimationCurve colorCurve;
@@ -73,7 +74,7 @@ public class MemoryWatchManager : MonoBehaviour {
         if (!Input.GetKey(KeyCode.Space)) activationPressed = false;
         if (activationPressed) {
             if (withinExecutionRangeMemoryObject != null) {
-                activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime;
+                activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime * watchActivationSpeed;
             } else activationPressed = false;
         } else activationProgress -= 0.5f * Time.deltaTime;
 

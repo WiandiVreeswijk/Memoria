@@ -148,6 +148,16 @@ public class ftClearMenu : EditorWindow
             }
             LightmapSettings.lightmaps = new LightmapData[0];
         }
+
+#if UNITY_2017_3_OR_NEWER
+        var lights = FindObjectsOfType<Light>() as Light[];
+        for(int i=0; i<lights.Length; i++)
+        {
+            var output = lights[i].bakingOutput;
+            output.isBaked = false;
+            lights[i].bakingOutput = output;
+        }
+#endif
     }
 }
 

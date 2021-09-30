@@ -127,7 +127,6 @@ public class ftShaderTweaks : ScriptableWizard
                     return;
                 }
 
-                shadersDir = "C:\\Users\\erfra\\Downloads\\tempBakery\\";
                 includeGIPath = shadersDir + "UnityGlobalIllumination.cginc";
                 if (File.Exists(includeGIPath))
                 {

@@ -27,7 +27,7 @@ public class xatlas
     public static extern void xatlasPack(System.IntPtr atlas, int attempts, float texelsPerUnit, int resolution, int maxChartSize, int padding, bool bruteForce, bool blockAlign);//, bool allowRotate);
 
     [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
-    public static extern void xatlasNormalize(System.IntPtr atlas, int[] atlasSizes);
+    public static extern void xatlasNormalize(System.IntPtr atlas, int[] atlasSizes, bool preferDensity);
 
     [DllImport ("xatlasLib", CallingConvention=CallingConvention.Cdecl)]
     public static extern int xatlasGetAtlasCount(System.IntPtr atlas);
@@ -164,7 +164,7 @@ public class xatlas
             newXrefBuffer.Add(0);
         }
 
-        xatlasNormalize(atlas, null);
+        xatlasNormalize(atlas, null, false);
 
         // Collect UVs/xrefs/indices
         for(int i=0; i<m.subMeshCount; i++)

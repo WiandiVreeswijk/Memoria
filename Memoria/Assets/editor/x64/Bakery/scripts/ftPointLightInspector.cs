@@ -121,9 +121,22 @@ public class ftPointLightInspector : UnityEditor.Editor
         else
         {
             lightInt = light.intensity;
-            lightR = light.color.linear.r;
-            lightG = light.color.linear.g;
-            lightB = light.color.linear.b;
+            lightR = light.color.r;
+            lightG = light.color.g;
+            lightB = light.color.b;
+
+            if (GraphicsSettings.lightsUseColorTemperature)
+            {
+#if UNITY_2019_3_OR_NEWER
+                if (light.useColorTemperature)
+#endif
+                {
+                    var temp = Mathf.CorrelatedColorTemperatureToRGB(light.colorTemperature).gamma;
+                    lightR *= temp.r;
+                    lightG *= temp.g;
+                    lightB *= temp.b;
+                }
+            }
         }
     }
 
@@ -607,9 +620,9 @@ public class ftPointLightInspector : UnityEditor.Editor
             if (isHDRP) fintensity *= Mathf.PI;
             if (PlayerSettings.colorSpace == ColorSpace.Linear)
             {
-                fr = clr.linear.r;// * fintensity;
-                fg = clr.linear.g;// * fintensity;
-                fb = clr.linear.b;// * fintensity;
+                fr = clr.r;// * fintensity;
+                fg = clr.g;// * fintensity;
+                fb = clr.b;// * fintensity;
             }
             else
             {
@@ -684,23 +697,11 @@ public class ftPointLightInspector : UnityEditor.Editor
                     var so = new SerializedObject(selectedLight);
                     InitSerializedProperties(so);
 
-                    if (PlayerSettings.colorSpace != ColorSpace.Linear)
-                    {
-                        ftraceLightColor.colorValue = light.color;
-                        ftraceLightIntensity.floatValue = light.intensity;
-                    }
-                    else if (!GraphicsSettings.lightsUseLinearIntensity)
-                    {
-                        float lightR, lightG, lightB, lightInt;
-                        GetLinearLightParameters(light, out lightR, out lightG, out lightB, out lightInt);
-                        ftraceLightColor.colorValue = new Color(lightR, lightG, lightB);
-                        ftraceLightIntensity.floatValue = lightInt;
-                    }
-                    else
-                    {
-                        ftraceLightColor.colorValue = light.color;
-                        ftraceLightIntensity.floatValue = light.intensity;
-                    }
+                    float lightR, lightG, lightB, lightInt;
+                    GetLinearLightParameters(light, out lightR, out lightG, out lightB, out lightInt);
+                    ftraceLightColor.colorValue = new Color(lightR, lightG, lightB);
+                    ftraceLightIntensity.floatValue = lightInt;
+
                     ftraceLightCutoff.floatValue = light.range;
                     ftraceLightAngle.floatValue = light.spotAngle;
 

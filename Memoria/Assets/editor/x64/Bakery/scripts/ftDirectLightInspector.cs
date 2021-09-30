@@ -21,6 +21,7 @@ public class ftDirectLightInspector : UnityEditor.Editor
     SerializedProperty ftraceLightShadowmaskDenoise;
     SerializedProperty ftraceLightIndirectIntensity;
     SerializedProperty ftraceLightTexture, ftraceLightCSTilingX, ftraceLightCSTilingY, ftraceLightCSOffsetX, ftraceLightCSOffsetY;
+    SerializedProperty ftraceLightSupersample;
 
     ftLightmapsStorage storage;
 
@@ -54,6 +55,7 @@ public class ftDirectLightInspector : UnityEditor.Editor
         ftraceLightCSTilingY = obj.FindProperty("cloudShadowTilingY");
         ftraceLightCSOffsetX = obj.FindProperty("cloudShadowOffsetX");
         ftraceLightCSOffsetY = obj.FindProperty("cloudShadowOffsetY");
+        ftraceLightSupersample = obj.FindProperty("supersample");
 
         isHDRP = (target as BakeryDirectLight).GetComponent("HDAdditionalLightData") != null;
     }
@@ -115,9 +117,22 @@ public class ftDirectLightInspector : UnityEditor.Editor
         else
         {
             lightInt = light.intensity;
-            lightR = light.color.linear.r;
-            lightG = light.color.linear.g;
-            lightB = light.color.linear.b;
+            lightR = light.color.r;
+            lightG = light.color.g;
+            lightB = light.color.b;
+
+            if (GraphicsSettings.lightsUseColorTemperature)
+            {
+#if UNITY_2019_3_OR_NEWER
+                if (light.useColorTemperature)
+#endif
+                {
+                    var temp = Mathf.CorrelatedColorTemperatureToRGB(light.colorTemperature).gamma;
+                    lightR *= temp.r;
+                    lightG *= temp.g;
+                    lightB *= temp.b;
+                }
+            }
         }
     }
 
@@ -200,6 +215,8 @@ public class ftDirectLightInspector : UnityEditor.Editor
 
             EditorGUILayout.PropertyField(ftraceLightIndirectIntensity, new GUIContent("Indirect intensity", "Non-physical GI multiplier for this light"));
 
+            EditorGUILayout.PropertyField(ftraceLightSupersample, new GUIContent("Anti-alias", "Performs supersampling for the shadows, using 8 sub-samples."));
+
             EditorGUILayout.PropertyField(ftraceLightTexture, new GUIContent("Texture projection", "Tiled projected texture"));
             if (ftraceLightTexture.objectReferenceValue != null)
             {
@@ -255,9 +272,9 @@ public class ftDirectLightInspector : UnityEditor.Editor
             if (isHDRP) fintensity *= Mathf.PI;
             if (PlayerSettings.colorSpace == ColorSpace.Linear)
             {
-                fr = clr.linear.r;// * fintensity;
-                fg = clr.linear.g;// * fintensity;
-                fb = clr.linear.b;// * fintensity;
+                fr = clr.r;// * fintensity;
+                fg = clr.g;// * fintensity;
+                fb = clr.b;// * fintensity;
             }
             else
             {
@@ -318,24 +335,13 @@ public class ftDirectLightInspector : UnityEditor.Editor
                     var so = new SerializedObject(selectedLight);
                     InitSerializedProperties(so);
 
-                    if (PlayerSettings.colorSpace != ColorSpace.Linear)
-                    {
-                        ftraceLightColor.colorValue = light.color;
-                        ftraceLightIntensity.floatValue = light.intensity;
-                    }
-                    else if (!GraphicsSettings.lightsUseLinearIntensity)
-                    {
-                        float lightR, lightG, lightB, lightInt;
-                        GetLinearLightParameters(light, out lightR, out lightG, out lightB, out lightInt);
-                        ftraceLightColor.colorValue = new Color(lightR, lightG, lightB);
-                        ftraceLightIntensity.floatValue = lightInt;
-                    }
-                    else
-                    {
-                        ftraceLightColor.colorValue = light.color;
-                        ftraceLightIntensity.floatValue = light.intensity;
-                    }
+                    float lightR, lightG, lightB, lightInt;
+                    GetLinearLightParameters(light, out lightR, out lightG, out lightB, out lightInt);
+                    ftraceLightColor.colorValue = new Color(lightR, lightG, lightB);
+                    ftraceLightIntensity.floatValue = lightInt;
+
                     ftraceLightIndirectIntensity.floatValue = light.bounceIntensity;
+
                     if (isHDRP) ftraceLightIntensity.floatValue /= Mathf.PI;
 
                     so.ApplyModifiedProperties();
@@ -381,6 +387,7 @@ public class ftDirectLightInspector : UnityEditor.Editor
                         light.color = ftraceLightColor.colorValue;
                         light.intensity = ftraceLightIntensity.floatValue;
                     }
+                    light.colorTemperature = 6570; // neutral in Unity
                     light.type = LightType.Directional;
                     light.bounceIntensity = ftraceLightIndirectIntensity.floatValue;
                     if (isHDRP) SetHDRPLight(light);

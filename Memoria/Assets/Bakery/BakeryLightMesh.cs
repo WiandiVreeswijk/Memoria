@@ -23,6 +23,7 @@ public class BakeryLightMesh : MonoBehaviour
     public int bitmask = 1;
     public bool selfShadow = true;
     public bool bakeToIndirect = true;
+    public bool shadowmask = false;
     public float indirectIntensity = 1.0f;
 
     public int lmid = -2;

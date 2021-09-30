@@ -7,6 +7,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
 {
     bool allPrefabsGood = true;
     SerializedProperty isEnabled;
+    SerializedProperty ignoreWarnings;
 
     void Refresh(BakeryLightmappedPrefab selected)
     {
@@ -32,6 +33,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
         }
         PrefabUtility.prefabInstanceUpdated += OnPrefabInstanceUpdate;
         isEnabled = serializedObject.FindProperty("enableBaking");
+        ignoreWarnings = serializedObject.FindProperty("ignoreWarnings");
     }
 
     void OnDisable()
@@ -61,6 +63,7 @@ public class ftLightmappedPrefabInspector : UnityEditor.Editor
         serializedObject.Update();
         var prev = isEnabled.boolValue;
         EditorGUILayout.PropertyField(isEnabled, new GUIContent("Enable baking", "Prefab contents will be patched after baking if this checkbox is on. Patched prefab will be lightmapped when instantiated in any scene."));
+        EditorGUILayout.PropertyField(ignoreWarnings, new GUIContent("Ignore warnings", "Still attempt to bake the prefab, even if it has unapplied properties."));
         serializedObject.ApplyModifiedProperties();
 
         if (isEnabled.boolValue != prev)

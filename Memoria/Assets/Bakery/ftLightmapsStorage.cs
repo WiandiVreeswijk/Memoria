@@ -149,7 +149,7 @@ public class ftLightmapsStorage : MonoBehaviour{
         // Reuired for network bakes
         public List<string> serverGetFileList = new List<string>();
         public List<bool> lightmapHasColor = new List<bool>();
-        public List<bool> lightmapHasMask = new List<bool>();
+        public List<int> lightmapHasMask = new List<int>();
         public List<bool> lightmapHasDir = new List<bool>();
         public List<bool> lightmapHasRNM = new List<bool>();
 

@@ -610,7 +610,7 @@ public class ftBuildLights
 #endif
 
 
-        f.Write(obj.samples2);
+        f.Write(obj.shadowmask ? 0 : obj.samples2);
         f.Write(SAMPLES);
         Vector3 trinormal;
         for(int sample=0; sample<SAMPLES; sample++)
@@ -893,15 +893,15 @@ public class ftBuildLights
             {
                 ftBuildGraphics.InitShaders();
                 ftBuildGraphics.SaveSky((tex as Cubemap).GetNativeTexturePtr(),
-                    1,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
                     0,
                     0,
                     1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0,
                     folder + "/" + texName,
                     true,
                     false

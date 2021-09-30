@@ -11,6 +11,7 @@ public class BakeryLightmappedPrefab : MonoBehaviour
 {
 #if UNITY_EDITOR
     public bool enableBaking = true;
+    public bool ignoreWarnings = false;
     public string errorMessage;
 
     public bool IsValid()
@@ -21,6 +22,8 @@ public class BakeryLightmappedPrefab : MonoBehaviour
         {
             return false;
         }
+
+        if (ignoreWarnings) return true;
 
         bool isPartOfPrefab = PrefabUtility.GetPrefabType(gameObject) == PrefabType.PrefabInstance;
         if (!isPartOfPrefab)

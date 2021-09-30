@@ -57,4 +57,19 @@ public class PlayerCameraController : MonoBehaviour {
             isInFirstPerson = false;
         }
     }
+
+
+    public void EaseFOV(float duration, float amount, bool snapBack, Ease easeIn, Ease easeOut = Ease.Linear) {
+        if (!IsInFirstPerson()) return;
+        float currentFOV = firstPersonCamera.m_Lens.FieldOfView;
+        DOTween.To(() => firstPersonCamera.m_Lens.FieldOfView, x => firstPersonCamera.m_Lens.FieldOfView = x,
+           Mathf.Clamp(currentFOV + amount, 0, 180), duration).SetEase(easeIn).OnComplete(() => {
+                if (snapBack) {
+                    firstPersonCamera.m_Lens.FieldOfView = currentFOV;
+                } else {
+                    DOTween.To(() => firstPersonCamera.m_Lens.FieldOfView, x => firstPersonCamera.m_Lens.FieldOfView = x,
+                        currentFOV, duration).SetEase(easeOut);
+                }
+            });
+    }
 }

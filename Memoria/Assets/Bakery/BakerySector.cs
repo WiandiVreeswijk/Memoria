@@ -30,7 +30,7 @@ public class BakerySector : MonoBehaviour
         Gizmos.color = Color.green;
         for(int i=0; i<cpoints.Count; i++)
         {
-            if (cpoints[i] != null) Gizmos.DrawWireSphere(cpoints[i].position, 1.0f);
+            Gizmos.DrawWireSphere(cpoints[i].position, 1.0f);
         }
     }
 }
