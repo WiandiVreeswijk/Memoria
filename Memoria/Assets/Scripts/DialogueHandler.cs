@@ -26,7 +26,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         actorName = actorName.ToLower();
         //DialogueLua.GetVariable(actorName + "_Progression");
 
-        if (actorIdleSound != null) actorIdleSound = GetComponent<ActorIdleSound>();
+        actorIdleSound = GetComponent<ActorIdleSound>();
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
