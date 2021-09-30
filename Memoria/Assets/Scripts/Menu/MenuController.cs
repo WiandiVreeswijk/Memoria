@@ -91,7 +91,10 @@ public class MenuController : MonoBehaviour {
             FadePanelOut(activePanel, fadeTime);
             activePanel = null;
         }
-        FadeMainPanelOut(fadeTime).OnComplete(() => Globals.TimescaleManager.UnPauseGame());
+        FadeMainPanelOut(fadeTime).OnComplete(() => {
+            Globals.UIManager.SetDepthOfField(false);
+            Globals.TimescaleManager.UnPauseGame();
+        });
         Globals.CursorManager.LockMouse();
     }
 
@@ -135,15 +138,15 @@ public class MenuController : MonoBehaviour {
     private void FadePanelOut(WAEMDictUIElement group, float time) {
         group.tween?.Kill();
         group.panel.blocksRaycasts = false;
-        group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 0.0f, time).OnComplete(() => {
-            group.panel.gameObject.SetActive(false);
-        }).SetUpdate(true);
+
+        group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 0.0f, time)
+            .OnComplete(() => { group.panel.gameObject.SetActive(false); }).SetUpdate(true);
     }
 
     private void FadeMainPanelIn(float time) {
         mainFade?.Kill();
         mainPanel.gameObject.SetActive(true);
-        mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true);
+        mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true).OnComplete(() => Globals.UIManager.SetDepthOfField(true));
     }
 
     private Tween FadeMainPanelOut(float time) {
