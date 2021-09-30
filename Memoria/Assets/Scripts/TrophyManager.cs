@@ -8,14 +8,26 @@ public enum TrophyType {
 }
 
 public class TrophyManager : MonoBehaviour {
-
-    public List<Trophy> trophies = new List<Trophy>();
+    private Dictionary<TrophyType, Trophy> trophies = new Dictionary<TrophyType, Trophy>();
     public Material goldMaterial;
     public Material ghostMaterial;
 
     public void Start() {
-        trophies.AddRange(GetComponentsInChildren<Trophy>());
+        List<Trophy> trophiesList = new List<Trophy>(GetComponentsInChildren<Trophy>());
+        trophies = Utils.ListToDictionary(trophiesList, "TrophyManager", x => x.GetTrophyType());
+        trophiesList.ForEach(x => x.SetMaterial(ghostMaterial));
+    }
 
-        trophies.ForEach(x => x.SetMaterial(ghostMaterial));
+    private Trophy GetTrophy(TrophyType trophyType) {
+        if (trophies.ContainsKey(trophyType)) return trophies[trophyType];
+        Debug.LogError("Trophy not found in trophy cupboard: " + trophyType);
+        return null;
+    }
+
+    public void CollectTrophy(TrophyType trophyType) {
+        Trophy trophy = GetTrophy(trophyType);
+        if (trophy != null) {
+            trophy.SetMaterial(goldMaterial);
+        }
     }
 }

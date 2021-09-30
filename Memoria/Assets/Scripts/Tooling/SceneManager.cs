@@ -28,7 +28,6 @@ public class SceneManager : MonoBehaviour {
     private void Awake() {
         for (int i = 0; i < levelSceneDefinitions.Count; i++) {
             if (levelSceneDefinitions[i].scene.ScenePath.Contains(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + ".unity")) activeScene = levelSceneDefinitions[i];
-
             if (levelSceneDefinitions[i].name.Length == 0) continue;
             if (sceneDefinitionsMap.ContainsKey(levelSceneDefinitions[i].name))
                 Debug.LogError($"[SceneManager] duplicate scene definition registered under {levelSceneDefinitions[i].name}");
@@ -71,6 +70,8 @@ public class SceneManager : MonoBehaviour {
 
         yield return new WaitForSeconds(1.0f); //Prevent stutter
         isLoadingScene = false;
+        Globals.CursorManager.LockMouse();
+        print("Active scene: " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         Globals.MenuController.BlackScreenFadeOut(2.0f).OnComplete(() => Globals.CinemachineManager.SetPausedState(false)).SetUpdate(true);
     }
 
