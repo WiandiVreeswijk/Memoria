@@ -22,6 +22,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     }
 
     public void OnFinishCutscene() {
+        Globals.CinemachineManager.SetInputEnabled(true);
         Globals.Player.PlayerMovementAdventure.SetCanMove(true);
         Utils.DelayedAction(7.5f, () => {
             if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.UIManager.NotificationManager.NotifyPlayer("WASD to move");
@@ -57,6 +58,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
 
     public void OnBusArrive() {
         Globals.Player.VisualEffects.SetVisible(true);
+        Globals.CinemachineManager.SetInputEnabled(false);
     }
 
     public void Trigger() {
@@ -66,9 +68,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
         playableDirector.time = ShouldSkip() ? playableDirector.duration : 0;
         playableDirector.Evaluate();
         playableDirector.Play();
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
 
         busEngine.isBraking = false;
         if (ShouldSkip()) {

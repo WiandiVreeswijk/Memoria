@@ -112,19 +112,23 @@ public class Globals : MonoBehaviour {
         progressionManager.OnGlobalsInitializeType(currentGlobalsType);
         player.OnGlobalsInitializeType(currentGlobalsType);
         uiManager.OnGlobalsInitialize();
-        
     }
 
     private void InitializeDebug() {
     }
 
+    //#Todo: this is dirty
+    private bool firstTime = true;
     private void InitializeNeighborhood() {
         Utils.FindUniqueObject(out interactableManager);
         Utils.FindUniqueObject(out soundManagerWijk);
         Utils.FindUniqueObject(out musicManagerWijk);
         Utils.FindUniqueObject(out trophyManager);
         Utils.FindUniqueObject(out ambientControl);
-        menuController.SetMenu("Main", 0.0f);
+        if (firstTime) {
+            menuController.SetMenu("Main", 0.0f);
+            firstTime = false;
+        }
     }
 
     private void InitializeOblivion() {

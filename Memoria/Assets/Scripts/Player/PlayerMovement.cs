@@ -49,8 +49,6 @@ public class PlayerMovement : MonoBehaviour {
         animatorElena = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         oldPos = transform.position;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update() {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -64,6 +62,7 @@ public class PlayerMovement : MonoBehaviour {
         Animation();
         FixedUpdateFunction();
     }
+
     #region Movement
     private void Movement() {
         gravity -= 9.8f * Time.fixedDeltaTime;
