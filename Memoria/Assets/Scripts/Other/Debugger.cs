@@ -119,7 +119,10 @@ public class Debugger : MonoBehaviour {
     }
 
     private void InitializeMenuOblivion() {
-
+        AddLabel("Chasing Level");
+        AddButton("Teleport to end of level", true, () => {
+            Globals.Player.transform.position = new Vector3(340f, 1f, 0f);
+        });
     }
 
     public bool IsOpen() {
