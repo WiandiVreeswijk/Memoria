@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
+using DG.Tweening;
 
 public class AmbientControl : MonoBehaviour {
 
@@ -19,6 +20,8 @@ public class AmbientControl : MonoBehaviour {
     [Header("Bird Options")]
     [Range(0f, 1f)]
     public float birdValue = 1f;
+
+    private Tween ambientVolumeTween;
 
     private void Start() {
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
@@ -41,17 +44,12 @@ public class AmbientControl : MonoBehaviour {
             audio.start();
         }
 
-        SetVolume(0.7f);
-        SetBirds(0.7f);
     }
-
-    public void SetParameters(float volume, float birds) {
-        volumeValue = volume;
-        birdValue = birds;
+    private void FixedUpdate()
+    {
         audio.setParameterByID(volumeParameter, volumeValue);
         audio.setParameterByID(birdsParameter, birdValue);
     }
-
     public void SetVolume(float volume) {
         volumeValue = volume;
         audio.setParameterByID(volumeParameter, volumeValue);
@@ -72,5 +70,20 @@ public class AmbientControl : MonoBehaviour {
         float volume;
         audio.getParameterByID(birdsParameter, out volume);
         return volume;
+    }
+
+    public void FadeAmbientVolume(float volumeValue, float duration = 5f)
+    {
+        ambientVolumeTween?.Kill();
+        if (duration == 0.0f)
+        {
+            SetVolume(volumeValue);
+        }
+        else
+        {
+            ambientVolumeTween = DOTween
+                .To(() => GetVolume(), x => SetVolume(x), volumeValue, 1f)
+                .SetEase(Ease.Linear);
+        }
     }
 }

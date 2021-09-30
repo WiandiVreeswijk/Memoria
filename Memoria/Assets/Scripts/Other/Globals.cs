@@ -49,6 +49,7 @@ public class Globals : MonoBehaviour {
     private OblivionVFXManager oblivionVFXManager;
     private CheckpointManager checkpointManager;
     private SoundManagerChase soundManagerChase;
+    private AmbientControl ambientControl;
 
 
     private void Awake() {
@@ -123,6 +124,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out soundManagerWijk);
         Utils.FindUniqueObject(out musicManagerWijk);
         Utils.FindUniqueObject(out trophyManager);
+        Utils.FindUniqueObject(out ambientControl);
         if (firstTime) {
             menuController.SetMenu("Main", 0.0f);
             firstTime = false;
@@ -134,6 +136,7 @@ public class Globals : MonoBehaviour {
         oblivionVFXManager = Utils.FindUniqueObject<OblivionVFXManager>();
         checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
         soundManagerChase = Utils.FindUniqueObject<SoundManagerChase>();
+        ambientControl = Utils.FindUniqueObject<AmbientControl>();
     }
 
     #region GlobalGlobals
@@ -162,6 +165,8 @@ public class Globals : MonoBehaviour {
     public static SoundManagerWijk SoundManagerWijk => _Instance.soundManagerWijk;
     public static MusicManagerWijk MusicManagerWijk => _Instance.musicManagerWijk;
     public static TrophyManager TrophyManager => _Instance.trophyManager;
+
+    public static AmbientControl AmbientControl => _Instance.ambientControl;
     #endregion
 
     #region OblivionGlobals
