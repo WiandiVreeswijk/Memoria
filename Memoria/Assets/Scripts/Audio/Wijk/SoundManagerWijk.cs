@@ -21,7 +21,7 @@ public class SoundManagerWijk : MonoBehaviour {
             busEngineSound.SetEngineStatus(engineValue);
         } else {
             engineStatusFadeTween = DOTween
-                .To(() => busEngineSound.GetEngineStatus(), x => busEngineSound.SetEngineStatus(x), engineValue, 1f)
+                .To(() => busEngineSound.GetEngineStatus(), x => busEngineSound.SetEngineStatus(x), engineValue, duration)
                 .SetEase(Ease.Linear);
         }
     }
@@ -32,7 +32,7 @@ public class SoundManagerWijk : MonoBehaviour {
             busEngineSound.SetVolume(volumeValue);
         } else {
             engineVolumeFadeTween = DOTween
-                .To(() => busEngineSound.GetVolume(), x => busEngineSound.SetVolume(x), volumeValue, 1f)
+                .To(() => busEngineSound.GetVolume(), x => busEngineSound.SetVolume(x), volumeValue, duration)
                 .SetEase(Ease.Linear);
         }
     }
@@ -47,7 +47,7 @@ public class SoundManagerWijk : MonoBehaviour {
         else
         {
             rainVolumeFadeTween = DOTween
-                .To(() => rainAmbientSound.GetInsideStatus(), x => rainAmbientSound.SetInsideStatus(x), insideValue, 1f)
+                .To(() => rainAmbientSound.GetInsideStatus(), x => rainAmbientSound.SetInsideStatus(x), insideValue, duration)
                 .SetEase(Ease.Linear);
         }
     }
@@ -62,7 +62,7 @@ public class SoundManagerWijk : MonoBehaviour {
         else
         {
             ambientVolumeFadeTween = DOTween
-                .To(() => ambientControl.GetVolume(), x => ambientControl.SetVolume(x), volume, 1f)
+                .To(() => ambientControl.GetVolume(), x => ambientControl.SetVolume(x), volume, duration)
                 .SetEase(Ease.Linear);
         }
     }

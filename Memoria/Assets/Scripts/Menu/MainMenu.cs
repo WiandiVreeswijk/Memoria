@@ -18,15 +18,16 @@ public class MainMenu : MonoBehaviour {
         Globals.AmbientControl.SetVolume(0);
     }
 
-    public void PlayGame() {
+    public void PlayGame()
+    {
+        Globals.CinemachineManager.SetInputEnabled(false);
         Globals.MenuController.BlackScreenFadeIn(0.0f, false);
-        Utils.DelayedAction(6, () => Globals.MenuController.BlackScreenFadeOut(2.5f));
+        Utils.DelayedAction(6, () => Globals.MenuController.BlackScreenFadeOut(2.5f).OnComplete(()=> Globals.CinemachineManager.SetInputEnabled(true)));
         FindObjectOfType<WijkOpeningCutscene>().Trigger();
         Globals.MenuController.CloseMenu(0.5f);
         Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
         Globals.SoundManagerWijk.FadeEngineVolume(0.4f);
         Globals.MusicManagerWijk.FadeFluteVolume(0.9f, 10.0f);
-        
     }
 
     public void QuitGame() {
