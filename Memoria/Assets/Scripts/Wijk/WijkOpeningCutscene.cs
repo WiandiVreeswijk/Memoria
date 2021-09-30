@@ -67,9 +67,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
         playableDirector.Evaluate();
         playableDirector.Play();
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         busEngine.isBraking = false;
         if (ShouldSkip()) {
             busStop.Skip();

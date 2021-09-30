@@ -9,9 +9,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
-    //private Animator animator;
-    // Start is called before the first frame update
-
     [Serializable]
     public struct WAEMUIElement {
         public string name;
@@ -53,6 +50,7 @@ public class MenuController : MonoBehaviour {
             } else Debug.LogError($"A UIElement named {element.name} is null");
         }
 
+        BlackScreenFadeOut(0.0f);
         CloseMenu(0.0f);
         initialized = true;
         if (afterInitializationPanel.Length != 0) SetMenu(afterInitializationPanel, 0.0f);

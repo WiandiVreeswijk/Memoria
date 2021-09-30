@@ -26,7 +26,7 @@ public class MemoryCollectible : MonoBehaviour, IEnterActivatable {
         if (!triggered) {
             //#Todo OnLevelEnded should not be called here
             Globals.AnalyticsManager.OnLevelEnded();
-            Globals.TrophyManager.CollectTrophy(trophyType);
+            if(Globals.TrophyManager) Globals.TrophyManager.CollectTrophy(trophyType);
             collectedAnimation.Play("MemoryCollected");
             hoveringParticles.Stop();
             collectedParticles.Play();
