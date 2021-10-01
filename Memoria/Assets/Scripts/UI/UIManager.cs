@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class UIManager : MonoBehaviour {
+    [SerializeField] private Volume volume;
+
+    [SerializeField] private GameObject background;
+
     [SerializeField] private Canvas overlayCanvas;
     public Canvas OverlayCanvas => overlayCanvas;
 
     [SerializeField] private Canvas screenspaceCanvas;
     public Canvas ScreenspaceCanvas => screenspaceCanvas;
+
 
     private ChasingLevelUI chasingLevelUI;
     public ChasingLevelUI ChasingLevel => chasingLevelUI;
@@ -24,8 +31,15 @@ public class UIManager : MonoBehaviour {
     private OptionsMenu optionsMenu;
     public OptionsMenu OptionsMenu => optionsMenu;
 
-    public void OnGlobalsInitialize()
-    {
+    public void Start() {
+        background.SetActive(false);
+    }
+
+    public void EnableBackground() {
+        background.SetActive(true);
+    }
+
+    public void OnGlobalsInitialize() {
         Utils.FindUniqueObjectInChildren(gameObject, out mainMenu);
         Utils.FindUniqueObjectInChildren(gameObject, out pauseMenu);
         Utils.FindUniqueObjectInChildren(gameObject, out optionsMenu);
@@ -56,5 +70,9 @@ public class UIManager : MonoBehaviour {
 
     private void OnGlobalsInitializeOblivion() {
 
+    }
+
+    public void SetDepthOfField(bool toggle) {
+        volume.enabled = toggle;
     }
 }

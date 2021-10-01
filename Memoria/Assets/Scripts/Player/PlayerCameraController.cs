@@ -59,6 +59,7 @@ public class PlayerCameraController : MonoBehaviour {
             inputTween?.Kill();
             Globals.CinemachineManager.SetInputEnabled(false);
             inputTween = Utils.DelayedAction(1.0f, () => Globals.CinemachineManager.SetInputEnabled(true));
+            thirdPersonCamera.m_Transitions.m_InheritPosition = false;
             thirdPersonCamera.m_XAxis.Value = x;
             thirdPersonCamera.m_YAxis.Value = y;
             thirdPersonCamera.Priority = 11;

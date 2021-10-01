@@ -21,8 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PolygonKids_Material_Face_01_A_CameraFade
-  m_Shader: {fileID: 4800000, guid: fc65687ee1044b44a8ad796f88d69a92, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _APPLYFOG _APPLYFOG_ON _FADING_ON
+  m_Shader: {fileID: -6465566751694194690, guid: 21f75c58f445a0e44a4a4ab942586ebd, type: 3}
+  m_ShaderKeywords: FADESHADOWS_ON _ALPHATEST_ON _APPLYFOG _APPLYFOG_ON _FADING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -101,7 +101,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - FADESHADOWS: 1
     - PixelSnap: 0
+    - Vector1_517ce4144ccf487583ac4e50649ab103: 1
+    - Vector1_ff8f0b23bed04ce89cdf0d8355aa2d3d: 0.75
     - _AOfromGI: 0
     - _AlphaClip: 1
     - _ApplyFog: 1
@@ -190,6 +193,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_311c3c6289a9424088e4760877535a63: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

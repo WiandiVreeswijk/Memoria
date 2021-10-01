@@ -64,7 +64,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public void Trigger() {
         if (isStarted) return;
         isStarted = true;
-        mainMenuCamera.Priority = 10;
+        mainMenuCamera.Priority = 0;
         playableDirector.time = ShouldSkip() ? playableDirector.duration : 0;
         playableDirector.Evaluate();
         playableDirector.Play();
