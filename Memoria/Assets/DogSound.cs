@@ -31,6 +31,8 @@ public class DogSound : MonoBehaviour
         FMOD.Studio.PARAMETER_DESCRIPTION volumeParameterDescription;
         volumeDescription.getParameterDescriptionByName("DogVolume", out volumeParameterDescription);
         volumeParameter = volumeParameterDescription.id;
+
+
     }
     private void FixedUpdate()
     {
@@ -39,7 +41,6 @@ public class DogSound : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(Globals.Player.transform.position, transform.position);
         volumeValue = Mathf.Lerp(1.0f, 0, distanceToPlayer * volumeMultiplier);
-        audio.setParameterByID(volumeParameter, volumeValue);
     }
 
     private void MaterialCheck()
@@ -64,6 +65,7 @@ public class DogSound : MonoBehaviour
     public void PlayFootstepsEvent(string path)
     {
         FMOD.Studio.EventInstance Footsteps = FMODUnity.RuntimeManager.CreateInstance(path);
+        Footsteps.setParameterByID(volumeParameter, volumeValue);
         Footsteps.setParameterByName("MaterialDog", material);
         Footsteps.start();
         Footsteps.release();
@@ -72,6 +74,7 @@ public class DogSound : MonoBehaviour
     public void PlayBarkEvent(string path)
     {
         FMOD.Studio.EventInstance Bark = FMODUnity.RuntimeManager.CreateInstance(path);
+        Bark.setParameterByID(volumeParameter, volumeValue);
         Bark.start();
         Bark.release();
     }
