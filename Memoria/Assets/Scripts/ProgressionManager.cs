@@ -15,6 +15,12 @@ public class ProgressionManager : MonoBehaviour {
         Globals.UIManager.NotificationManager.NotifyPlayerBig(formatter, () => { });
     }
 
+    //For debugger
+    public void CollectWatchManual() {
+        watchCollected = true;
+        Globals.MemoryWatchManager.EnableMemoryWatch();
+    }
+
     public Icon GetIcon() {
         return questIcon;
     }
@@ -27,4 +33,6 @@ public class ProgressionManager : MonoBehaviour {
             if (questIcon != null) questIcon.SetEnabled(false);
         }
     }
+
+
 }
