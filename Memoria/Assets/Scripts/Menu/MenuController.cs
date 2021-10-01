@@ -132,28 +132,49 @@ public class MenuController : MonoBehaviour {
         group.tween?.Kill();
         group.panel.blocksRaycasts = true;
         group.panel.gameObject.SetActive(true);
-        group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 1.0f, time).SetEase(Ease.OutQuint).SetUpdate(true);
+        if (time == 0.0f) {
+            group.panel.alpha = 1.0f;
+        } else {
+            group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 1.0f, time).SetEase(Ease.OutQuint).SetUpdate(true);
+        }
     }
 
     private void FadePanelOut(WAEMDictUIElement group, float time) {
         group.tween?.Kill();
         group.panel.blocksRaycasts = false;
-
-        group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 0.0f, time)
-            .OnComplete(() => { group.panel.gameObject.SetActive(false); }).SetUpdate(true);
+        if (time == 0.0f) {
+            group.panel.alpha = 0.0f;
+            group.panel.gameObject.SetActive(false);
+        } else {
+            group.tween = DOTween.To(() => group.panel.alpha, x => group.panel.alpha = x, 0.0f, time)
+                .OnComplete(() => { group.panel.gameObject.SetActive(false); }).SetUpdate(true);
+        }
     }
 
     private void FadeMainPanelIn(float time) {
         mainFade?.Kill();
+        mainPanel.blocksRaycasts = true;
         mainPanel.gameObject.SetActive(true);
-        mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true).OnComplete(() => Globals.UIManager.SetDepthOfField(true));
+        if (time == 0.0f) {
+            mainPanel.alpha = 1.0f;
+            Globals.UIManager.SetDepthOfField(true);
+        } else {
+            mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true)
+                .OnComplete(() => Globals.UIManager.SetDepthOfField(true));
+        }
     }
 
     private Tween FadeMainPanelOut(float time) {
         mainFade?.Kill();
-        mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 0.0f, time).OnComplete(() => {
+        mainPanel.blocksRaycasts = false;
+        if (time == 0.0f) {
+            mainPanel.alpha = 0.0f;
             mainPanel.gameObject.SetActive(false);
-        }).SetEase(Ease.InCirc).SetUpdate(true);
+        } else {
+            mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 0.0f, time)
+                .OnComplete(() => { mainPanel.gameObject.SetActive(false); }).SetEase(Ease.InCirc).SetUpdate(true);
+        }
+
         return mainFade;
     }
 

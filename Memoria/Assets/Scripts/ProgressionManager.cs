@@ -9,6 +9,10 @@ public class ProgressionManager : MonoBehaviour {
     public void CollectWatch() {
         watchCollected = true;
         Globals.MemoryWatchManager.EnableMemoryWatch();
+        RichTextFormatter formatter = new RichTextFormatter();
+
+        formatter.Append("You have found grandma's pocket watch!\n The pocket watch will appear when Elena is close to an object which has a strong memory attached to it! Hold spacebar to activate the pocket watch when you are near such an object.");
+        Globals.UIManager.NotificationManager.NotifyPlayerBig(formatter, () => { });
     }
 
     public Icon GetIcon() {

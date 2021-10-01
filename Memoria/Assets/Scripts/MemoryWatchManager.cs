@@ -69,6 +69,7 @@ public class MemoryWatchManager : MonoBehaviour {
         //thirdPersonWatch.gameObject.SetActive(!Globals.Player.CameraController.IsInFirstPerson());
     }
 
+    bool soundIsPlaying = false;
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) activationPressed = true;
         if (!Input.GetKey(KeyCode.Space)) activationPressed = false;
@@ -77,11 +78,21 @@ public class MemoryWatchManager : MonoBehaviour {
             activationProgress = 1.0f;
         } else {
             if (activationPressed) {
+                if (!soundIsPlaying) {
+                    //Start sound here
+                    soundIsPlaying = true;
+                }
                 if (withinExecutionRangeMemoryObject != null) {
                     activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime *
                                           watchActivationSpeed;
                 } else activationPressed = false;
-            } else activationProgress -= 0.5f * Time.deltaTime;
+            } else {
+                if (soundIsPlaying) {
+                    //Stop sound here
+                    soundIsPlaying = false;
+                }
+                activationProgress -= 0.5f * Time.deltaTime;
+            }
         }
 
         activationProgress = Mathf.Clamp01(activationProgress);
