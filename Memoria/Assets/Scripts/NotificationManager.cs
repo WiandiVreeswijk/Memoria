@@ -14,6 +14,17 @@ public class NotificationManager : MonoBehaviour {
     private int notificationIndex = 0;
     private const float NOTIFICATION_SPACING = 10f;
 
+    public delegate void OnAcceptNotification();
+    private OnAcceptNotification currentOnAcceptNotification;
+    public void NotifyPlayerBig(string message, OnAcceptNotification onAcceptNotification) {
+        currentOnAcceptNotification = onAcceptNotification;
+    }
+
+    public void AcceptNotificationButtonClick() {
+        if (currentOnAcceptNotification != null) currentOnAcceptNotification();
+        currentOnAcceptNotification = null;
+    }
+
     public void NotifyPlayer(string message, float delay = 0.0f) {
         GameObject obj = Instantiate(notificationPrefab, notificationsParent.transform);
         Notification notification = obj.GetComponent<Notification>();
