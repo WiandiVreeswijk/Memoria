@@ -49,10 +49,10 @@ public class MemoryWatchManager : MonoBehaviour {
         if (closest != null) {
             if (Globals.Player.CameraController.IsInFirstPerson()) {
                 firstPersonWatch.SetActivity(1.0f - (closestDistance / MAX_DISTANCE), closest);
-                thirdPersonWatch.SetActivity(0, null);
+                //thirdPersonWatch.SetActivity(0, null);
             } else {
                 firstPersonWatch.SetActivity(0, null);
-                thirdPersonWatch.SetActivity(1.0f - (closestDistance / MAX_DISTANCE), closest);
+                //thirdPersonWatch.SetActivity(1.0f - (closestDistance / MAX_DISTANCE), closest);
             }
         }
 
@@ -66,37 +66,44 @@ public class MemoryWatchManager : MonoBehaviour {
         armRotationTween?.Kill();
         armRotationTween = armRotator.transform.DOLocalRotate(new Vector3(rotation, 0.0f, 0.0f), 0.5f).SetEase(Ease.Linear);
 
-        thirdPersonWatch.gameObject.SetActive(!Globals.Player.CameraController.IsInFirstPerson());
+        //thirdPersonWatch.gameObject.SetActive(!Globals.Player.CameraController.IsInFirstPerson());
     }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) activationPressed = true;
         if (!Input.GetKey(KeyCode.Space)) activationPressed = false;
-        if (activationPressed) {
-            if (withinExecutionRangeMemoryObject != null) {
-                activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime * watchActivationSpeed;
-            } else activationPressed = false;
-        } else activationProgress -= 0.5f * Time.deltaTime;
+        bool canActivate = activationProgress >= 0.99f;
+        if (activated) {
+            activationProgress = 1.0f;
+        } else {
+            if (activationPressed) {
+                if (withinExecutionRangeMemoryObject != null) {
+                    activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime *
+                                          watchActivationSpeed;
+                } else activationPressed = false;
+            } else activationProgress -= 0.5f * Time.deltaTime;
+        }
 
         activationProgress = Mathf.Clamp01(activationProgress);
-        thirdPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed && activationProgress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
-        firstPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed && activationProgress < 0.99f, Globals.Player.CameraController.IsInFirstPerson());
+        //thirdPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed && activationProgress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
+        firstPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed, activationProgress >= 0.99f && activationPressed, Globals.Player.CameraController.IsInFirstPerson());
 
-        if (!activated && activationProgress >= 0.99f && !activationPressed) {
+        if (!activated && canActivate && !activationPressed) {
             withinExecutionRangeMemoryObject.Activate();
             print("activate watch");
             if (Globals.Player.CameraController.IsInFirstPerson()) {
                 firstPersonWatch.Activate(withinExecutionRangeMemoryObject);
-            } else thirdPersonWatch.Activate(withinExecutionRangeMemoryObject);
+            }
+            //} else thirdPersonWatch.Activate(withinExecutionRangeMemoryObject);
             activated = true;
         }
 
-        if (activationProgress < 0.1f) activated = false;
+        //if (activationProgress < 0.1f) activated = false;
     }
 
     public void DisableMemoryWatch() {
         enabled = false;
-        thirdPersonWatch.gameObject.SetActive(false);
+        //thirdPersonWatch.gameObject.SetActive(false);
         armRotator.transform.localRotation = Quaternion.Euler(ARM_ROTATION, 0f, 0f);
     }
     public void EnableMemoryWatch() {
