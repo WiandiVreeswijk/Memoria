@@ -24,6 +24,9 @@ public class MemoryWatchManager : MonoBehaviour {
     private bool activated = false;
     private Tween armRotationTween;
 
+    private FMOD.Studio.EventInstance charge;
+    public string soundPath;
+
 
     MemoryObject[] memoryObjects;
     private MemoryObject withinExecutionRangeMemoryObject;
@@ -32,6 +35,8 @@ public class MemoryWatchManager : MonoBehaviour {
         memoryObjects = FindObjectsOfType<MemoryObject>();
         foreach (MemoryObject mo in memoryObjects) mo.UpdateDistance(float.MaxValue);
         DisableMemoryWatch();
+
+        charge = FMODUnity.RuntimeManager.CreateInstance(soundPath);
     }
 
     void FixedUpdate() {
@@ -69,19 +74,42 @@ public class MemoryWatchManager : MonoBehaviour {
         //thirdPersonWatch.gameObject.SetActive(!Globals.Player.CameraController.IsInFirstPerson());
     }
 
-    void Update() {
+    bool soundIsPlaying = false;
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Space)) activationPressed = true;
         if (!Input.GetKey(KeyCode.Space)) activationPressed = false;
         bool canActivate = activationProgress >= 0.99f;
-        if (activated) {
+        if (activated)
+        {
             activationProgress = 1.0f;
-        } else {
-            if (activationPressed) {
-                if (withinExecutionRangeMemoryObject != null) {
+        }
+        else
+        {
+            if (activationPressed)
+            {
+                if (!soundIsPlaying)
+                {
+                    charge.start();
+                    soundIsPlaying = true;
+                }
+                if (withinExecutionRangeMemoryObject != null)
+                {
                     activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime *
                                           watchActivationSpeed;
-                } else activationPressed = false;
-            } else activationProgress -= 0.5f * Time.deltaTime;
+                }
+                else activationPressed = false;
+            }
+            else
+            {
+                if (soundIsPlaying)
+                {
+                    //Stop sound here
+                    charge.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    soundIsPlaying = false;
+                }
+                activationProgress -= 0.5f * Time.deltaTime;
+            }
         }
 
         activationProgress = Mathf.Clamp01(activationProgress);
