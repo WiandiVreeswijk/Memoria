@@ -7,7 +7,7 @@ using static Cinemachine.CinemachineBrain;
 
 public class CinemachineManager : MonoBehaviour {
     CinemachineBrain[] brains;
-    public bool inputEnabled = true;
+    private bool inputEnabled = true;
     public GameObject cameraTarget;
 
     void Start() {
