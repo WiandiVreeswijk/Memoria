@@ -6,8 +6,8 @@ using DG.Tweening;
 using JetBrains.Annotations;
 
 public class MemoryWatch : MonoBehaviour {
-    public GameObject bigArm;
-    public GameObject smallArm;
+    public GameObject arm;
+    public GameObject button;
     public WatchParticleSystem watchParticleSystem;
     public WatchReleaseParticleSystem releaseParticleSystem;
 
@@ -18,7 +18,7 @@ public class MemoryWatch : MonoBehaviour {
     public int baseShakeVibrato = 10;
 
     public MeshRenderer watchRenderer;
-    private Material watchMaterial;
+    //private Material watchMaterial;
     private Material watchEdgeMaterial;
 
     private float activity = 0.0f;
@@ -27,9 +27,10 @@ public class MemoryWatch : MonoBehaviour {
 
     Tweener shakeTween;
     private MemoryObject memoryObject;
+    private bool canActivate;
 
     public void Start() {
-        watchMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchMaterial"));
+        //watchMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchMaterial"));
         watchEdgeMaterial = watchRenderer.materials.First(x => x.name.Contains("WatchEdgeMaterial"));
     }
 
@@ -38,16 +39,19 @@ public class MemoryWatch : MonoBehaviour {
         this.memoryObject = memoryObject;
         shakeTween.Kill(true);
         shakeTween = DOTween.Shake(() => transform.localPosition, x => transform.localPosition = x, baseShakeDuration, baseShakeStrength * activity, baseShakeVibrato);
-        watchMaterial.color = Color.Lerp(color1, color2 * 2, Globals.MemoryWatchManager.colorCurve.Evaluate(activity));
+        //watchMaterial.color = Color.Lerp(color1, color2 * 2, Globals.MemoryWatchManager.colorCurve.Evaluate(activity));
     }
 
-    public void SetWatchEdgeProgress(float progress, bool isActive, bool shouldEmitParticles) {
+    public void SetWatchEdgeProgress(float progress, bool isActive, bool canActivate, bool shouldEmitParticles) {
+        this.canActivate = canActivate;
+        button.transform.localPosition = new Vector3(0f, isActive ? -1.75f : 0.8f, 0f);
         watchEdgeMaterial.SetFloat("_Rotation", progress);
-        if (shouldEmitParticles && isActive) watchParticleSystem.Emit((1.0f - progress) / 10);
+        //if (shouldEmitParticles && isActiveAndNotDone) watchParticleSystem.Emit((1.0f - progress) / 10);
     }
+
     public void FixedUpdate() {
-        bigArm.transform.Rotate(Vector3.up, 10.0f * Globals.MemoryWatchManager.rotationCurve.Evaluate(activity));
-        smallArm.transform.Rotate(Vector3.up, 6.75f * activity);
+        arm.transform.Rotate(Vector3.forward, 10.0f * Globals.MemoryWatchManager.rotationCurve.Evaluate(activity) * (canActivate ? 2.5f : 1f));
+        //smallArm.transform.Rotate(Vector3.up, 6.75f * activity);
     }
 
     public void Activate(MemoryObject memoryObject) {
