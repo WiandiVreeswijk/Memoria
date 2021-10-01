@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{d1261eda-b546-4590-be8c-d530ef5e4297}">
+		<property name="name">
+			<value>WijkMusic</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{47bb2475-03b1-4fb6-94f0-49d2b78a7662}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{5f65d31e-4f1c-44d9-a4f4-8c854970daf8}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{40acb94c-d6f2-415c-b031-82f12a863e48}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{47bb2475-03b1-4fb6-94f0-49d2b78a7662}">
+		<relationship name="effects">
+			<destination>{67720112-422f-49a2-8a33-f7fb677b4f22}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{5f65d31e-4f1c-44d9-a4f4-8c854970daf8}" />
+	<object class="MixerBusFader" id="{67720112-422f-49a2-8a33-f7fb677b4f22}" />
+</objects>
