@@ -17,7 +17,6 @@ public class MainMenu : MonoBehaviour {
     public void PlayGame() {
         Globals.CinemachineManager.SetInputEnabled(false);
         Globals.MenuController.BlackScreenFadeIn(1.0f, false).OnComplete(() => {
-            Globals.UIManager.EnableBackground();
             FindObjectOfType<MenuCamera>().cam.Priority = 0;
             FindObjectOfType<WijkOpeningCutscene>().Trigger();
         });

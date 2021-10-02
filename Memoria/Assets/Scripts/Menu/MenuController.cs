@@ -13,17 +13,20 @@ public class MenuController : MonoBehaviour {
     public struct WAEMUIElement {
         public string name;
         public CanvasGroup panel;
+        public bool background;
     }
 
     public class WAEMDictUIElement {
         public CanvasGroup panel;
         public Tween tween;
         public string name;
+        public bool background;
 
-        public WAEMDictUIElement(CanvasGroup panel, string name) {
+        public WAEMDictUIElement(CanvasGroup panel, string name, bool background) {
             this.panel = panel;
             this.tween = null;
             this.name = name;
+            this.background = background;
         }
     }
 
@@ -32,6 +35,7 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private float fadeTime = 0.125f;
     [SerializeField] private CanvasGroup blackScreen;
     [SerializeField] private Image image;
+    [SerializeField] private GameObject redBackground;
     private bool blackScreenActive = false;
 
     private Tween mainFade;
@@ -44,7 +48,7 @@ public class MenuController : MonoBehaviour {
     void Start() {
         foreach (var element in uiElements) {
             if (element.panel != null) {
-                uiElementsDict.Add(element.name, new WAEMDictUIElement(element.panel, element.name));
+                uiElementsDict.Add(element.name, new WAEMDictUIElement(element.panel, element.name, element.background));
                 element.panel.blocksRaycasts = false;
                 element.panel.alpha = 0.0f;
             } else Debug.LogError($"A UIElement named {element.name} is null");
@@ -114,6 +118,7 @@ public class MenuController : MonoBehaviour {
             return;
         }
         if (uiElementsDict.TryGetValue(name, out WAEMDictUIElement group)) {
+            redBackground.SetActive(group.background);
             if (activePanel == group) return;
             if (activePanel == null) FadeMainPanelIn(time);
             if (activePanel != null) FadePanelOut(activePanel, time / 2.0f);
@@ -156,12 +161,11 @@ public class MenuController : MonoBehaviour {
         mainFade?.Kill();
         mainPanel.blocksRaycasts = true;
         mainPanel.gameObject.SetActive(true);
+        Globals.UIManager.SetDepthOfField(true);
         if (time == 0.0f) {
             mainPanel.alpha = 1.0f;
-            Globals.UIManager.SetDepthOfField(true);
         } else {
-            mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true)
-                .OnComplete(() => Globals.UIManager.SetDepthOfField(true));
+            mainFade = DOTween.To(() => mainPanel.alpha, x => mainPanel.alpha = x, 1.0f, time).SetUpdate(true);
         }
     }
 

@@ -7,8 +7,6 @@ using UnityEngine.Rendering.Universal;
 public class UIManager : MonoBehaviour {
     [SerializeField] private Volume volume;
 
-    [SerializeField] private GameObject background;
-
     [SerializeField] private Canvas overlayCanvas;
     public Canvas OverlayCanvas => overlayCanvas;
 
@@ -30,14 +28,6 @@ public class UIManager : MonoBehaviour {
 
     private OptionsMenu optionsMenu;
     public OptionsMenu OptionsMenu => optionsMenu;
-
-    public void Start() {
-        background.SetActive(false);
-    }
-
-    public void EnableBackground() {
-        background.SetActive(true);
-    }
 
     public void OnGlobalsInitialize() {
         Utils.FindUniqueObjectInChildren(gameObject, out mainMenu);
