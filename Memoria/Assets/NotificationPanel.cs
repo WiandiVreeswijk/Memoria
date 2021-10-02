@@ -17,14 +17,14 @@ public class NotificationPanel : MonoBehaviour {
         open = false;
         Globals.CursorManager.LockMouse();
         Globals.CinemachineManager.SetInputEnabled(true);
-        Globals.Player.PlayerMovementAdventure.SetCanMove(true);
+        if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.NEIGHBORHOOD) Globals.Player.PlayerMovementAdventure.SetCanMove(true);
     }
 
     public void FixedUpdate() {
         if (open) {
             Globals.CursorManager.UnlockMouse();
             Globals.CinemachineManager.SetInputEnabled(false);
-            Globals.Player.PlayerMovementAdventure.SetCanMove(false);
+            if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.NEIGHBORHOOD) Globals.Player.PlayerMovementAdventure.SetCanMove(false);
         }
     }
 }

@@ -137,6 +137,7 @@ public class Globals : MonoBehaviour {
         checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
         soundManagerChase = Utils.FindUniqueObject<SoundManagerChase>();
         ambientControl = Utils.FindUniqueObject<AmbientControl>();
+        UIManager.SetDepthOfField(false);
     }
 
     #region GlobalGlobals
