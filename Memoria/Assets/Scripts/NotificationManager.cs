@@ -19,9 +19,6 @@ public class NotificationManager : MonoBehaviour {
     public delegate void OnAcceptNotification();
     private OnAcceptNotification currentOnAcceptNotification;
     public void NotifyPlayerBig(string message, OnAcceptNotification onAcceptNotification) {
-        Globals.CursorManager.UnlockMouse();
-        Globals.CinemachineManager.SetInputEnabled(false);
-        Globals.Player.PlayerMovementAdventure.SetCanMove(false);
         currentOnAcceptNotification = onAcceptNotification;
         notificationPanel.Open(message);
     }
@@ -50,9 +47,6 @@ public class NotificationManager : MonoBehaviour {
         if (currentOnAcceptNotification != null) currentOnAcceptNotification();
         currentOnAcceptNotification = null;
         notificationPanel.Close();
-        Globals.CursorManager.LockMouse();
-        Globals.CinemachineManager.SetInputEnabled(true);
-        Globals.Player.PlayerMovementAdventure.SetCanMove(true);
     }
 
     public void NotifyPlayer(string message, float delay = 0.0f) {

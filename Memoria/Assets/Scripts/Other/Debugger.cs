@@ -114,7 +114,7 @@ public class Debugger : MonoBehaviour {
         });
 
         AddButton("Collect watch", true, () => {
-            FindObjectOfType<ProgressionManager>().CollectWatch();
+            FindObjectOfType<ProgressionManager>().CollectWatchManual();
         });
     }
 

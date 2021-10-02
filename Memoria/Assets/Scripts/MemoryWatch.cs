@@ -44,7 +44,7 @@ public class MemoryWatch : MonoBehaviour {
 
     public void SetWatchEdgeProgress(float progress, bool isActive, bool canActivate, bool shouldEmitParticles) {
         this.canActivate = canActivate;
-        button.transform.localPosition = new Vector3(0f, isActive ? -1.75f : 0.8f, 0f);
+        button.transform.localPosition = new Vector3(0f, isActive ? -0.022f : 0.0f, 0f);
         watchEdgeMaterial.SetFloat("_Rotation", progress);
         //if (shouldEmitParticles && isActiveAndNotDone) watchParticleSystem.Emit((1.0f - progress) / 10);
     }

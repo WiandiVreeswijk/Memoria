@@ -7,7 +7,7 @@ public class MemoryWatchManager : MonoBehaviour {
     private const float MAX_DISTANCE = 5.5f;
     private const float MIN_ARM_RAISE_DISTANCE = 5.0f;
     private const float EXECUTION_DISTANCE = 2.5f;
-    private const float ARM_ROTATION = 70f;
+    private const float ARM_ROTATION = 75f;
 
     public GameObject arm;
     public GameObject armRotator;

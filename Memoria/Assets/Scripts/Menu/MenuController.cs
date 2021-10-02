@@ -50,6 +50,7 @@ public class MenuController : MonoBehaviour {
             } else Debug.LogError($"A UIElement named {element.name} is null");
         }
 
+        blackScreen.gameObject.SetActive(true);
         BlackScreenFadeOut(0.0f);
         CloseMenu(0.0f);
         initialized = true;
