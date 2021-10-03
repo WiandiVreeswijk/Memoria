@@ -104,7 +104,6 @@ public class MenuController : MonoBehaviour {
     }
 
     public void SetMenu(string name) {
-        Globals.TimescaleManager.PauseGame();
         SetMenu(name, fadeTime);
     }
 
@@ -118,8 +117,9 @@ public class MenuController : MonoBehaviour {
             return;
         }
         if (uiElementsDict.TryGetValue(name, out WAEMDictUIElement group)) {
-            redBackground.SetActive(group.background);
             if (activePanel == group) return;
+            redBackground.SetActive(group.background);
+            if (group.background) Globals.TimescaleManager.PauseGame();
             if (activePanel == null) FadeMainPanelIn(time);
             if (activePanel != null) FadePanelOut(activePanel, time / 2.0f);
             FadePanelIn(group, time);
