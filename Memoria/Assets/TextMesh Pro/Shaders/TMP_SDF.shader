@@ -82,6 +82,7 @@ Properties {
 
 	_CullMode			("Cull Mode", Float) = 0
 	_ColorMask			("Color Mask", Float) = 15
+	[Enum(UnityEngine.Rendering.CompareFunction)] unity_GUIZTestMode("ZTest", Float) = 4
 }
 
 SubShader {
