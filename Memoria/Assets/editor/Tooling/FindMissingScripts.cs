@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEditor;
 public class FindMissingScriptsRecursively : EditorWindow {
     static int go_count = 0, components_count = 0, missing_count = 0;
@@ -15,7 +16,40 @@ public class FindMissingScriptsRecursively : EditorWindow {
         if (GUILayout.Button("Find not navigation static objects")) {
             FindNonStatic();
         }
+
+        if (GUILayout.Button("Find shaders and materials")) {
+            FindShaderAndMaterials();
+        }
     }
+
+    private void FindShaderAndMaterials() {
+        Dictionary<Shader, HashSet<string>> dict = new Dictionary<Shader, HashSet<string>>();
+
+        string str = "";
+        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject go in gameObjects) {
+            Renderer renderer = go.GetComponent<Renderer>();
+            if (renderer != null) {
+                foreach (Material material in renderer.sharedMaterials) {
+                    if (!dict.ContainsKey(material.shader)) {
+                        dict.Add(material.shader, new HashSet<string>());
+                    }
+
+                    if (material.name == "Lit") Debug.Log(go.name);
+                    dict[material.shader].Add(material.name);
+                }
+            }
+        }
+
+        foreach (var entry in dict) {
+            str += entry.Key.name + "\n";
+            foreach (var mat in entry.Value) {
+                str += "\t" + mat + "\n";
+            }
+        }
+        Debug.Log(str);
+    }
+
     private static void FindInSelected() {
         GameObject[] go = Selection.gameObjects;
         go_count = 0;
