@@ -11,7 +11,13 @@ public class ProgressionManager : MonoBehaviour {
         Globals.MemoryWatchManager.EnableMemoryWatch();
         RichTextFormatter formatter = new RichTextFormatter();
 
-        formatter.Append("You have found grandma's pocket watch!\n The pocket watch will appear when Elena is close to an object which has a strong memory attached to it! Hold spacebar to activate the pocket watch when you are near such an object.");
+
+        formatter.Size(50).Append("You have found grandma's pocket watch!\n\n").Size(40)
+            .Append("The pocket watch will appear when Elena is close to an object with a strong ")
+            .Color(new Color(255f / 255f, 215f / 255f, 0f))
+            .Append("memory").CloseColor().Append(" attached to it!\n\nHold ")
+            .Color(new Color(0f, 96f / 255f, 100f / 255)).Append("spacebar")
+            .CloseColor().Append(" to activate the pocket watch when you are near such an object");
         Globals.UIManager.NotificationManager.NotifyPlayerBig(formatter, () => { });
     }
 
@@ -34,5 +40,12 @@ public class ProgressionManager : MonoBehaviour {
         }
     }
 
+    public void InitializeProgression(bool backFromChasing)
+    {
+        if (backFromChasing)
+        {
+
+        }
+    }
 
 }

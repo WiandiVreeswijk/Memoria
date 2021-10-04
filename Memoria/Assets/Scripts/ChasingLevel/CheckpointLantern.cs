@@ -84,13 +84,6 @@ public class CheckpointLantern : MonoBehaviour, IEnterActivatable {
         audio.setParameterByID(volumeParameter, volumeValue);
     }
     public void Update() {
-        //if (Input.GetKey(KeyCode.R)) {
-        //    igniting = true;
-        //    activated = false;
-        //    Activate();
-        //}
-
-
         if (igniting) return;
         while (smoothQueue.Count >= smoothing) {
             lastSum -= smoothQueue.Dequeue();

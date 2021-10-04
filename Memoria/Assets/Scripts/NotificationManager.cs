@@ -31,17 +31,17 @@ public class NotificationManager : MonoBehaviour {
         notificationPanel.Close();
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.B)) {
-            RichTextFormatter formatter = new RichTextFormatter();
-
-            formatter.Color(Color.red).Size(50).Append("Dit is een test!\n").CloseSize().Append("Dit ook!\n")
-                .Font("Mouse SDF").Color(Color.blue).Append("u")
-                .CloseFont().CloseColor().Append(" Fiets");
-
-            NotifyPlayerBig(formatter, () => print("Pressed!"));
-        }
-    }
+    //private void Update() {
+    //    if (Input.GetKeyDown(KeyCode.B)) {
+    //        RichTextFormatter formatter = new RichTextFormatter();
+    //
+    //        formatter.Color(Color.red).Size(50).Append("Dit is een test!\n").CloseSize().Append("Dit ook!\n")
+    //            .Font("Mouse SDF").Color(Color.blue).Append("u")
+    //            .CloseFont().CloseColor().Append(" Fiets");
+    //
+    //        NotifyPlayerBig(formatter, () => print("Pressed!"));
+    //    }
+    //}
 
     public void AcceptNotificationButtonClick() {
         if (currentOnAcceptNotification != null) currentOnAcceptNotification();

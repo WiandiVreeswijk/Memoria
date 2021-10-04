@@ -12,13 +12,6 @@ public class SoundManagerChase : MonoBehaviour {
         musicControl = GetComponent<MusicControlChaseLevel>();
     }
 
-    public void Update() {
-        if (Input.GetKey(KeyCode.R)) {
-            FadeDeath(1.0f);
-        } else if (Input.GetKey(KeyCode.E)) {
-            FadeDeath(0.0f);
-        }
-    }
     public void FadeIntensity(float intensity, float duration = 2.5f) {
         intensityFadeTween?.Kill();
         if (duration == 0.0f) {
