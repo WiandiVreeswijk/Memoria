@@ -60,7 +60,9 @@ public class SceneManager : MonoBehaviour {
     //#Todo Fix audio not stopping on scene switch. 
     //DOTween.To(() => cam.m_Lens.FieldOfView, x => cam.m_Lens.FieldOfView = x, 120, 1.0f).SetEase(Ease.InExpo);
     //#Todo Global camera FOV change. 
-    private IEnumerator LoadScene(SceneDefinition scene) {
+    private IEnumerator LoadScene(SceneDefinition scene)
+    {
+        string oldSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         isLoadingScene = true;
         activeScene = scene;
         AsyncOperation loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene.scene, LoadSceneMode.Single);
@@ -68,7 +70,8 @@ public class SceneManager : MonoBehaviour {
         while (loadOperation.progress < 0.9f) yield return null;
         loadOperation.allowSceneActivation = true;
 
-        yield return new WaitForSeconds(1.0f); //Prevent stutter
+        //yield return new WaitForSeconds(1.0f); //Prevent stutter
+        while (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == oldSceneName) yield return null;
         isLoadingScene = false;
         Globals.CursorManager.LockMouse();
         print("Active scene: " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);

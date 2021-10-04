@@ -12,6 +12,7 @@ public class Globals : MonoBehaviour {
     }
 
     private static Globals _Instance;
+    private GlobalsType previousGlobalsType;
     private GlobalsType currentGlobalsType;
 
     //Global
@@ -73,6 +74,7 @@ public class Globals : MonoBehaviour {
 
     public static void Initialize(GlobalsType type) {
         if (_Instance == null) Debug.LogError("No globals found in scene.");
+        _Instance.previousGlobalsType = _Instance.currentGlobalsType;
         _Instance.currentGlobalsType = type;
         _Instance.GlobalInitialize();
         switch (type) {
@@ -109,8 +111,8 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out player);
         camera = mainCamera.GetComponent<Camera>();
         player.OnGlobalsInitialize();
-        progressionManager.OnGlobalsInitializeType(currentGlobalsType);
-        player.OnGlobalsInitializeType(currentGlobalsType);
+        progressionManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        player.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
         uiManager.OnGlobalsInitialize();
     }
 
@@ -136,7 +138,6 @@ public class Globals : MonoBehaviour {
         oblivionVFXManager = Utils.FindUniqueObject<OblivionVFXManager>();
         checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
         soundManagerChase = Utils.FindUniqueObject<SoundManagerChase>();
-        ambientControl = Utils.FindUniqueObject<AmbientControl>();
         UIManager.SetDepthOfField(false);
     }
 

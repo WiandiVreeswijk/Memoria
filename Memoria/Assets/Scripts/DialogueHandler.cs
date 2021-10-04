@@ -47,7 +47,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             fakeElena.transform.position = data.fakeElenaPoint.position + new Vector3(0.0f, 0.05f, 0.0f);
             fakeElena.transform.rotation = data.fakeElenaPoint.rotation;
             Globals.Player.VisualEffects.SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
-            Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position);
+            Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
             Globals.ProgressionManager.GetIcon().SetEnabled(false);
             Globals.CinemachineManager.SetPausedState(true);
             Globals.CinemachineManager.SetInputEnabled(false);
@@ -101,5 +101,9 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
 
     public string GetActorName() {
         return actorName;
+    }
+
+    public void SetDialogueEnabled(bool enabled) {
+        GetComponent<Usable>().enabled = enabled;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour {
@@ -31,21 +32,33 @@ public class ProgressionManager : MonoBehaviour {
         return questIcon;
     }
 
-    public void OnGlobalsInitializeType(Globals.GlobalsType currentGlobalsType) {
+    public void OnGlobalsInitializeType(Globals.GlobalsType previousGlobalsType, Globals.GlobalsType currentGlobalsType) {
         if (currentGlobalsType == Globals.GlobalsType.NEIGHBORHOOD) { //#TODO: This is temporary
-            GameObject manfred = Utils.FindUniqueObject<Manfred>().gameObject;
-            questIcon = Globals.IconManager.AddWorldIcon("oma", manfred.transform.position + new Vector3(0, 2.25f, 0));
+            if (previousGlobalsType == Globals.GlobalsType.OBLIVION) {
+                InitializeProgressionBackFromChasing();
+            } else {
+                GameObject manfred = Utils.FindUniqueObject<Manfred>().gameObject;
+                questIcon = Globals.IconManager.AddWorldIcon("oma",
+                    manfred.transform.position + new Vector3(0, 2.25f, 0));
+            }
         } else {
             if (questIcon != null) questIcon.SetEnabled(false);
         }
     }
 
-    public void InitializeProgression(bool backFromChasing)
-    {
-        if (backFromChasing)
-        {
-
-        }
+    public void InitializeProgressionBackFromChasing() {
+        DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
+        DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
+        DialogueHandler hanna = dialogueHandlers.First(x => x.actorName == "hanna");
+        DialogueHandler manfred = dialogueHandlers.First(x => x.actorName == "manfred");
+        oma.SetDialogueEnabled(false);
+        hanna.SetDialogueEnabled(false);
+        manfred.SetDialogueEnabled(false);
+        CollectWatchManual();
+        Globals.MenuController.CloseMenu(0.0f);
+        Utils.DelayedAction(5.0f, () => {
+            Globals.UIManager.NotificationManager.NotifyPlayerBig("Fiets", () => { });
+        });
     }
 
 }
