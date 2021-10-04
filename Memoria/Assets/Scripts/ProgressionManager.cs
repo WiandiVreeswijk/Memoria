@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour {
@@ -56,8 +57,12 @@ public class ProgressionManager : MonoBehaviour {
         manfred.SetDialogueEnabled(false);
         CollectWatchManual();
         Globals.MenuController.CloseMenu(0.0f);
+        FindObjectOfType<OmaHouseDoor>().OpenDoor();
         FindObjectOfType<WijkOpeningCutscene>().Skip();
+        Globals.CinemachineManager.ClearNextBlend();
+        Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
         Utils.DelayedAction(5.0f, () => {
+        //Globals.Player.PlayerMovementAdventure.Teleport(FindObjectOfType<ReturnPoint>().transform.position);
             Globals.UIManager.NotificationManager.NotifyPlayerBig("Fiets", () => { });
         });
     }

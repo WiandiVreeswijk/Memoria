@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CursorManager : MonoBehaviour {
+    private CursorLockMode lockState = CursorLockMode.None;
+    private bool visible = true;
     public void LockMouse() {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        lockState = CursorLockMode.Locked;
+        visible = false;
     }
     public void UnlockMouse() {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        lockState = CursorLockMode.None;
+        visible = true;
+    }
+
+    public void Update() {
+        Cursor.lockState = lockState;
+        Cursor.visible = visible;
     }
 }

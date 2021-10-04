@@ -6,6 +6,11 @@ public class NotificationPanel : MonoBehaviour {
     public TMPro.TextMeshProUGUI text;
     private bool open = false;
 
+
+    private void Start() {
+        gameObject.SetActive(false);
+    }
+
     public void Open(string txt) {
         text.text = txt;
         gameObject.SetActive(true);
