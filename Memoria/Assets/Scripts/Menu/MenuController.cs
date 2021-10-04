@@ -37,6 +37,7 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private Image image;
     [SerializeField] private GameObject redBackground;
     private bool blackScreenActive = false;
+    private CinemachineVirtualCamera menuCamera;
 
     private Tween mainFade;
     private WAEMDictUIElement activePanel;
@@ -54,6 +55,7 @@ public class MenuController : MonoBehaviour {
             } else Debug.LogError($"A UIElement named {element.name} is null");
         }
 
+        menuCamera = FindObjectOfType<MenuCamera>().GetComponent<CinemachineVirtualCamera>();
         blackScreen.gameObject.SetActive(true);
         BlackScreenFadeOut(0.0f);
         CloseMenu(0.0f);
@@ -96,10 +98,18 @@ public class MenuController : MonoBehaviour {
             FadePanelOut(activePanel, fadeTime);
             activePanel = null;
         }
-        FadeMainPanelOut(fadeTime).OnComplete(() => {
+
+        if (fadeTime == 0.0f) {
             Globals.UIManager.SetDepthOfField(false);
             Globals.TimescaleManager.UnPauseGame();
-        });
+            menuCamera.Priority = 0;
+        } else {
+            FadeMainPanelOut(fadeTime).OnComplete(() => {
+                Globals.UIManager.SetDepthOfField(false);
+                Globals.TimescaleManager.UnPauseGame();
+                menuCamera.Priority = 0;
+            });
+        }
         Globals.CursorManager.LockMouse();
     }
 
@@ -119,7 +129,10 @@ public class MenuController : MonoBehaviour {
         if (uiElementsDict.TryGetValue(name, out WAEMDictUIElement group)) {
             if (activePanel == group) return;
             redBackground.SetActive(group.background);
-            if (group.background) Globals.TimescaleManager.PauseGame();
+            if (group.background) {
+                Globals.TimescaleManager.PauseGame();
+            }
+            menuCamera.Priority = group.background ? 0 : 12;
             if (activePanel == null) FadeMainPanelIn(time);
             if (activePanel != null) FadePanelOut(activePanel, time / 2.0f);
             FadePanelIn(group, time);

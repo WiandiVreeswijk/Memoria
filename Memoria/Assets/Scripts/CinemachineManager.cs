@@ -10,7 +10,7 @@ public class CinemachineManager : MonoBehaviour {
     private bool inputEnabled = true;
     public GameObject cameraTarget;
 
-    void Start() {
+    void Awake() {
         brains = FindObjectsOfType<CinemachineBrain>();
         CinemachineCore.GetInputAxis = CinemachineAxisInputDelegate;
     }
