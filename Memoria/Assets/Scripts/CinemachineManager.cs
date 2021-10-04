@@ -12,8 +12,7 @@ public class CinemachineManager : MonoBehaviour {
     private bool useBlending = true;
     private bool inputEnabled = true;
 
-    void Awake()
-    {
+    void Awake() {
         brains = FindObjectsOfType<CinemachineBrain>();
         CinemachineCore.GetInputAxis = CinemachineAxisInputDelegate;
         CinemachineCore.GetBlendOverride = GetBlendOverrideDelegate;
@@ -42,8 +41,8 @@ public class CinemachineManager : MonoBehaviour {
 
     public CinemachineBlendDefinition GetBlendOverrideDelegate(ICinemachineCamera fromVcam, ICinemachineCamera toVcam, CinemachineBlendDefinition defaultBlend, MonoBehaviour owner) {
         if (useBlending) {
-            useBlending = false;
-            return blends.GetBlendForVirtualCameras(fromVcam.Name, toVcam.Name, noBlend);
+            useBlending = true;
+            return blends.GetBlendForVirtualCameras(fromVcam.Name, toVcam.Name, defaultBlend);
         }
         return noBlend;
     }
