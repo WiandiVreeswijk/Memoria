@@ -9,6 +9,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
     [Tooltip("Disable this to disable the opening cutscene.")]
     public bool isEnabled = true;
     public CinemachineVirtualCamera mainMenuCamera;
+    public CinemachineFreeLook thirdPersonCamera;
     public PlayableDirector playableDirector;
 
     public CarEngine busEngine;
@@ -59,6 +60,11 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public void OnBusArrive() {
         Globals.Player.VisualEffects.SetVisible(true);
         Globals.CinemachineManager.SetInputEnabled(false);
+        thirdPersonCamera.m_Transitions.m_InheritPosition = true;
+        Utils.DelayedAction(15.0f, () => {
+            thirdPersonCamera.m_Transitions.m_InheritPosition = false;
+            print("fiets");
+        });
     }
 
     public void Trigger() {

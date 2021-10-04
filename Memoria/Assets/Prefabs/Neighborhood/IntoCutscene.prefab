@@ -142,7 +142,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 12
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -185,8 +185,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013523814743466348}
-  m_LocalRotation: {x: 0.13926819, y: 0.03970582, z: -0.005588761, w: 0.9894426}
-  m_LocalPosition: {x: 8.08, y: 5.62, z: -24.784}
+  m_LocalRotation: {x: 0.13926819, y: 0.039705858, z: -0.005588767, w: 0.9894426}
+  m_LocalPosition: {x: 8.077999, y: 5.127, z: -24.409}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7013523816439422392}
@@ -209,7 +209,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -252,7 +252,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013523815000611148}
-  m_LocalRotation: {x: 0.0036583315, y: 0.97668093, z: -0.2140147, w: 0.016695218}
+  m_LocalRotation: {x: 0.0036583312, y: 0.97668093, z: -0.2140147, w: 0.01669522}
   m_LocalPosition: {x: -211.22002, y: 7.4699993, z: 45.290016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -276,7 +276,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -319,7 +319,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013523815310441351}
-  m_LocalRotation: {x: 0.2693525, y: -0.6756055, z: 0.29328445, w: 0.6204763}
+  m_LocalRotation: {x: 0.26935256, y: -0.6756055, z: 0.29328448, w: 0.6204762}
   m_LocalPosition: {x: -178.91849, y: 36.7, z: 40.285294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -343,7 +343,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -555,6 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnabled: 1
   mainMenuCamera: {fileID: 7013523814661947705}
+  thirdPersonCamera: {fileID: 0}
   playableDirector: {fileID: 7013523816024923970}
   busEngine: {fileID: 0}
   busStop: {fileID: 0}
@@ -640,6 +641,18 @@ MonoBehaviour:
         - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: MusicManagerWijk, Assembly-CSharp
           m_MethodName: OpeningCutsceneEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7013523816079540838}
+          m_TargetAssemblyTypeName: WijkOpeningCutscene, Assembly-CSharp
+          m_MethodName: OnBusArrive
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -740,7 +753,7 @@ MonoBehaviour:
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
   m_Priority: 10
-  m_StandbyUpdate: 2
+  m_StandbyUpdate: 0
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
@@ -752,7 +765,7 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
   m_Transitions:
     m_BlendHint: 0
-    m_InheritPosition: 1
+    m_InheritPosition: 0
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []
@@ -818,7 +831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RecenterTarget: 1
   m_VerticalAxis:
-    Value: 33.999973
+    Value: 0
     m_SpeedMode: 1
     m_MaxSpeed: 1
     m_AccelTime: 0.05
@@ -842,7 +855,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_HorizontalAxis:
-    Value: -39.275482
+    Value: 0
     m_SpeedMode: 1
     m_MaxSpeed: 1
     m_AccelTime: 0.05
