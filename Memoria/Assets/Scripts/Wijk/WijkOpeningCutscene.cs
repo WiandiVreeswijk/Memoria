@@ -16,9 +16,13 @@ public class WijkOpeningCutscene : MonoBehaviour {
     private bool isStarted = false;
     Tween markerNotificationTween;
 
+    private bool skipped = false;
+
     void Start() {
-        Globals.Player.PlayerMovementAdventure.SetCanMove(false);
-        Globals.Player.VisualEffects.SetVisible(false);
+        if (!skipped) {
+            Globals.Player.PlayerMovementAdventure.SetCanMove(false);
+            Globals.Player.VisualEffects.SetVisible(false);
+        }
     }
 
     public void OnFinishCutscene() {
@@ -75,12 +79,17 @@ public class WijkOpeningCutscene : MonoBehaviour {
 
         busEngine.isBraking = false;
         if (ShouldSkip()) {
-            busStop.Skip();
-            MouseNotification();
-            Globals.Player.VisualEffects.SetVisible(true);
-            OnFinishCutscene();
+            Skip();
         } else {
             Utils.DelayedAction(15.0f, () => MouseNotification());
         }
+    }
+
+    public void Skip() {
+        skipped = true;
+        busStop.Skip();
+        MouseNotification();
+        Globals.Player.VisualEffects.SetVisible(true);
+        OnFinishCutscene();
     }
 }

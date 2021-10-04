@@ -56,6 +56,7 @@ public class ProgressionManager : MonoBehaviour {
         manfred.SetDialogueEnabled(false);
         CollectWatchManual();
         Globals.MenuController.CloseMenu(0.0f);
+        FindObjectOfType<WijkOpeningCutscene>().Skip();
         Utils.DelayedAction(5.0f, () => {
             Globals.UIManager.NotificationManager.NotifyPlayerBig("Fiets", () => { });
         });
