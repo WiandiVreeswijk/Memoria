@@ -66,15 +66,13 @@ public class MusicControlChaseLevel : MonoBehaviour {
         }
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         float distance = Utils.Distance(Globals.Player.transform.position.x, memory.transform.position.x);
         chorusValue = Mathf.Lerp(1.0f, 0, distance * 0.005f);
         audio.setParameterByID(chorusParameter, chorusValue);
     }
 
-    public void SetVolume(float volume)
-    {
+    public void SetVolume(float volume) {
         volumeValue = volume;
         audio.setParameterByID(volumeParameter, volume);
     }
@@ -88,14 +86,12 @@ public class MusicControlChaseLevel : MonoBehaviour {
         audio.setParameterByID(deathParameter, death);
     }
 
-    public void SetChorus(float chorus)
-    {
+    public void SetChorus(float chorus) {
         chorusValue = chorus;
         audio.setParameterByID(deathParameter, chorus);
     }
 
-    public float GetVolume()
-    {
+    public float GetVolume() {
         return volumeValue;
     }
     public float GetIntensity() {
@@ -105,8 +101,7 @@ public class MusicControlChaseLevel : MonoBehaviour {
     public float GetDeath() {
         return deathValue;
     }
-    public float GetChorus()
-    {
+    public float GetChorus() {
         return chorusValue;
     }
 }

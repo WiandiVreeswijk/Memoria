@@ -22,7 +22,7 @@ public class SoundManagerChase : MonoBehaviour {
         else
         {
             volumeFadeTween = DOTween
-                .To(() => musicControl.GetVolume(), x => musicControl.SetVolume(x), volume, 1f)
+                .To(() => musicControl.GetVolume(), x => musicControl.SetVolume(x), volume, duration)
                 .SetEase(Ease.Linear);
         }
     }
@@ -33,7 +33,7 @@ public class SoundManagerChase : MonoBehaviour {
             musicControl.SetIntensity(intensity);
         } else {
             intensityFadeTween = DOTween
-                .To(() => musicControl.GetIntensity(), x => musicControl.SetIntensity(x), intensity, 1f)
+                .To(() => musicControl.GetIntensity(), x => musicControl.SetIntensity(x), intensity, duration)
                 .SetEase(Ease.Linear);
         }
     }
@@ -43,7 +43,7 @@ public class SoundManagerChase : MonoBehaviour {
         if (duration == 0.0f) {
             musicControl.SetDeath(death);
         } else {
-            deathFadeTween = DOTween.To(() => musicControl.GetDeath(), x => musicControl.SetDeath(x), death, 0.5f)
+            deathFadeTween = DOTween.To(() => musicControl.GetDeath(), x => musicControl.SetDeath(x), death, duration)
                 .SetEase(Ease.Linear);
         }
     }
