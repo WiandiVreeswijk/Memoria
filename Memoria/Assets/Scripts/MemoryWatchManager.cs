@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using FMODUnity;
 using UnityEngine;
 
 public class MemoryWatchManager : MonoBehaviour {
@@ -25,6 +26,7 @@ public class MemoryWatchManager : MonoBehaviour {
     private Tween armRotationTween;
 
     private FMOD.Studio.EventInstance charge;
+    [EventRef]
     public string soundPath;
 
 
