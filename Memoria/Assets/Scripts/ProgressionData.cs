@@ -30,11 +30,9 @@ public class ProgressionData : MonoBehaviour, IEnterActivatable {
             actor.transform.rotation = newActorPosition.rotation;
         }
 
-        if (setQuestIcon) {
+        Globals.ProgressionManager.GetIcon().SetEnabled(setQuestIcon);
+        if (setQuestIcon)
             Globals.ProgressionManager.GetIcon().transform.position = questIconPosition.position + questIconOffset;
-            Globals.ProgressionManager.GetIcon().SetEnabled(true);
-        } else Globals.ProgressionManager.GetIcon().SetEnabled(false);
-
         if (setDialogueProgression) {
             DialogueLua.SetVariable(actorName + "_Progression", dialogueProgressionName);
             actor.GetComponent<Usable>().enabled = true;

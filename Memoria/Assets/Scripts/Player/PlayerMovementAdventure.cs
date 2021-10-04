@@ -40,7 +40,7 @@ public class PlayerMovementAdventure : MonoBehaviour {
             Adventure();
         } else {
             animator.applyRootMotion = false;
-            if (FPSLookAt.sqrMagnitude > 0.01f)
+            if (FPSLookAt.sqrMagnitude > 0.01f && canMove)
                 gameObject.transform.rotation = Quaternion.LookRotation(FPSLookAt, Vector3.up);
             FPS();
         }
@@ -53,12 +53,21 @@ public class PlayerMovementAdventure : MonoBehaviour {
         Gizmos.DrawLine(transform.position, transform.position + Vector3.ClampMagnitude(plainRotatedMovement, forwardSpeed)); //Direction the player is moving to
     }
 
-    public void SetCanMove(bool canMove) { this.canMove = canMove; }
+    public void SetCanMove(bool canMove) {
+        this.canMove = canMove;
+    }
     public bool HasMoved() { return hasMoved; }
 
     public void Teleport(Vector3 position) {
+        Teleport(position, null);
+    }
+
+    public void Teleport(Vector3 position, Quaternion? rotation) {
         Utils.DelayedAction(0, () => {
             transform.position = position;
+            if (rotation.HasValue) {
+                transform.rotation = rotation.Value;
+            }
         }).SetUpdate(UpdateType.Late);
     }
 
@@ -113,8 +122,8 @@ public class PlayerMovementAdventure : MonoBehaviour {
 
     private Vector3 FPSLookAt;
     private void FPS() {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = canMove? Input.GetAxis("Horizontal") : 0;
+        float vertical = canMove?Input.GetAxis("Vertical") : 0;
 
         Vector3 movement = new Vector3(horizontal, 0, vertical);
 

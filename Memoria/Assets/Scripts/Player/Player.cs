@@ -45,8 +45,8 @@ public class Player : MonoBehaviour {
         povPoint = Utils.FindUniqueChildInTransform(transform, "POVPoint");
     }
 
-    public void OnGlobalsInitializeType(Globals.GlobalsType type) {
-        switch (type) {
+    public void OnGlobalsInitializeType(Globals.GlobalsType previousGlobalsType, Globals.GlobalsType currentGlobalsType) {
+        switch (currentGlobalsType) {
             case Globals.GlobalsType.DEBUG: OnGlobalsInitializeDebug(); break;
             case Globals.GlobalsType.NEIGHBORHOOD: OnGlobalsInitializeNeighborhood(); break;
             case Globals.GlobalsType.OBLIVION: OnGlobalsInitializeOblivion(); break;
