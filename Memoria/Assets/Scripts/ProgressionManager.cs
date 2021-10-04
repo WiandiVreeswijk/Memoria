@@ -14,10 +14,10 @@ public class ProgressionManager : MonoBehaviour {
 
 
         formatter.Size(50).Append("You have found grandma's pocket watch!\n\n").Size(40)
-            .Append("The pocket watch will appear when Elena is close to an object with a strong ")
-            .Color(new Color(255f / 255f, 215f / 255f, 0f))
+            .Append("The pocket watch will appear in your screen when Elena is close to an object with a strong ")
+            .Color(new Color(1f, 0.843137f, 0f))
             .Append("memory").CloseColor().Append(" attached to it!\n\nHold ")
-            .Color(new Color(0f, 96f / 255f, 100f / 255)).Append("spacebar")
+            .Color(new Color(0f, 1.720795f, 1.027072f, 1f)).Append("spacebar")
             .CloseColor().Append(" to activate the pocket watch when you are near such an object");
         Globals.UIManager.NotificationManager.NotifyPlayerBig(formatter, () => { });
     }
