@@ -62,7 +62,7 @@ public class ProgressionManager : MonoBehaviour {
         Globals.CinemachineManager.ClearNextBlend();
         Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
         Utils.DelayedAction(5.0f, () => {
-        //Globals.Player.PlayerMovementAdventure.Teleport(FindObjectOfType<ReturnPoint>().transform.position);
+            //Globals.Player.PlayerMovementAdventure.Teleport(FindObjectOfType<ReturnPoint>().transform.position);
             Globals.UIManager.NotificationManager.NotifyPlayerBig("Fiets", () => { });
         });
     }
