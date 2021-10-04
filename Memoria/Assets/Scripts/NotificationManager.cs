@@ -11,6 +11,7 @@ public class NotificationManager : MonoBehaviour {
     [SerializeField] private GameObject notificationsParent;
     [SerializeField] private NotificationPanel notificationPanel;
 
+    public bool blockNotifications = false;
     private List<Notification> cachedNotifications = new List<Notification>();
 
     private int notificationIndex = 0;
@@ -46,6 +47,10 @@ public class NotificationManager : MonoBehaviour {
     }
 
     public void NotifyPlayer(string message, float delay = 0.0f) {
+        if (blockNotifications) {
+            print("Notification blocked!");
+            return;
+        }
         GameObject obj = Instantiate(notificationPrefab, notificationsParent.transform);
         Notification notification = obj.GetComponent<Notification>();
         notification.Set(message);

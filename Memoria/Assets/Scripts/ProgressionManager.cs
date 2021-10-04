@@ -60,6 +60,7 @@ public class ProgressionManager : MonoBehaviour {
         FindObjectOfType<OmaHouseDoor>().OpenDoor();
         FindObjectOfType<WijkOpeningCutscene>().Skip();
         Globals.CinemachineManager.ClearNextBlend();
+        Globals.UIManager.NotificationManager.blockNotifications = true;
         Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
         Utils.DelayedAction(5.0f, () => {
             //Globals.Player.PlayerMovementAdventure.Teleport(FindObjectOfType<ReturnPoint>().transform.position);
