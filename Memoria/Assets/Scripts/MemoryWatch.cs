@@ -55,6 +55,6 @@ public class MemoryWatch : MonoBehaviour {
     }
 
     public void Activate(MemoryObject memoryObject) {
-        releaseParticleSystem.targetObject = memoryObject.gameObject;
+        //releaseParticleSystem.targetObject = memoryObject.gameObject;
     }
 }
