@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OmaHouseDoor : MonoBehaviour {
-    void Start() {
+    void Awake() {
         transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 

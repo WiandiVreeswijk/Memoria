@@ -27,10 +27,6 @@ public class NotificationManager : MonoBehaviour {
         NotifyPlayerBig(formatter.Finalize(), onAcceptNotification);
     }
 
-    private void Start() {
-        notificationPanel.Close();
-    }
-
     //private void Update() {
     //    if (Input.GetKeyDown(KeyCode.B)) {
     //        RichTextFormatter formatter = new RichTextFormatter();
