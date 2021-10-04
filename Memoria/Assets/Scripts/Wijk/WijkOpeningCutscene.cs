@@ -8,7 +8,6 @@ using UnityEngine.Playables;
 public class WijkOpeningCutscene : MonoBehaviour {
     [Tooltip("Disable this to disable the opening cutscene.")]
     public bool isEnabled = true;
-    public CinemachineVirtualCamera mainMenuCamera;
     public CinemachineFreeLook thirdPersonCamera;
     public PlayableDirector playableDirector;
 
@@ -70,7 +69,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public void Trigger() {
         if (isStarted) return;
         isStarted = true;
-        mainMenuCamera.Priority = 0;
         playableDirector.time = ShouldSkip() ? playableDirector.duration : 0;
         playableDirector.Evaluate();
         playableDirector.Play();
