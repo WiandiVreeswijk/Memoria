@@ -12,6 +12,11 @@ public class MusicControlChaseLevel : MonoBehaviour {
     private PARAMETER_ID intensityParameter;
     private PARAMETER_ID deathParameter;
     private PARAMETER_ID chorusParameter;
+    private PARAMETER_ID volumeParameter;
+
+    [Header("Volume Value")]
+    [Range(0f, 1f)]
+    public float volumeValue = 0f;
 
     [Header("Intensity Value")]
     [Range(0f, 1f)]
@@ -29,6 +34,12 @@ public class MusicControlChaseLevel : MonoBehaviour {
 
     private void Start() {
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
+
+        FMOD.Studio.EventDescription volumeDescription;
+        audio.getDescription(out volumeDescription);
+        FMOD.Studio.PARAMETER_DESCRIPTION volumeParameterDescription;
+        volumeDescription.getParameterDescriptionByName("VolumeChasingLevelMusic", out volumeParameterDescription);
+        volumeParameter = volumeParameterDescription.id;
 
         FMOD.Studio.EventDescription intensityDescription;
         audio.getDescription(out intensityDescription);
@@ -62,6 +73,11 @@ public class MusicControlChaseLevel : MonoBehaviour {
         audio.setParameterByID(chorusParameter, chorusValue);
     }
 
+    public void SetVolume(float volume)
+    {
+        volumeValue = volume;
+        audio.setParameterByID(volumeParameter, volume);
+    }
     public void SetIntensity(float intensity) {
         intensityValue = intensity;
         audio.setParameterByID(intensityParameter, intensity);
@@ -78,6 +94,10 @@ public class MusicControlChaseLevel : MonoBehaviour {
         audio.setParameterByID(deathParameter, chorus);
     }
 
+    public float GetVolume()
+    {
+        return volumeValue;
+    }
     public float GetIntensity() {
         return intensityValue;
     }
