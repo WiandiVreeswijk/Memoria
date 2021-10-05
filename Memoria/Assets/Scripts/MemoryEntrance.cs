@@ -42,7 +42,7 @@ namespace Assets.Scripts {
 
         public override void Activate() {
             Globals.Player.CameraController.EaseFOV(2.0f, 140f, 1f, Ease.InExpo);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/EnterMemorySound");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFXWijk/PocketWatch/EnterMemorySound");
             Globals.SceneManager.SetScene(sceneName);
             Globals.MusicManagerWijk.FadeToMuteAll();
         }
