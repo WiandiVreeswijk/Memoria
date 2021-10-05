@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Playables;
 using Cinemachine;
 using DG.Tweening;
+using Debug = UnityEngine.Debug;
 
 public class MainMenu : MonoBehaviour {
     private void Start() {
@@ -14,20 +16,60 @@ public class MainMenu : MonoBehaviour {
         Globals.AmbientControl.SetVolume(0);
     }
 
+    private float textTime = 9.0f;
+    private float fadeTime = 1.0f;
     public void PlayGame() {
-        Globals.CinemachineManager.SetInputEnabled(false);
-        Globals.MenuController.BlackScreenFadeIn(1.0f, false).OnComplete(() => {
-            FindObjectOfType<MenuCamera>().cam.Priority = 0;
-            FindObjectOfType<WijkOpeningCutscene>().Trigger();
-        });
-        Utils.DelayedAction(6, () => {
-            Globals.CinemachineManager.SetInputEnabled(true);
-            Globals.MenuController.BlackScreenFadeOut(2.5f);
-        });
         Globals.MenuController.CloseMenu(1.0f);
+        Globals.CinemachineManager.SetInputEnabled(false);
+        Globals.MenuController.blackScreenText.text = "";
+        Globals.MenuController.BlackScreenFadeIn(1.0f, false).OnComplete(() => {
+            Utils.DelayedAction(2.5f, () => {
+                Globals.MenuController.blackScreenText.color = new Color(1, 1, 1, 0);
+                Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_1");
+                Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
+                Utils.DelayedAction(textTime, () => {
+                    Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
+                        Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_2");
+                        Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
+                        Utils.DelayedAction(textTime, () => {
+                            Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
+                                Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_3");
+                                Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
+                                Utils.DelayedAction(textTime, () => {
+                                    Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
+                                        Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_4");
+                                        Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
+                                        Utils.DelayedAction(textTime / 2f, () => {
+                                            Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
+                                                Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_5");
+                                                Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
+                                                Switch();
+                                                Utils.DelayedAction(textTime, () => {
+                                                    Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
+                                                    }).SetUpdate(true);
+                                                }).SetUpdate(true);
+                                            }).SetUpdate(true);
+                                        }).SetUpdate(true);
+                                    }).SetUpdate(true);
+                                }).SetUpdate(true);
+                            }).SetUpdate(true);
+                        }).SetUpdate(true);
+                    }).SetUpdate(true);
+                }).SetUpdate(true);
+            }).SetUpdate(true);
+        }).SetUpdate(true);
+    }
+
+    private void Switch() {
         Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
         Globals.SoundManagerWijk.FadeEngineVolume(0.4f);
         Globals.MusicManagerWijk.FadeFluteVolume(0.9f, 10.0f);
+        FindObjectOfType<MenuCamera>().cam.Priority = 0;
+        FindObjectOfType<WijkOpeningCutscene>().Trigger();
+        Utils.DelayedAction(5, () => {
+            Globals.CinemachineManager.SetInputEnabled(true);
+            Globals.MenuController.BlackScreenFadeOut(2.5f);
+        });
     }
 
     public void QuitGame() {

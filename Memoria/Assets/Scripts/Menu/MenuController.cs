@@ -36,6 +36,7 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private CanvasGroup blackScreen;
     [SerializeField] private Image image;
     [SerializeField] private GameObject redBackground;
+    public TextMeshProUGUI blackScreenText;
     private bool blackScreenActive = false;
     private CinemachineVirtualCamera menuCamera;
 
