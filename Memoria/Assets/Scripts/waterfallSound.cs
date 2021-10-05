@@ -11,7 +11,7 @@ public class waterfallSound : MonoBehaviour
     public string SelectAudio;
     public new FMOD.Studio.EventInstance audio;
     private PARAMETER_ID volumeParameter;
-
+    
     [Header("waterfall Volume")]
     [Range(0f, 1f)]
     public float volumeValue = 0f;
@@ -26,6 +26,13 @@ public class waterfallSound : MonoBehaviour
         FMOD.Studio.PARAMETER_DESCRIPTION volumeParameterDescription;
         volumeDescription.getParameterDescriptionByName("waterfallVolume", out volumeParameterDescription);
         volumeParameter = volumeParameterDescription.id;
+
+        FMOD.Studio.PLAYBACK_STATE PbState;
+        audio.getPlaybackState(out PbState);
+        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            audio.start();
+        }
     }
 
     private void FixedUpdate()
