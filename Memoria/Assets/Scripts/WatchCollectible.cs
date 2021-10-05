@@ -10,5 +10,6 @@ public class WatchCollectible : MonoBehaviour, IEnterActivatable {
     public void ActivateEnter() {
         Globals.ProgressionManager.CollectWatch();
         gameObject.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFXWijk/PocketWatch/PickedUpWatch");
     }
 }
