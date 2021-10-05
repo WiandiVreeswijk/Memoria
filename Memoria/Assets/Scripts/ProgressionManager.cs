@@ -47,6 +47,17 @@ public class ProgressionManager : MonoBehaviour {
         }
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            RichTextFormatter formatter = new RichTextFormatter().Size(50).Append("Thank you for playing the demo of ")
+                .Color(new Color(0.89f, 0.24f, 0.24f)).Append("MEMORIA").CloseColor().Append("!").Size(30).Append(
+                    "\n\nWe greatly appreciate the time and effort you put into playing our game and we can't wait to hear your feedback!\n Please head over to our Discord or website to let us know what you think!\n\n\n")
+                .Size(50).Append("Cheers!\n\nthe ").Color(new Color(0.84f, 0f, 0f)).Append("WAEM Game Studios")
+                .CloseColor().Append(" team");
+            //Globals.Player.PlayerMovementAdventure.Teleport(FindObjectOfType<ReturnPoint>().transform.position);
+            Globals.UIManager.NotificationManager.NotifyPlayerBig(formatter, () => { });
+        }
+    }
     public void InitializeProgressionBackFromChasing() {
         DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
         DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
@@ -63,8 +74,13 @@ public class ProgressionManager : MonoBehaviour {
         Globals.UIManager.NotificationManager.blockNotifications = true;
         Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
         Utils.DelayedAction(5.0f, () => {
+            RichTextFormatter formatter = new RichTextFormatter().Size(50).Append("Thank you for playing the demo of ")
+                .Color(new Color(0.89f, 0.24f, 0.24f)).Append("MEMORIA").CloseColor().Append("!").Size(30).Append(
+                    "\n\nWe greatly appreciate the time and effort you put into playing our game and we can't wait to hear your feedback!\n Please head over to our Discord or website to let us know what you think!\n\n\n")
+                .Size(50).Append("Cheers!\n\nthe ").Color(new Color(0.84f, 0f, 0f)).Append("WAEM Game Studios")
+                .CloseColor().Append(" team");
             //Globals.Player.PlayerMovementAdventure.Teleport(FindObjectOfType<ReturnPoint>().transform.position);
-            Globals.UIManager.NotificationManager.NotifyPlayerBig("Fiets", () => { });
+            Globals.UIManager.NotificationManager.NotifyPlayerBig(formatter, () => { });
         });
     }
 
