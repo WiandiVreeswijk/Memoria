@@ -98,7 +98,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{d4d84046-fe0b-4330-9414-865e97b1b25d}">
 		<property name="volume">
-			<value>-3</value>
+			<value>-11</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -123,9 +123,11 @@
 	<object class="MixerBusEffectChain" id="{bb61b8d1-30c7-4d8f-8fb9-aa015beb2a94}">
 		<relationship name="effects">
 			<destination>{0037c99c-ce7f-47ce-9e7d-c3cbaaeeb032}</destination>
+			<destination>{6b30148f-b9da-4204-a4f9-a227a47cf857}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{31ea7808-ffa9-4a74-8ba7-9489bde03561}" />
 	<object class="MixerBusFader" id="{e183cd33-7062-4db9-b7ca-7e7077d7c75c}" />
 	<object class="MixerBusFader" id="{0037c99c-ce7f-47ce-9e7d-c3cbaaeeb032}" />
+	<object class="SFXReverbEffect" id="{6b30148f-b9da-4204-a4f9-a227a47cf857}" />
 </objects>
