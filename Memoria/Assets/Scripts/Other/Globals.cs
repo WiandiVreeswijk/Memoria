@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers;
 using UnityEngine;
 
 public class Globals : MonoBehaviour {
@@ -28,6 +29,7 @@ public class Globals : MonoBehaviour {
     private Debugger debugger;
     private CursorManager cursorManager;
     private AnalyticsManager analyticsManager;
+    private GlobalTextTable localization;
     private new Camera camera;
     private bool isInitialized = false;
 
@@ -103,6 +105,7 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out analyticsManager, false);
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
+        Utils.FindUniqueObject(out localization);
         Utils.FindUniqueObject(out menuController);
         Utils.FindUniqueObject(out timescaleManager);
         Utils.FindUniqueObject(out cinemachineManager);
@@ -150,6 +153,7 @@ public class Globals : MonoBehaviour {
     public static TimescaleManager TimescaleManager => _Instance.timescaleManager;
     public static Screenshake Screenshake => _Instance.screenshake;
     public static SceneManager SceneManager => _Instance.sceneManager;
+    public static GlobalTextTable Localization => _Instance.localization;
     public static UIManager UIManager => _Instance.uiManager;
     public static IconManager IconManager => _Instance.iconManager;
     public static ScoreManager ScoreManager => _Instance.scoreManager;
