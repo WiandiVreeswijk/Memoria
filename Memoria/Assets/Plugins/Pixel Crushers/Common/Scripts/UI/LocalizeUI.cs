@@ -89,13 +89,13 @@ namespace PixelCrushers
             // Skip if no text table or language set:
             if (textTable == null)
             {
-                Debug.LogWarning("No localized text table is assigned to " + name + " or a UI Localized Manager component.", this);
+                Debug.LogError("No localized text table is assigned to " + name + " or a UI Localized Manager component.", this);
                 return;
             }
 
             if (!textTable.HasLanguage(language))
             {
-                Debug.LogWarning("Text table " + textTable.name + " does not have a language '" + language + "'.", textTable);
+                Debug.LogError("Text table " + textTable.name + " does not have a language '" + language + "'.", textTable);
                 //return; //--- Allow to continue and use default language value.
             }
 
@@ -116,7 +116,7 @@ namespace PixelCrushers
 #endif
             if (!hasLocalizableComponent)
             {
-                Debug.LogWarning("Localize UI didn't find a localizable UI component on " + name + ".", this);
+                Debug.LogError("Localize UI didn't find a localizable UI component on " + name + ".", this);
                 return;
             }
 
@@ -135,7 +135,7 @@ namespace PixelCrushers
             {
                 if (!textTable.HasField(fieldName))
                 {
-                    Debug.LogWarning("Text table " + textTable.name + " does not have a field '" + fieldName + "'.", textTable);
+                    Debug.LogError("Text table " + textTable.name + " does not have a field '" + fieldName + "'.", textTable);
                 }
                 else
                 {
@@ -170,7 +170,7 @@ namespace PixelCrushers
                 }
                 if (!textTable.HasField(fieldName))
                 {
-                    Debug.LogWarning("Text table " + textTable.name + " does not have a field '" + fieldName + "'.", textTable);
+                    Debug.LogError("Text table " + textTable.name + " does not have a field '" + fieldName + "'.", textTable);
                 }
                 else
                 {
