@@ -40,7 +40,8 @@ public class ProgressionManager : MonoBehaviour {
             if (questIcon != null) questIcon.SetEnabled(false);
         }
     }
-    public void InitializeProgressionBackFromChasing() {
+    public void InitializeProgressionBackFromChasing()
+    {
         DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
         DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
         DialogueHandler hanna = dialogueHandlers.First(x => x.actorName == "hanna");
@@ -57,6 +58,7 @@ public class ProgressionManager : MonoBehaviour {
         Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
         Utils.DelayedAction(5.0f, () => {
             string localized = Globals.Localization.Get("DEMO_FINISHED");
+            print("demoFinish");
             Globals.UIManager.NotificationManager.NotifyPlayerBig(localized, () => { });
         });
     }
