@@ -51,6 +51,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             Globals.ProgressionManager.GetIcon().SetEnabled(false);
             Globals.CinemachineManager.SetPausedState(true);
             Globals.CinemachineManager.SetInputEnabled(false);
+            print(soundEffectStart);
             if (soundEffectStart.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
             if (actorIdleSound != null) actorIdleSound.mute = true;
