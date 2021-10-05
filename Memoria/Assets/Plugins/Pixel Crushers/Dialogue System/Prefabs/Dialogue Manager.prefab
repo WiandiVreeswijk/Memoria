@@ -157,9 +157,9 @@ MonoBehaviour:
     subtitleSettings:
       showNPCSubtitlesDuringLine: 1
       showNPCSubtitlesWithResponses: 1
-      showPCSubtitlesDuringLine: 0
+      showPCSubtitlesDuringLine: 1
       allowPCSubtitleReminders: 1
-      skipPCSubtitleAfterResponseMenu: 1
+      skipPCSubtitleAfterResponseMenu: 0
       subtitleCharsPerSecond: 25
       minSubtitleSeconds: 6
       continueButton: 3
@@ -1658,8 +1658,8 @@ RectTransform:
   m_Children:
   - {fileID: 841522232}
   - {fileID: 484342260}
-  m_Father: {fileID: 1032291089}
-  m_RootOrder: 1
+  m_Father: {fileID: 1716103646}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a9540f98bb79346b296ec5feb51073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 0}
+  firstSelected: {fileID: 1143547483}
   focusCheckFrequency: 0.2
   refreshSelectablesFrequency: 0
   selectPreviousOnDisable: 1
@@ -1815,8 +1815,8 @@ MonoBehaviour:
   subtitleText:
     m_uiText: {fileID: 841522230}
     m_textMeshProUGUI: {fileID: 0}
-  addSpeakerName: 0
-  addSpeakerNameFormat: '{0}: {1}'
+  addSpeakerName: 1
+  addSpeakerNameFormat: '<color=#FF5567><b>{0}  </b></color>: {1}'
   accumulateText: 0
   delayTypewriterUntilOpen: 0
   continueButton: {fileID: 484342264}
@@ -2428,7 +2428,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1276979991}
-  - {fileID: 636607046}
   m_Father: {fileID: 132493578}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4170,6 +4169,7 @@ RectTransform:
   m_Children:
   - {fileID: 738813652}
   - {fileID: 307182539}
+  - {fileID: 636607046}
   m_Father: {fileID: 132493578}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
