@@ -11,7 +11,7 @@ public class waterfallSound : MonoBehaviour
     public string SelectAudio;
     public new FMOD.Studio.EventInstance audio;
     private PARAMETER_ID volumeParameter;
-    
+
     [Header("waterfall Volume")]
     [Range(0f, 1f)]
     public float volumeValue = 0f;
@@ -40,6 +40,11 @@ public class waterfallSound : MonoBehaviour
         float distance = Utils.Distance(Globals.Player.transform.position.x, transform.position.x);
         volumeValue = Mathf.Lerp(1.0f, 0, distance * volumeMultiplier);
         audio.setParameterByID(volumeParameter, volumeValue);
+    }
+
+    public void MuteWaterfall()
+    {
+        audio.stop(STOP_MODE.ALLOWFADEOUT);
     }
 
 }
