@@ -5,12 +5,7 @@ using UnityEngine;
 public class ChangeSceneActivatable : MonoBehaviour, IEnterActivatable {
     public string sceneName;
 
-    private waterfallSound waterfallSound;
-
-    private void Start()
-    {
-        waterfallSound = GetComponent<waterfallSound>();
-    }
+    public WaterfallSound waterfallSound;
 
     public void ActivateEnter() {
         Globals.SoundManagerChase.FadeMusicVolume(0.0f);

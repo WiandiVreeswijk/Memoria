@@ -56,7 +56,7 @@ public class MenuController : MonoBehaviour {
             } else Debug.LogError($"A UIElement named {element.name} is null");
         }
 
-        menuCamera = FindObjectOfType<MenuCamera>().GetComponent<CinemachineVirtualCamera>();
+        menuCamera = FindObjectOfType<MenuCamera>()?.GetComponent<CinemachineVirtualCamera>();
         blackScreen.gameObject.SetActive(true);
         BlackScreenFadeOut(0.0f);
         CloseMenu(0.0f);
@@ -103,12 +103,12 @@ public class MenuController : MonoBehaviour {
         if (fadeTime == 0.0f) {
             Globals.UIManager.SetDepthOfField(false);
             Globals.TimescaleManager.UnPauseGame();
-            menuCamera.Priority = 0;
+            if (menuCamera) menuCamera.Priority = 0;
         } else {
             FadeMainPanelOut(fadeTime).OnComplete(() => {
                 Globals.UIManager.SetDepthOfField(false);
                 Globals.TimescaleManager.UnPauseGame();
-                menuCamera.Priority = 0;
+                if (menuCamera) menuCamera.Priority = 0;
             });
         }
         Globals.CursorManager.LockMouse();
@@ -133,7 +133,7 @@ public class MenuController : MonoBehaviour {
             if (group.background) {
                 Globals.TimescaleManager.PauseGame();
             }
-            menuCamera.Priority = group.background ? 0 : 12;
+            if(menuCamera)menuCamera.Priority = group.background ? 0 : 12;
             if (activePanel == null) FadeMainPanelIn(time);
             if (activePanel != null) FadePanelOut(activePanel, time / 2.0f);
             FadePanelIn(group, time);

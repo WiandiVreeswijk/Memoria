@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class waterfallSound : MonoBehaviour
+public class WaterfallSound : MonoBehaviour
 {
     //FMOD
     [Header("FMOD Event")]
