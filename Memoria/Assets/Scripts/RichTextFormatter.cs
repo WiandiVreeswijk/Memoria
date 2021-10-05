@@ -62,6 +62,12 @@ public class RichTextFormatter {
         return this;
     }
 
+    public RichTextFormatter AppendLocalized(string field) {
+        string localized = Globals.Localization.Get(field);
+        builder.Append(localized);
+        return this;
+    }
+
     public string Finalize() {
         if (colorOpened) CloseColor();
         if (fontOpened) CloseFont();

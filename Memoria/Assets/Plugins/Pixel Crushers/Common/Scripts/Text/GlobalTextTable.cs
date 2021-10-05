@@ -2,15 +2,13 @@
 
 using UnityEngine;
 
-namespace PixelCrushers
-{
+namespace PixelCrushers {
 
     /// <summary>
     /// Maintains a reference to a global TextTable that other scripts can use.
     /// </summary>
     [AddComponentMenu("")] // Use wrapper instead.
-    public class GlobalTextTable : MonoBehaviour
-    {
+    public class GlobalTextTable : MonoBehaviour {
 
         [Tooltip("The global TextTable.")]
         [SerializeField]
@@ -20,19 +18,16 @@ namespace PixelCrushers
 
 #if UNITY_2019_3_OR_NEWER
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void InitStaticVariables()
-        {
+        static void InitStaticVariables() {
             s_instance = null;
         }
 #endif
 
-        protected virtual void Awake()
-        {
+        protected virtual void Awake() {
             if (s_instance == null) s_instance = this;
         }
 
-        protected virtual void OnDestroy()
-        {
+        protected virtual void OnDestroy() {
             if (s_instance == this) s_instance = null;
         }
 
@@ -44,16 +39,12 @@ namespace PixelCrushers
         /// <summary>
         /// Current global text table.
         /// </summary>
-        public static TextTable textTable
-        {
-            get
-            {
+        public static TextTable textTable {
+            get {
                 return (instance != null) ? instance.m_textTable : null;
             }
-            set
-            {
-                if (instance != null)
-                {
+            set {
+                if (instance != null) {
                     instance.m_textTable = value;
                     if (UILocalizationManager.instance != null) UILocalizationManager.instance.UpdateUIs(currentLanguage);
                 }
@@ -63,8 +54,7 @@ namespace PixelCrushers
         /// <summary>
         /// The current language to use.
         /// </summary>
-        public static string currentLanguage
-        {
+        public static string currentLanguage {
             get { return (UILocalizationManager.instance != null) ? UILocalizationManager.instance.currentLanguage : string.Empty; }
             set { if (UILocalizationManager.instance != null) UILocalizationManager.instance.currentLanguage = value; }
         }
@@ -74,10 +64,13 @@ namespace PixelCrushers
         /// </summary>
         /// <param name="fieldName">Field name.</param>
         /// <returns>The field value in the global text table for the current language.</returns>
-        public static string Lookup(StringField fieldName)
-        {
+        public static string Lookup(StringField fieldName) {
             if (fieldName == null) return string.Empty;
             return Lookup(fieldName.value);
+        }
+
+        public string Get(StringField fieldName) {
+            return Lookup(fieldName);
         }
 
         /// <summary>
@@ -85,12 +78,14 @@ namespace PixelCrushers
         /// </summary>
         /// <param name="fieldName">Field name.</param>
         /// <returns>The field value in the global text table for the current language.</returns>
-        public static string Lookup(string fieldName)
-        {
+        public static string Lookup(string fieldName) {
             if (string.IsNullOrEmpty(fieldName)) return string.Empty;
             if (textTable == null) return fieldName;
             return textTable.GetFieldTextForLanguage(fieldName, currentLanguage);
         }
 
+        public string Get(string fieldName) {
+            return Lookup(fieldName);
+        }
     }
 }

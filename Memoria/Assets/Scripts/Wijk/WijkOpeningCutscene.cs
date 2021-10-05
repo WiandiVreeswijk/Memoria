@@ -29,7 +29,8 @@ public class WijkOpeningCutscene : MonoBehaviour {
         Globals.CinemachineManager.SetInputEnabled(true);
         Globals.Player.PlayerMovementAdventure.SetCanMove(true);
         Utils.DelayedAction(7.5f, () => {
-            if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.UIManager.NotificationManager.NotifyPlayer("WASD to move");
+            string localized = Globals.Localization.Get("INSTR_MOVE");
+            if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.UIManager.NotificationManager.NotifyPlayer(localized);
         });
         StartMarkerNotification();
     }
@@ -41,7 +42,8 @@ public class WijkOpeningCutscene : MonoBehaviour {
 
     private void StartMarkerNotification() {
         markerNotificationTween = Utils.DelayedAction(25.0f, () => {
-            Globals.UIManager.NotificationManager.NotifyPlayer("Follow the ! marker");
+            string localized = Globals.Localization.Get("INSTR_MARKER");
+            Globals.UIManager.NotificationManager.NotifyPlayer(localized);
             markerNotificationTween.Restart();
         }).OnUpdate(() => {
             if (Globals.GetCurrentGlobalsType() != Globals.GlobalsType.NEIGHBORHOOD) markerNotificationTween.Kill();
@@ -57,7 +59,8 @@ public class WijkOpeningCutscene : MonoBehaviour {
     }
 
     private void MouseNotification() {
-        Globals.UIManager.NotificationManager.NotifyPlayer("<font=\"Mouse SDF\"><size=78>u</size></font>  to move the camera");
+        string localized = Globals.Localization.Get("INSTR_CAMERA");
+        Globals.UIManager.NotificationManager.NotifyPlayer("<font=\"Mouse SDF\"><size=78>u</size></font> " + localized);
     }
 
     public void OnBusArrive() {
@@ -66,7 +69,6 @@ public class WijkOpeningCutscene : MonoBehaviour {
         thirdPersonCamera.m_Transitions.m_InheritPosition = true;
         Utils.DelayedAction(15.0f, () => {
             thirdPersonCamera.m_Transitions.m_InheritPosition = false;
-            print("fiets");
         });
     }
 

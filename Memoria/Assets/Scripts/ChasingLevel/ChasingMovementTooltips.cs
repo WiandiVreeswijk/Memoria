@@ -19,14 +19,17 @@ public class ChasingMovementTooltips : MonoBehaviour {
     }
 
     public void OnJumpPointReached() {
-        if (!hasJumpedOrBeenNotified) {
-            Globals.UIManager.NotificationManager.NotifyPlayer("Space to jump");
+        if (!hasJumpedOrBeenNotified)
+        {
+            string localized = Globals.Localization.Get("INSTR_JUMP");
+            Globals.UIManager.NotificationManager.NotifyPlayer(localized);
             Destroy(gameObject);
             hasJumpedOrBeenNotified = true;
         }
     }
 
     public void OnLevelStarted() {
-        movementTween = Utils.DelayedAction(5.0f, () => Globals.UIManager.NotificationManager.NotifyPlayer("WASD to move"));
+        string localized = Globals.Localization.Get("INSTR_MOVE");
+        movementTween = Utils.DelayedAction(5.0f, () => Globals.UIManager.NotificationManager.NotifyPlayer(localized));
     }
 }
