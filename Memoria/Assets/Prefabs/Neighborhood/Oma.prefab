@@ -1556,6 +1556,7 @@ GameObject:
   - component: {fileID: 6524208660857085315}
   - component: {fileID: 3202999744675472633}
   - component: {fileID: 1832917710}
+  - component: {fileID: 1284647111}
   m_Layer: 0
   m_Name: Oma
   m_TagString: Untagged
@@ -1630,10 +1631,11 @@ MonoBehaviour:
   dialogueData:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   actorName: oma
   fakeElena: {fileID: 0}
-  soundEffectStart: 
-  soundEffectEnd: 
+  soundEffectStart: event:/SFXWijk/Actors/Grandma/Start
+  soundEffectEnd: event:/SFXWijk/Actors/Grandma/End
 --- !u!114 &6524208660857085315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1741,6 +1743,23 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1284647111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5551932347549416909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b7025a0e63a674fa95cda5bea3d6b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectAudio: event:/SFXWijk/Actors/Grandma/Idle
+  parameterName: VolumeGrandma
+  volumeValue: 0
+  volumeMultiplier: 0.3
+  mute: 0
 --- !u!1 &5785480431602026709
 GameObject:
   m_ObjectHideFlags: 0

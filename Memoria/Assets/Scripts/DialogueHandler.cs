@@ -49,10 +49,8 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
         DialogueData data = GetDialogueDataFromConversation(conversationName);
         if (data != null) {
             data.cam.Priority = 99;
-            fakeElena.transform.position = data.fakeElenaPoint.position + new Vector3(0.0f, 0.05f, 0.0f);
-            fakeElena.transform.rotation = data.fakeElenaPoint.rotation;
             Globals.Player.VisualEffects.SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
-            Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
+            Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position + new Vector3(0.0f, 0.05f, 0.0f), data.fakeElenaPoint.rotation);
             Globals.ProgressionManager.GetIcon().SetEnabled(false);
             Globals.CinemachineManager.SetInputEnabled(false);
             dialogueIcon.SetEnabled(false);

@@ -424,7 +424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322114442811738}
   m_LocalRotation: {x: 0.5278816, y: -0.5215059, z: -0.45559222, w: 0.4917402}
-  m_LocalPosition: {x: 0.022315025, y: 0.5975847, z: -0.15640736}
+  m_LocalPosition: {x: 0.02231545, y: 0.5975847, z: -0.1564079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4952093592855048}
@@ -605,7 +605,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 28646867ddcf90a4989276acd313ea43, type: 2}
+  - {fileID: 2100000, guid: 384c57c35226d334da15ba38961f9698, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1602,6 +1602,7 @@ GameObject:
   - component: {fileID: 663495698}
   - component: {fileID: 663495702}
   - component: {fileID: 66942390476820581}
+  - component: {fileID: 450239155}
   m_Layer: 0
   m_Name: Character_Daughter_01
   m_TagString: Untagged
@@ -1618,7 +1619,7 @@ Transform:
   m_GameObject: {fileID: 1971421721505344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4536270220917514}
   - {fileID: 4002048977467014}
@@ -1657,10 +1658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9917ee8f984adbc4f85cf8c305e106ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAtPoint: {fileID: 0}
-  weight: 1
+  lookAtPoint: {fileID: 4997219138845920736}
+  weight: 0.4
   timeToLookAtPlayer: 2
-  distance: 4.5
+  distance: 2.5
 --- !u!65 &663495699
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1672,7 +1673,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4.2, z: 1}
+  m_Size: {x: 3, y: 4.2, z: 2}
   m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!114 &663495697
 MonoBehaviour:
@@ -1783,8 +1784,8 @@ MonoBehaviour:
   - {fileID: 0}
   actorName: hanna
   fakeElena: {fileID: 0}
-  soundEffectStart: 
-  soundEffectEnd: 
+  soundEffectStart: event:/SFXWijk/Actors/Hanna/StartHanna
+  soundEffectEnd: event:/SFXWijk/Actors/Hanna/EndHanna
 --- !u!114 &66942390476820581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1798,6 +1799,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightOffset: 1.75
+--- !u!114 &450239155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971421721505344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b7025a0e63a674fa95cda5bea3d6b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectAudio: event:/SFXWijk/Actors/Hanna/IdleHanna
+  parameterName: VolumeHanna
+  volumeValue: 0
+  volumeMultiplier: 0.3
+  mute: 0
 --- !u!1 &1974444383641786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,7 +1904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5625081907361381825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.655, z: 0.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4972655278935194}
