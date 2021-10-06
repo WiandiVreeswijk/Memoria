@@ -22,6 +22,10 @@ public class MainMenu : MonoBehaviour {
         Globals.MenuController.CloseMenu(1.0f);
         Globals.CinemachineManager.SetInputEnabled(false);
         Globals.MenuController.blackScreenText.text = "";
+        if (!FindObjectOfType<WijkOpeningCutscene>().isEnabled) {
+            Switch();
+            return;
+        }
         Globals.MenuController.BlackScreenFadeIn(1.0f, false).OnComplete(() => {
             Utils.DelayedAction(2.5f, () => {
                 Globals.MenuController.blackScreenText.color = new Color(1, 1, 1, 0);
@@ -45,8 +49,7 @@ public class MainMenu : MonoBehaviour {
                                                 Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
                                                 Switch();
                                                 Utils.DelayedAction(textTime, () => {
-                                                    Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
-                                                    }).SetUpdate(true);
+                                                    Globals.MenuController.blackScreenText.DOFade(0, fadeTime).SetUpdate(true);
                                                 }).SetUpdate(true);
                                             }).SetUpdate(true);
                                         }).SetUpdate(true);
