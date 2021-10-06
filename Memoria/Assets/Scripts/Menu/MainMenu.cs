@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour {
         Globals.AmbientControl.SetVolume(0);
     }
 
-    private float textTime = 9.0f;
+    private float textTime = 11.0f;
     private float fadeTime = 1.0f;
     public void PlayGame() {
         Globals.MenuController.CloseMenu(1.0f);
@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour {
                                                 Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_5");
                                                 Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
                                                 Switch();
-                                                Utils.DelayedAction(textTime, () => {
+                                                Utils.DelayedAction(textTime * 0.8f, () => {
                                                     Globals.MenuController.blackScreenText.DOFade(0, fadeTime).SetUpdate(true);
                                                 }).SetUpdate(true);
                                             }).SetUpdate(true);
