@@ -63,7 +63,9 @@ public class WijkOpeningCutscene : MonoBehaviour {
         Globals.UIManager.NotificationManager.NotifyPlayer("<font=\"Mouse SDF\"><size=78>u</size></font> " + localized);
     }
 
-    public void OnBusArrive() {
+    public void OnBusArrive()
+    {
+        Globals.ProgressionManager.GetIcon().SetEnabled(true);
         Globals.Player.VisualEffects.SetVisible(true);
         Globals.CinemachineManager.SetInputEnabled(false);
         thirdPersonCamera.m_Transitions.m_InheritPosition = true;

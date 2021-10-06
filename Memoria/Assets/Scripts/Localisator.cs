@@ -14,6 +14,7 @@ public class Localisator : MonoBehaviour {
 
     public void Start() {
         dropdown = GetComponent<TMPro.TMP_Dropdown>();
+        dropdown.value = UILocalizationManager.instance.currentLanguage == "nl" ? 1 : 0;
         dropdown.onValueChanged.AddListener(OnValueChange);
     }
 

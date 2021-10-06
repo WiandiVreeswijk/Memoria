@@ -36,12 +36,11 @@ public class ProgressionManager : MonoBehaviour {
                 questIcon = Globals.IconManager.AddWorldIcon("oma",
                     manfred.transform.position + new Vector3(0, 2.75f, 0));
             }
-        } else {
-            if (questIcon != null) questIcon.SetEnabled(false);
         }
+        if (questIcon != null) questIcon.SetEnabled(false);
     }
-    public void InitializeProgressionBackFromChasing()
-    {
+
+    public void InitializeProgressionBackFromChasing() {
         DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
         DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
         DialogueHandler hanna = dialogueHandlers.First(x => x.actorName == "hanna");

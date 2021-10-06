@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour {
                                                 Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_5");
                                                 Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
                                                 Switch();
-                                                Utils.DelayedAction(textTime * 0.8f, () => {
+                                                Utils.DelayedAction(textTime * 0.7f, () => {
                                                     Globals.MenuController.blackScreenText.DOFade(0, fadeTime).SetUpdate(true);
                                                 }).SetUpdate(true);
                                             }).SetUpdate(true);
