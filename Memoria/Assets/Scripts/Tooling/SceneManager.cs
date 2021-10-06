@@ -46,7 +46,7 @@ public class SceneManager : MonoBehaviour {
     public void SetScene(string sceneName) {
         if (sceneDefinitionsMap.TryGetValue(sceneName, out SceneDefinition scene)) {
             if (isLoadingScene || scene == activeScene) return;
-            Globals.CinemachineManager.SetPausedState(true);
+            Globals.CinemachineManager.SetInputEnabled(false);
             Globals.MenuController.BlackScreenFadeIn(2.0f, true).OnComplete(() => StartCoroutine(LoadScene(scene))).SetUpdate(true);
         } else Debug.LogError($"[SceneManager] scene has not been registered {sceneName}");
     }
@@ -75,7 +75,7 @@ public class SceneManager : MonoBehaviour {
         isLoadingScene = false;
         Globals.CursorManager.LockMouse();
         print("Active scene: " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        Globals.MenuController.BlackScreenFadeOut(2.0f).OnComplete(() => Globals.CinemachineManager.SetPausedState(false)).SetUpdate(true);
+        Globals.MenuController.BlackScreenFadeOut(2.0f).OnComplete(() => Globals.CinemachineManager.SetInputEnabled(true)).SetUpdate(true);
     }
 
     public static void LoadSceneIfNotActive(string sceneName) {

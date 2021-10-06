@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -143,7 +144,7 @@ public class MenuController : MonoBehaviour {
     }
 
     public void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape) && !Globals.Debugger.IsOpen()) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !Globals.Debugger.IsOpen() && DialogueManager.CurrentConversant == null) {
             TogglePause();
         }
     }

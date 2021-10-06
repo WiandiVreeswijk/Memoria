@@ -7,13 +7,13 @@ public class TimescaleManager : MonoBehaviour {
     public void PauseGame() {
         isPaused = true;
         Time.timeScale = 0.0f;
-        Globals.CinemachineManager.SetPausedState(true);
+        Globals.CinemachineManager.SetInputEnabled(false);
     }
 
     public void UnPauseGame() {
         isPaused = false;
         Time.timeScale = 1.0f;
-        Globals.CinemachineManager.SetPausedState(false);
+        Globals.CinemachineManager.SetInputEnabled(true);
     }
 
     public bool IsPaused() {

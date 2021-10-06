@@ -54,7 +54,6 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             Globals.Player.VisualEffects.SetLookAt(data.elenaLookAtPoint == null ? (Vector3?)null : data.elenaLookAtPoint.position);
             Globals.Player.PlayerMovementAdventure.Teleport(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
             Globals.ProgressionManager.GetIcon().SetEnabled(false);
-            Globals.CinemachineManager.SetPausedState(true);
             Globals.CinemachineManager.SetInputEnabled(false);
             dialogueIcon.SetEnabled(false);
             if (soundEffectStart.Length > 0)
@@ -75,7 +74,6 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             data.cam.Priority = 0;
             Utils.DelayedAction(1.0f, () => //Wait for cameras to blend. 1.0f is default camera blend time
             {
-                Globals.CinemachineManager.SetPausedState(false);
                 Globals.CinemachineManager.SetInputEnabled(true);
             });
 
