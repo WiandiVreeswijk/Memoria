@@ -8,6 +8,8 @@ using PixelCrushers.DialogueSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(DialogueIcon))]
+[RequireComponent(typeof(ActorIdleSound))]
 public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     public List<DialogueData> dialogueData = new List<DialogueData>();
     public string actorName;
@@ -22,11 +24,14 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     [EventRef]
     public string soundEffectEnd;
 
+    private DialogueIcon dialogueIcon;
+
     public void Start() {
         actorName = actorName.ToLower();
         //DialogueLua.GetVariable(actorName + "_Progression");
 
         actorIdleSound = GetComponent<ActorIdleSound>();
+        dialogueIcon = GetComponent<DialogueIcon>();
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {
@@ -51,10 +56,10 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             Globals.ProgressionManager.GetIcon().SetEnabled(false);
             Globals.CinemachineManager.SetPausedState(true);
             Globals.CinemachineManager.SetInputEnabled(false);
-            print(soundEffectStart);
+            dialogueIcon.SetEnabled(false);
             if (soundEffectStart.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectStart);
-            if (actorIdleSound != null) actorIdleSound.mute = true;
+            actorIdleSound.mute = true;
             data.conversationStart.Invoke();
             return new KeyValuePair<Vector3, Quaternion>(data.fakeElenaPoint.position, data.fakeElenaPoint.rotation);
         }
@@ -88,11 +93,10 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
             Globals.ProgressionManager.GetIcon().SetEnabled(true);
             if (soundEffectEnd.Length > 0)
                 FMODUnity.RuntimeManager.PlayOneShot(soundEffectEnd);
-            if (actorIdleSound != null) actorIdleSound.mute = false;
+            Utils.DelayedAction(0.5f, () => actorIdleSound.mute = false);
 
-            if (data.disableActorAfterDialogue) {
-                GetComponent<Usable>().enabled = false;
-            }
+            SetDialogueEnabled(!data.disableActorAfterDialogue);
+
             data.conversationEnd.Invoke();
         }
     }
@@ -105,6 +109,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
     }
 
     public void SetDialogueEnabled(bool enabled) {
+        dialogueIcon.SetEnabled(enabled);
         GetComponent<Usable>().enabled = enabled;
     }
 }

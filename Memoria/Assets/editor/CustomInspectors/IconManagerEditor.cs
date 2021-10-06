@@ -9,10 +9,12 @@ public class IconManagerEditor : Editor {
     private ReorderableList iconsList;
     private SerializedProperty iconDefinitionsProperty;
     private SerializedProperty iconPrefabProperty;
+    private SerializedProperty dialogueIconPrefab;
     private int globalIndex;
 
     private void OnEnable() {
         iconPrefabProperty = serializedObject.FindProperty("iconPrefab");
+        dialogueIconPrefab = serializedObject.FindProperty("dialogueIconPrefab");
         iconDefinitionsProperty = serializedObject.FindProperty("iconDefinitions");
         iconsList = new ReorderableList(serializedObject, iconDefinitionsProperty, true, true, true, true);
         iconsList.onAddCallback += AddItem;
@@ -24,6 +26,7 @@ public class IconManagerEditor : Editor {
         EditorGUI.BeginChangeCheck();
         serializedObject.Update();
         EditorGUILayout.PropertyField(iconPrefabProperty);
+        EditorGUILayout.PropertyField(dialogueIconPrefab);
         iconsList.DoLayoutList();
         globalIndex = iconsList.index;
         if (globalIndex != -1 && globalIndex < iconDefinitionsProperty.arraySize) {

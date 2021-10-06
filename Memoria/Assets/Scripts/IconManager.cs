@@ -19,6 +19,7 @@ public class IconManager : MonoBehaviour {
     public List<IconDefinition> iconDefinitions = new List<IconDefinition>();
     public Dictionary<string, IconDefinition> iconDefinitionsDict = new Dictionary<string, IconDefinition>();
     public GameObject iconPrefab;
+    public GameObject dialogueIconPrefab;
 
     public void Awake() {
         iconDefinitionsDict = Utils.ListToDictionary(iconDefinitions, "IconManager", x => x.name);

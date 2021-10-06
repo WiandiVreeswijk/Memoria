@@ -34,7 +34,7 @@ public class ProgressionManager : MonoBehaviour {
             } else {
                 GameObject manfred = Utils.FindUniqueObject<Manfred>().gameObject;
                 questIcon = Globals.IconManager.AddWorldIcon("oma",
-                    manfred.transform.position + new Vector3(0, 2.25f, 0));
+                    manfred.transform.position + new Vector3(0, 2.75f, 0));
             }
         } else {
             if (questIcon != null) questIcon.SetEnabled(false);

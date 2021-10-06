@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActorIdleSound : MonoBehaviour
-{
+public class ActorIdleSound : MonoBehaviour {
     //FMOD
     [Header("FMOD Event")]
     [FMODUnity.EventRef]
@@ -20,8 +19,8 @@ public class ActorIdleSound : MonoBehaviour
 
     public bool mute;
 
-    private void Start()
-    {
+    private void Start() {
+        if (SelectAudio.Length == 0) return;
         audio = FMODUnity.RuntimeManager.CreateInstance(SelectAudio);
 
         FMOD.Studio.EventDescription volumeDescription;
@@ -32,27 +31,21 @@ public class ActorIdleSound : MonoBehaviour
 
         FMOD.Studio.PLAYBACK_STATE PbState;
         audio.getPlaybackState(out PbState);
-        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
+        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
             audio.start();
         }
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         SoundBehaviour();
     }
 
-    private void SoundBehaviour()
-    {
-        if (!mute)
-        {
+    private void SoundBehaviour() {
+        if (!mute) {
             float distance = Vector3.Distance(Globals.Player.transform.position, transform.position);
             volumeValue = Mathf.Lerp(1.0f, 0, distance * volumeMultiplier);
             audio.setParameterByID(volumeParameter, volumeValue);
-        }
-        else
-        {
+        } else {
             audio.setParameterByID(volumeParameter, 0);
         }
     }
