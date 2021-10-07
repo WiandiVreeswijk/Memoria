@@ -11,7 +11,7 @@ public class NotificationManager : MonoBehaviour {
     [SerializeField] private GameObject notificationsParent;
     [SerializeField] private NotificationPanel notificationPanel;
 
-    public bool blockNotifications = false;
+    private bool blockNotifications = false;
     private List<Notification> cachedNotifications = new List<Notification>();
 
     private int notificationIndex = 0;
@@ -26,6 +26,10 @@ public class NotificationManager : MonoBehaviour {
 
     public void NotifyPlayerBig(RichTextFormatter formatter, OnAcceptNotification onAcceptNotification) {
         NotifyPlayerBig(formatter.Finalize(), onAcceptNotification);
+    }
+
+    public void SetBlockNotifications() {
+        blockNotifications = true;
     }
 
     //private void Update() {
@@ -47,6 +51,7 @@ public class NotificationManager : MonoBehaviour {
     }
 
     public void NotifyPlayer(string message, float delay = 0.0f) {
+        print("blocked: " + blockNotifications);
         if (blockNotifications) {
             print("Notification blocked!");
             return;

@@ -40,6 +40,8 @@ public class ProgressionManager : MonoBehaviour {
         if (questIcon != null) questIcon.SetEnabled(false);
     }
 
+
+
     public void InitializeProgressionBackFromChasing() {
         DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
         DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
@@ -53,7 +55,7 @@ public class ProgressionManager : MonoBehaviour {
         FindObjectOfType<OmaHouseDoor>().OpenDoor();
         FindObjectOfType<WijkOpeningCutscene>().Skip();
         Globals.CinemachineManager.ClearNextBlend();
-        Globals.UIManager.NotificationManager.blockNotifications = true;
+        Globals.UIManager.NotificationManager.SetBlockNotifications();
         Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
         Utils.DelayedAction(5.0f, () => {
             string localized = Globals.Localization.Get("DEMO_FINISHED");

@@ -77,42 +77,39 @@ public class MemoryWatchManager : MonoBehaviour {
     }
 
     bool soundIsPlaying = false;
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) activationPressed = true;
+    private float time = 0;
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            time = Time.time;
+            activationPressed = true;
+        }
         if (!Input.GetKey(KeyCode.Space)) activationPressed = false;
         bool canActivate = activationProgress >= 0.99f;
-        if (activated)
-        {
+        if (activated) {
             activationProgress = 1.0f;
-        }
-        else
-        {
-            if (activationPressed)
-            {
-                if (!soundIsPlaying)
-                {
+        } else {
+            if (activationPressed) {
+                if (!soundIsPlaying) {
                     charge.start();
                     soundIsPlaying = true;
                 }
-                if (withinExecutionRangeMemoryObject != null)
-                {
+                if (withinExecutionRangeMemoryObject != null) {
                     activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime *
                                           watchActivationSpeed;
-                }
-                else activationPressed = false;
-            }
-            else
-            {
-                if (soundIsPlaying)
-                {
+                } else activationPressed = false;
+            } else {
+                if (soundIsPlaying) {
                     //Stop sound here
+                    charge.getTimelinePosition(out int position);
+                    Globals.Debugger.Print("a", "" + position, 1.0f);
                     charge.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                     soundIsPlaying = false;
                 }
                 activationProgress -= 0.5f * Time.deltaTime;
             }
         }
+
+            //Globals.Debugger.Print("b", "" + (Time.time - time), 1.0f);
 
         activationProgress = Mathf.Clamp01(activationProgress);
         //thirdPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed && activationProgress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
