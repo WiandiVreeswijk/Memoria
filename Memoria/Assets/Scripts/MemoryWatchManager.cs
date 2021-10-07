@@ -91,11 +91,11 @@ public class MemoryWatchManager : MonoBehaviour {
             if (activationPressed) {
                 if (!soundIsPlaying) {
                     charge.start();
+                    charge.setTimelinePosition((int)(1500f * activationProgress));
                     soundIsPlaying = true;
                 }
                 if (withinExecutionRangeMemoryObject != null) {
-                    activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime *
-                                          watchActivationSpeed;
+                    activationProgress += processCurve.Evaluate(activationProgress) * Time.deltaTime * watchActivationSpeed;
                 } else activationPressed = false;
             } else {
                 if (soundIsPlaying) {
