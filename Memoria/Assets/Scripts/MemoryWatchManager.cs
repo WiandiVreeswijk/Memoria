@@ -115,9 +115,8 @@ public class MemoryWatchManager : MonoBehaviour {
         //thirdPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed && activationProgress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
         firstPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed, activationProgress >= 0.99f && activationPressed, Globals.Player.CameraController.IsInFirstPerson());
 
-        if (!activated && canActivate && !activationPressed) {
+        if (!activated && canActivate) {
             withinExecutionRangeMemoryObject.Activate();
-            print("activate watch");
             if (Globals.Player.CameraController.IsInFirstPerson()) {
                 firstPersonWatch.Activate(withinExecutionRangeMemoryObject);
             }

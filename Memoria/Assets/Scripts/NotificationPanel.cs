@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NotificationPanel : MonoBehaviour {
     public TMPro.TextMeshProUGUI text;
+    public GameObject gemImage;
+
     private bool open = false;
 
 
@@ -11,8 +13,19 @@ public class NotificationPanel : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void Open(string txt) {
-        text.text = txt;
+    private bool CheckKeyword(ref string content, string keyword) {
+        bool startsWith = content.StartsWith(keyword);
+        if (startsWith) {
+            content = content.Substring(keyword.Length);
+        }
+
+        return startsWith;
+
+    }
+
+    public void Open(string content) {
+        gemImage.SetActive(CheckKeyword(ref content, "[GEM]"));
+        text.text = content;
         gameObject.SetActive(true);
         open = true;
     }
@@ -23,6 +36,7 @@ public class NotificationPanel : MonoBehaviour {
         Globals.CursorManager.LockMouse();
         Globals.CinemachineManager.SetInputEnabled(true);
         if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.NEIGHBORHOOD) Globals.Player.PlayerMovementAdventure.SetCanMove(true);
+        if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.OBLIVION) Globals.Player.PlayerMovement25D.SetStunned(false, false, false);
     }
 
     public void FixedUpdate() {
@@ -30,6 +44,7 @@ public class NotificationPanel : MonoBehaviour {
             Globals.CursorManager.UnlockMouse();
             Globals.CinemachineManager.SetInputEnabled(false);
             if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.NEIGHBORHOOD) Globals.Player.PlayerMovementAdventure.SetCanMove(false);
+            if (Globals.GetCurrentGlobalsType() == Globals.GlobalsType.OBLIVION) Globals.Player.PlayerMovement25D.SetStunned(true, true, true);
         }
     }
 }
