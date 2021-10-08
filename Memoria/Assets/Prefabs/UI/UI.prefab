@@ -2112,7 +2112,7 @@ RectTransform:
   m_Children:
   - {fileID: 201186448506624634}
   m_Father: {fileID: 988084627084775137}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2337,7 +2337,7 @@ RectTransform:
   - {fileID: 988084626658913619}
   - {fileID: 2250382795355359560}
   m_Father: {fileID: 988084627084775137}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2500,7 +2500,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 988084627084775137}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2572,14 +2572,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[GEM]<size=60>Dit is een <color=#FB47FE>edelsteen</color>!</size>
+  m_text: '<size=50>Thank you for playing the demo of <color=#E33D3D>MEMORIA</color>!</size>
 
 
+    <size=30>We
+    greatly appreciate the time and effort you put into playing our game and we can''t
+    wait to hear your feedback!
+
+    Please head over to our Discord or website to
+    let us know what you think!</size>
 
 
+    <size=50>Cheers!
 
-    <size=40>Verzamel
-    alle edelstenen om extra <color=#FFD700>herinneringen</color> te ontgrendelen!'
+    the <color=#D60000>WAEM
+    Game Studios</color> team</size>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7572e1396353a7a409f5c5aff9c8c62b, type: 2}
   m_sharedMaterial: {fileID: 8722678028072857435, guid: 7572e1396353a7a409f5c5aff9c8c62b, type: 2}
@@ -3276,7 +3283,7 @@ RectTransform:
   - {fileID: 492989515}
   - {fileID: 6432090852489285673}
   m_Father: {fileID: 988084627084775137}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4138,6 +4145,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 47734300}
+  - {fileID: 8729324585028099653}
   - {fileID: 201186448735181578}
   - {fileID: 4757323741264921938}
   - {fileID: 201186447364944598}
@@ -6731,6 +6739,77 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2324748484471406730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8729324585028099653}
+  - component: {fileID: 4787298396846388949}
+  - component: {fileID: 917139599934007638}
+  - component: {fileID: 7073070586519179462}
+  m_Layer: 5
+  m_Name: IndicatorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8729324585028099653
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324748484471406730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 988084627084775137}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4787298396846388949
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324748484471406730}
+  m_CullTransparentMesh: 1
+--- !u!225 &917139599934007638
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324748484471406730}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &7073070586519179462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324748484471406730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99c3b085eec7644195ce2651bac2992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicatorPrefab: {fileID: 162298053052242862, guid: 904f0051e8b915d468cd70952c5ee5c5, type: 3}
 --- !u!1 &2371581428097135968
 GameObject:
   m_ObjectHideFlags: 0

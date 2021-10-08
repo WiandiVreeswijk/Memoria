@@ -15,7 +15,11 @@ public class Icon : MonoBehaviour {
 
     private const float MIN_FADE_DISTANCE = 4f;
     private const float MAX_FADE_DISTANCE = 10f;
-        
+
+    public void Start() {
+        Globals.UIManager.IndicatorManager.CreateIndicator(gameObject);
+    }
+
     public void SetImage(Texture texture) {
         Material mat = iconObject.GetComponent<MeshRenderer>().material;
         Material matZ = iconZObject.GetComponent<MeshRenderer>().material;

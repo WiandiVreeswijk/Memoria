@@ -5,9 +5,12 @@ using UnityEngine;
 public class DialogueIcon : MonoBehaviour {
     private GameObject dialogueIcon;
     public float heightOffset = 1.75f;
+    private bool isEnabled = true;
+
     void Start() {
         dialogueIcon = Instantiate(Globals.IconManager.dialogueIconPrefab, transform);
-        dialogueIcon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        dialogueIcon.transform.localScale = new Vector3(0.65f, 0.65f, 0.65f);
+        SetEnabled(isEnabled);
     }
 
     void Update() {
@@ -18,7 +21,8 @@ public class DialogueIcon : MonoBehaviour {
     }
 
     public void SetEnabled(bool toggle) {
-        dialogueIcon.SetActive(toggle);
+        isEnabled = toggle;
+        if (dialogueIcon != null) dialogueIcon.SetActive(toggle);
     }
 
     private void OnDrawGizmosSelected() {
