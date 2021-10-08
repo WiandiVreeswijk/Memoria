@@ -51,7 +51,6 @@ public class NotificationManager : MonoBehaviour {
     }
 
     public void NotifyPlayer(string message, float delay = 0.0f) {
-        print("blocked: " + blockNotifications);
         if (blockNotifications) {
             print("Notification blocked!");
             return;
@@ -59,8 +58,6 @@ public class NotificationManager : MonoBehaviour {
         GameObject obj = Instantiate(notificationPrefab, notificationsParent.transform);
         Notification notification = obj.GetComponent<Notification>();
         notification.Set(message);
-
-        obj.GetComponentInChildren<TextMeshProUGUI>().text = message;
 
         RectTransform rectTransform = obj.GetComponent<RectTransform>();
         obj.transform.position = new Vector3(obj.transform.position.x, rectTransform.rect.height + NOTIFICATION_SPACING + (rectTransform.rect.height + NOTIFICATION_SPACING) * notificationIndex, 0.0f);
