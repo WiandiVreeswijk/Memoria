@@ -26,7 +26,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
 
     private DialogueIcon dialogueIcon;
 
-    public void Start() {
+    public void Awake() {
         actorName = actorName.ToLower();
         //DialogueLua.GetVariable(actorName + "_Progression");
 

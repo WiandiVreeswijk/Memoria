@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour {
         Globals.MenuController.CloseMenu(1.0f);
         Globals.CinemachineManager.SetInputEnabled(false);
         Globals.MenuController.blackScreenText.text = "";
-        if (!FindObjectOfType<WijkOpeningCutscene>().isEnabled) {
+        if (FindObjectOfType<WijkOpeningCutscene>().ShouldSkip()) {
             Switch();
             return;
         }

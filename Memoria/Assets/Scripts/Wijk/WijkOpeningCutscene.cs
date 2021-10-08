@@ -7,7 +7,7 @@ using UnityEngine.Playables;
 
 public class WijkOpeningCutscene : MonoBehaviour {
     [Tooltip("Disable this to disable the opening cutscene.")]
-    public bool isEnabled = true;
+    [SerializeField] private bool isEnabled = true;
     public CinemachineFreeLook thirdPersonCamera;
     public PlayableDirector playableDirector;
 
@@ -54,7 +54,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
         });
     }
 
-    private bool ShouldSkip() {
+    public bool ShouldSkip() {
         return !isEnabled && Application.isEditor;
     }
 
