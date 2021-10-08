@@ -37,7 +37,11 @@ public class ProgressionManager : MonoBehaviour {
                     manfred.transform.position + new Vector3(0, 2.75f, 0));
             }
         }
-        if (questIcon != null) questIcon.SetEnabled(false);
+
+        if (questIcon != null)
+        {
+             questIcon.SetEnabled(FindObjectOfType<WijkOpeningCutscene>().ShouldSkip());
+        }
     }
 
 

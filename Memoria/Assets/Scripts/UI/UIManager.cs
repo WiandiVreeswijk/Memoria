@@ -13,9 +13,11 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private Canvas screenspaceCanvas;
     public Canvas ScreenspaceCanvas => screenspaceCanvas;
 
-
     private ChasingLevelUI chasingLevelUI;
     public ChasingLevelUI ChasingLevel => chasingLevelUI;
+
+    private IndicatorManager indicatorManager;
+    public IndicatorManager IndicatorManager => indicatorManager;
 
     private NotificationManager notificationManager;
     public NotificationManager NotificationManager => notificationManager;
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviour {
         Utils.FindUniqueObjectInChildren(gameObject, out mainMenu);
         Utils.FindUniqueObjectInChildren(gameObject, out pauseMenu);
         Utils.FindUniqueObjectInChildren(gameObject, out optionsMenu);
+        Utils.FindUniqueObjectInChildren(gameObject, out indicatorManager);
 
         Utils.FindUniqueObject(out chasingLevelUI);
         Utils.FindUniqueObject(out notificationManager);

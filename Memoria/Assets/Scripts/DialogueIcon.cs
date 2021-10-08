@@ -7,7 +7,7 @@ public class DialogueIcon : MonoBehaviour {
     public float heightOffset = 1.75f;
     void Start() {
         dialogueIcon = Instantiate(Globals.IconManager.dialogueIconPrefab, transform);
-        dialogueIcon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        dialogueIcon.transform.localScale = new Vector3(0.65f, 0.65f, 0.65f);
     }
 
     void Update() {
