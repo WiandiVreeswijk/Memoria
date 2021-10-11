@@ -24,7 +24,7 @@ public class Globals : MonoBehaviour {
     private CinemachineManager cinemachineManager;
     private TimescaleManager timescaleManager;
     private SceneManager sceneManager;
-    private Screenshake screenshake;
+    private ScreenshakeManager screenshakeManager;
     private ScoreManager scoreManager;
     private Debugger debugger;
     private CursorManager cursorManager;
@@ -98,10 +98,10 @@ public class Globals : MonoBehaviour {
     private void GlobalInitialize() {
         Utils.FindUniqueObject(out MainCamera mainCamera);
         Utils.FindUniqueObject(out iconManager);
-        Utils.FindUniqueObject(out screenshake);
         Utils.FindUniqueObject(out scoreManager);
         Utils.FindUniqueObject(out cursorManager);
         Utils.FindUniqueObject(out progressionManager);
+        Utils.FindUniqueObject(out screenshakeManager);
         Utils.FindUniqueObject(out analyticsManager, false);
         Utils.FindUniqueObject(out debugger);
         Utils.FindUniqueObject(out uiManager);
@@ -117,6 +117,7 @@ public class Globals : MonoBehaviour {
         progressionManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
         player.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
         uiManager.OnGlobalsInitialize();
+        screenshakeManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
     }
 
     private void InitializeDebug() {
@@ -151,7 +152,7 @@ public class Globals : MonoBehaviour {
     public static CinemachineManager CinemachineManager => _Instance.cinemachineManager;
     public static ProgressionManager ProgressionManager => _Instance.progressionManager;
     public static TimescaleManager TimescaleManager => _Instance.timescaleManager;
-    public static Screenshake Screenshake => _Instance.screenshake;
+    public static ScreenshakeManager Screenshake => _Instance.screenshakeManager;
     public static SceneManager SceneManager => _Instance.sceneManager;
     public static GlobalTextTable Localization => _Instance.localization;
     public static UIManager UIManager => _Instance.uiManager;

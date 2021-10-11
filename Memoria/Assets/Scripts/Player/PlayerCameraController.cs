@@ -77,4 +77,12 @@ public class PlayerCameraController : MonoBehaviour {
                 Utils.DelayedAction(returnDelay, () => firstPersonCamera.m_Lens.FieldOfView = currentFOV);
             });
     }
+
+    public CinemachineVirtualCamera GetFirstPersonCamera() {
+        return firstPersonCamera;
+    }
+
+    public CinemachineVirtualCamera Get25DCamera() {
+        return cam;
+    }
 }
