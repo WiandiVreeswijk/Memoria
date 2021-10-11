@@ -18,6 +18,10 @@ public class WijkOpeningCutscene : MonoBehaviour {
 
     private bool skipped = false;
 
+    public void SetEnabled(bool toggle) {
+        isEnabled = toggle;
+    }
+
     void Start() {
         if (!skipped) {
             Globals.Player.PlayerMovementAdventure.SetCanMove(false);
