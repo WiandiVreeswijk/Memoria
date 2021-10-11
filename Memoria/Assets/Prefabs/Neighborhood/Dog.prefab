@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ground:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32759
   SelectAudio: event:/SFXWijk/Dog/Footsteps
   volumeValue: 0
   volumeMultiplier: 0.1
@@ -433,6 +433,10 @@ PrefabInstance:
     - target: {fileID: 4853161833948474, guid: 16e5f48d612f744039dbecb3e834b94f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114965423073504876, guid: 16e5f48d612f744039dbecb3e834b94f, type: 3}
+      propertyPath: idleStates.Array.data[1].maxStateTime
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 137707776166963076, guid: 16e5f48d612f744039dbecb3e834b94f, type: 3}
       propertyPath: m_Materials.Array.data[0]
