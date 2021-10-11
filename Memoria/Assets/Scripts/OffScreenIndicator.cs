@@ -10,7 +10,7 @@ public class OffScreenIndicator : MonoBehaviour {
     public float screenBoundOffset = 0.9f;
 
     void Update() {
-        if (!target.activeInHierarchy) {
+        if (!target.activeInHierarchy || Globals.MenuController.IsOpen()) {
             indicatorObject.SetActive(false);
             indicatorCenterObject.SetActive(false);
             return;
