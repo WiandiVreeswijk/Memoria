@@ -21,4 +21,10 @@ public class SceneOpener : EditorWindow {
         UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
         UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/UI.unity");
     }
+
+    [MenuItem("Scene/Persistent")]
+    public static void Persistent() {
+        UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+        UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/Persistent.unity");
+    }
 }

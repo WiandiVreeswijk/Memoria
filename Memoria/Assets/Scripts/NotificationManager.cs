@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static DG.Tweening.DOTween;
 
 public class NotificationManager : MonoBehaviour {
@@ -59,9 +60,11 @@ public class NotificationManager : MonoBehaviour {
         Notification notification = obj.GetComponent<Notification>();
         notification.Set(message);
 
-        RectTransform rectTransform = obj.GetComponent<RectTransform>();
-        obj.transform.position = new Vector3(obj.transform.position.x, rectTransform.rect.height + NOTIFICATION_SPACING + (rectTransform.rect.height + NOTIFICATION_SPACING) * notificationIndex, 0.0f);
-
+        LayoutRebuilder.ForceRebuildLayoutImmediate(notificationsParent.GetComponent<RectTransform>());
+            //notificationsParent.GetComponent<HorizontalLayoutGroup>().SetLayoutHorizontal();
+        //RectTransform rectTransform = obj.GetComponent<RectTransform>();
+        //rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, rectTransform.rect.height + NOTIFICATION_SPACING + (rectTransform.rect.height + NOTIFICATION_SPACING) * notificationIndex, 0.0f);
+       //print(rectTransform.localPosition.y);
         CanvasGroup group = obj.GetComponent<CanvasGroup>();
         group.alpha = 0.0f;
 
