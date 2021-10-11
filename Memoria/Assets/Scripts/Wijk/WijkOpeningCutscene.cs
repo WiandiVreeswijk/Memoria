@@ -28,11 +28,17 @@ public class WijkOpeningCutscene : MonoBehaviour {
     public void OnFinishCutscene() {
         Globals.CinemachineManager.SetInputEnabled(true);
         Globals.Player.PlayerMovementAdventure.SetCanMove(true);
-        Utils.DelayedAction(7.5f, () => {
+        StartMovementNotification(8f);
+    }
+
+    public void StartMovementNotification(float delay) {
+        Utils.DelayedAction(delay, () => {
             string localized = Globals.Localization.Get("INSTR_MOVE");
-            if (!Globals.Player.PlayerMovementAdventure.HasMoved()) Globals.UIManager.NotificationManager.NotifyPlayer(localized);
+            if (!Globals.Player.PlayerMovementAdventure.HasMoved()) {
+                Globals.UIManager.NotificationManager.NotifyPlayer(localized);
+                StartMovementNotification(15f);
+            } else StartMarkerNotification();
         });
-        StartMarkerNotification();
     }
 
     public void KillMarkerNotificationTween() {
@@ -63,8 +69,7 @@ public class WijkOpeningCutscene : MonoBehaviour {
         Globals.UIManager.NotificationManager.NotifyPlayer("<font=\"Mouse SDF\"><size=78>u</size></font> " + localized);
     }
 
-    public void OnBusArrive()
-    {
+    public void OnBusArrive() {
         Globals.ProgressionManager.GetIcon().SetEnabled(true);
         Globals.Player.VisualEffects.SetVisible(true);
         Globals.CinemachineManager.SetInputEnabled(false);
