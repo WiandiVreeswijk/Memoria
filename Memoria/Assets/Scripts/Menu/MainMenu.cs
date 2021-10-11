@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour {
 
     private float textTime = 11.0f;
     private float fadeTime = 1.0f;
+    private Tween updateTween;
+    private Tween textTween;
     public void PlayGame() {
         Globals.MenuController.CloseMenu(1.0f);
         Globals.CinemachineManager.SetInputEnabled(false);
@@ -26,29 +28,38 @@ public class MainMenu : MonoBehaviour {
             Switch();
             return;
         }
+
         Globals.MenuController.BlackScreenFadeIn(1.0f, false).OnComplete(() => {
-            Utils.DelayedAction(2.5f, () => {
+            updateTween = Utils.DelayedAction(60, () => { }).SetUpdate(true).OnUpdate(() => {
+                if (Application.isEditor && Input.GetKeyDown(KeyCode.Space)) {
+                    textTween.Kill();
+                    Globals.MenuController.blackScreenText.DOFade(0, 0.1f).SetUpdate(true);
+                    Globals.MenuController.blackScreenText.text = "";
+                    Switch();
+                }
+            });
+            textTween = Utils.DelayedAction(2.5f, () => {
                 Globals.MenuController.blackScreenText.color = new Color(1, 1, 1, 0);
                 Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_1");
                 Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
-                Utils.DelayedAction(textTime, () => {
+                textTween = Utils.DelayedAction(textTime, () => {
                     Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
                         Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_2");
                         Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
-                        Utils.DelayedAction(textTime, () => {
+                        textTween = Utils.DelayedAction(textTime, () => {
                             Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
                                 Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_3");
                                 Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
-                                Utils.DelayedAction(textTime, () => {
+                                textTween = Utils.DelayedAction(textTime, () => {
                                     Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
                                         Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_4");
                                         Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
-                                        Utils.DelayedAction(textTime / 2f, () => {
+                                        textTween = Utils.DelayedAction(textTime / 2f, () => {
                                             Globals.MenuController.blackScreenText.DOFade(0, fadeTime).OnComplete(() => {
                                                 Globals.MenuController.blackScreenText.text = Globals.Localization.Get("INTR_STORY_5");
                                                 Globals.MenuController.blackScreenText.DOFade(1, fadeTime);
                                                 Switch();
-                                                Utils.DelayedAction(textTime * 0.7f, () => {
+                                                textTween = Utils.DelayedAction(textTime * 0.7f, () => {
                                                     Globals.MenuController.blackScreenText.DOFade(0, fadeTime).SetUpdate(true);
                                                 }).SetUpdate(true);
                                             }).SetUpdate(true);
@@ -63,7 +74,9 @@ public class MainMenu : MonoBehaviour {
         }).SetUpdate(true);
     }
 
+
     private void Switch() {
+        updateTween.Kill();
         Globals.SoundManagerWijk.FadeEngineStatus(1.0f);
         Globals.SoundManagerWijk.FadeEngineVolume(0.4f);
         Globals.MusicManagerWijk.FadeFluteVolume(0.9f, 10.0f);
