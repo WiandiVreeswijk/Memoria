@@ -38,9 +38,9 @@ public class ProgressionManager : MonoBehaviour {
             }
         }
 
-        if (questIcon != null)
-        {
-             questIcon.SetEnabled(FindObjectOfType<WijkOpeningCutscene>().ShouldSkip());
+        if (questIcon != null) {
+            WijkOpeningCutscene cutscene = FindObjectOfType<WijkOpeningCutscene>();
+            questIcon.SetEnabled(cutscene == null ? false : cutscene.ShouldSkip());
         }
     }
 
