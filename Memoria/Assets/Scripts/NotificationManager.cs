@@ -61,10 +61,10 @@ public class NotificationManager : MonoBehaviour {
         notification.Set(message);
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(notificationsParent.GetComponent<RectTransform>());
-            //notificationsParent.GetComponent<HorizontalLayoutGroup>().SetLayoutHorizontal();
+        //notificationsParent.GetComponent<HorizontalLayoutGroup>().SetLayoutHorizontal();
         //RectTransform rectTransform = obj.GetComponent<RectTransform>();
         //rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, rectTransform.rect.height + NOTIFICATION_SPACING + (rectTransform.rect.height + NOTIFICATION_SPACING) * notificationIndex, 0.0f);
-       //print(rectTransform.localPosition.y);
+        //print(rectTransform.localPosition.y);
         CanvasGroup group = obj.GetComponent<CanvasGroup>();
         group.alpha = 0.0f;
 
@@ -90,6 +90,8 @@ public class NotificationManager : MonoBehaviour {
         foreach (Notification notification in cachedNotifications) {
             Destroy(notification.gameObject);
         }
+
+        blockNotifications = true;
     }
 
     public void ReleaseCachedNotifications() {
@@ -99,5 +101,6 @@ public class NotificationManager : MonoBehaviour {
             }
             cachedNotifications.Clear();
         });
+        blockNotifications = false;
     }
 }
