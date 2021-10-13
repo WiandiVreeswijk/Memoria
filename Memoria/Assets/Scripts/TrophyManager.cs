@@ -12,10 +12,12 @@ public class TrophyManager : MonoBehaviour {
     public Material goldMaterial;
     public Material ghostMaterial;
 
-    public void Start() {
-        List<Trophy> trophiesList = new List<Trophy>(GetComponentsInChildren<Trophy>());
-        trophies = Utils.ListToDictionary(trophiesList, "TrophyManager", x => x.GetTrophyType());
-        trophiesList.ForEach(x => x.SetMaterial(ghostMaterial));
+    public void OnGlobalsInitializeType(Globals.GlobalsType previousGlobalsType, Globals.GlobalsType currentGlobalsType) {
+        if (currentGlobalsType == Globals.GlobalsType.NEIGHBORHOOD) {
+            List<Trophy> trophiesList = new List<Trophy>(GetComponentsInChildren<Trophy>());
+            trophies = Utils.ListToDictionary(trophiesList, "TrophyManager", x => x.GetTrophyType());
+            trophiesList.ForEach(x => x.SetMaterial(ghostMaterial));
+        }
     }
 
     private Trophy GetTrophy(TrophyType trophyType) {
@@ -26,7 +28,9 @@ public class TrophyManager : MonoBehaviour {
 
     public void CollectTrophy(TrophyType trophyType) {
         Trophy trophy = GetTrophy(trophyType);
+        print("1: " + trophy.gameObject.name);
         if (trophy != null) {
+            print("2: " + trophy.gameObject.name);
             trophy.SetMaterial(goldMaterial);
         }
     }
