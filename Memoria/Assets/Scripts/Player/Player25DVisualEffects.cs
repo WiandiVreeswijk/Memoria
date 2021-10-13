@@ -48,7 +48,9 @@ public class Player25DVisualEffects : MonoBehaviour {
     void BlinkOn(float speed, int times) {
         if (isDead) return;
         SetMeshEnabled(true);
-        if (times > 0) Utils.DelayedAction(speed + speed / 2.0f, () => BlinkOff(speed, times));
+        if (times > 0) Utils.DelayedAction(speed + speed / 2.0f, () => {
+            if (!isDead) BlinkOff(speed, times);
+        });
         else {
             isBlinking = false;
             playerMaterials.ForEach(x => x.DOColor(Color.white, 0.1f));
@@ -58,13 +60,16 @@ public class Player25DVisualEffects : MonoBehaviour {
     void BlinkOff(float speed, int times) {
         if (isDead) return;
         SetMeshEnabled(false);
-        Utils.DelayedAction(speed / 2.0f, () => BlinkOn(speed, times - 1));
+        Utils.DelayedAction(speed / 2.0f, () => {
+            if (!isDead) BlinkOn(speed, times - 1);
+        });
     }
 
     #endregion
 
     #region Death
     public void Death(DeathType type, Vector3 position) {
+        Globals.Debugger.Print("Dead", "Dead", 0.5f);
         if (!isDead) {
             skinnedRenderers.ForEach(x => x.enabled = false);
             switch (type) {

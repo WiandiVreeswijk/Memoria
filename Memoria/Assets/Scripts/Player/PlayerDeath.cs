@@ -49,13 +49,17 @@ public class PlayerDeath : MonoBehaviour {
             Vector3 pos = Globals.Player.transform.position;
             pos.y = -1.0f; //Water position fix
             Globals.Player.VisualEffects25D.Death(water ? DeathType.WATER : DeathType.OBLIVION, pos);
-            Globals.Player.VisualEffects25D.isDead = false;
 
-            FMODUnity.RuntimeManager.PlayOneShot(water ? "event:/SFXChasingLevel/WaterSplash" : "event:/SFXChasingLevel/OblivionExplode");
+            FMODUnity.RuntimeManager.PlayOneShot(water
+                ? "event:/SFXChasingLevel/WaterSplash"
+                : "event:/SFXChasingLevel/OblivionExplode");
 
             Globals.SoundManagerChase.FadeDeath(1.0f);
             respawningSequence = Utils.DelayedAction(2.0f, RespawnPosition);
-            Utils.DelayedAction(1.0f, () => Globals.MenuController.BlackScreenFadeIn(0.5f, false));
+            Utils.DelayedAction(1.0f, () => {
+                Globals.Player.VisualEffects25D.isDead = false;
+                Globals.MenuController.BlackScreenFadeIn(0.5f, false);
+            });
         }
     }
 
