@@ -39,7 +39,7 @@ public class FindMissingScriptsRecursively : EditorWindow {
         Dictionary<Shader, Dictionary<string, int>> dict = new Dictionary<Shader, Dictionary<string, int>>();
 
         string str = "";
-        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
+        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>(true);
         foreach (GameObject go in gameObjects) {
             Renderer renderer = go.GetComponent<Renderer>();
             if (renderer != null) {
@@ -49,6 +49,7 @@ public class FindMissingScriptsRecursively : EditorWindow {
                             dict.Add(material.shader, new Dictionary<string, int>());
                         }
 
+                        if (material.name == "Lit") Debug.Log(go.name);
                         if (!dict[material.shader].ContainsKey(material.name)) {
                             dict[material.shader].Add(material.name, 0);
                         }
