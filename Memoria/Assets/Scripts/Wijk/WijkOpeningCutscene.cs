@@ -81,6 +81,10 @@ public class WijkOpeningCutscene : MonoBehaviour {
         Utils.DelayedAction(15.0f, () => {
             thirdPersonCamera.m_Transitions.m_InheritPosition = false;
         });
+
+        foreach (DialogueIcon dialogueIcon in FindObjectsOfType<DialogueIcon>()) {
+            dialogueIcon.SetEnabled(true);
+        }
     }
 
     public void Trigger() {

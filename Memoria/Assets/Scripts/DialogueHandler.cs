@@ -32,6 +32,7 @@ public class DialogueHandler : MonoBehaviour, IDialogueHandler {
 
         actorIdleSound = GetComponent<ActorIdleSound>();
         dialogueIcon = GetComponent<DialogueIcon>();
+        dialogueIcon.SetEnabled(false);
     }
 
     private DialogueData GetDialogueDataFromConversation(string name) {

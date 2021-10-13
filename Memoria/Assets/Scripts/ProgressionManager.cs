@@ -43,8 +43,9 @@ public class ProgressionManager : MonoBehaviour {
         }
 
         if (questIcon != null) {
-            WijkOpeningCutscene cutscene = FindObjectOfType<WijkOpeningCutscene>();
-            questIcon.SetEnabled(cutscene == null ? false : cutscene.ShouldSkip());
+            //WijkOpeningCutscene cutscene = FindObjectOfType<WijkOpeningCutscene>();
+            //questIcon.SetEnabled(cutscene == null ? false : cutscene.ShouldSkip());
+            questIcon.SetEnabled(currentGlobalsType == Globals.GlobalsType.NEIGHBORHOOD);
         }
     }
 
@@ -52,8 +53,6 @@ public class ProgressionManager : MonoBehaviour {
 
     public void InitializeProgressionBackFromChasing()
     {
-        ProgressionData pData = progressionDataDict["TrophyCupboardEnd"];
-        pData.Progress();
         Globals.TrophyManager.CollectTrophy(TrophyType.TIFA);
         DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
         DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
@@ -70,8 +69,10 @@ public class ProgressionManager : MonoBehaviour {
         Globals.UIManager.NotificationManager.SetBlockNotifications();
         Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
 
-
         Trophy tifa = FindObjectsOfType<Trophy>().First(x => x.GetTrophyType() == TrophyType.TIFA);
         tifa.gameObject.AddComponent<EndOfDemo>();
+
+        ProgressionData pData = progressionDataDict["TrophyCupboardEnd"];
+        pData.Progress();
     }
 }
