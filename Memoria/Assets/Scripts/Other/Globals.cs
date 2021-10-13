@@ -145,7 +145,7 @@ public class Globals : MonoBehaviour {
     {
         player.OnGlobalsInitialize();
         uiManager.OnGlobalsInitializeType(currentGlobalsType);
-        trophyManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        trophyManager?.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
         player.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
         progressionManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
         screenshakeManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
