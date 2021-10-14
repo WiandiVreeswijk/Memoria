@@ -101,7 +101,6 @@ public class MemoryWatchManager : MonoBehaviour {
                 if (soundIsPlaying) {
                     //Stop sound here
                     charge.getTimelinePosition(out int position);
-                    Globals.Debugger.Print("a", "" + position, 1.0f);
                     charge.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                     soundIsPlaying = false;
                 }

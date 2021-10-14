@@ -69,7 +69,6 @@ public class Player25DVisualEffects : MonoBehaviour {
 
     #region Death
     public void Death(DeathType type, Vector3 position) {
-        Globals.Debugger.Print("Dead", "Dead", 0.5f);
         if (!isDead) {
             skinnedRenderers.ForEach(x => x.enabled = false);
             switch (type) {
