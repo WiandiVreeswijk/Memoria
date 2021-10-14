@@ -21,9 +21,24 @@ public class CinemachineManager : MonoBehaviour {
         inputEnabled = toggle;
     }
 
-    public float CinemachineAxisInputDelegate(string axisName)
-    {
-        if (inputEnabled) return Input.GetAxis(axisName);
+    private Dictionary<string, Queue<float>> dict = new Dictionary<string, Queue<float>>();
+    public float CinemachineAxisInputDelegate(string axisName) {
+        if (!dict.ContainsKey(axisName)) {
+            dict.Add(axisName, new Queue<float>());
+        }
+
+        if (inputEnabled) {
+            float newVal = Input.GetAxis(axisName);
+            dict[axisName].Enqueue(newVal);
+            if (dict[axisName].Count > 5) dict[axisName].Dequeue();
+            float endVal = 0;
+            foreach (float val in dict[axisName]) {
+                endVal += val;
+            }
+
+            endVal /= dict[axisName].Count;
+            return endVal;
+        }
         return 0;
     }
 
