@@ -7,6 +7,8 @@ using UnityEngine;
 public class ProgressionManager : MonoBehaviour {
     private Icon questIcon;
     private bool watchCollected = false;
+    private Dictionary<string, ProgressionData> progressionDataDict = new Dictionary<string, ProgressionData>();
+
 
     public void CollectWatch() {
         watchCollected = true;
@@ -28,6 +30,8 @@ public class ProgressionManager : MonoBehaviour {
     }
 
     public void OnGlobalsInitializeType(Globals.GlobalsType previousGlobalsType, Globals.GlobalsType currentGlobalsType) {
+        progressionDataDict = Utils.ListToDictionary(FindObjectsOfType<ProgressionData>().ToList(), "ProgressionData", x => x.name);
+
         if (currentGlobalsType == Globals.GlobalsType.NEIGHBORHOOD) { //#TODO: This is temporary
             if (previousGlobalsType == Globals.GlobalsType.OBLIVION) {
                 InitializeProgressionBackFromChasing();
@@ -38,15 +42,18 @@ public class ProgressionManager : MonoBehaviour {
             }
         }
 
-        if (questIcon != null)
-        {
-             questIcon.SetEnabled(FindObjectOfType<WijkOpeningCutscene>().ShouldSkip());
+        if (questIcon != null) {
+            //WijkOpeningCutscene cutscene = FindObjectOfType<WijkOpeningCutscene>();
+            //questIcon.SetEnabled(cutscene == null ? false : cutscene.ShouldSkip());
+            questIcon.SetEnabled(currentGlobalsType == Globals.GlobalsType.NEIGHBORHOOD);
         }
     }
 
 
 
-    public void InitializeProgressionBackFromChasing() {
+    public void InitializeProgressionBackFromChasing()
+    {
+        Globals.TrophyManager.CollectTrophy(TrophyType.TIFA);
         DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
         DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
         DialogueHandler hanna = dialogueHandlers.First(x => x.actorName == "hanna");
@@ -61,10 +68,11 @@ public class ProgressionManager : MonoBehaviour {
         Globals.CinemachineManager.ClearNextBlend();
         Globals.UIManager.NotificationManager.SetBlockNotifications();
         Globals.Player.transform.position = FindObjectOfType<ReturnPoint>().transform.position;
-        Utils.DelayedAction(5.0f, () => {
-            string localized = Globals.Localization.Get("DEMO_FINISHED");
-            print("demoFinish");
-            Globals.UIManager.NotificationManager.NotifyPlayerBig(localized, () => { });
-        });
+
+        Trophy tifa = FindObjectsOfType<Trophy>().First(x => x.GetTrophyType() == TrophyType.TIFA);
+        tifa.gameObject.AddComponent<EndOfDemo>();
+
+        ProgressionData pData = progressionDataDict["TrophyCupboardEnd"];
+        pData.Progress();
     }
 }

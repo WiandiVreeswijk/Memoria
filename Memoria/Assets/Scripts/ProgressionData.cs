@@ -24,7 +24,7 @@ public class ProgressionData : MonoBehaviour, IEnterActivatable {
 
     public UnityEvent onProgression;
 
-    void Progress() {
+    public void Progress() {
         if (setActorPosition) {
             actor.transform.position = newActorPosition.position;
             actor.transform.rotation = newActorPosition.rotation;

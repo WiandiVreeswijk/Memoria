@@ -18,6 +18,7 @@ public class Icon : MonoBehaviour {
 
     public void Start() {
         Globals.UIManager.IndicatorManager.CreateIndicator(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void SetImage(Texture texture) {

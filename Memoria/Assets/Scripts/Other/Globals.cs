@@ -90,8 +90,9 @@ public class Globals : MonoBehaviour {
                 _Instance.InitializeOblivion();
                 break;
         }
-        _Instance.uiManager.OnGlobalsInitializeType(type);
+        _Instance.PostGlobalsInitialize();
         Debugger.InitializeMenu(type);
+
         _Instance.isInitialized = true;
     }
 
@@ -113,11 +114,6 @@ public class Globals : MonoBehaviour {
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
         Utils.FindUniqueObject(out player);
         camera = mainCamera.GetComponent<Camera>();
-        player.OnGlobalsInitialize();
-        progressionManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
-        player.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
-        uiManager.OnGlobalsInitialize();
-        screenshakeManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
     }
 
     private void InitializeDebug() {
@@ -143,6 +139,16 @@ public class Globals : MonoBehaviour {
         checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
         soundManagerChase = Utils.FindUniqueObject<SoundManagerChase>();
         UIManager.SetDepthOfField(false);
+    }
+
+    private void PostGlobalsInitialize()
+    {
+        player.OnGlobalsInitialize();
+        uiManager.OnGlobalsInitializeType(currentGlobalsType);
+        trophyManager?.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        player.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        progressionManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        screenshakeManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
     }
 
     #region GlobalGlobals

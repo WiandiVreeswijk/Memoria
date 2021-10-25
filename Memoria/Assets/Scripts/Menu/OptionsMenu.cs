@@ -16,8 +16,7 @@ public class OptionsMenu : MonoBehaviour {
     public TMP_Dropdown resolutionDropdown;
     public TMP_Dropdown graphicsDropdown;
 
-    private void Start()
-    {
+    private void Start() {
         masterBus = FMODUnity.RuntimeManager.GetBus(masterBusString);
 
         resolutions = Screen.resolutions;
@@ -27,13 +26,11 @@ public class OptionsMenu : MonoBehaviour {
         List<string> options = new List<string>();
 
         int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
+        for (int i = 0; i < resolutions.Length; i++) {
+            string option = $"{resolutions[i].width}x{resolutions[i].height} [{resolutions[i].refreshRate}Hz]";
             options.Add(option);
 
-            if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) {
                 currentResolutionIndex = i;
             }
         }
@@ -47,32 +44,25 @@ public class OptionsMenu : MonoBehaviour {
 
     }
 
-    public void SetVolume(float volume)
-    {
+    public void SetVolume(float volume) {
         masterBus.setVolume(volume);
     }
 
-    public void SetResolution(int resolutionIndex)
-    {
+    public void SetResolution(int resolutionIndex) {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetQuality(int qualityIndex)
-    {
+    public void SetQuality(int qualityIndex) {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
-    public void SetFullscreen(int screenTypeIndex)
-    {
-        if(screenTypeIndex == 0)
-        {
+    public void SetFullscreen(int screenTypeIndex) {
+        if (screenTypeIndex == 0) {
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-        }else if(screenTypeIndex == 1)
-        {
+        } else if (screenTypeIndex == 1) {
             Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-        }else if(screenTypeIndex == 2)
-        {
+        } else if (screenTypeIndex == 2) {
             Screen.fullScreenMode = FullScreenMode.Windowed;
         }
     }

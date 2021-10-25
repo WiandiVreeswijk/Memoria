@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using PlasticGui.Help.NewVersions;
 using UnityEngine;
 using UnityEditor;
 public class FindMissingScriptsRecursively : EditorWindow {
     static int go_count = 0, components_count = 0, missing_count = 0;
-
-    [MenuItem("WAEM/Find objects")]
+    private float percentage = 0.5f;
+    [MenuItem("WAEM/Objects")]
     public static void ShowWindow() {
         EditorWindow.GetWindow(typeof(FindMissingScriptsRecursively));
     }
@@ -20,23 +22,97 @@ public class FindMissingScriptsRecursively : EditorWindow {
         if (GUILayout.Button("Find shaders and materials")) {
             FindShaderAndMaterials();
         }
+        if (GUILayout.Button("Find Lightmap sizes")) {
+            FindLightmaps();
+        }
+
+        if (GUILayout.Button("Count meshes")) {
+            CountMeshes();
+        }
+
+
+        percentage = EditorGUILayout.Slider(percentage, 0.0f, 1.0f);
+        if (GUILayout.Button("Select percentage")) {
+            SelectPercentage();
+        }
+    }
+
+    private void SelectPercentage() {
+        List<Object> objects = Selection.objects.ToList();
+        objects.RemoveAll(x => UnityEngine.Random.Range(0.0f, 1.0f) > percentage);
+        Selection.objects = objects.ToArray();
+    }
+
+    private void CountMeshes() {
+        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>(true);
+        Dictionary<Mesh, int> dict = new Dictionary<Mesh, int>();
+        foreach (GameObject go in gameObjects) {
+            MeshFilter renderer = go.GetComponent<MeshFilter>();
+            if (renderer != null) {
+                if (!dict.ContainsKey(renderer.sharedMesh)) {
+                    dict.Add(renderer.sharedMesh, 0);
+                }
+                dict[renderer.sharedMesh]++;
+            }
+        }
+
+        var list = dict.ToList();
+        list.Sort((x, y) => x.Value > y.Value ? -1 : 1);
+        string str = "";
+        foreach (var obj in list) {
+            str += $"{obj.Key.name}|{obj.Value}\n";
+        }
+
+        Debug.Log(str);
+    }
+    struct LightmapObject {
+        public Vector4 offset;
+        public GameObject gameObject;
+    }
+    private void FindLightmaps() {
+        List<LightmapObject> objs = new List<LightmapObject>();
+        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>(true);
+        foreach (GameObject go in gameObjects) {
+            Renderer renderer = go.GetComponent<Renderer>();
+            if (renderer != null && renderer.lightmapIndex != -1) {
+                LightmapObject obj = new LightmapObject();
+                obj.gameObject = go;
+                obj.offset = renderer.lightmapScaleOffset;
+                objs.Add(obj);
+            }
+        }
+
+        objs.Sort((x, y) => (x.offset.x * x.offset.y) > (y.offset.x * y.offset.y) ? -1 : 1);
+
+        string str = "";
+        foreach (LightmapObject lmo in objs) {
+            str += $"{lmo.offset.x}|{lmo.offset.y}: {lmo.gameObject.name}\n";
+        }
+
+        Debug.Log(str);
     }
 
     private void FindShaderAndMaterials() {
-        Dictionary<Shader, HashSet<string>> dict = new Dictionary<Shader, HashSet<string>>();
+        Dictionary<Shader, Dictionary<string, int>> dict = new Dictionary<Shader, Dictionary<string, int>>();
 
         string str = "";
-        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
+        GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>(true);
         foreach (GameObject go in gameObjects) {
             Renderer renderer = go.GetComponent<Renderer>();
             if (renderer != null) {
                 foreach (Material material in renderer.sharedMaterials) {
-                    if (!dict.ContainsKey(material.shader)) {
-                        dict.Add(material.shader, new HashSet<string>());
-                    }
+                    if (material != null) {
+                        if (!dict.ContainsKey(material.shader)) {
+                            dict.Add(material.shader, new Dictionary<string, int>());
+                        }
 
-                    if (material.name == "Lit") Debug.Log(go.name);
-                    dict[material.shader].Add(material.name);
+                        if (material.name == "Lit") Debug.Log(go.name);
+                        if (!dict[material.shader].ContainsKey(material.name)) {
+                            dict[material.shader].Add(material.name, 0);
+                        }
+
+                        dict[material.shader][material.name]++;
+                    }
                 }
             }
         }

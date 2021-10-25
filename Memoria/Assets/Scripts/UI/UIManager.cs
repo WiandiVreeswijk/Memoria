@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour {
     private OptionsMenu optionsMenu;
     public OptionsMenu OptionsMenu => optionsMenu;
 
-    public void OnGlobalsInitialize() {
+    public void OnGlobalsInitializeType(Globals.GlobalsType type) {
         Utils.FindUniqueObjectInChildren(gameObject, out mainMenu);
         Utils.FindUniqueObjectInChildren(gameObject, out pauseMenu);
         Utils.FindUniqueObjectInChildren(gameObject, out optionsMenu);
@@ -40,9 +40,7 @@ public class UIManager : MonoBehaviour {
         Utils.FindUniqueObject(out chasingLevelUI);
         Utils.FindUniqueObject(out notificationManager);
         screenspaceCanvas.worldCamera = Globals.Camera;
-    }
 
-    public void OnGlobalsInitializeType(Globals.GlobalsType type) {
         pauseMenu.SetBackToWijkButtonEnabled(type != Globals.GlobalsType.NEIGHBORHOOD);
         ChasingLevel.SetEnabled(type == Globals.GlobalsType.OBLIVION);
 
