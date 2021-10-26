@@ -5,7 +5,7 @@
 			<value>SpeakerEvent</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{f932e130-028d-48a8-a811-c114fb6a44a7}</destination>
@@ -53,17 +53,24 @@
 			<destination>{e9fce32a-ea07-4f59-9f3f-1d0574af44c2}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{40acb94c-d6f2-415c-b031-82f12a863e48}</destination>
+			<destination>{fe68f261-6125-4cd2-899a-08f59be28708}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{f3d0f89c-28f2-498c-808b-53a53ac3a5ae}" />
 	<object class="MarkerTrack" id="{e89fe2df-0c8d-4de9-9530-9f7aa8b5f7fe}" />
 	<object class="GroupTrack" id="{7b1c66ec-4203-485c-87c4-426715ee62e8}">
+		<relationship name="modules">
+			<destination>{1cb3f4ac-555e-4a00-a4a2-312201e8c547}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{2800a2e9-ff07-4055-a402-baac58f120c1}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{18ef74eb-4d0b-48cf-8b83-15b87a20e013}" />
+	<object class="Timeline" id="{18ef74eb-4d0b-48cf-8b83-15b87a20e013}">
+		<relationship name="modules">
+			<destination>{1cb3f4ac-555e-4a00-a4a2-312201e8c547}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{2edfe7a2-d556-4ce1-a66a-d4b67fef75bc}">
 		<relationship name="effectChain">
 			<destination>{820cf926-4008-42b2-a6d8-755fcbce9a77}</destination>
@@ -81,6 +88,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e9fce32a-ea07-4f59-9f3f-1d0574af44c2}" />
+	<object class="SingleSound" id="{1cb3f4ac-555e-4a00-a4a2-312201e8c547}">
+		<property name="length">
+			<value>424.88163265306122</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{6b6c4463-973d-4a12-a38f-365b41813152}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{2800a2e9-ff07-4055-a402-baac58f120c1}">
 		<property name="name">
 			<value>Audio 1</value>
@@ -152,7 +167,7 @@
 			<value>Spread</value>
 		</property>
 		<property name="value">
-			<value>9.99999975e-06</value>
+			<value>0</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(1.000000,360.000000)}</value>
@@ -199,7 +214,7 @@
 			<value>Occlusion</value>
 		</property>
 		<property name="value">
-			<value>9.99999997e-07</value>
+			<value>0</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(1.000000,10.000000)}</value>
