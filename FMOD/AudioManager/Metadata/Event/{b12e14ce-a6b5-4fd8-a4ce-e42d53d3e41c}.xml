@@ -112,8 +112,8 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{820cf926-4008-42b2-a6d8-755fcbce9a77}">
 		<relationship name="effects">
-			<destination>{9554f350-93c6-49dd-98b7-09c3ef855cdd}</destination>
 			<destination>{e205b57c-12e1-42b9-b0e5-abaa91cd08c6}</destination>
+			<destination>{9554f350-93c6-49dd-98b7-09c3ef855cdd}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8f1d22cb-b06c-4044-ba5b-c6cdd25ae6b4}" />
@@ -124,12 +124,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{3a77d4a6-78a1-41d6-a01b-9a925bbb1b0e}" />
-	<object class="MixerBusFader" id="{9554f350-93c6-49dd-98b7-09c3ef855cdd}" />
 	<object class="PluginEffect" id="{e205b57c-12e1-42b9-b0e5-abaa91cd08c6}">
 		<relationship name="plugin">
 			<destination>{2ae825ea-5675-4700-8d76-ba4e8024d117}</destination>
 		</relationship>
 	</object>
+	<object class="MixerBusFader" id="{9554f350-93c6-49dd-98b7-09c3ef855cdd}" />
 	<object class="MixerBusFader" id="{e8d3e829-ddf4-440b-a46b-4df5f7ee8eea}" />
 	<object class="Plugin" id="{2ae825ea-5675-4700-8d76-ba4e8024d117}">
 		<property name="identifier">
@@ -167,7 +167,7 @@
 			<value>Spread</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>80</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(1.000000,360.000000)}</value>
@@ -189,7 +189,7 @@
 			<value>Max Distance</value>
 		</property>
 		<property name="value">
-			<value>500</value>
+			<value>30</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(2.000000,1.000000)(5.000000,5.000000)(10.000000,10.000000)(15.000000,100.000000)(20.000000,1000.000000)(27.000000,10000.000000)}</value>
@@ -200,7 +200,7 @@
 			<value>Dist Rolloff</value>
 		</property>
 		<property name="value">
-			<value>2</value>
+			<value>4</value>
 		</property>
 		<property name="minimumValue">
 			<value>0</value>
@@ -225,7 +225,7 @@
 			<value>Directivity</value>
 		</property>
 		<property name="value">
-			<value>9.99999975e-06</value>
+			<value>0.319999993</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(1.000000,1.000000)}</value>

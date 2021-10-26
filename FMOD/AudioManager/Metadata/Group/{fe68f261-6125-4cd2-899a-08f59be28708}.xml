@@ -16,38 +16,38 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{667d10e4-5326-4b13-8b6d-c4707ab53734}">
 		<relationship name="effects">
-			<destination>{6f16dc1f-3297-4998-90f9-6ab8f9067061}</destination>
+			<destination>{8f08ce95-a4a3-4ea8-883f-4a0d641e31ae}</destination>
 			<destination>{52b7af64-4c53-4606-b9f9-5ca8ecae8cb2}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ae1ab5e2-b68c-4474-887c-5b29ebe35157}" />
-	<object class="PluginEffect" id="{6f16dc1f-3297-4998-90f9-6ab8f9067061}">
+	<object class="PluginEffect" id="{8f08ce95-a4a3-4ea8-883f-4a0d641e31ae}">
 		<relationship name="plugin">
-			<destination>{5e0cf874-ce92-468b-a81d-df6f221bdfef}</destination>
+			<destination>{53945fe9-23e8-4a93-941d-b62c8206a494}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{52b7af64-4c53-4606-b9f9-5ca8ecae8cb2}" />
-	<object class="Plugin" id="{5e0cf874-ce92-468b-a81d-df6f221bdfef}">
+	<object class="Plugin" id="{53945fe9-23e8-4a93-941d-b62c8206a494}">
 		<property name="identifier">
 			<value>Resonance Audio Listener</value>
 		</property>
 		<relationship name="pluginParameters">
-			<destination>{fd0964ec-ee90-4be1-9d26-8deaaac602c2}</destination>
-			<destination>{57377cd4-a405-4df3-9f38-6520ebc7ed92}</destination>
+			<destination>{58caaae9-01c4-4683-8ae7-e8b6c189bb8d}</destination>
+			<destination>{425be046-3dcd-4b39-8aa8-e74a34dc1476}</destination>
 		</relationship>
 	</object>
-	<object class="FloatPluginParameter" id="{fd0964ec-ee90-4be1-9d26-8deaaac602c2}">
+	<object class="FloatPluginParameter" id="{58caaae9-01c4-4683-8ae7-e8b6c189bb8d}">
 		<property name="name">
 			<value>Gain</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>-9.99999975e-06</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,-80.000000)(1.000000,0.000000)}</value>
 		</property>
 	</object>
-	<object class="DataPluginParameter" id="{57377cd4-a405-4df3-9f38-6520ebc7ed92}">
+	<object class="DataPluginParameter" id="{425be046-3dcd-4b39-8aa8-e74a34dc1476}">
 		<property name="name">
 			<value>Room Properties</value>
 		</property>
