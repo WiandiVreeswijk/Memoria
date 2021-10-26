@@ -1962,6 +1962,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
   ListenerNumber: 0
+  occlusionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &347014491
 GameObject:
   m_ObjectHideFlags: 0
@@ -11987,6 +11990,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 2e554ff8e1847a54b82fa118e84642c6, type: 2}
+    - target: {fileID: 137681323169037432, guid: 91b945b0668d8214598d65c9246536a4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d1131046af820b42b5f217bf7bb76c3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91b945b0668d8214598d65c9246536a4, type: 3}
 --- !u!1 &1757831987
