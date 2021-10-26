@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{fe68f261-6125-4cd2-899a-08f59be28708}">
+		<property name="name">
+			<value>ResonanceAudioGroup</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{667d10e4-5326-4b13-8b6d-c4707ab53734}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{ae1ab5e2-b68c-4474-887c-5b29ebe35157}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{40acb94c-d6f2-415c-b031-82f12a863e48}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{667d10e4-5326-4b13-8b6d-c4707ab53734}">
+		<relationship name="effects">
+			<destination>{6f16dc1f-3297-4998-90f9-6ab8f9067061}</destination>
+			<destination>{52b7af64-4c53-4606-b9f9-5ca8ecae8cb2}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{ae1ab5e2-b68c-4474-887c-5b29ebe35157}" />
+	<object class="PluginEffect" id="{6f16dc1f-3297-4998-90f9-6ab8f9067061}">
+		<relationship name="plugin">
+			<destination>{5e0cf874-ce92-468b-a81d-df6f221bdfef}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusFader" id="{52b7af64-4c53-4606-b9f9-5ca8ecae8cb2}" />
+	<object class="Plugin" id="{5e0cf874-ce92-468b-a81d-df6f221bdfef}">
+		<property name="identifier">
+			<value>Resonance Audio Listener</value>
+		</property>
+		<relationship name="pluginParameters">
+			<destination>{fd0964ec-ee90-4be1-9d26-8deaaac602c2}</destination>
+			<destination>{57377cd4-a405-4df3-9f38-6520ebc7ed92}</destination>
+		</relationship>
+	</object>
+	<object class="FloatPluginParameter" id="{fd0964ec-ee90-4be1-9d26-8deaaac602c2}">
+		<property name="name">
+			<value>Gain</value>
+		</property>
+		<property name="value">
+			<value>-9.99999975e-06</value>
+		</property>
+		<property name="curve">
+			<value>{(0.000000,-80.000000)(1.000000,0.000000)}</value>
+		</property>
+	</object>
+	<object class="DataPluginParameter" id="{57377cd4-a405-4df3-9f38-6520ebc7ed92}">
+		<property name="name">
+			<value>Room Properties</value>
+		</property>
+		<property name="value" />
+		<property name="dataType">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
