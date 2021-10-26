@@ -83,10 +83,10 @@ namespace FMODUnityResonance
         /// Size of the room (normalized with respect to scale of the game object).
         public Vector3 size = Vector3.one;
 
-        void OnEnable()
-        {
-            FmodResonanceAudio.UpdateAudioRoom(this, FmodResonanceAudio.IsListenerInsideRoom(this));
-        }
+        //void OnEnable()
+        //{
+        //    FmodResonanceAudio.UpdateAudioRoom(this, FmodResonanceAudio.IsListenerInsideRoom(this));
+        //}
 
         void OnDisable()
         {
