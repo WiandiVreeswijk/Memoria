@@ -30,26 +30,24 @@ public class AudioOcclusion : MonoBehaviour
         instance.start();
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        void Update()
+        if (instance.isValid())
         {
-            if (instance.isValid())
-            {
-                instance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.gameObject));
+            instance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.gameObject));
 
-                if (!occlusionEnabled)
-                {
-                    currentOcclusion = 0.0f;
-                }
-                else if (Time.time >= nextOcclusionUpdate)
-                {
-                    nextOcclusionUpdate = Time.time + FmodResonanceAudio.occlusionDetectionInterval;
-                    currentOcclusion = occlusionIntensity * FmodResonanceAudio.ComputeOcclusion(transform);
-                    instance.setParameterByName(occlusionParameterName, currentOcclusion);
-                }
+            if (!occlusionEnabled)
+            {
+                currentOcclusion = 0.0f;
+            }
+            else if (Time.time >= nextOcclusionUpdate)
+            {
+                nextOcclusionUpdate = Time.time + FmodResonanceAudio.occlusionDetectionInterval;
+                currentOcclusion = occlusionIntensity * FmodResonanceAudio.ComputeOcclusion(transform);
+                instance.setParameterByName(occlusionParameterName, currentOcclusion);
             }
         }
     }
+
 }
 

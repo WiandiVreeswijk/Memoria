@@ -932,9 +932,9 @@ GameObject:
   - component: {fileID: 121743148}
   - component: {fileID: 121743147}
   - component: {fileID: 121743150}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SpeakerPedestal (3)
-  m_TagString: Untagged
+  m_TagString: Speaker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1024,20 +1024,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 121743145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: be3b2cba13ee6554f84b3342ad959a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/3DTestEvents/SpeakerEvent
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 0
+  fmodEvent: event:/3DTestEvents/SpeakerEvent
+  occlusionEnabled: 1
+  occlusionParameterName: OcclusionTestSpeaker
+  occlusionIntensity: 1
 --- !u!1 &171564197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,7 +1957,7 @@ MonoBehaviour:
   ListenerNumber: 0
   occlusionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 65527
 --- !u!1 &347014491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2286,7 +2279,7 @@ GameObject:
   - component: {fileID: 366757573}
   - component: {fileID: 366757572}
   - component: {fileID: 366757571}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: DebugGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2477,9 +2470,10 @@ GameObject:
   - component: {fileID: 403606582}
   - component: {fileID: 403606581}
   - component: {fileID: 403606580}
-  m_Layer: 0
+  - component: {fileID: 403606583}
+  m_Layer: 16
   m_Name: Speaker
-  m_TagString: Untagged
+  m_TagString: Speaker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2561,6 +2555,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403606578}
   m_Mesh: {fileID: 4300000, guid: 48a7ff4e7c9457448bc9467a746dcab8, type: 3}
+--- !u!114 &403606583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403606578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3b2cba13ee6554f84b3342ad959a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEvent: event:/3DTestEvents/SpeakerEvent
+  occlusionEnabled: 1
+  occlusionParameterName: OcclusionTestSpeaker
+  occlusionIntensity: 1
 --- !u!1 &422026263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2668,7 +2678,7 @@ GameObject:
   - component: {fileID: 424563787}
   - component: {fileID: 424563786}
   - component: {fileID: 424563785}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4079,7 +4089,7 @@ GameObject:
   - component: {fileID: 622915257}
   - component: {fileID: 622915256}
   - component: {fileID: 622915255}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4207,7 +4217,7 @@ GameObject:
   - component: {fileID: 623238027}
   - component: {fileID: 623238026}
   - component: {fileID: 623238025}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5259,9 +5269,10 @@ GameObject:
   - component: {fileID: 882871791}
   - component: {fileID: 882871790}
   - component: {fileID: 882871789}
-  m_Layer: 0
+  - component: {fileID: 882871792}
+  m_Layer: 16
   m_Name: Speaker
-  m_TagString: Untagged
+  m_TagString: Speaker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5343,6 +5354,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882871787}
   m_Mesh: {fileID: 4300000, guid: 48a7ff4e7c9457448bc9467a746dcab8, type: 3}
+--- !u!114 &882871792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882871787}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3b2cba13ee6554f84b3342ad959a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEvent: event:/3DTestEvents/SpeakerEvent
+  occlusionEnabled: 1
+  occlusionParameterName: OcclusionTestSpeaker
+  occlusionIntensity: 1
 --- !u!1 &883426325
 GameObject:
   m_ObjectHideFlags: 0
@@ -6615,9 +6642,9 @@ GameObject:
   - component: {fileID: 1117836187}
   - component: {fileID: 1117836186}
   - component: {fileID: 1117836189}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Speaker
-  m_TagString: Untagged
+  m_TagString: Speaker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6708,20 +6735,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117836184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: be3b2cba13ee6554f84b3342ad959a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/3DTestEvents/SpeakerEvent
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 0
+  fmodEvent: event:/3DTestEvents/SpeakerEvent
+  occlusionEnabled: 1
+  occlusionParameterName: OcclusionTestSpeaker
+  occlusionIntensity: 1
 --- !u!1001 &1125450056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8160,7 +8180,7 @@ GameObject:
   - component: {fileID: 1334895255}
   - component: {fileID: 1334895254}
   - component: {fileID: 1334895253}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10250,7 +10270,7 @@ GameObject:
   - component: {fileID: 1466266114}
   - component: {fileID: 1466266113}
   - component: {fileID: 1466266112}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12103,7 +12123,7 @@ GameObject:
   - component: {fileID: 1758529244}
   - component: {fileID: 1758529243}
   - component: {fileID: 1758529242}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13532,7 +13552,7 @@ GameObject:
   - component: {fileID: 1988256710}
   - component: {fileID: 1988256709}
   - component: {fileID: 1988256708}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14042,7 +14062,7 @@ GameObject:
   - component: {fileID: 2097902017}
   - component: {fileID: 2097902016}
   - component: {fileID: 2097902015}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DebugGround (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14621,13 +14641,30 @@ GameObject:
   - component: {fileID: 8944161425103915372}
   - component: {fileID: 8936854868281862060}
   - component: {fileID: 8985581555204686678}
-  m_Layer: 0
+  - component: {fileID: 8957863983755987003}
+  m_Layer: 16
   m_Name: Speaker
-  m_TagString: Untagged
+  m_TagString: Speaker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!114 &8957863983755987003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957863983755987002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3b2cba13ee6554f84b3342ad959a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEvent: event:/3DTestEvents/SpeakerEvent
+  occlusionEnabled: 1
+  occlusionParameterName: OcclusionTestSpeaker
+  occlusionIntensity: 1
 --- !u!4 &8960822849132553038
 Transform:
   m_ObjectHideFlags: 0
