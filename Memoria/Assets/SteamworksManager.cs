@@ -19,11 +19,12 @@ public class SteamworksManager : MonoBehaviour {
         }
     }
 
-    void Update() {
+    void Update()
+    {
         //if (Input.GetKeyDown(KeyCode.Space)) Steamworks.SteamUserStats.IndicateAchievementProgress("Fiets", 1, 100);
-        foreach (var c in Steamworks.SteamInput.Controllers) {
-            print(c.Id);
-        }
+        //foreach (var c in Steamworks.SteamInput.Controllers) {
+        //    print(c.Id);
+        //}
         Steamworks.SteamClient.RunCallbacks();
     }
 

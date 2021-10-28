@@ -32,6 +32,7 @@ public class Globals : MonoBehaviour {
     private GlobalTextTable localization;
     private new Camera camera;
     private bool isInitialized = false;
+    private ControllerManager controllerManager;
 
     //UI
     private UIManager uiManager;
@@ -113,6 +114,8 @@ public class Globals : MonoBehaviour {
         Utils.FindUniqueObject(out memoryWatchManager, false);
         Utils.FindOrInstantiateUniqueObject(out persistenceManager, () => Instantiate(persistenceManagerPrefab, transform).GetComponent<Persistence>());
         Utils.FindUniqueObject(out player);
+        Utils.FindUniqueObject(out controllerManager);
+
         camera = mainCamera.GetComponent<Camera>();
     }
 
@@ -141,8 +144,7 @@ public class Globals : MonoBehaviour {
         UIManager.SetDepthOfField(false);
     }
 
-    private void PostGlobalsInitialize()
-    {
+    private void PostGlobalsInitialize() {
         player.OnGlobalsInitialize();
         uiManager.OnGlobalsInitializeType(currentGlobalsType);
         trophyManager?.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
@@ -169,6 +171,7 @@ public class Globals : MonoBehaviour {
     public static Debugger Debugger => _Instance.debugger;
     public static CursorManager CursorManager => _Instance.cursorManager;
     public static Camera Camera => _Instance.camera;
+    public static ControllerManager ControllerManager => _Instance.controllerManager;
 
     #endregion
 

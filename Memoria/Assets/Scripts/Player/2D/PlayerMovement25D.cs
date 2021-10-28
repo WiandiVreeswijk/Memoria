@@ -70,6 +70,8 @@ public class PlayerMovement25D : MonoBehaviour {
     void Update() {
         Jump();
         moveInput = Input.GetAxis("Horizontal");
+        moveInput += Hinput.anyGamepad.leftStick.horizontal;
+        moveInput = Mathf.Clamp(moveInput, - 1.0f, 1.0f);
     }
 
     bool justLanded = false;
@@ -138,7 +140,9 @@ public class PlayerMovement25D : MonoBehaviour {
         else hangCounter -= Time.deltaTime;
 
         //Manage jump buffer
-        if (Input.GetKeyDown(KeyCode.Space) && canJump && !stunned) {
+        bool jump = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 1");
+        bool jumpUp = Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp("joystick button 1");
+        if (jump && canJump && !stunned) {
             canJump = false;
             jumpBufferCount = jumpBufferLength;
             Globals.Player.PlayerSound.PlayJumpingSound();
@@ -159,10 +163,10 @@ public class PlayerMovement25D : MonoBehaviour {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
         //Check if player is going up and jump button is released
-        else if (rb.velocity.y > 0 && (stunned || !isJumping || !Input.GetKeyDown(KeyCode.Space))) {
+        else if (rb.velocity.y > 0 && (stunned || !isJumping || !jump)) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        if (!stunned && rb.velocity.y > 0 && isJumping && Input.GetKeyUp(KeyCode.Space)) {
+        if (!stunned && rb.velocity.y > 0 && isJumping && jumpUp) {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
     }

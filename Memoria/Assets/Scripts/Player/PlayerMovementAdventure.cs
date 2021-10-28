@@ -78,6 +78,7 @@ public class PlayerMovementAdventure : MonoBehaviour {
         float rawHorizontal = canMove ? Input.GetAxisRaw("Horizontal") : 0.0f;
         float rawVertical = canMove ? Input.GetAxisRaw("Vertical") : 0.0f;
 
+        Globals.Debugger.Print("asd", horizontal +"", 0.1f);
         Vector3 plainMovement = new Vector3(horizontal, 0, vertical); //This frame's movement store in a vector.
         Vector3 plainRawMovement = new Vector3(rawHorizontal, 0, rawVertical); //This frame's movement store in a vector.
 
