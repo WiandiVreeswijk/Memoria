@@ -78,7 +78,6 @@ public class PlayerMovementAdventure : MonoBehaviour {
         float rawHorizontal = canMove ? Input.GetAxisRaw("Horizontal") : 0.0f;
         float rawVertical = canMove ? Input.GetAxisRaw("Vertical") : 0.0f;
 
-        Globals.Debugger.Print("asd", horizontal +"", 0.1f);
         Vector3 plainMovement = new Vector3(horizontal, 0, vertical); //This frame's movement store in a vector.
         Vector3 plainRawMovement = new Vector3(rawHorizontal, 0, rawVertical); //This frame's movement store in a vector.
 
@@ -95,7 +94,7 @@ public class PlayerMovementAdventure : MonoBehaviour {
             }
             wasMovingLastFrame = false;
         } else if (sharpTurn || (Mathf.Abs(plainMovement.x) + Mathf.Abs(plainMovement.z)) > startMovingTreshold) {//If any keys are pressed and thus the player should be moving. Or if there is a sharp turn
-            if (Input.GetButton("Sprint")) isRunning = false;
+            //if (Input.GetButton("Sprint")) isRunning = false;
             movement += plainMovement; //Add input movement to movement resulting from the previous frame
 
             Quaternion temporaryCameraRotation = cam.transform.rotation;

@@ -13,7 +13,7 @@ public class CinemachineManager : MonoBehaviour {
 
     void Awake() {
         brains = FindObjectsOfType<CinemachineBrain>();
-        //CinemachineCore.GetInputAxis = CinemachineAxisInputDelegate;
+        CinemachineCore.GetInputAxis = CinemachineAxisInputDelegate;
         CinemachineCore.GetBlendOverride = GetBlendOverrideDelegate;
     }
 

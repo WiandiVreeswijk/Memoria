@@ -32,11 +32,12 @@ public class MemoryWatchManager : MonoBehaviour {
 
     MemoryObject[] memoryObjects;
     private MemoryObject withinExecutionRangeMemoryObject;
+    public bool shouldDisable = true;
 
     void Start() {
         memoryObjects = FindObjectsOfType<MemoryObject>();
         foreach (MemoryObject mo in memoryObjects) mo.UpdateDistance(float.MaxValue);
-        DisableMemoryWatch();
+        if (shouldDisable) DisableMemoryWatch();
 
         charge = FMODUnity.RuntimeManager.CreateInstance(soundPath);
     }
@@ -108,11 +109,11 @@ public class MemoryWatchManager : MonoBehaviour {
             }
         }
 
-            //Globals.Debugger.Print("b", "" + (Time.time - time), 1.0f);
+        //Globals.Debugger.Print("b", "" + (Time.time - time), 1.0f);
 
         activationProgress = Mathf.Clamp01(activationProgress);
         //thirdPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed && activationProgress < 0.99f, !Globals.Player.CameraController.IsInFirstPerson());
-        firstPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed, activationProgress >= 0.99f && activationPressed, Globals.Player.CameraController.IsInFirstPerson());
+        firstPersonWatch.SetWatchEdgeProgress(activationProgress, activationPressed, activationProgress >= 0.99f, Globals.Player.CameraController.IsInFirstPerson());
 
         if (!activated && canActivate) {
             withinExecutionRangeMemoryObject.Activate();
@@ -132,6 +133,7 @@ public class MemoryWatchManager : MonoBehaviour {
         armRotator.transform.localRotation = Quaternion.Euler(ARM_ROTATION, 0f, 0f);
     }
     public void EnableMemoryWatch() {
+        print("collectwatch");
         enabled = true;
     }
 }

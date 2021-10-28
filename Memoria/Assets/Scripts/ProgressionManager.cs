@@ -49,10 +49,7 @@ public class ProgressionManager : MonoBehaviour {
         }
     }
 
-
-
-    public void InitializeProgressionBackFromChasing()
-    {
+    public void InitializeProgressionBackFromChasing() {
         Globals.TrophyManager.CollectTrophy(TrophyType.TIFA);
         DialogueHandler[] dialogueHandlers = GameObject.FindObjectsOfType<DialogueHandler>();
         DialogueHandler oma = dialogueHandlers.First(x => x.actorName == "oma");
@@ -61,6 +58,7 @@ public class ProgressionManager : MonoBehaviour {
         oma.SetDialogueEnabled(false);
         hanna.SetDialogueEnabled(false);
         manfred.SetDialogueEnabled(false);
+        Globals.MemoryWatchManager.shouldDisable = false;
         CollectWatchManual();
         Globals.MenuController.CloseMenu(0.0f);
         FindObjectOfType<OmaHouseDoor>().OpenDoor();
