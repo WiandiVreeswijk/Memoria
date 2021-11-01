@@ -134,7 +134,7 @@ public class MenuController : MonoBehaviour {
             if (group.background) {
                 Globals.TimescaleManager.PauseGame();
             }
-            if(menuCamera)menuCamera.Priority = group.background ? 0 : 12;
+            if (menuCamera) menuCamera.Priority = group.background ? 0 : 12;
             if (activePanel == null) FadeMainPanelIn(time);
             if (activePanel != null) FadePanelOut(activePanel, time / 2.0f);
             FadePanelIn(group, time);
@@ -144,7 +144,8 @@ public class MenuController : MonoBehaviour {
     }
 
     public void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape) && !Globals.Debugger.IsOpen() && DialogueManager.CurrentConversant == null) {
+        bool debugger = (Application.isEditor || Debug.isDebugBuild) && Globals.Debugger.IsOpen();
+        if (Input.GetKeyDown(KeyCode.Escape) && !debugger && DialogueManager.CurrentConversant == null) {
             TogglePause();
         }
     }
