@@ -206,9 +206,7 @@ MonoBehaviour:
       responseTimeoutAction: 0
       emTagForOldResponses: 0
       emTagForInvalidResponses: 0
-      qteButtons:
-      - Fire1
-      - Fire2
+      qteButtons: []
       cancel:
         key: 0
         buttonName: 
@@ -271,13 +269,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125852}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dddab24af7a02a54c9631fd5c532d7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputDevice: 0
-  joystickKeyCodesToCheck: 4a0100004b0100004c01000051010000
+  joystickKeyCodesToCheck: 4b0100004c0100004a0100004d010000
   joystickButtonsToCheck: []
   joystickAxesToCheck: []
   joystickAxisThreshold: 0.5
@@ -678,7 +676,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258601202}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e51cd51221394b74796a6b539f05fed4, type: 3}
   m_Name: 
@@ -1762,7 +1760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a9540f98bb79346b296ec5feb51073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 1143547483}
+  firstSelected: {fileID: 484342259}
   focusCheckFrequency: 0.2
   refreshSelectablesFrequency: 0
   selectPreviousOnDisable: 1
@@ -1904,7 +1902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a44b96aa95563e4dbd81da44328a697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 1910047303}
+  firstSelected: {fileID: 0}
   focusCheckFrequency: 0.2
   refreshSelectablesFrequency: 0
   selectPreviousOnDisable: 1
@@ -1956,9 +1954,9 @@ MonoBehaviour:
   explicitNavigationForTemplateButtons: 1
   loopExplicitNavigation: 0
   autonumber:
-    enabled: 0
+    enabled: 1
     regularNumberHotkeys: 1
-    numpadHotkeys: 0
+    numpadHotkeys: 1
     format: '{0}. {1}'
   blockInputDuration: 0
   onContentChanged:
@@ -2124,7 +2122,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788536003}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e51cd51221394b74796a6b539f05fed4, type: 3}
   m_Name: 
@@ -3496,6 +3494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 32
+  stringKey: 
   buttonName: 
   anyKeyOrButton: 0
   skipIfBeingClickedBySubmit: 1
@@ -4347,7 +4346,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910047303}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e51cd51221394b74796a6b539f05fed4, type: 3}
   m_Name: 

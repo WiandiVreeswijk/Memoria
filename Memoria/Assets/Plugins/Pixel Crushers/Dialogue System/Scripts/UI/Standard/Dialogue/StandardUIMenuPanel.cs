@@ -7,12 +7,10 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace PixelCrushers.DialogueSystem
-{
+namespace PixelCrushers.DialogueSystem {
 
     [AddComponentMenu("")] // Use wrapper.
-    public class StandardUIMenuPanel : UIPanel
-    {
+    public class StandardUIMenuPanel : UIPanel {
 
         #region Serialized Fields
 
@@ -90,8 +88,7 @@ namespace PixelCrushers.DialogueSystem
 
         [SerializeField, Tooltip("Panel is currently in focused state.")]
         private bool m_hasFocus = false;
-        public virtual bool hasFocus
-        {
+        public virtual bool hasFocus {
             get { return m_hasFocus; }
             protected set { m_hasFocus = value; }
         }
@@ -120,10 +117,8 @@ namespace PixelCrushers.DialogueSystem
         protected CanvasGroup m_mainCanvasGroup = null;
         protected static bool s_isInputDisabled = false;
         private StandardDialogueUI m_dialogueUI = null;
-        protected StandardDialogueUI dialogueUI
-        {
-            get
-            {
+        protected StandardDialogueUI dialogueUI {
+            get {
                 if (m_dialogueUI == null) m_dialogueUI = GetComponentInParent<StandardDialogueUI>();
                 return m_dialogueUI;
             }
@@ -133,8 +128,7 @@ namespace PixelCrushers.DialogueSystem
 
         #region Initialization
 
-        public virtual void Awake()
-        {
+        public virtual void Awake() {
             Tools.SetGameObjectActive(buttonTemplate, false);
         }
 
@@ -142,10 +136,8 @@ namespace PixelCrushers.DialogueSystem
 
         #region Show & Hide
 
-        public virtual void SetPCPortrait(Sprite portraitSprite, string portraitName)
-        {
-            if (pcImage != null)
-            {
+        public virtual void SetPCPortrait(Sprite portraitSprite, string portraitName) {
+            if (pcImage != null) {
                 pcImage.sprite = portraitSprite;
                 Tools.SetGameObjectActive(pcImage, portraitSprite != null);
             }
@@ -153,17 +145,13 @@ namespace PixelCrushers.DialogueSystem
         }
 
         [System.Obsolete("Use SetPCPortrait(Sprite,string) instead.")]
-        public virtual void SetPCPortrait(Texture2D portraitTexture, string portraitName)
-        {
+        public virtual void SetPCPortrait(Texture2D portraitTexture, string portraitName) {
             SetPCPortrait(UITools.CreateSprite(portraitTexture), portraitName);
         }
 
-        public virtual void ShowResponses(Subtitle subtitle, Response[] responses, Transform target)
-        {
-            if (waitForClose)
-            {
-                if (dialogueUI.AreAnyPanelsClosing())
-                {
+        public virtual void ShowResponses(Subtitle subtitle, Response[] responses, Transform target) {
+            if (waitForClose) {
+                if (dialogueUI.AreAnyPanelsClosing()) {
                     DialogueManager.instance.StartCoroutine(ShowAfterPanelsClose(subtitle, responses, target));
                     return;
                 }
@@ -171,10 +159,8 @@ namespace PixelCrushers.DialogueSystem
             ShowResponsesNow(subtitle, responses, target);
         }
 
-        protected virtual void ShowResponsesNow(Subtitle subtitle, Response[] responses, Transform target)
-        {
-            if (responses == null || responses.Length == 0)
-            {
+        protected virtual void ShowResponsesNow(Subtitle subtitle, Response[] responses, Transform target) {
+            if (responses == null || responses.Length == 0) {
                 if (DialogueDebug.logWarnings) Debug.LogWarning("Dialogue System: StandardDialogueUI ShowResponses received an empty list of responses.", this);
                 return;
             }
@@ -183,13 +169,10 @@ namespace PixelCrushers.DialogueSystem
             ActivateUIElements();
             Open();
             Focus();
-            if (blockInputDuration > 0)
-            {
+            if (blockInputDuration > 0) {
                 DisableInput();
                 Invoke("EnableInput", blockInputDuration);
-            }
-            else
-            {
+            } else {
                 if (s_isInputDisabled) EnableInput();
             }
 #if TMP_PRESENT
@@ -200,8 +183,7 @@ namespace PixelCrushers.DialogueSystem
 #if TMP_PRESENT
         // Handles edge case where TMPro uses autoscroll but entry ends before typing starts.
         // In this case, this method updates the autoscroll size.
-        protected IEnumerator CheckTMProAutoScroll()
-        {
+        protected IEnumerator CheckTMProAutoScroll() {
             var ui = GetComponentInParent<StandardDialogueUI>();
             if (ui == null || ui.conversationUIElements.defaultNPCSubtitlePanel == null || ui.conversationUIElements.defaultNPCSubtitlePanel.subtitleText == null) yield break;
             var tmp = ui.conversationUIElements.defaultNPCSubtitlePanel.subtitleText.textMeshProUGUI;
@@ -209,101 +191,81 @@ namespace PixelCrushers.DialogueSystem
             var layoutElement = tmp.GetComponent<UnityEngine.UI.LayoutElement>();
             if (layoutElement != null) layoutElement.preferredHeight = -1;
             var uiScrollbarEnabler = GetComponentInParent<UIScrollbarEnabler>();
-            if (uiScrollbarEnabler != null)
-            {
+            if (uiScrollbarEnabler != null) {
                 yield return null;
                 uiScrollbarEnabler.CheckScrollbarWithResetValue(0);
             }
         }
 #endif
 
-        protected virtual IEnumerator ShowAfterPanelsClose(Subtitle subtitle, Response[] responses, Transform target)
-        {
+        protected virtual IEnumerator ShowAfterPanelsClose(Subtitle subtitle, Response[] responses, Transform target) {
             float safeguardTime = Time.realtimeSinceStartup + WaitForCloseTimeoutDuration;
-            while (dialogueUI.AreAnyPanelsClosing() && Time.realtimeSinceStartup < safeguardTime)
-            {
+            while (dialogueUI.AreAnyPanelsClosing() && Time.realtimeSinceStartup < safeguardTime) {
                 yield return null;
             }
             ShowResponsesNow(subtitle, responses, target);
         }
 
-        public virtual void HideResponses()
-        {
+        public virtual void HideResponses() {
             StopTimer();
             Unfocus();
             Close();
         }
 
-        public override void Close()
-        {
+        public override void Close() {
             if (isOpen) base.Close();
         }
 
-        public virtual void Focus()
-        {
+        public virtual void Focus() {
             if (hasFocus) return;
-            if (panelState == PanelState.Opening && enabled && gameObject.activeInHierarchy)
-            {
+            if (panelState == PanelState.Opening && enabled && gameObject.activeInHierarchy) {
                 StartCoroutine(FocusWhenOpen());
-            }
-            else
-            {
+            } else {
                 FocusNow();
             }
         }
 
-        protected IEnumerator FocusWhenOpen()
-        {
+        protected IEnumerator FocusWhenOpen() {
             float timeout = Time.realtimeSinceStartup + 5f;
-            while (panelState != PanelState.Open && Time.realtimeSinceStartup < timeout)
-            {
+            while (panelState != PanelState.Open && Time.realtimeSinceStartup < timeout) {
                 yield return null;
             }
             FocusNow();
         }
 
-        protected virtual void FocusNow()
-        {
+        protected virtual void FocusNow() {
             panelState = PanelState.Open;
             animatorMonitor.SetTrigger(focusAnimationTrigger, null, false);
             UITools.EnableInteractivity(gameObject);
             if (hasFocus) return;
-            if (string.IsNullOrEmpty(focusAnimationTrigger))
-            {
+            if (string.IsNullOrEmpty(focusAnimationTrigger)) {
                 OnFocused();
-            }
-            else
-            {
+            } else {
                 animatorMonitor.SetTrigger(focusAnimationTrigger, OnFocused, true);
             }
             onFocus.Invoke();
         }
 
-        private void OnFocused()
-        {
+        private void OnFocused() {
             hasFocus = true;
         }
 
-        public virtual void Unfocus()
-        {
+        public virtual void Unfocus() {
             if (!hasFocus) return;
             hasFocus = false;
             animatorMonitor.SetTrigger(unfocusAnimationTrigger, null, false);
             onUnfocus.Invoke();
         }
 
-        protected void ActivateUIElements()
-        {
+        protected void ActivateUIElements() {
             SetUIElementsActive(true);
         }
 
-        protected void DeactivateUIElements()
-        {
+        protected void DeactivateUIElements() {
             SetUIElementsActive(false);
         }
 
-        protected virtual void SetUIElementsActive(bool value)
-        {
+        protected virtual void SetUIElementsActive(bool value) {
             Tools.SetGameObjectActive(panel, value);
             Tools.SetGameObjectActive(pcImage, value && pcImage != null && pcImage.sprite != null);
             pcName.SetActive(value);
@@ -311,18 +273,14 @@ namespace PixelCrushers.DialogueSystem
             if (value == false) ClearResponseButtons();
         }
 
-        public virtual void HideImmediate()
-        {
+        public virtual void HideImmediate() {
             DeactivateUIElements();
         }
 
-        protected virtual void ClearResponseButtons()
-        {
+        protected virtual void ClearResponseButtons() {
             DestroyInstantiatedButtons();
-            if (buttons != null)
-            {
-                for (int i = 0; i < buttons.Length; i++)
-                {
+            if (buttons != null) {
+                for (int i = 0; i < buttons.Length; i++) {
                     if (buttons[i] == null) continue;
                     buttons[i].Reset();
                     buttons[i].isVisible = showUnusedButtons;
@@ -336,107 +294,79 @@ namespace PixelCrushers.DialogueSystem
         /// </summary>
         /// <param name='responses'>Responses.</param>
         /// <param name='target'>Target that will receive OnClick events from the buttons.</param>
-        protected virtual void SetResponseButtons(Response[] responses, Transform target)
-        {
+        protected virtual void SetResponseButtons(Response[] responses, Transform target) {
             firstSelected = null;
             DestroyInstantiatedButtons();
             var hasDisabledButton = false;
 
             // Prep autonumber format:
-            if (autonumber.enabled)
-            {
+            if (autonumber.enabled) {
                 m_processedAutonumberFormat = autonumber.format.Replace("\\t", "\t").Replace("\\n", "\n");
             }
 
-            if ((buttons != null) && (responses != null))
-            {
+            if ((buttons != null) && (responses != null)) {
                 // Add explicitly-positioned buttons:
                 int buttonNumber = 0;
-                for (int i = 0; i < responses.Length; i++)
-                {
-                    if (responses[i].formattedText.position != FormattedText.NoAssignedPosition)
-                    {
+                for (int i = 0; i < responses.Length; i++) {
+                    if (responses[i].formattedText.position != FormattedText.NoAssignedPosition) {
                         int position = responses[i].formattedText.position;
-                        if (0 <= position && position < buttons.Length && buttons[position] != null)
-                        {
+                        if (0 <= position && position < buttons.Length && buttons[position] != null) {
                             SetResponseButton(buttons[position], responses[i], target, buttonNumber++);
-                        }
-                        else
-                        {
+                        } else {
                             Debug.LogWarning("Dialogue System: Buttons list doesn't contain a button for position " + position + ".", this);
                         }
                     }
                 }
 
-                if ((buttonTemplate != null) && (buttonTemplateHolder != null))
-                {
+                if ((buttonTemplate != null) && (buttonTemplateHolder != null)) {
                     // Reset scrollbar to top:
                     //--- Scroll even if no scrollbar: if (buttonTemplateScrollbar != null)
                     {
-                        if (buttonTemplateScrollbarResetValue >= 0)
-                        {
+                        if (buttonTemplateScrollbarResetValue >= 0) {
                             if (buttonTemplateScrollbar != null) buttonTemplateScrollbar.value = buttonTemplateScrollbarResetValue;
-                            if (scrollbarEnabler != null)
-                            {
+                            if (scrollbarEnabler != null) {
                                 scrollbarEnabler.CheckScrollbarWithResetValue(buttonTemplateScrollbarResetValue);
                             }
-                        }
-                        else if (scrollbarEnabler != null)
-                        {
+                        } else if (scrollbarEnabler != null) {
                             scrollbarEnabler.CheckScrollbar();
                         }
                     }
 
                     // Instantiate buttons from template:
-                    for (int i = 0; i < responses.Length; i++)
-                    {
+                    for (int i = 0; i < responses.Length; i++) {
                         if (responses[i].formattedText.position != FormattedText.NoAssignedPosition) continue;
                         GameObject buttonGameObject = InstantiateButton();
-                        if (buttonGameObject == null)
-                        {
+                        if (buttonGameObject == null) {
                             Debug.LogError("Dialogue System: Couldn't instantiate response button template.");
-                        }
-                        else
-                        {
+                        } else {
                             instantiatedButtons.Add(buttonGameObject);
                             buttonGameObject.transform.SetParent(buttonTemplateHolder.transform, false);
                             buttonGameObject.transform.SetAsLastSibling();
                             buttonGameObject.SetActive(true);
                             StandardUIResponseButton responseButton = buttonGameObject.GetComponent<StandardUIResponseButton>();
                             SetResponseButton(responseButton, responses[i], target, buttonNumber++);
-                            if (responseButton != null)
-                            {
+                            if (responseButton != null) {
                                 buttonGameObject.name = "Response: " + responseButton.text;
                                 if (explicitNavigationForTemplateButtons && !responseButton.isClickable) hasDisabledButton = true;
                             }
                             if (firstSelected == null) firstSelected = buttonGameObject;
-
                         }
                     }
-                }
-                else
-                {
+                } else {
                     // Auto-position remaining buttons:
-                    if (buttonAlignment == ResponseButtonAlignment.ToFirst)
-                    {
+                    if (buttonAlignment == ResponseButtonAlignment.ToFirst) {
                         // Align to first, so add in order to front:
-                        for (int i = 0; i < Mathf.Min(buttons.Length, responses.Length); i++)
-                        {
-                            if (responses[i].formattedText.position == FormattedText.NoAssignedPosition)
-                            {
+                        for (int i = 0; i < Mathf.Min(buttons.Length, responses.Length); i++) {
+                            if (responses[i].formattedText.position == FormattedText.NoAssignedPosition) {
                                 int position = Mathf.Clamp(GetNextAvailableResponseButtonPosition(0, 1), 0, buttons.Length - 1);
                                 SetResponseButton(buttons[position], responses[i], target, buttonNumber++);
                                 if (firstSelected == null) firstSelected = buttons[position].gameObject;
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         // Align to last, so add in reverse order to back:
-                        for (int i = Mathf.Min(buttons.Length, responses.Length) - 1; i >= 0; i--)
-                        {
-                            if (responses[i].formattedText.position == FormattedText.NoAssignedPosition)
-                            {
+                        for (int i = Mathf.Min(buttons.Length, responses.Length) - 1; i >= 0; i--) {
+                            if (responses[i].formattedText.position == FormattedText.NoAssignedPosition) {
                                 int position = Mathf.Clamp(GetNextAvailableResponseButtonPosition(buttons.Length - 1, -1), 0, buttons.Length - 1);
                                 SetResponseButton(buttons[position], responses[i], target, buttonNumber++);
                                 firstSelected = buttons[position].gameObject;
@@ -451,10 +381,8 @@ namespace PixelCrushers.DialogueSystem
             NotifyContentChanged();
         }
 
-        protected virtual void SetResponseButton(StandardUIResponseButton button, Response response, Transform target, int buttonNumber)
-        {
-            if (button != null)
-            {
+        protected virtual void SetResponseButton(StandardUIResponseButton button, Response response, Transform target, int buttonNumber) {
+            if (button != null) {
                 button.gameObject.SetActive(true);
                 button.isVisible = true;
                 button.isClickable = response.enabled;
@@ -463,37 +391,42 @@ namespace PixelCrushers.DialogueSystem
                 button.response = response;
 
                 // Auto-number:
-                if (autonumber.enabled)
-                {
+                if (autonumber.enabled) {
                     button.text = string.Format(m_processedAutonumberFormat, buttonNumber + 1, button.text);
-                    var keyTrigger = button.GetComponent<UIButtonKeyTrigger>();
-                    if (autonumber.regularNumberHotkeys)
-                    {
-                        if (keyTrigger == null) keyTrigger = button.gameObject.AddComponent<UIButtonKeyTrigger>();
-                        keyTrigger.key = (KeyCode)((int)KeyCode.Alpha1 + buttonNumber);
+
+                    var keyTriggers = button.gameObject.GetComponents<UIButtonKeyTrigger>();
+
+                    if (keyTriggers.Length != 3) {
+                        button.gameObject.AddComponent<UIButtonKeyTrigger>();
+                        button.gameObject.AddComponent<UIButtonKeyTrigger>();
+                        button.gameObject.AddComponent<UIButtonKeyTrigger>();
+                        keyTriggers = button.gameObject.GetComponents<UIButtonKeyTrigger>();
                     }
-                    if (autonumber.numpadHotkeys)
-                    {
-                        if (autonumber.regularNumberHotkeys || keyTrigger == null) keyTrigger = button.gameObject.AddComponent<UIButtonKeyTrigger>();
-                        keyTrigger.key = (KeyCode)((int)KeyCode.Keypad1 + buttonNumber);
+                    if (autonumber.regularNumberHotkeys) {
+                        //if (keyTrigger == null) keyTrigger = button.gameObject.AddComponent<UIButtonKeyTrigger>();
+                        keyTriggers[0].key = (KeyCode)((int)KeyCode.Alpha1 + buttonNumber);
+                    }
+                    if (autonumber.numpadHotkeys) {
+                        //if (autonumber.regularNumberHotkeys || keyTrigger == null) keyTrigger = button.gameObject.AddComponent<UIButtonKeyTrigger>();
+                        keyTriggers[1].key = (KeyCode)((int)KeyCode.Keypad1 + buttonNumber);
+                    }
+
+                    switch (buttonNumber) {
+                        case 0: keyTriggers[2].stringKey = "joystick button 1"; break;
+                        case 1: keyTriggers[2].stringKey = "joystick button 2"; break;
+                        case 2: keyTriggers[2].stringKey = "joystick button 0"; break;
                     }
                 }
             }
         }
 
-        protected int GetNextAvailableResponseButtonPosition(int start, int direction)
-        {
-            if (buttons != null)
-            {
+        protected int GetNextAvailableResponseButtonPosition(int start, int direction) {
+            if (buttons != null) {
                 int position = start;
-                while ((0 <= position) && (position < buttons.Length))
-                {
-                    if (buttons[position].isVisible && buttons[position].response != null)
-                    {
+                while ((0 <= position) && (position < buttons.Length)) {
+                    if (buttons[position].isVisible && buttons[position].response != null) {
                         position += direction;
-                    }
-                    else
-                    {
+                    } else {
                         return position;
                     }
                 }
@@ -501,23 +434,18 @@ namespace PixelCrushers.DialogueSystem
             return 5;
         }
 
-        public virtual void SetupTemplateButtonNavigation(bool hasDisabledButton)
-        {
+        public virtual void SetupTemplateButtonNavigation(bool hasDisabledButton) {
             // Assumes buttons are active (since uses GetComponent), so call after activating panel.
             if (instantiatedButtons == null || instantiatedButtons.Count == 0) return;
             var buttons = new List<GameObject>();
-            if (hasDisabledButton)
-            {
+            if (hasDisabledButton) {
                 // If some buttons are disabled, make a list of only the clickable ones:
                 buttons.AddRange(instantiatedButtons.FindAll(x => x.GetComponent<StandardUIResponseButton>().isClickable));
-            }
-            else
-            {
+            } else {
                 buttons.AddRange(instantiatedButtons);
             }
 
-            for (int i = 0; i < buttons.Count; i++)
-            {
+            for (int i = 0; i < buttons.Count; i++) {
                 var button = buttons[i].GetComponent<UnityEngine.UI.Button>();
                 if (button == null) continue;
                 var above = (i == 0) ? (loopExplicitNavigation ? buttons[buttons.Count - 1].GetComponent<UnityEngine.UI.Button>() : null)
@@ -535,26 +463,20 @@ namespace PixelCrushers.DialogueSystem
             }
         }
 
-        protected virtual GameObject InstantiateButton()
-        {
+        protected virtual GameObject InstantiateButton() {
             // Try to pull from pool first:
-            if (m_instantiatedButtonPool.Count > 0)
-            {
+            if (m_instantiatedButtonPool.Count > 0) {
                 var button = m_instantiatedButtonPool[0];
                 m_instantiatedButtonPool.RemoveAt(0);
                 return button;
-            }
-            else
-            {
+            } else {
                 return GameObject.Instantiate(buttonTemplate.gameObject) as GameObject;
             }
         }
 
-        public void DestroyInstantiatedButtons()
-        {
+        public void DestroyInstantiatedButtons() {
             // Return buttons to pool:
-            for (int i = 0; i < instantiatedButtons.Count; i++)
-            {
+            for (int i = 0; i < instantiatedButtons.Count; i++) {
                 instantiatedButtons[i].SetActive(false);
             }
             m_instantiatedButtonPool.AddRange(instantiatedButtons);
@@ -569,66 +491,52 @@ namespace PixelCrushers.DialogueSystem
         /// clicked to make sure the player can't click another one while the
         /// menu is playing its hide animation.
         /// </summary>
-        public virtual void MakeButtonsNonclickable()
-        {
-            for (int i = 0; i < instantiatedButtons.Count; i++)
-            {
+        public virtual void MakeButtonsNonclickable() {
+            for (int i = 0; i < instantiatedButtons.Count; i++) {
                 var responseButton = (instantiatedButtons[i] != null) ? instantiatedButtons[i].GetComponent<StandardUIResponseButton>() : null;
                 if (responseButton != null) responseButton.isClickable = false;
             }
-            for (int i = 0; i < buttons.Length; i++)
-            {
+            for (int i = 0; i < buttons.Length; i++) {
                 if (buttons[i] != null) buttons[i].isClickable = false;
             }
         }
 
-        protected void NotifyContentChanged()
-        {
+        protected void NotifyContentChanged() {
             onContentChanged.Invoke();
         }
 
-        protected void DisableInput()
-        {
+        protected void DisableInput() {
             SetInput(false);
         }
 
-        protected void EnableInput()
-        {
+        protected void EnableInput() {
             SetInput(true);
         }
 
-        protected void SetInput(bool value)
-        {
+        protected void SetInput(bool value) {
             s_isInputDisabled = (value == false);
-            if (m_mainCanvasGroup == null)
-            {
+            if (m_mainCanvasGroup == null) {
                 // Try to get dialogue UI's main panel:
                 var ui = GetComponentInParent<StandardDialogueUI>();
-                if (ui != null && ui.conversationUIElements.mainPanel != null)
-                {
+                if (ui != null && ui.conversationUIElements.mainPanel != null) {
                     var mainPanel = ui.conversationUIElements.mainPanel;
                     m_mainCanvasGroup = mainPanel.GetComponent<CanvasGroup>() ?? mainPanel.gameObject.AddComponent<CanvasGroup>();
-                }
-                else
-                {
+                } else {
                     // Otherwise try the menu's panel:
                     var menuPanel = panel;
                     if (menuPanel == null) menuPanel = buttonTemplateHolder;
-                    if (menuPanel != null)
-                    {
+                    if (menuPanel != null) {
                         m_mainCanvasGroup = menuPanel.GetComponent<CanvasGroup>() ?? menuPanel.gameObject.AddComponent<CanvasGroup>();
                     }
                 }
             }
             if (m_mainCanvasGroup != null) m_mainCanvasGroup.interactable = value;
-            if (EventSystem.current != null)
-            {
+            if (EventSystem.current != null) {
                 var inputModule = EventSystem.current.GetComponent<PointerInputModule>();
                 if (inputModule != null) inputModule.enabled = value;
             }
             UIButtonKeyTrigger.monitorInput = value;
-            if (value == true)
-            {
+            if (value == true) {
                 RefreshSelectablesList();
                 CheckFocus();
             }
@@ -642,18 +550,13 @@ namespace PixelCrushers.DialogueSystem
         /// </summary>
         /// <param name='timeout'>Timeout duration in seconds.</param>
         /// <param name="timeoutHandler">Invoke this handler on timeout.</param>
-        public virtual void StartTimer(float timeout, System.Action timeoutHandler)
-        {
-            if (m_timer == null)
-            {
-                if (timerSlider != null)
-                {
+        public virtual void StartTimer(float timeout, System.Action timeoutHandler) {
+            if (m_timer == null) {
+                if (timerSlider != null) {
                     Tools.SetGameObjectActive(timerSlider, true);
                     m_timer = timerSlider.GetComponent<StandardUITimer>();
                     if (m_timer == null) m_timer = timerSlider.gameObject.AddComponent<StandardUITimer>();
-                }
-                else
-                {
+                } else {
                     m_timer = GetComponentInChildren<StandardUITimer>();
                     if (m_timer == null) m_timer = gameObject.AddComponent<StandardUITimer>();
                 }
@@ -662,10 +565,8 @@ namespace PixelCrushers.DialogueSystem
             m_timer.StartCountdown(timeout, timeoutHandler);
         }
 
-        public virtual void StopTimer()
-        {
-            if (m_timer != null)
-            {
+        public virtual void StopTimer() {
+            if (m_timer != null) {
                 m_timer.StopCountdown();
                 Tools.SetGameObjectActive(m_timer, false);
             }

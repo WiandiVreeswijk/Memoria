@@ -40,9 +40,9 @@ public class ControllerManager : MonoBehaviour {
         }
     }
 
-    public bool JustChanged() {
-        return justChanged;
-    }
+    //public bool JustChanged() {
+    //    return justChanged;
+    //}
 
     public bool IsUsingController() {
         return isUsingController;

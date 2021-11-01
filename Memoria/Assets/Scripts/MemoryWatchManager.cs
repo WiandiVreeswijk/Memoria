@@ -80,11 +80,13 @@ public class MemoryWatchManager : MonoBehaviour {
     bool soundIsPlaying = false;
     private float time = 0;
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        bool buttonDown = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 1");
+        bool button = Input.GetKey(KeyCode.Space) || Input.GetKey("joystick button 1");
+        if (buttonDown) {
             time = Time.time;
             activationPressed = true;
         }
-        if (!Input.GetKey(KeyCode.Space)) activationPressed = false;
+        if (!button) activationPressed = false;
         bool canActivate = activationProgress >= 0.99f;
         if (activated) {
             activationProgress = 1.0f;
