@@ -43,7 +43,15 @@ public class CinemachineManager : MonoBehaviour {
     }
     */
     public float CinemachineAxisInputDelegate(string axisName) {
-        if (inputEnabled) return Input.GetAxis(axisName);
+        //float multiplier = 1.0f;
+        //if (inputEnabled) {
+        //    switch (axisName) {
+        //        case "CameraControl Y FPS": multiplier = 0.5f; break;
+        //        case "CameraControl X FPS": multiplier = 0.5f; break;
+        //    }
+        //    return Input.GetAxis(axisName) * multiplier;
+        //}
+        return Input.GetAxis(axisName);
         return 0;
     }
 

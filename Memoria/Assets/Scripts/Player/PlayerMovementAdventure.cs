@@ -122,8 +122,8 @@ public class PlayerMovementAdventure : MonoBehaviour {
 
     private Vector3 FPSLookAt;
     private void FPS() {
-        float horizontal = canMove? Input.GetAxis("Horizontal") : 0;
-        float vertical = canMove?Input.GetAxis("Vertical") : 0;
+        float horizontal = canMove ? Input.GetAxis("Horizontal") : 0;
+        float vertical = canMove ? Input.GetAxis("Vertical") : 0;
 
         Vector3 movement = new Vector3(horizontal, 0, vertical);
 
