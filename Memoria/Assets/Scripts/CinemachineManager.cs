@@ -51,7 +51,7 @@ public class CinemachineManager : MonoBehaviour {
         //    }
         //    return Input.GetAxis(axisName) * multiplier;
         //}
-        return Input.GetAxis(axisName);
+        if (inputEnabled) return Input.GetAxis(axisName);
         return 0;
     }
 
