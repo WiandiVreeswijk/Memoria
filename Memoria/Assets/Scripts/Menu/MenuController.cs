@@ -213,6 +213,7 @@ public class MenuController : MonoBehaviour {
     }
 
     public void BackToWijk() {
+        CloseMenu();
         Globals.SceneManager.SetScene("Wijk");
     }
 

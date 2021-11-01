@@ -135,7 +135,6 @@ public class MemoryWatchManager : MonoBehaviour {
         armRotator.transform.localRotation = Quaternion.Euler(ARM_ROTATION, 0f, 0f);
     }
     public void EnableMemoryWatch() {
-        print("collectwatch");
         enabled = true;
     }
 }
