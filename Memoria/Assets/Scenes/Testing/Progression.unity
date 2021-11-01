@@ -32,13 +32,13 @@ RenderSettings:
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 512
   m_ReflectionBounces: 4
   m_ReflectionIntensity: 1
-  m_CustomReflection: {fileID: 0}
+  m_CustomReflection: {fileID: 8900000, guid: b196a8280489dc44283c13ea20af3606, type: 3}
   m_Sun: {fileID: 40952532}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.19377834, g: 0.21487975, b: 0.46522284, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -271,8 +271,9 @@ GameObject:
   m_Component:
   - component: {fileID: 40952533}
   - component: {fileID: 40952532}
+  - component: {fileID: 40952534}
   m_Layer: 0
-  m_Name: Directional Light (1)
+  m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,6 +355,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &40952534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40952531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74ce2158ae608549902afb4112fd042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  intensity: 1
+  shadowSpread: 0.01
+  samples: 16
+  bitmask: 1
+  bakeToIndirect: 0
+  shadowmask: 0
+  shadowmaskDenoise: 0
+  indirectIntensity: 1
+  cloudShadow: {fileID: 0}
+  cloudShadowTilingX: 0.01
+  cloudShadowTilingY: 0.01
+  cloudShadowOffsetX: 0
+  cloudShadowOffsetY: 0
+  supersample: 0
+  UID: -641017040
 --- !u!1 &43424117
 GameObject:
   m_ObjectHideFlags: 3
@@ -378,7 +407,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43424117}
-  m_LocalRotation: {x: -0.040960133, y: -0.040754348, z: 0.03865543, w: 0.99758065}
+  m_LocalRotation: {x: -0.040944453, y: -0.045402702, z: 0.043064382, w: 0.9971999}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -644,7 +673,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90029138}
-  m_LocalRotation: {x: -0.05909884, y: -0.04145074, z: 0.037907735, w: 0.9966706}
+  m_LocalRotation: {x: -0.05907625, y: -0.04617849, z: 0.04223138, w: 0.9962902}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -694,6 +723,47 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 431679376}
+--- !u!114 &186925840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Progression_LMA2
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 2
+  sortingID: 2
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Progression
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &200460608
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1069,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &336508377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Progression_LMA3
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 3
+  sortingID: 3
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Progression
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &366757570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,7 +1169,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.1
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -1168,7 +1279,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -1427,7 +1538,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -1556,7 +1667,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -1579,6 +1690,47 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623238023}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &628028396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Progression_LM0
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 0
+  sortingID: 0
+  isImplicit: 1
+  area: 2832
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Progression
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &655361464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1886,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7279712180945551401, guid: 869c1afc8913aec45b8448a5472ea263, type: 3}
   maxParticles: 50
+--- !u!114 &720421778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Progression_LMA1
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 1
+  sortingID: 1
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Progression
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &723514124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,6 +1993,61 @@ Transform:
   - {fileID: 1584598043}
   m_Father: {fileID: 596214503}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &824256881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 824256883}
+  - component: {fileID: 824256882}
+  m_Layer: 0
+  m_Name: Skylight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &824256882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824256881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306a56f30ff21b5439963fc745cfe9cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texName: sky.dds
+  color: {r: 1, g: 1, b: 1, a: 1}
+  intensity: 1
+  samples: 32
+  hemispherical: 0
+  bitmask: 1
+  bakeToIndirect: 1
+  indirectIntensity: 1
+  tangentSH: 0
+  correctRotation: 0
+  cubemap: {fileID: 8900000, guid: b196a8280489dc44283c13ea20af3606, type: 3}
+  UID: -1898069256
+--- !u!4 &824256883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824256881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.499481, y: 54.635357, z: 27.24872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &891486751
 GameObject:
@@ -1972,7 +2220,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256735151}
-  m_LocalRotation: {x: -0.07709792, y: -0.05314359, z: 0.046859354, w: 0.9945029}
+  m_LocalRotation: {x: -0.077069774, y: -0.05686173, z: 0.050137773, w: 0.9941395}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2095,7 +2343,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -2157,11 +2405,11 @@ MonoBehaviour:
   renderSettingsForceRebuildGeometry: 1
   renderSettingsPerformRendering: 1
   renderSettingsUserRenderMode: 0
-  renderSettingsDistanceShadowmask: 0
-  renderSettingsSettingsMode: 0
+  renderSettingsDistanceShadowmask: 1
+  renderSettingsSettingsMode: 2
   renderSettingsFixSeams: 1
   renderSettingsDenoise: 1
-  renderSettingsDenoise2x: 0
+  renderSettingsDenoise2x: 1
   renderSettingsEncode: 1
   renderSettingsEncodeMode: 0
   renderSettingsOverwriteWarning: 0
@@ -2179,12 +2427,12 @@ MonoBehaviour:
   renderSettingsHackEmissiveBoost: 1
   renderSettingsHackIndirectBoost: 1
   renderSettingsTempPath: 
-  renderSettingsOutPath: 
+  renderSettingsOutPath: BakeryLightmaps
   renderSettingsUseScenePath: 0
-  renderSettingsHackAOIntensity: 0
+  renderSettingsHackAOIntensity: 2.5
   renderSettingsHackAOSamples: 16
-  renderSettingsHackAORadius: 1
-  renderSettingsShowAOSettings: 0
+  renderSettingsHackAORadius: 0.15
+  renderSettingsShowAOSettings: 1
   renderSettingsShowTasks: 1
   renderSettingsShowTasks2: 0
   renderSettingsShowPaths: 1
@@ -2195,26 +2443,26 @@ MonoBehaviour:
   renderSettingsTexelsMask: 1
   renderSettingsTexelsDir: 1
   renderSettingsShowDirWarning: 1
-  renderSettingsRenderDirMode: 0
+  renderSettingsRenderDirMode: 2
   renderSettingsShowCheckerSettings: 0
   renderSettingsSamplesWarning: 1
   renderSettingsPrefabWarning: 1
   renderSettingsSplitByScene: 0
   renderSettingsUVPaddingMax: 0
   renderSettingsPostPacking: 1
-  renderSettingsHoleFilling: 0
+  renderSettingsHoleFilling: 1
   renderSettingsBeepOnFinish: 0
-  renderSettingsExportTerrainAsHeightmap: 1
+  renderSettingsExportTerrainAsHeightmap: 0
   renderSettingsRTXMode: 1
   renderSettingsLightProbeMode: 1
   renderSettingsClientMode: 0
   renderSettingsServerAddress: 127.0.0.1
-  renderSettingsUnwrapper: 0
+  renderSettingsUnwrapper: 1
   renderSettingsDenoiserType: 100
   renderSettingsExportTerrainTrees: 0
   renderSettingsShowPerf: 1
   renderSettingsSampleDiv: 1
-  renderSettingsAtlasPacker: 0
+  renderSettingsAtlasPacker: 1
   renderSettingsBatchPoints: 1
   renderSettingsCompressVolumes: 0
   renderSettingsSector: {fileID: 0}
@@ -2222,15 +2470,113 @@ MonoBehaviour:
   renderSettingsRTPVSceneView: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
-  lastBakeTime: 0
+  lastBakeTime: 58
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
-  lightUIDs: 
-  lights: []
-  implicitGroups: []
-  implicitGroupedObjects: []
-  bounds: []
-  hasEmissive: 
+  lightUIDs: e58565e030dbcad9
+  lights:
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1
+    range: 0
+    radius: 0
+    samples: 32
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 1
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 0
+    cookie: {fileID: 8900000, guid: b196a8280489dc44283c13ea20af3606, type: 3}
+    angle: 30
+  - tform:
+      e00: 0.86602545
+      e01: -0.38302216
+      e02: -0.3213938
+      e03: 0
+      e10: 0
+      e11: 0.6427877
+      e12: -0.76604444
+      e13: 3
+      e20: 0.49999994
+      e21: 0.66341394
+      e22: 0.5566704
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1
+    range: 0
+    radius: 0.01
+    samples: 16
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 0
+    cookie: {fileID: 0}
+    angle: 30
+  implicitGroups:
+  - {fileID: 720421778}
+  - {fileID: 628028396}
+  - {fileID: 186925840}
+  - {fileID: 186925840}
+  - {fileID: 186925840}
+  - {fileID: 186925840}
+  - {fileID: 186925840}
+  - {fileID: 720421778}
+  - {fileID: 336508377}
+  - {fileID: 336508377}
+  - {fileID: 720421778}
+  - {fileID: 720421778}
+  - {fileID: 720421778}
+  - {fileID: 186925840}
+  - {fileID: 720421778}
+  implicitGroupedObjects:
+  - {fileID: 200460608}
+  - {fileID: 366757570}
+  - {fileID: 424563783}
+  - {fileID: 622915253}
+  - {fileID: 623238023}
+  - {fileID: 655361464}
+  - {fileID: 1334895251}
+  - {fileID: 1466266110}
+  - {fileID: 1565347885}
+  - {fileID: 1584598042}
+  - {fileID: 1707528259}
+  - {fileID: 1758529240}
+  - {fileID: 1988256706}
+  - {fileID: 2038980993}
+  - {fileID: 2097902013}
+  bounds:
+  - m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 50, y: 1.110223e-15, z: 50}
+  - m_Center: {x: 0, y: 3.1082554, z: 0}
+    m_Extent: {x: 150, y: 3.1082554, z: 150}
+  - m_Center: {x: 0, y: 3.108253, z: 0}
+    m_Extent: {x: 150, y: 3.108253, z: 150}
+  - m_Center: {x: -1.75, y: 2, z: 0.75}
+    m_Extent: {x: 2.75, y: 2, z: 2}
+  hasEmissive: 01010101
   uvBuffOffsets: 
   uvBuffLengths: 
   uvSrcBuff: []
@@ -2242,38 +2588,171 @@ MonoBehaviour:
   lmGroupMinLOD: 
   lmGroupLODMatrix: 
   serverGetFileList: []
-  lightmapHasColor: 
-  lightmapHasMask: 
-  lightmapHasDir: 
-  lightmapHasRNM: 
+  lightmapHasColor: 01010101
+  lightmapHasMask: 00000000000000000000000000000000
+  lightmapHasDir: 01010101
+  lightmapHasRNM: 00000000
   modifiedAssetPathList: []
   modifiedAssets: []
-  maps: []
+  maps:
+  - {fileID: 2800000, guid: b2c615343fedf86499f7a66520cf54a9, type: 3}
+  - {fileID: 2800000, guid: 13bb991ed8475d04ebb02ae0e897b5e3, type: 3}
+  - {fileID: 2800000, guid: ecaf85edc1fe67a4ba814300d01d0453, type: 3}
+  - {fileID: 2800000, guid: cddc19c9b1c2a5b4295b3504952e438c, type: 3}
   masks: []
-  dirMaps: []
+  dirMaps:
+  - {fileID: 2800000, guid: 4eda8675518fc4b4c8cc5ab45b9c82f3, type: 3}
+  - {fileID: 2800000, guid: d9e0b7f1ee5bc6e4ca056880d075fd2c, type: 3}
+  - {fileID: 2800000, guid: 216ccb2e8607fbb4998ddb5f5bb2ed92, type: 3}
+  - {fileID: 2800000, guid: 9fcd31b82e1beca448cafd593ee9504f, type: 3}
   rnmMaps0: []
   rnmMaps1: []
   rnmMaps2: []
   mapsMode: 
-  bakedRenderers: []
-  bakedIDs: 
-  bakedScaleOffset: []
-  bakedVertexOffset: 
-  bakedVertexColorMesh: []
+  bakedRenderers:
+  - {fileID: 200460610}
+  - {fileID: 366757572}
+  - {fileID: 424563786}
+  - {fileID: 622915256}
+  - {fileID: 623238026}
+  - {fileID: 655361466}
+  - {fileID: 1334895254}
+  - {fileID: 1466266113}
+  - {fileID: 1565347887}
+  - {fileID: 1584598045}
+  - {fileID: 1707528261}
+  - {fileID: 1758529243}
+  - {fileID: 1988256709}
+  - {fileID: 2038980995}
+  - {fileID: 2097902016}
+  bakedIDs: 010000000000000002000000020000000200000002000000020000000100000003000000030000000100000001000000010000000200000001000000
+  bakedScaleOffset:
+  - {x: 0.84119344, y: 0.87311894, z: -0.003411684, w: -0.0035411664}
+  - {x: 1, y: 1, z: 0, w: 0}
+  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0.68408555}
+  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0.456057}
+  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0.2280285}
+  - {x: 0.77327496, y: 0.76518536, z: -0.0031362227, w: 0.50045955}
+  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0}
+  - {x: 0.18271118, y: 0.190184, z: 0.8172888, w: 0.57259715}
+  - {x: 1.0074528, y: 0.7643428, z: -0.0040859934, w: 0.50100964}
+  - {x: 1.0074528, y: 0.7643429, z: -0.0040859934, w: -0.0030999961}
+  - {x: 0.62743133, y: 0.65877926, z: -0.0025447148, w: 0.5699253}
+  - {x: 0.18271118, y: 0.19018406, z: 0.8172888, w: 0.76891613}
+  - {x: 0.18271124, y: 0.19018406, z: 0.6286837, w: 0.76891613}
+  - {x: 0.77327496, y: 0.7651854, z: -0.0031362227, w: -0.0031034134}
+  - {x: 0.18271124, y: 0.190184, z: 0.6286837, w: 0.57259715}
+  bakedVertexOffset: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  bakedVertexColorMesh:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   nonBakedRenderers: []
-  bakedLights: []
-  bakedLightChannels: 
+  bakedLights:
+  - {fileID: 40952532}
+  bakedLightChannels: ffffffff
   bakedRenderersTerrain: []
   bakedIDsTerrain: 
   bakedScaleOffsetTerrain: []
   assetList: []
   uvOverlapAssetList: 
-  idremap: 
+  idremap: 00000000010000000200000003000000
   usesRealtimeGI: 0
   emptyDirectionTex: {fileID: 0}
   anyVolumes: 0
   compressedVolumes: 0
-  sectors: []
+  sectors:
+  - name: $G
+    maps:
+    - {fileID: 2800000, guid: b2c615343fedf86499f7a66520cf54a9, type: 3}
+    - {fileID: 2800000, guid: 13bb991ed8475d04ebb02ae0e897b5e3, type: 3}
+    - {fileID: 2800000, guid: ecaf85edc1fe67a4ba814300d01d0453, type: 3}
+    - {fileID: 2800000, guid: cddc19c9b1c2a5b4295b3504952e438c, type: 3}
+    - {fileID: 2800000, guid: 4f0ee60d064d7414fae4059098de3400, type: 3}
+    - {fileID: 2800000, guid: c03eb59093ae42d48941b9eea6f6740e, type: 3}
+    - {fileID: 2800000, guid: ed692e2821327ca4ab264809f132b6e6, type: 3}
+    - {fileID: 2800000, guid: 31d8cf3cad86fbf41bd7a161bc8857ba, type: 3}
+    - {fileID: 2800000, guid: 3dca8dc46aad6ad4eb887b4a460858be, type: 3}
+    masks: []
+    dirMaps:
+    - {fileID: 2800000, guid: 4eda8675518fc4b4c8cc5ab45b9c82f3, type: 3}
+    - {fileID: 2800000, guid: d9e0b7f1ee5bc6e4ca056880d075fd2c, type: 3}
+    - {fileID: 2800000, guid: 216ccb2e8607fbb4998ddb5f5bb2ed92, type: 3}
+    - {fileID: 2800000, guid: 9fcd31b82e1beca448cafd593ee9504f, type: 3}
+    - {fileID: 2800000, guid: 7e62d4590f089c545b7dee68b2566412, type: 3}
+    - {fileID: 2800000, guid: 54bddf617138d0b439357ff5676896a2, type: 3}
+    - {fileID: 2800000, guid: 76163a5856441924e8b363014eae245f, type: 3}
+    - {fileID: 2800000, guid: d343e09b3d3c4914d958d14ff11122f9, type: 3}
+    - {fileID: 2800000, guid: 74f683c30032f5444bbaf2bc24d9ac09, type: 3}
+    rnmMaps0: []
+    rnmMaps1: []
+    rnmMaps2: []
+    mapsMode: 
+    bakedRenderers:
+    - {fileID: 200460610}
+    - {fileID: 366757572}
+    - {fileID: 424563786}
+    - {fileID: 622915256}
+    - {fileID: 623238026}
+    - {fileID: 655361466}
+    - {fileID: 1334895254}
+    - {fileID: 1466266113}
+    - {fileID: 1565347887}
+    - {fileID: 1584598045}
+    - {fileID: 1707528261}
+    - {fileID: 1758529243}
+    - {fileID: 1988256709}
+    - {fileID: 2038980995}
+    - {fileID: 2097902016}
+    bakedRenderersTerrain: []
+    bakedIDs: 000000000800000007000000060000000500000000000000040000000300000000000000000000000000000002000000010000000000000000000000
+    bakedIDsTerrain: 
+    bakedScaleOffset:
+    - {x: 0.1513494, y: 0.1373288, z: -0.0006138378, w: 0.91034687}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 0.112888835, y: 0.10361632, z: 0.3770607, w: 0.91048354}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 0.0986442, y: 0.089734755, z: 0.5892076, w: 0.91053987}
+    - {x: 0.09864417, y: 0.089734755, z: 0.49023268, w: 0.91053987}
+    - {x: 0.112888835, y: 0.10361632, z: 0.15083236, w: 0.91048354}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 1, y: 1, z: 0, w: 0}
+    - {x: 0.112888835, y: 0.10361632, z: 0.26394653, w: 0.91048354}
+    - {x: 1, y: 0.9099389, z: 0, w: 0}
+    bakedScaleOffsetTerrain: []
+    bakedVertexColorMesh:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    nonBakedRenderers: []
 --- !u!4 &1410038963
 Transform:
   m_ObjectHideFlags: 1
@@ -2361,7 +2840,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -2890,7 +3369,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -3128,7 +3607,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -3275,19 +3754,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.66965896
+      value: 0.665428
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24703854
+      value: 0.24547775
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.65709203
+      value: -0.6613763
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.24240258
+      value: 0.24398313
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3384,7 +3863,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.001
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
