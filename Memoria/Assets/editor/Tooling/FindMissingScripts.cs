@@ -16,9 +16,11 @@ public class FindMissingScriptsRecursively : EditorWindow {
             FindInSelected();
         }
         if (GUILayout.Button("Find not navigation static objects")) {
-            FindNonStatic();
+            FindNonStatic(StaticEditorFlags.NavigationStatic);
         }
-
+        if (GUILayout.Button("Find not GI static objects")) {
+            FindNonStatic(StaticEditorFlags.ContributeGI);
+        }
         if (GUILayout.Button("Find shaders and materials")) {
             FindShaderAndMaterials();
         }
@@ -137,11 +139,11 @@ public class FindMissingScriptsRecursively : EditorWindow {
         Debug.Log(string.Format("Searched {0} GameObjects, {1} components, found {2} missing", go_count, components_count, missing_count));
     }
 
-    private void FindNonStatic() {
+    private void FindNonStatic(StaticEditorFlags flags) {
         string objectsString = "";
         GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
         foreach (GameObject go in gameObjects) {
-            if (go.GetComponent<MeshRenderer>() != null && !GameObjectUtility.AreStaticEditorFlagsSet(go, StaticEditorFlags.NavigationStatic)) {
+            if (go.GetComponent<MeshRenderer>() != null && !GameObjectUtility.AreStaticEditorFlagsSet(go, flags)) {
                 objectsString += go.name + "\n";
             }
         }

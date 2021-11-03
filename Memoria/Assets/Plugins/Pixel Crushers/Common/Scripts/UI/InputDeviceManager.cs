@@ -152,6 +152,11 @@ namespace PixelCrushers
             return (m_instance != null && m_instance.GetButtonUp != null) ? m_instance.GetButtonUp(buttonName) : DefaultGetButtonUp(buttonName);
         }
 
+        public static bool IsKeyDown(string keyCode) {
+            if (!isInputAllowed) return false;
+            return DefaultGetKeyDown(keyCode);
+        }
+
         public static bool IsKeyDown(KeyCode keyCode)
         {
             if (!isInputAllowed) return false;
@@ -468,6 +473,24 @@ namespace PixelCrushers
 
         public static bool DefaultGetKeyDown(KeyCode keyCode)
         {
+#if USE_NEW_INPUT
+            if (Keyboard.current == null || keyCode == KeyCode.None) return false;
+            var s = keyCode.ToString().ToLower();
+            if (s.StartsWith("joystick")) return false;
+            if ((KeyCode.Alpha0 <= keyCode && keyCode <= KeyCode.Alpha9) || 
+                (KeyCode.Keypad0 <= keyCode && keyCode <= KeyCode.Keypad9))
+            {
+                KeyControl numKeyControl;
+                return specialKeyCodeDict.TryGetValue(keyCode, out numKeyControl) ? numKeyControl.wasPressedThisFrame : false;
+            }
+            var keyControl = Keyboard.current[s] as KeyControl;
+            return (keyControl != null) ? keyControl.wasPressedThisFrame : false;
+#else
+            return Input.GetKeyDown(keyCode);
+#endif
+        }
+
+        public static bool DefaultGetKeyDown(string keyCode) {
 #if USE_NEW_INPUT
             if (Keyboard.current == null || keyCode == KeyCode.None) return false;
             var s = keyCode.ToString().ToLower();

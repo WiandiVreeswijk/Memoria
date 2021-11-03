@@ -4,19 +4,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace PixelCrushers
-{
+namespace PixelCrushers {
 
     /// <summary>
     /// This script adds a key or button trigger to a Unity UI Selectable.
     /// </summary>
     [AddComponentMenu("")] // Use wrapper.
     [RequireComponent(typeof(UnityEngine.UI.Selectable))]
-    public class UIButtonKeyTrigger : MonoBehaviour
-    {
+    public class UIButtonKeyTrigger : MonoBehaviour {
 
         [Tooltip("Trigger the selectable when this key is pressed.")]
         public KeyCode key = KeyCode.None;
+
+        public string stringKey = "";
 
         [Tooltip("Trigger the selectable when this input button is pressed.")]
         public string buttonName = string.Empty;
@@ -41,50 +41,40 @@ namespace PixelCrushers
         /// </summary>
         public static bool monitorInput = true;
 
-        protected virtual void Awake()
-        {
+        protected virtual void Awake() {
             m_selectable = GetComponent<UnityEngine.UI.Selectable>();
             if (m_selectable == null) enabled = false;
         }
 
-        protected void Update()
-        {
+        protected void Update() {
             if (!monitorInput) return;
-            if (InputDeviceManager.IsKeyDown(key) || 
-                (!string.IsNullOrEmpty(buttonName) && InputDeviceManager.IsButtonDown(buttonName)) ||
-                (anyKeyOrButton && InputDeviceManager.IsAnyKeyDown()))
-            {
+            if (stringKey.Length == 0 ? InputDeviceManager.IsKeyDown(key) : InputDeviceManager.IsKeyDown(stringKey) ||
+                                                                            (!string.IsNullOrEmpty(buttonName) && InputDeviceManager.IsButtonDown(buttonName)) ||
+                                                                            (anyKeyOrButton && InputDeviceManager.IsAnyKeyDown())) {
                 if (skipIfBeingClickedBySubmit && IsBeingClickedBySubmit()) return;
                 Click();
             }
         }
 
-        protected virtual bool IsBeingClickedBySubmit()
-        {
+        protected virtual bool IsBeingClickedBySubmit() {
             return EventSystem.current != null &&
                 EventSystem.current.currentSelectedGameObject == m_selectable.gameObject &&
                 InputDeviceManager.instance != null &&
                 InputDeviceManager.IsButtonDown(InputDeviceManager.instance.submitButton);
         }
 
-        protected virtual void Click()
-        {
-            if (simulateButtonClick)
-            {
+        protected virtual void Click() {
+            if (simulateButtonClick) {
                 StartCoroutine(SimulateButtonClick());
-            }
-            else
-            {
+            } else {
                 ExecuteEvents.Execute(m_selectable.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.submitHandler);
             }
         }
 
-        protected IEnumerator SimulateButtonClick()
-        {
+        protected IEnumerator SimulateButtonClick() {
             m_selectable.OnPointerDown(new PointerEventData(EventSystem.current));
             var timeLeft = simulateButtonDownDuration;
-            while (timeLeft > 0)
-            {
+            while (timeLeft > 0) {
                 yield return null;
                 timeLeft -= Time.unscaledDeltaTime;
             }

@@ -28,9 +28,7 @@ public class TrophyManager : MonoBehaviour {
 
     public void CollectTrophy(TrophyType trophyType) {
         Trophy trophy = GetTrophy(trophyType);
-        print("1: " + trophy.gameObject.name);
         if (trophy != null) {
-            print("2: " + trophy.gameObject.name);
             trophy.SetMaterial(goldMaterial);
         }
     }
