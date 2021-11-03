@@ -20,6 +20,7 @@ public class ScreenshakeManager : MonoBehaviour {
         switch (currentGlobalsType) {
             case Globals.GlobalsType.NEIGHBORHOOD: GetNoiseFromCamera(Globals.Player.CameraController.GetFirstPersonCamera()); break;
             case Globals.GlobalsType.OBLIVION: GetNoiseFromCamera(Globals.Player.CameraController.Get25DCamera()); break;
+            case Globals.GlobalsType.MUDDLE: GetNoiseFromCamera(Globals.Player.CameraController.Get25DCamera()); break;
         }
     }
 
