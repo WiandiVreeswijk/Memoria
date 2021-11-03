@@ -10,9 +10,7 @@ public class ControllerButtonsUI : MonoBehaviour {
         xbox.SetActive(Hinput.anyGamepad.isConnected);
         xbox.SetActive(Hinput.anyGamepad.isConnected);
     }
-    void Update()
-    {
-        print(Globals.ControllerManager.JustChanged());
+    void Update() {
         if (Globals.ControllerManager.JustChanged()) {
             xbox.SetActive(Globals.ControllerManager.IsUsingController());
             ps.SetActive(Globals.ControllerManager.IsUsingController());

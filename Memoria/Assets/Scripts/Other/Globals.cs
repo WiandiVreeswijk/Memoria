@@ -9,7 +9,8 @@ public class Globals : MonoBehaviour {
     public enum GlobalsType {
         DEBUG,
         NEIGHBORHOOD,
-        OBLIVION
+        OBLIVION,
+        MUDDLE
     }
 
     private static Globals _Instance;
@@ -90,6 +91,9 @@ public class Globals : MonoBehaviour {
             case GlobalsType.OBLIVION:
                 _Instance.InitializeOblivion();
                 break;
+            case GlobalsType.MUDDLE:
+                _Instance.InitializeMuddle();
+                break;
         }
         _Instance.PostGlobalsInitialize();
         Debugger.InitializeMenu(type);
@@ -141,6 +145,11 @@ public class Globals : MonoBehaviour {
         oblivionVFXManager = Utils.FindUniqueObject<OblivionVFXManager>();
         checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
         soundManagerChase = Utils.FindUniqueObject<SoundManagerChase>();
+        UIManager.SetDepthOfField(false);
+    }
+
+    private void InitializeMuddle() {
+        checkpointManager = Utils.FindUniqueObject<CheckpointManager>();
         UIManager.SetDepthOfField(false);
     }
 

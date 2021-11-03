@@ -16,6 +16,12 @@ public class SceneOpener : EditorWindow {
             UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/ChasingLevel/ChasingLevelScene.unity");
     }
 
+    [MenuItem("Scene/Muddle")]
+    public static void Muddle() {
+        if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/MuddleLevel/MuddleLevelScene.unity");
+    }
+
     [MenuItem("Scene/UI")]
     public static void UI() {
         if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
