@@ -1,39 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEditor.SceneTemplate;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerMovement25D : MonoBehaviour {
-    //[Header("Movement")]
-    //[SerializeField] public float rotationSpeed = 5.0f;
-    //[SerializeField] public float timeToRunMultiplier = 1.0f;
-    //[SerializeField] public float movementDragMultiplier = 0.85f;
-    //[SerializeField] public float movementDecreaseWhenNotMoving = 0.01f;
-    //[SerializeField] public float startMovingTreshold = 0.25f;
-    //
-    //private Transform cam;
+    Tween stunnedTween = null;
     private Animator animator;
-    //
-    //private Vector3 smoothedRotatedMovement = Vector3.zero;
-    //private Vector3 previousPlainMovement = Vector3.zero;
-    //private Vector3 plainRotatedMovement = Vector3.zero;
-    //private Vector3 previousMovement = Vector3.zero;
-    //private float runVariableSmoothed = 0.0f;
-    //private float forwardSpeed = 0.0f;
-    //private bool wasMovingLastFrame;
-    //
-    //private CharacterController controller;
-    //public float fpsSpeed = 2.5f;
-    //private float gravity = 9.81f;
-    //
-    //[HideInInspector]
-    //public bool inHouse;
 
-    //public bool hasMoved = false;
-    //public bool canMove = false;
-
-    public float moveSpeed;
-    public float jumpForce;
+    public float moveSpeed = 8f;
+    public float jumpForce = 15f;
+    public float extraJumpForce = 15f;
     private float moveInput;
 
     private Rigidbody2D rb;
@@ -42,44 +20,55 @@ public class PlayerMovement25D : MonoBehaviour {
     private Collider2D playerCollider;
 
     private bool isGrounded;
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 4f;
-    public Vector2 groundColliderCheckSize = new Vector2(0.2f, 0.2f);
+    public float fallMultiplier = 7f;
+    public float lowJumpMultiplier = 5f;
+    public Vector2 groundColliderCheckSize = new Vector2(0.55f, 0.2f);
 
-    public float hangTime = 0.2f;
+    public bool extraJumpSupported = false;
+    public float hangTime = 0.15f;
     private float hangCounter;
 
-    public float jumpBufferLength;
+    public float jumpBufferLength = 0;
     private float jumpBufferCount;
 
-    public float fallTimeout = 0.15f;
+    public float fallTimeout = 0.05f;
     private float fallTimeoutDelta;
 
+    bool justLanded = false;
+    private float previousYVelocity = 0.0f;
+
+    bool canJump = false;
+    bool canExtraJump = false;
+
     private bool stunned = false;
+
+    public bool dashSupported = false;
+    public bool canDash = false;
+    private bool isDashing = false;
+
+    public float dashDuration = 2.0f;
+    private float dashDurationLeft = 0.0f;
+    private float currentDashSpeed = 0f;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
-        //groundCheckCollider = GetComponentInChildren<Collider2D>();
         animator = GetComponent<Animator>();
         fallTimeoutDelta = fallTimeout;
     }
 
     void Update() {
         Jump();
+        Dash();
         moveInput = Input.GetAxis("Horizontal");
         moveInput += Hinput.anyGamepad.leftStick.horizontal;
-        moveInput = Mathf.Clamp(moveInput, - 1.0f, 1.0f);
+        moveInput = Mathf.Clamp(moveInput, -1.0f, 1.0f);
     }
 
-    bool justLanded = false;
-    //bool wasTouching = false;
-    private float previousYVelocity = 0.0f;
-    bool canJump = false;
     private void FixedUpdate() {
         //IsTouching is checked for this frame and the previous frame to prevent Elena from 'tripping' over adjecent colliders
         bool areFeetGrounded = Physics2D.OverlapBox(transform.position, groundColliderCheckSize, 0, platformLayerMask);
-        bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
+        //bool isTouchingLayers = Physics2D.IsTouchingLayers(playerCollider, platformLayerMask);
 
         var hit = Physics2D.Raycast(transform.position, -Vector2.up, 10.0f, platformLayerMask);
 
@@ -95,10 +84,19 @@ public class PlayerMovement25D : MonoBehaviour {
         justLanded = !isGrounded && isGroundedThisFrame;
         if (justLanded && !ignoreLanding) OnLand(previousYVelocity);
         isGrounded = isGroundedThisFrame;
+        canJump = isGroundedThisFrame;
         bool jumpAnimation = false;
+        if (ignoreLanding) {
+            canJump = false;
+            canExtraJump = false;
+        }
         if (isGrounded) {
+            isInExtraJump = false;
             fallTimeoutDelta = fallTimeout;
-            if (!ignoreLanding) canJump = true;
+            if (!ignoreLanding) {
+                //canJump = true;
+                if (extraJumpSupported) canExtraJump = true;
+            }
         }
         if (isGrounded || rb.velocity.y <= 0) isJumping = false;
 
@@ -113,7 +111,7 @@ public class PlayerMovement25D : MonoBehaviour {
 
         float horizontal = moveInput;
         float animatorForwardSpeed = Mathf.Clamp01(Mathf.Abs(rb.velocity.x));
-        if (!stunned) rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        if (!stunned) rb.velocity = new Vector2((moveInput * moveSpeed) + currentDashSpeed, isDashing ? 0 : rb.velocity.y);
 
         //TODO rotate 180 animation
         if (horizontal < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -131,9 +129,10 @@ public class PlayerMovement25D : MonoBehaviour {
         }
     }
 
-    private bool superJump = false;
+    private bool isInExtraJump = false;
     bool isJumping = false;
     private void Jump() {
+        if (isDashing) return;
         //Manage hang time
         if (isGrounded) hangCounter = hangTime;
         else hangCounter -= Time.deltaTime;
@@ -142,9 +141,16 @@ public class PlayerMovement25D : MonoBehaviour {
         bool jump = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 1");
         bool jumpUp = Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp("joystick button 1");
         if (jump && canJump && !stunned) {
-            canJump = false;
-            jumpBufferCount = jumpBufferLength;
             Globals.Player.PlayerSound.PlayJumpingSound();
+            jumpBufferCount = jumpBufferLength;
+            hangCounter = hangTime;
+            canJump = false;
+        } else if (jump && canExtraJump && !stunned) {
+            Globals.Player.PlayerSound.PlayJumpingSound(); //Super jump sound?
+            jumpBufferCount = jumpBufferLength;
+            hangCounter = hangTime;
+            isInExtraJump = true;
+            canExtraJump = false;
         } else jumpBufferCount -= Time.deltaTime;
 
         //checks hangtime and jumpbuffer
@@ -153,7 +159,7 @@ public class PlayerMovement25D : MonoBehaviour {
                 //Just jumped
                 isJumping = true;
             }
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = Vector2.up * (isInExtraJump ? extraJumpForce : jumpForce);
             jumpBufferCount = 0;
         }
 
@@ -170,7 +176,27 @@ public class PlayerMovement25D : MonoBehaviour {
         }
     }
 
-    Tween stunnedTween = null;
+    private void Dash()
+    {
+        currentDashSpeed = 0f;
+        if (!dashSupported) return;
+        bool dash = Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown("joystick button 0");
+        if (dash && !isDashing) {
+            isDashing = true;
+            dashDurationLeft = dashDuration;
+        }
+
+        if (isDashing) {
+            Globals.Debugger.Print("a", "Dashing", 0.1f);
+            currentDashSpeed = 15f;
+            dashDurationLeft -= Time.deltaTime;
+            if (dashDurationLeft <= 0) {
+                isDashing = false;
+                canDash = true;
+            }
+        }
+    }
+
     public void Stunned(float duration) {
         stunned = true;
         if (stunned) gameObject.GetComponent<Player25DVisualEffects>().DoBlink(0.1f, 4);

@@ -9,11 +9,11 @@ using Debug = UnityEngine.Debug;
 
 public class MainMenu : MonoBehaviour {
     private void Start() {
-        Globals.MusicManagerWijk.FadePianoVolume(1.0f, 2.0f);
-        Globals.MusicManagerWijk.FadeViolinVolume(1.0f, 2.0f);
-        Globals.MusicManagerWijk.FadeHarpVolume(1.0f, 2.0f);
-        Globals.SoundManagerWijk.FadeAmbientVolume(0.0f, 0.0f);
-        Globals.AmbientControl.SetVolume(0);
+        Globals.MusicManagerWijk?.FadePianoVolume(1.0f, 2.0f);
+        Globals.MusicManagerWijk?.FadeViolinVolume(1.0f, 2.0f);
+        Globals.MusicManagerWijk?.FadeHarpVolume(1.0f, 2.0f);
+        Globals.SoundManagerWijk?.FadeAmbientVolume(0.0f, 0.0f);
+        Globals.AmbientControl?.SetVolume(0);
     }
 
     private float textTime = 11.0f;

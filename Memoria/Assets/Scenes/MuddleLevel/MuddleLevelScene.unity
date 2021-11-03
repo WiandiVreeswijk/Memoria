@@ -3538,7 +3538,7 @@ MonoBehaviour:
   renderSettingsForceRebuildGeometry: 1
   renderSettingsPerformRendering: 1
   renderSettingsUserRenderMode: 0
-  renderSettingsDistanceShadowmask: 0
+  renderSettingsDistanceShadowmask: 1
   renderSettingsSettingsMode: 0
   renderSettingsFixSeams: 1
   renderSettingsDenoise: 1
@@ -3560,7 +3560,7 @@ MonoBehaviour:
   renderSettingsHackEmissiveBoost: 1
   renderSettingsHackIndirectBoost: 1
   renderSettingsTempPath: 
-  renderSettingsOutPath: 
+  renderSettingsOutPath: BakeryLightmaps
   renderSettingsUseScenePath: 0
   renderSettingsHackAOIntensity: 0
   renderSettingsHackAOSamples: 16
@@ -32157,6 +32157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpForce: 15
+  extraJumpForce: 20
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 12288
@@ -32166,10 +32167,13 @@ MonoBehaviour:
   fallMultiplier: 7
   lowJumpMultiplier: 5
   groundColliderCheckSize: {x: 0.55, y: 0.2}
-  extraJumpsValue: 0
+  extraJumpSupported: 1
   hangTime: 0.15
   jumpBufferLength: 0
   fallTimeout: 0.05
+  dashSupported: 1
+  canDash: 0
+  dashDuration: 2
 --- !u!114 &6836267754684318094
 MonoBehaviour:
   m_ObjectHideFlags: 0
