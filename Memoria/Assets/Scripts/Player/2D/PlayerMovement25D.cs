@@ -46,8 +46,6 @@ public class PlayerMovement25D : MonoBehaviour {
     public float lowJumpMultiplier = 4f;
     public Vector2 groundColliderCheckSize = new Vector2(0.2f, 0.2f);
 
-    public int extraJumpsValue;
-
     public float hangTime = 0.2f;
     private float hangCounter;
 
@@ -133,6 +131,7 @@ public class PlayerMovement25D : MonoBehaviour {
         }
     }
 
+    private bool superJump = false;
     bool isJumping = false;
     private void Jump() {
         //Manage hang time
