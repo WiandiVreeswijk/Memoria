@@ -406,8 +406,6 @@ public class ftBuildGraphics : ScriptableWizard
             lmgroup = lmgroupSelector.lmgroupAsset as BakeryLightmapGroup;
             lmgroupHolder = lmgroupSelector.gameObject;
 
-            //var so = new SerializedObject(obj.GetComponent<Renderer>());
-            //var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
             var scaleInLm = data.objToScaleInLm[obj];
             if (scaleInLm == 0.0f) lmgroup = data.autoVertexGroup;
                 //null; // ignore lightmaps when scaleInLightmap == 0
@@ -448,8 +446,6 @@ public class ftBuildGraphics : ScriptableWizard
             var r = GetValidRenderer(obj);
             if (r)
             {
-                //var so = new SerializedObject(r);
-                //var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
                 var scaleInLm = data.objToScaleInLm[obj];
                 if (scaleInLm == 0.0f) lmgroup = data.autoVertexGroup;
                 // null; // ignore lightmaps when scaleInLightmap == 0
@@ -499,6 +495,10 @@ public class ftBuildGraphics : ScriptableWizard
             {
                 var so = new SerializedObject(r);
                 var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
+#if UNITY_2019_2_OR_NEWER
+                var _r = r as MeshRenderer;
+                if (pstorage.takeReceiveGIIntoAccount && _r != null && _r.receiveGI == ReceiveGI.LightProbes) scaleInLm = 0;
+#endif
                 //var scaleInLm = data.objToScaleInLm[obj];
                 if (scaleInLm == 0.0f) lmgroup = null;
                 // null; // ignore lightmaps when scaleInLightmap == 0
@@ -2284,6 +2284,10 @@ public class ftBuildGraphics : ScriptableWizard
 
                     var so = new SerializedObject(mr);
                     var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue; // (before FilterObjects)
+#if UNITY_2019_2_OR_NEWER
+                    var _r = mr as MeshRenderer;
+                    if (pstorage.takeReceiveGIIntoAccount && _r != null && _r.receiveGI == ReceiveGI.LightProbes) scaleInLm = 0;
+#endif
                     if (scaleInLm == 0) continue;
 
                     lightmappedLOD = true;
@@ -3281,6 +3285,10 @@ public class ftBuildGraphics : ScriptableWizard
 
             var so = new SerializedObject(mr);//obj.GetComponent<Renderer>());
             var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
+#if UNITY_2019_2_OR_NEWER
+            var _r = mr as MeshRenderer;
+            if (pstorage.takeReceiveGIIntoAccount && _r != null && _r.receiveGI == ReceiveGI.LightProbes) scaleInLm = 0;
+#endif
 
             if (ftRenderLightmap.fullSectorRender)
             {
@@ -4194,8 +4202,6 @@ public class ftBuildGraphics : ScriptableWizard
                 // uv layouts always have empty spaces
                 //area /= areaUV;
 
-                //var so = new SerializedObject(mr);
-                //var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
                 var scaleInLm = data.objToScaleInLm[obj];
 
                 if (!pstorage.alternativeScaleInLightmap) area *= scaleInLm;
@@ -4442,6 +4448,10 @@ public class ftBuildGraphics : ScriptableWizard
                     {
                         var so = new SerializedObject(mr);
                         var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
+#if UNITY_2019_2_OR_NEWER
+                        var _r = mr as MeshRenderer;
+                        if (pstorage.takeReceiveGIIntoAccount && _r != null && _r.receiveGI == ReceiveGI.LightProbes) scaleInLm = 0;
+#endif
                         width *= scaleInLm;
                         height *= scaleInLm;
                     }
@@ -4831,6 +4841,10 @@ public class ftBuildGraphics : ScriptableWizard
             {
                 var so = new SerializedObject(mr);
                 var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
+#if UNITY_2019_2_OR_NEWER
+                var _r = mr as MeshRenderer;
+                if (pstorage.takeReceiveGIIntoAccount && _r != null && _r.receiveGI == ReceiveGI.LightProbes) scaleInLm = 0;
+#endif
                 if (pstorage.alternativeScaleInLightmap)
                 {
                     a *= scaleInLm * scaleInLm;
@@ -5018,6 +5032,10 @@ public class ftBuildGraphics : ScriptableWizard
                     {
                         var so = new SerializedObject(mr);
                         var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
+#if UNITY_2019_2_OR_NEWER
+                        var _r = mr as MeshRenderer;
+                        if (pstorage.takeReceiveGIIntoAccount && _r != null && _r.receiveGI == ReceiveGI.LightProbes) scaleInLm = 0;
+#endif
                         width *= scaleInLm;
                         height *= scaleInLm;
                     }

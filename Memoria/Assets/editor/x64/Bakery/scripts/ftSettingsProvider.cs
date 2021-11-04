@@ -32,6 +32,7 @@ public class ftSettingsProvider
         EditorGUILayout.PropertyField(so.FindProperty("alternativeScaleInLightmap"), new GUIContent("Alternative Scale in Lightmap", "Make 'Scale in Lightmap' renderer property act more similar to built-in Unity behaviour."));
         EditorGUILayout.PropertyField(so.FindProperty("alignToTextureBlocksWithXatlas"), new GUIContent("Align to texture compression blocks with xatlas", "Make xatlas align charts to 4x4 block boundaries to make texture compression happy."));
         EditorGUILayout.PropertyField(so.FindProperty("generateSmoothPos"), new GUIContent("Generate smooth positions", "Should we adjust sample positions to prevent incorrect shadowing on very low-poly meshes with smooth normals?"));
+        EditorGUILayout.PropertyField(so.FindProperty("takeReceiveGIIntoAccount"), new GUIContent("Use 'Receive GI' values", "Take 'Receive Global Illumination' values into account on renderers. Originally Bakery ignored it."));
 
         EditorGUIUtility.labelWidth = prev;
 
@@ -53,6 +54,7 @@ public class ftSettingsProvider
                 so.FindProperty("alternativeScaleInLightmap").boolValue = false;
                 so.FindProperty("alignToTextureBlocksWithXatlas").boolValue = true;
                 so.FindProperty("generateSmoothPos").boolValue = true;
+                so.FindProperty("takeReceiveGIIntoAccount").boolValue = true;
             }
         }
 

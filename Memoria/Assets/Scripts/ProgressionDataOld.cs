@@ -4,7 +4,7 @@ using PixelCrushers.DialogueSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ProgressionData : MonoBehaviour, IEnterActivatable {
+public class ProgressionDataOld : MonoBehaviour, IEnterActivatable {
     [SerializeField] private bool setActorPosition;
     [SerializeField] private GameObject actor;
     [SerializeField] private Transform newActorPosition;

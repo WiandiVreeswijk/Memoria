@@ -8014,7 +8014,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
         }
     }
 
-    bool WriteCompFiles(BakeryPointLight obj, ComposeInstructionFiles cif, string lname, int rmode, bool dominantDirMode, bool rnmMode, bool shMode)
+    bool WriteCompFiles(BakeryPointLight obj, ComposeInstructionFiles cif, string lname, int rmode, bool dominantDirMode, bool rnmMode, bool shMode, bool shModeProbe)
     {
         bool usesIndirectIntensity = false;
 
@@ -8085,7 +8085,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
             if (bounces == 0) passes = 0;
             passes |= PASS_RNM0 | PASS_RNM1 | PASS_RNM2;
         }
-        else if (shMode && (rmodeFullLight || obj.bakeToIndirect))
+        else if (shMode && (rmodeFullLight || obj.bakeToIndirect || shModeProbe))
         {
             renderMode += shModeProbe ? "probesh" : "sh";
             if (bounces == 0) passes = 0;
@@ -8106,7 +8106,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
         deferredCommandDesc.Add(progressText);
     }
 
-    string PrepareBatchPointLight(int start, int end, int LMID, bool[] skipLight, ComposeInstructionFiles cif, int rmode, bool dominantDirMode, bool rnmMode, bool shMode, ref bool usesIndirectIntensity)
+    string PrepareBatchPointLight(int start, int end, int LMID, bool[] skipLight, ComposeInstructionFiles cif, int rmode, bool dominantDirMode, bool rnmMode, bool shMode, bool shModeProbe, ref bool usesIndirectIntensity)
     {
         string lname = "PointBatch_" + LMID + "_" + start + "_" + end;
         bool first = true;
@@ -8122,7 +8122,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
             if (first)
             {
                 // Once for the whole batch
-                if (WriteCompFiles(AllP[j], cif, lname, rmode, dominantDirMode, rnmMode, shMode)) usesIndirectIntensity = true;
+                if (WriteCompFiles(AllP[j], cif, lname, rmode, dominantDirMode, rnmMode, shMode, shModeProbe)) usesIndirectIntensity = true;
                 first = false;
             }
         }
@@ -8357,7 +8357,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
                 cif.fcompRNM1.Write(lname + "_RNM1" + (compressedOutput ? ".lz4" : ".dds"));
                 cif.fcompRNM2.Write(lname + "_RNM2" + (compressedOutput ? ".lz4" : ".dds"));
             }
-            else if (shMode && (rmodeFullLight || obj.bakeToIndirect))
+            else if (shMode && (rmodeFullLight || obj.bakeToIndirect || shModeProbe))
             {
                 if (shModeProbe) {
                     renderMode = obj.texture == null ? "arealightprobesh" : "texarealightprobesh";
@@ -8543,7 +8543,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
                 if (split)
                 {
                     end = i-1;
-                    lname = PrepareBatchPointLight(start, end, LMID, skipLight, cif, rmode, dominantDirMode, rnmMode, shMode, ref usesIndirectIntensity);
+                    lname = PrepareBatchPointLight(start, end, LMID, skipLight, cif, rmode, dominantDirMode, rnmMode, shMode, shModeProbe, ref usesIndirectIntensity);
                     settingsFile = "batchpointlight_" + LMID + "_" + start + "_" + end + ".bin";
                     bakeBatch = true;
                 }
@@ -8555,7 +8555,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
                 UpdateLightmapShadowmaskFromPointLight(obj, LMID, lname, lmname);
 
                 // Update composing instructions
-                if (WriteCompFiles(obj, cif, lname, rmode, dominantDirMode, rnmMode, shMode)) usesIndirectIntensity = true;
+                if (WriteCompFiles(obj, cif, lname, rmode, dominantDirMode, rnmMode, shMode, shModeProbe)) usesIndirectIntensity = true;
 
                 settingsFile = "pointlight" + i + ".bin";
             }
@@ -8633,7 +8633,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
         if (ftAdditionalConfig.batchPointLights && addedLights > 0)
         {
             end = AllP.Length-1;
-            string lname = PrepareBatchPointLight(start, end, LMID, skipLight, cif, rmode, dominantDirMode, rnmMode, shMode, ref usesIndirectIntensity);
+            string lname = PrepareBatchPointLight(start, end, LMID, skipLight, cif, rmode, dominantDirMode, rnmMode, shMode, shModeProbe, ref usesIndirectIntensity);
             string settingsFile = "batchpointlight_" + LMID + "_" + start + "_" + end + ".bin";
             string renderMode = "batchpointlight";
             string progressText = "Rendering point light batch (" + (start) + "-" + (end) + ") for " + lmname + "...";
@@ -8744,7 +8744,7 @@ public class ftRenderLightmap : EditorWindow//ScriptableWizard
 
             var bakeDir = (dominantDirMode && (rmodeFullLight || obj.bakeToIndirect));
             var bakeRNM = (rnmMode && (rmodeFullLight || obj.bakeToIndirect));
-            var bakeSH = (shMode && (rmodeFullLight || obj.bakeToIndirect));
+            var bakeSH = (shMode && (rmodeFullLight || obj.bakeToIndirect || shModeProbe));
             string renderMode;
             if (obj.cubemap != null)
             {

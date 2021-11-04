@@ -7,7 +7,7 @@ using UnityEngine;
 public class ProgressionManager : MonoBehaviour {
     private Icon questIcon;
     private bool watchCollected = false;
-    private Dictionary<string, ProgressionData> progressionDataDict = new Dictionary<string, ProgressionData>();
+    private Dictionary<string, ProgressionDataOld> progressionDataDict = new Dictionary<string, ProgressionDataOld>();
 
 
     public void CollectWatch() {
@@ -30,7 +30,7 @@ public class ProgressionManager : MonoBehaviour {
     }
 
     public void OnGlobalsInitializeType(Globals.GlobalsType previousGlobalsType, Globals.GlobalsType currentGlobalsType) {
-        progressionDataDict = Utils.ListToDictionary(FindObjectsOfType<ProgressionData>().ToList(), "ProgressionData", x => x.name);
+        progressionDataDict = Utils.ListToDictionary(FindObjectsOfType<ProgressionDataOld>().ToList(), "ProgressionData", x => x.name);
 
         if (currentGlobalsType == Globals.GlobalsType.NEIGHBORHOOD) { //#TODO: This is temporary
             if (previousGlobalsType == Globals.GlobalsType.OBLIVION) {
@@ -70,7 +70,7 @@ public class ProgressionManager : MonoBehaviour {
         Trophy tifa = FindObjectsOfType<Trophy>().First(x => x.GetTrophyType() == TrophyType.TIFA);
         tifa.gameObject.AddComponent<EndOfDemo>();
 
-        ProgressionData pData = progressionDataDict["TrophyCupboardEnd"];
+        ProgressionDataOld pData = progressionDataDict["TrophyCupboardEnd"];
         pData.Progress();
     }
 }

@@ -63,6 +63,10 @@ public class BakeryProjectSettings : ScriptableObject
     // Should we adjust sample positions to prevent incorrect shadowing on very low-poly meshes with smooth normals?
     [SerializeField]
     public bool generateSmoothPos = true;
+
+    // Use renderer.receiveGI
+    [SerializeField]
+    public bool takeReceiveGIIntoAccount = true;
 }
 
 #endif

@@ -353,7 +353,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &40952534
 MonoBehaviour:
@@ -407,7 +407,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43424117}
-  m_LocalRotation: {x: -0.040944453, y: -0.045402702, z: 0.043064382, w: 0.9971999}
+  m_LocalRotation: {x: -0.04091799, y: -0.052336298, z: 0.0496409, w: 0.9965553}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -647,7 +647,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &90029138
 GameObject:
@@ -673,7 +673,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90029138}
-  m_LocalRotation: {x: -0.05907625, y: -0.04617849, z: 0.04223138, w: 0.9962902}
+  m_LocalRotation: {x: -0.059038058, y: -0.053230613, z: 0.048680738, w: 0.9956462}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -723,47 +723,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 431679376}
---- !u!114 &186925840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: Progression_LMA2
-  m_EditorClassIdentifier: 
-  resolution: 512
-  bitmask: 1
-  id: 2
-  sortingID: 2
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: Progression
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &200460608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,49 +1026,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &336508377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: Progression_LMA3
-  m_EditorClassIdentifier: 
-  resolution: 512
-  bitmask: 1
-  id: 3
-  sortingID: 3
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: Progression
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &366757570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,7 +1087,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 0.1
+  m_ScaleInLightmap: 1
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -1428,6 +1346,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &452238899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: ProgressionTest_LMA1
+  m_EditorClassIdentifier: 
+  resolution: 2048
+  bitmask: 1
+  id: 1
+  sortingID: 2
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: ProgressionTest
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
+--- !u!1 &468004961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468004963}
+  - component: {fileID: 468004962}
+  m_Layer: 0
+  m_Name: BakeryVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &468004962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468004961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ce3c1d3490b7143a67ebdc73cab6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableBaking: 1
+  bounds:
+    m_Center: {x: -5.891725, y: 2.3227055, z: -8.738577}
+    m_Extent: {x: 19.199148, y: 2.3421614, z: 18.419926}
+  adaptiveRes: 1
+  voxelsPerUnit: 2.5
+  resolutionX: 95
+  resolutionY: 11
+  resolutionZ: 92
+  encoding: 0
+  shadowmaskEncoding: 0
+  denoise: 1
+  isGlobal: 1
+  bakedTexture0: {fileID: 11700000, guid: 467d482bf209b6547923854224a8f6b0, type: 2}
+  bakedTexture1: {fileID: 11700000, guid: 1ba43d491bfb89145a9ac035ecf0e047, type: 2}
+  bakedTexture2: {fileID: 11700000, guid: a2ba3b276a48be84fa6727a12ca27698, type: 2}
+  bakedTexture3: {fileID: 0}
+  bakedMask: {fileID: 0}
+  supportRotationAfterBake: 0
+--- !u!4 &468004963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468004961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.891725, y: 2.3227055, z: -8.738577}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &552451803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1890214705832023420, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
@@ -1592,7 +1613,7 @@ Transform:
   - {fileID: 212995734}
   - {fileID: 1862564469}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &623238023
 GameObject:
@@ -1690,47 +1711,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623238023}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &628028396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: Progression_LM0
-  m_EditorClassIdentifier: 
-  resolution: 512
-  bitmask: 1
-  id: 0
-  sortingID: 0
-  isImplicit: 1
-  area: 2832
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: Progression
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &655361464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,47 +1866,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7279712180945551401, guid: 869c1afc8913aec45b8448a5472ea263, type: 3}
   maxParticles: 50
---- !u!114 &720421778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: Progression_LMA1
-  m_EditorClassIdentifier: 
-  resolution: 512
-  bitmask: 1
-  id: 1
-  sortingID: 1
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: Progression
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &723514124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,7 +1986,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &891486751
 GameObject:
@@ -2136,7 +2075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1890214705832023130, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1890214705832023130, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2178,6 +2117,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1890214705833924274, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9bf6f1626effa7d46a731d2212ba7e5b, type: 2}
+    - target: {fileID: 1890214705834836696, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d25fa910ce03fb54996c134c22b4ac07, type: 2}
     - target: {fileID: 5602641666063726847, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
       propertyPath: arm
       value: 
@@ -2194,6 +2141,10 @@ PrefabInstance:
       propertyPath: elenaMeshesObject
       value: 
       objectReference: {fileID: 1489013342}
+    - target: {fileID: 6835828420792390712, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d25fa910ce03fb54996c134c22b4ac07, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
 --- !u!1 &1256735151
@@ -2220,7 +2171,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256735151}
-  m_LocalRotation: {x: -0.077069774, y: -0.05686173, z: 0.050137773, w: 0.9941395}
+  m_LocalRotation: {x: -0.07702426, y: -0.062399648, z: 0.05502083, w: 0.9935523}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2407,7 +2358,7 @@ MonoBehaviour:
   renderSettingsUserRenderMode: 0
   renderSettingsDistanceShadowmask: 1
   renderSettingsSettingsMode: 2
-  renderSettingsFixSeams: 1
+  renderSettingsFixSeams: 0
   renderSettingsDenoise: 1
   renderSettingsDenoise2x: 1
   renderSettingsEncode: 1
@@ -2427,8 +2378,8 @@ MonoBehaviour:
   renderSettingsHackEmissiveBoost: 1
   renderSettingsHackIndirectBoost: 1
   renderSettingsTempPath: 
-  renderSettingsOutPath: BakeryLightmaps
-  renderSettingsUseScenePath: 0
+  renderSettingsOutPath: Scenes/Testing/ProgressionTest
+  renderSettingsUseScenePath: 1
   renderSettingsHackAOIntensity: 2.5
   renderSettingsHackAOSamples: 16
   renderSettingsHackAORadius: 0.15
@@ -2470,10 +2421,10 @@ MonoBehaviour:
   renderSettingsRTPVSceneView: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
-  lastBakeTime: 58
+  lastBakeTime: 76
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
-  lightUIDs: e58565e030dbcad9
+  lightUIDs: f8c2dd8e30dbcad9
   lights:
   - tform:
       e00: 1
@@ -2536,22 +2487,24 @@ MonoBehaviour:
     cookie: {fileID: 0}
     angle: 30
   implicitGroups:
-  - {fileID: 720421778}
-  - {fileID: 628028396}
-  - {fileID: 186925840}
-  - {fileID: 186925840}
-  - {fileID: 186925840}
-  - {fileID: 186925840}
-  - {fileID: 186925840}
-  - {fileID: 720421778}
-  - {fileID: 336508377}
-  - {fileID: 336508377}
-  - {fileID: 720421778}
-  - {fileID: 720421778}
-  - {fileID: 720421778}
-  - {fileID: 186925840}
-  - {fileID: 720421778}
+  - {fileID: 1907471073}
+  - {fileID: 452238899}
+  - {fileID: 2124085304}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
+  - {fileID: 452238899}
   implicitGroupedObjects:
+  - {fileID: 0}
   - {fileID: 200460608}
   - {fileID: 366757570}
   - {fileID: 424563783}
@@ -2572,11 +2525,9 @@ MonoBehaviour:
     m_Extent: {x: 50, y: 1.110223e-15, z: 50}
   - m_Center: {x: 0, y: 3.1082554, z: 0}
     m_Extent: {x: 150, y: 3.1082554, z: 150}
-  - m_Center: {x: 0, y: 3.108253, z: 0}
-    m_Extent: {x: 150, y: 3.108253, z: 150}
-  - m_Center: {x: -1.75, y: 2, z: 0.75}
-    m_Extent: {x: 2.75, y: 2, z: 2}
-  hasEmissive: 01010101
+  - m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 5000, y: 5000, z: 5000}
+  hasEmissive: 0101
   uvBuffOffsets: 
   uvBuffLengths: 
   uvSrcBuff: []
@@ -2588,23 +2539,19 @@ MonoBehaviour:
   lmGroupMinLOD: 
   lmGroupLODMatrix: 
   serverGetFileList: []
-  lightmapHasColor: 01010101
-  lightmapHasMask: 00000000000000000000000000000000
-  lightmapHasDir: 01010101
-  lightmapHasRNM: 00000000
+  lightmapHasColor: 010101
+  lightmapHasMask: 000000000000000000000000
+  lightmapHasDir: 010100
+  lightmapHasRNM: 000001
   modifiedAssetPathList: []
   modifiedAssets: []
   maps:
-  - {fileID: 2800000, guid: b2c615343fedf86499f7a66520cf54a9, type: 3}
-  - {fileID: 2800000, guid: 13bb991ed8475d04ebb02ae0e897b5e3, type: 3}
-  - {fileID: 2800000, guid: ecaf85edc1fe67a4ba814300d01d0453, type: 3}
-  - {fileID: 2800000, guid: cddc19c9b1c2a5b4295b3504952e438c, type: 3}
+  - {fileID: 2800000, guid: cf82db0434fd0b640b3dbcd544707944, type: 3}
+  - {fileID: 2800000, guid: feffa03e1bb470048a00be5b8de9f5ff, type: 3}
   masks: []
   dirMaps:
-  - {fileID: 2800000, guid: 4eda8675518fc4b4c8cc5ab45b9c82f3, type: 3}
-  - {fileID: 2800000, guid: d9e0b7f1ee5bc6e4ca056880d075fd2c, type: 3}
-  - {fileID: 2800000, guid: 216ccb2e8607fbb4998ddb5f5bb2ed92, type: 3}
-  - {fileID: 2800000, guid: 9fcd31b82e1beca448cafd593ee9504f, type: 3}
+  - {fileID: 2800000, guid: aa6e9ebb72840964ca01901526549b43, type: 3}
+  - {fileID: 2800000, guid: f9f8960f0c039bd4089a46fd8ff21d8d, type: 3}
   rnmMaps0: []
   rnmMaps1: []
   rnmMaps2: []
@@ -2625,23 +2572,23 @@ MonoBehaviour:
   - {fileID: 1988256709}
   - {fileID: 2038980995}
   - {fileID: 2097902016}
-  bakedIDs: 010000000000000002000000020000000200000002000000020000000100000003000000030000000100000001000000010000000200000001000000
+  bakedIDs: 010000000000000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   bakedScaleOffset:
-  - {x: 0.84119344, y: 0.87311894, z: -0.003411684, w: -0.0035411664}
+  - {x: 0.5716522, y: 0.55520827, z: -0.0023184877, w: -0.002251795}
   - {x: 1, y: 1, z: 0, w: 0}
-  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0.68408555}
-  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0.456057}
-  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0.2280285}
-  - {x: 0.77327496, y: 0.76518536, z: -0.0031362227, w: 0.50045955}
-  - {x: 0.22518158, y: 0.22090262, z: 0.7748184, w: 0}
-  - {x: 0.18271118, y: 0.190184, z: 0.8172888, w: 0.57259715}
-  - {x: 1.0074528, y: 0.7643428, z: -0.0040859934, w: 0.50100964}
-  - {x: 1.0074528, y: 0.7643429, z: -0.0040859934, w: -0.0030999961}
-  - {x: 0.62743133, y: 0.65877926, z: -0.0025447148, w: 0.5699253}
-  - {x: 0.18271118, y: 0.19018406, z: 0.8172888, w: 0.76891613}
-  - {x: 0.18271124, y: 0.19018406, z: 0.6286837, w: 0.76891613}
-  - {x: 0.77327496, y: 0.7651854, z: -0.0031362227, w: -0.0031034134}
-  - {x: 0.18271124, y: 0.190184, z: 0.6286837, w: 0.57259715}
+  - {x: 0.12416556, y: 0.120936275, z: 0, w: 0.8790637}
+  - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.7750325}
+  - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.65019506}
+  - {x: 0.42638525, y: 0.41891164, z: 0.5696993, w: -0.0016990078}
+  - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.5253576}
+  - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.40052015}
+  - {x: 0.3725827, y: 0.36278954, z: 0.37232068, w: 0.6383205}
+  - {x: 0.3725827, y: 0.36278954, z: -0.0015111085, w: 0.6383205}
+  - {x: 0.42638525, y: 0.4189117, z: -0.001729319, w: 0.36241022}
+  - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.27568272}
+  - {x: 0.124165595, y: 0.120936275, z: 0.74766356, w: 0.76462936}
+  - {x: 0.42638525, y: 0.4189117, z: 0.425507, w: 0.36241022}
+  - {x: 0.124165595, y: 0.120936334, z: 0.74766356, w: 0.6397919}
   bakedVertexOffset: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   bakedVertexColorMesh:
   - {fileID: 0}
@@ -2668,34 +2615,20 @@ MonoBehaviour:
   bakedScaleOffsetTerrain: []
   assetList: []
   uvOverlapAssetList: 
-  idremap: 00000000010000000200000003000000
+  idremap: 0000000001000000
   usesRealtimeGI: 0
-  emptyDirectionTex: {fileID: 0}
-  anyVolumes: 0
+  emptyDirectionTex: {fileID: 2800000, guid: 04afea73344b7d049b5b7ac5ae315dd5, type: 3}
+  anyVolumes: 1
   compressedVolumes: 0
   sectors:
   - name: $G
     maps:
-    - {fileID: 2800000, guid: b2c615343fedf86499f7a66520cf54a9, type: 3}
-    - {fileID: 2800000, guid: 13bb991ed8475d04ebb02ae0e897b5e3, type: 3}
-    - {fileID: 2800000, guid: ecaf85edc1fe67a4ba814300d01d0453, type: 3}
-    - {fileID: 2800000, guid: cddc19c9b1c2a5b4295b3504952e438c, type: 3}
-    - {fileID: 2800000, guid: 4f0ee60d064d7414fae4059098de3400, type: 3}
-    - {fileID: 2800000, guid: c03eb59093ae42d48941b9eea6f6740e, type: 3}
-    - {fileID: 2800000, guid: ed692e2821327ca4ab264809f132b6e6, type: 3}
-    - {fileID: 2800000, guid: 31d8cf3cad86fbf41bd7a161bc8857ba, type: 3}
-    - {fileID: 2800000, guid: 3dca8dc46aad6ad4eb887b4a460858be, type: 3}
+    - {fileID: 2800000, guid: cf82db0434fd0b640b3dbcd544707944, type: 3}
+    - {fileID: 2800000, guid: feffa03e1bb470048a00be5b8de9f5ff, type: 3}
     masks: []
     dirMaps:
-    - {fileID: 2800000, guid: 4eda8675518fc4b4c8cc5ab45b9c82f3, type: 3}
-    - {fileID: 2800000, guid: d9e0b7f1ee5bc6e4ca056880d075fd2c, type: 3}
-    - {fileID: 2800000, guid: 216ccb2e8607fbb4998ddb5f5bb2ed92, type: 3}
-    - {fileID: 2800000, guid: 9fcd31b82e1beca448cafd593ee9504f, type: 3}
-    - {fileID: 2800000, guid: 7e62d4590f089c545b7dee68b2566412, type: 3}
-    - {fileID: 2800000, guid: 54bddf617138d0b439357ff5676896a2, type: 3}
-    - {fileID: 2800000, guid: 76163a5856441924e8b363014eae245f, type: 3}
-    - {fileID: 2800000, guid: d343e09b3d3c4914d958d14ff11122f9, type: 3}
-    - {fileID: 2800000, guid: 74f683c30032f5444bbaf2bc24d9ac09, type: 3}
+    - {fileID: 2800000, guid: aa6e9ebb72840964ca01901526549b43, type: 3}
+    - {fileID: 2800000, guid: f9f8960f0c039bd4089a46fd8ff21d8d, type: 3}
     rnmMaps0: []
     rnmMaps1: []
     rnmMaps2: []
@@ -2717,24 +2650,24 @@ MonoBehaviour:
     - {fileID: 2038980995}
     - {fileID: 2097902016}
     bakedRenderersTerrain: []
-    bakedIDs: 000000000800000007000000060000000500000000000000040000000300000000000000000000000000000002000000010000000000000000000000
+    bakedIDs: 010000000000000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
     bakedIDsTerrain: 
     bakedScaleOffset:
-    - {x: 0.1513494, y: 0.1373288, z: -0.0006138378, w: 0.91034687}
+    - {x: 0.5716522, y: 0.55520827, z: -0.0023184877, w: -0.002251795}
     - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 0.112888835, y: 0.10361632, z: 0.3770607, w: 0.91048354}
-    - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 0.0986442, y: 0.089734755, z: 0.5892076, w: 0.91053987}
-    - {x: 0.09864417, y: 0.089734755, z: 0.49023268, w: 0.91053987}
-    - {x: 0.112888835, y: 0.10361632, z: 0.15083236, w: 0.91048354}
-    - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 1, y: 1, z: 0, w: 0}
-    - {x: 0.112888835, y: 0.10361632, z: 0.26394653, w: 0.91048354}
-    - {x: 1, y: 0.9099389, z: 0, w: 0}
+    - {x: 0.12416556, y: 0.120936275, z: 0, w: 0.8790637}
+    - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.7750325}
+    - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.65019506}
+    - {x: 0.42638525, y: 0.41891164, z: 0.5696993, w: -0.0016990078}
+    - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.5253576}
+    - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.40052015}
+    - {x: 0.3725827, y: 0.36278954, z: 0.37232068, w: 0.6383205}
+    - {x: 0.3725827, y: 0.36278954, z: -0.0015111085, w: 0.6383205}
+    - {x: 0.42638525, y: 0.4189117, z: -0.001729319, w: 0.36241022}
+    - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.27568272}
+    - {x: 0.124165595, y: 0.120936275, z: 0.74766356, w: 0.76462936}
+    - {x: 0.42638525, y: 0.4189117, z: 0.425507, w: 0.36241022}
+    - {x: 0.124165595, y: 0.120936334, z: 0.74766356, w: 0.6397919}
     bakedScaleOffsetTerrain: []
     bakedVertexColorMesh:
     - {fileID: 0}
@@ -2765,7 +2698,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1466266110
 GameObject:
@@ -3469,6 +3402,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
   m_PrefabInstance: {fileID: 2065535689}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1907471073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: volumes
+  m_EditorClassIdentifier: 
+  resolution: 16
+  bitmask: 1
+  id: 2
+  sortingID: 0
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 96140
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: 
+  containsTerrains: 0
+  probes: 1
+  mode: 2
+  renderMode: 1000
+  renderDirMode: 5
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 1
+  voxelSize: {x: 0.4041926, y: 0.42584753, z: 0.40043315}
+  passedFilter: 0
 --- !u!1001 &1932400828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3490,7 +3464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1687132516955185355, guid: 7f77e599a8de66149a8dfc3f4aa3b0ff, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1687132516955185355, guid: 7f77e599a8de66149a8dfc3f4aa3b0ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3754,19 +3728,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.665428
+      value: 0.6590626
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24547775
+      value: 0.24312957
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6613763
+      value: -0.66771954
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.24398313
+      value: 0.24632315
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3886,68 +3860,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097902013}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2124085304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: ProgressionTest_LM0
+  m_EditorClassIdentifier: 
+  resolution: 2048
+  bitmask: 1
+  id: 0
+  sortingID: 1
+  isImplicit: 1
+  area: 20832
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: ProgressionTest
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!4 &2126249120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1067742207, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
   m_PrefabInstance: {fileID: 984032033}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &235372314380423525
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.897313
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -14.655908
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314102876714, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 235372314103195608, guid: 7d5974b035918004781543b4e0812572, type: 3}
-      propertyPath: m_Name
-      value: WanderingAI
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7d5974b035918004781543b4e0812572, type: 3}
 --- !u!23 &1658783961951997873
 MeshRenderer:
   m_ObjectHideFlags: 0
