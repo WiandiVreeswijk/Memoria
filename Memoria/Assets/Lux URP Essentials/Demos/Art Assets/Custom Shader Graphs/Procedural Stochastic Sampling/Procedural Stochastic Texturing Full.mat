@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -21,8 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Procedural Stochastic Texturing Full
-  m_Shader: {fileID: -6465566751694194690, guid: 3f8b015c8dda6c340ad635234df71d59,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 3f8b015c8dda6c340ad635234df71d59, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -62,35 +61,30 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tinput_Albedo:
-        m_Texture: {fileID: 2527122685305239375, guid: fd13e657b180842e591450e282a3cab9,
-          type: 2}
+        m_Texture: {fileID: 2527122685305239375, guid: fd13e657b180842e591450e282a3cab9, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tinput_Mask:
-        m_Texture: {fileID: 2527122685305239375, guid: 3b9f2749079aa4788990eb9604f3d44e,
-          type: 2}
+        m_Texture: {fileID: 2527122685305239375, guid: 3b9f2749079aa4788990eb9604f3d44e, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tinput_Normal:
-        m_Texture: {fileID: 2527122685305239375, guid: 7c41dc5d4c2734049a38b7bc03314287,
-          type: 2}
+        m_Texture: {fileID: 2527122685305239375, guid: 7c41dc5d4c2734049a38b7bc03314287, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _invT_Albedo:
-        m_Texture: {fileID: 5871812515647968012, guid: fd13e657b180842e591450e282a3cab9,
-          type: 2}
+        m_Texture: {fileID: 5871812515647968012, guid: fd13e657b180842e591450e282a3cab9, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _invT_Mask:
-        m_Texture: {fileID: 5871812515647968012, guid: 3b9f2749079aa4788990eb9604f3d44e,
-          type: 2}
+        m_Texture: {fileID: 5871812515647968012, guid: 3b9f2749079aa4788990eb9604f3d44e, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _invT_Normal:
-        m_Texture: {fileID: 5871812515647968012, guid: 7c41dc5d4c2734049a38b7bc03314287,
-          type: 2}
+        m_Texture: {fileID: 5871812515647968012, guid: 7c41dc5d4c2734049a38b7bc03314287, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_64FF58D5: 6
     - _AlphaClip: 0
@@ -133,3 +127,4 @@ Material:
     - _InputSize_Mask: {r: 1024, g: 1024, b: 0.1, a: 0}
     - _InputSize_Normal: {r: 1024, g: 1024, b: 0.1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []

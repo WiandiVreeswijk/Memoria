@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.LWRP;
 
 namespace LuxLWRPEssentials.Demo {
 	public class CheckSettings : MonoBehaviour

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Experimental.SceneManagement;
+
 using UnityEngine;
 
 namespace MagicLightProbes
@@ -182,7 +182,7 @@ namespace MagicLightProbes
             List<MagicLightProbes> allVolumes = new List<MagicLightProbes>();
             allVolumes.AddRange(Resources.FindObjectsOfTypeAll<MagicLightProbes>());
 
-            if (allVolumes.Count == 0 && PrefabStageUtility.GetCurrentPrefabStage() == null)
+            if (allVolumes.Count == 0 && UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() == null)
             {
                 if (EditorUtility.DisplayDialog("Magic Light Probe component required", "First add \"Magic Light Probes\" object to the scene.", "Add"))
                 {

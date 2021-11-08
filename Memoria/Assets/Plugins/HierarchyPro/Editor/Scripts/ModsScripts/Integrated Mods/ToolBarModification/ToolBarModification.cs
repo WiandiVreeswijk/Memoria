@@ -273,7 +273,7 @@ namespace EMX.HierarchyPlugin.Editor.Mods
                        else if ( p.par_e.DRAW_TOPBAR_HOTBUTTONS )
                        {
 
-                           hotButtons.DrawButtonsOnTopBar();
+                          // hotButtons.DrawButtonsOnTopBar();
                        }
                    /*  if (GUILayout.Button("save" , GUILayout.ExpandHeight(true)))
                      {
@@ -352,7 +352,11 @@ namespace EMX.HierarchyPlugin.Editor.Mods
                                    _b2.height -= MARGIN_Y * 2;
                                    EMX.CustomizationHierarchy.ExtensionInterface_TopBarOnGUI.onRightLayoutGUI( _b2 ); //_p was
                            }
-                           if ( p.par_e.DRAW_TOPBAR_HOTBUTTONS ) { hotButtons.DrawButtonsOnTopBar(); }
+
+                           if (p.par_e.DRAW_TOPBAR_HOTBUTTONS)
+                           {
+                               //hotButtons.DrawButtonsOnTopBar();
+                           }
                        }
                        else
                        {
