@@ -20,7 +20,7 @@ public class Globals : MonoBehaviour {
     private Player player;
     private MenuController menuController;
     private Persistence persistenceManager;
-    private ProgressionManager progressionManager;
+    private ProgressionManagerOld progressionManager;
     private CinemachineManager cinemachineManager;
     private TimescaleManager timescaleManager;
     private SceneManager sceneManager;
@@ -145,12 +145,12 @@ public class Globals : MonoBehaviour {
     }
 
     private void PostGlobalsInitialize() {
-        player.OnGlobalsInitialize();
-        uiManager.OnGlobalsInitializeType(currentGlobalsType);
+        player?.OnGlobalsInitialize();
+        uiManager?.OnGlobalsInitializeType(currentGlobalsType);
         trophyManager?.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
-        player.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
-        progressionManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
-        screenshakeManager.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        player?.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        progressionManager?.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
+        screenshakeManager?.OnGlobalsInitializeType(previousGlobalsType, currentGlobalsType);
     }
 
     #region GlobalGlobals
@@ -158,7 +158,7 @@ public class Globals : MonoBehaviour {
     public static MenuController MenuController => _Instance.menuController;
     public static Persistence Persistence => _Instance.persistenceManager;
     public static CinemachineManager CinemachineManager => _Instance.cinemachineManager;
-    public static ProgressionManager ProgressionManager => _Instance.progressionManager;
+    public static ProgressionManagerOld ProgressionManager => _Instance.progressionManager;
     public static TimescaleManager TimescaleManager => _Instance.timescaleManager;
     public static ScreenshakeManager Screenshake => _Instance.screenshakeManager;
     public static SceneManager SceneManager => _Instance.sceneManager;

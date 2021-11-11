@@ -12,7 +12,6 @@ public class ControllerButtonsUI : MonoBehaviour {
     }
     void Update()
     {
-        print(Globals.ControllerManager.JustChanged());
         if (Globals.ControllerManager.JustChanged()) {
             xbox.SetActive(Globals.ControllerManager.IsUsingController());
             ps.SetActive(Globals.ControllerManager.IsUsingController());

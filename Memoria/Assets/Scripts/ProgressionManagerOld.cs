@@ -4,7 +4,7 @@ using System.Linq;
 using Cinemachine;
 using UnityEngine;
 
-public class ProgressionManager : MonoBehaviour {
+public class ProgressionManagerOld : MonoBehaviour {
     private Icon questIcon;
     private bool watchCollected = false;
     private Dictionary<string, ProgressionDataOld> progressionDataDict = new Dictionary<string, ProgressionDataOld>();
