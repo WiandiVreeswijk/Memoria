@@ -21,6 +21,10 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private int nodeID;
     private bool dirty = false;
 
+    private float zoom = 1.0f;
+    private int intZoom = 2;
+
+
     [UnityEditor.Callbacks.OnOpenAsset(1)]
     public static bool OnOpenAsset(int instanceID, int line) {
         bool isProgressionData = EditorUtility.InstanceIDToObject(instanceID).GetType() == typeof(ProgressionData);
@@ -35,6 +39,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
     public static void OpenWindow(ProgressionData progressionData) {
         ProgressionDataEditorWindow window = GetWindow<ProgressionDataEditorWindow>();
         window.titleContent = new GUIContent(TITLE);
+        window.minSize = new Vector2(600.0f, 300.0f);
+        window.wantsMouseMove = true;
         window.SelectData(progressionData);
     }
 
@@ -46,10 +52,30 @@ public class ProgressionDataEditorWindow : EditorWindow {
     }
 
     private void OnEnable() {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        UnityEditor.SceneManagement.EditorSceneManager.sceneOpened += OnSceneChanged;
         LoadProgressionData();
     }
 
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.LoadSceneMode arg1) {
+        if (nodes != null) {
+            foreach (Node node in nodes) node.sceneNode.Initialize();
+        }
+    }
+
+    private void OnSceneChanged(UnityEngine.SceneManagement.Scene scene, UnityEditor.SceneManagement.OpenSceneMode mode) {
+        SavePopupIfDirty();
+        LoadProgressionData();
+        Repaint();
+    }
+
     public void OnDestroy() {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        UnityEditor.SceneManagement.EditorSceneManager.sceneOpened -= OnSceneChanged;
+        SavePopupIfDirty();
+    }
+
+    void SavePopupIfDirty() {
         if (dirty) {
             string path = AssetDatabase.GetAssetPath(progressionData);
             if (EditorUtility.DisplayDialog("Procession Data Has Been Modified",
@@ -58,12 +84,15 @@ public class ProgressionDataEditorWindow : EditorWindow {
                 SaveProgressionData();
             }
         }
+
     }
 
     string activeNode = "";
-    bool shouldRepaint = false;
     private void Update() {
-        if (!Application.isPlaying) return;
+        if (!Application.isPlaying) {
+            activeNode = "";
+            return;
+        }
         string previousNode = activeNode;
         if (ProgressionManager._Instance != null && ProgressionManager._Instance.progressionData == progressionData) {
             activeNode = ProgressionManager._Instance.GetActiveNode().name;
@@ -78,7 +107,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
         //EditorGUI.BeginDisabledGroup(Application.isPlaying);
         //Matrix4x4 before = GUI.matrix;
         //GUIUtility.ScaleAroundPivot(Vector2.one * zoomScale, new Vector2(position.width, position.height) / 2.0f);
-
+        EditorZoomArea.Begin(zoom, new Rect(0, 0, position.width, position.height));
+        //GUILayout.BeginArea(new Rect(_zoomCoordsOrigin.x, _zoomCoordsOrigin.y, position.width, position.height));
         DrawGrid(20, 0.2f, Color.gray);
         DrawGrid(100, 0.4f, Color.gray);
 
@@ -94,10 +124,11 @@ public class ProgressionDataEditorWindow : EditorWindow {
         }
 
         //GUI.matrix = before;
+        //GUILayout.EndArea();
 
+        EditorZoomArea.End();
         DrawToolbar();
         DrawProgressionDataField();
-
         if (GUI.changed) Repaint();
         //EditorGUI.EndDisabledGroup();
     }
@@ -108,7 +139,22 @@ public class ProgressionDataEditorWindow : EditorWindow {
             SaveProgressionData();
         }
         GUILayout.FlexibleSpace();
+
+        EditorGUI.BeginChangeCheck();
+        GUILayout.Label("Zoom");
+        intZoom = EditorGUILayout.IntSlider(intZoom, 0, 2);
+        if (EditorGUI.EndChangeCheck()) {
+            UpdateZoom();
+        }
         GUILayout.EndHorizontal();
+    }
+
+    void UpdateZoom() {
+        switch (intZoom) {
+            case 0: zoom = 0.5f; break;
+            case 1: zoom = 0.75f; break;
+            case 2: zoom = 1.0f; break;
+        }
     }
 
     private void DrawProgressionDataField() {
@@ -127,8 +173,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
     }
 
     private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor) {
-        int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
-        int heightDivs = Mathf.CeilToInt(position.height / gridSpacing);
+        int widthDivs = Mathf.CeilToInt(position.width / zoom / gridSpacing);
+        int heightDivs = Mathf.CeilToInt(position.height / zoom / gridSpacing);
         //if (offset.x < 0) {
         //    widthDivs+=10;
         //    heightDivs+=10;
@@ -145,11 +191,11 @@ public class ProgressionDataEditorWindow : EditorWindow {
         Vector3 newOffset = new Vector3(offset.x % gridSpacing, offset.y % gridSpacing, 0);
 
         for (int i = 0; i < widthDivs; i++) {
-            Handles.DrawLine(new Vector3(gridSpacing * i, -gridSpacing, 0) + newOffset, new Vector3(gridSpacing * i, position.height + (offset.y < 0 ? gridSpacing : 0), 0f) + newOffset);
+            Handles.DrawLine(new Vector3(gridSpacing * i, -gridSpacing, 0) + newOffset, new Vector3(gridSpacing * i, position.height / zoom + (offset.y < 0 ? gridSpacing : 0), 0f) + newOffset);
         }
 
         for (int j = 0; j < heightDivs; j++) {
-            Handles.DrawLine(new Vector3(-gridSpacing, gridSpacing * j, 0) + newOffset, new Vector3(position.width + (offset.x < 0 ? gridSpacing : 0), gridSpacing * j, 0f) + newOffset);
+            Handles.DrawLine(new Vector3(-gridSpacing, gridSpacing * j, 0) + newOffset, new Vector3(position.width / zoom + (offset.x < 0 ? gridSpacing : 0), gridSpacing * j, 0f) + newOffset);
         }
 
         Handles.color = Color.white;
@@ -159,7 +205,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private void DrawNodes(string activeNode) {
         if (nodes != null) {
             for (int i = 0; i < nodes.Count; i++) {
-                nodes[i].Draw(activeNode);
+                if (nodes[i].Draw(activeNode)) MarkDirty();
             }
         }
     }
@@ -180,12 +226,13 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private void ProcessEvents(Event e) {
         drag = Vector2.zero;
 
-        Rect rect = position;
-        rect.x = 0;
-        rect.y = 0;
-        rect.y += ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
-        rect.height -= ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
-        bool mouseWithinGrid = rect.Contains(e.mousePosition);
+        //Rect rect = position;
+        //rect.x = 0;
+        //rect.y = 0;
+        //rect.y += ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
+        //rect.height -= ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
+        //bool mouseWithinGrid = rect.Contains(e.mousePosition);
+        bool mouseWithinGrid = e.mousePosition.y > ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
         switch (e.type) {
             case EventType.MouseDown:
                 if (mouseWithinGrid) {
@@ -202,16 +249,28 @@ public class ProgressionDataEditorWindow : EditorWindow {
             case EventType.MouseDrag:
                 if (mouseWithinGrid) {
                     if (e.button == 0) {
-                        OnDrag(e.delta);
+                        Vector2 delta = Event.current.delta;
+                        //delta /= _zoom;
+                        //_zoomCoordsOrigin += delta;
+                        //OnDrag(delta);
+                        OnDrag(Event.current.delta);
+                        e.Use();
                     }
                 }
                 break;
             case EventType.ScrollWheel:
                 if (mouseWithinGrid) {
-                    //if (e.delta.y > 0) zoomScale /= 1.2f;
-                    //else zoomScale *= 1.2f;
-                    //zoomScale = Mathf.Clamp(zoomScale, 0.1f, 100f);
-                    //GUI.changed = true;
+                    //Vector2 screenCoordsMousePos = Event.current.mousePosition;
+                    //Vector2 delta = Event.current.delta;
+                    //Vector2 zoomCoordsMousePos = ConvertScreenCoordsToZoomCoords(screenCoordsMousePos) * _zoom;
+                    //float zoomDelta = -delta.y / 150.0f;
+                    //float oldZoom = _zoom;
+                    //_zoom += zoomDelta;
+                    //_zoom = Mathf.Clamp(_zoom, kZoomMin, kZoomMax);
+                    //Vector2 a = (zoomCoordsMousePos - _zoomCoordsOrigin) - (oldZoom / _zoom) * (zoomCoordsMousePos - _zoomCoordsOrigin);
+                    //_zoomCoordsOrigin += a;
+                    //OnDrag(-a);
+                    //e.Use();
                 }
                 break;
         }
@@ -285,6 +344,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
         int id = nodeID++;
         Node node = new Node(this, mousePosition, "", id);
         node.AddOutPoint();
+        node.InitializeNewNode();
         nodes.Add(node);
 
         if (nodes.Count == 1) {
@@ -394,21 +454,23 @@ public class ProgressionDataEditorWindow : EditorWindow {
 
     #region LoadingAndSaving
     private void LoadProgressionData() {
+        ClearNodes();
         if (progressionData == null) return;
         Dictionary<int, Node> nodesDict = new Dictionary<int, Node>();
         nodeID = progressionData.nodeID;
         // Create nodes
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
-            Node node = new Node(this, data.position, data.name, data.id);
+            Node node = new Node(this, data.position + totalDrag, data.name, data.id);
 
             foreach (var nodeConnection in data.connections) {
                 node.AddOutPoint(nodeConnection.name);
             }
 
-            //node.onExitComponents = new List<ProgressionComponentBase>(data.onExitComponents);
-            //node.onEnterComponents = new List<ProgressionComponentBase>(data.onEnterComponents);
-            node.gameObject = data.gameObject;
+            //node.onExitComponents = new List<ProgressionComponent>(data.onExitComponents);
+            //node.onEnterComponents = new List<ProgressionComponent>(data.onEnterComponents);
+            node.sceneNode = new ProgressionSceneNodeReference(data.sceneNode.scenePath, data.sceneNode.ID);
+            node.sceneNode.Initialize();
             node.isBaseNode = data.isBaseNode;
             nodes.Add(node);
             nodesDict.Add(data.id, node);
@@ -424,6 +486,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
                 }
             }
         }
+        dirty = false;
+        titleContent.text = TITLE;
     }
 
     public void SetBaseNode(Node newBaseNode) {
@@ -457,7 +521,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
             progressionData.nodeDataCollection[i].name = node.name;
             progressionData.nodeDataCollection[i].position = node.rect.position - totalDrag;
             progressionData.nodeDataCollection[i].isBaseNode = node.isBaseNode;
-            progressionData.nodeDataCollection[i].gameObject= node.gameObject;
+            //progressionData.nodeDataCollection[i].gameObject= node.gameObject;
+            progressionData.nodeDataCollection[i].sceneNode = node.sceneNode;
             //progressionData.nodeDataCollection[i].onExitComponents = node.onExitComponents.ToArray();
             //progressionData.nodeDataCollection[i].onEnterComponents = node.onEnterComponents.ToArray();
             progressionData.nodeDataCollection[i].connections = new ProgressionData.NodeConnection[node.outPoints.Count];

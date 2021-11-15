@@ -7,6 +7,7 @@ public class ProgressionDataEditorStyles : MonoBehaviour {
     public static GUIStyle FOOTERBUTTON;
 
     public static GUIStyle LINE;
+    public static GUIStyle ERRORLABEL;
 
     public static GUIStyle NODE;
     public static GUIStyle SELECTEDNODE;
@@ -36,6 +37,10 @@ public class ProgressionDataEditorStyles : MonoBehaviour {
 
         LINE = new GUIStyle();
         LINE.normal.background = MakeTex(1, 1, Color.white);
+
+        ERRORLABEL = new GUIStyle();
+        ERRORLABEL.alignment = TextAnchor.MiddleCenter;
+        ERRORLABEL.normal.textColor = new Color(0.8f, 0.6f, 0.6f);
 
         NODE = new GUIStyle();
         NODE.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;

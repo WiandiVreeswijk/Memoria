@@ -20,9 +20,13 @@ public class Node {
     public ConnectionPoint inPoint;
     //public ConnectionPoint outPoint;
     public List<ConnectionPoint> outPoints = new List<ConnectionPoint>();
-    //public List<ProgressionComponentBase> onEnterComponents = new List<ProgressionComponentBase>();
-    //public List<ProgressionComponentBase> onExitComponents = new List<ProgressionComponentBase>();
-       public GameObject gameObject;
+
+    public ProgressionSceneNodeReference sceneNode;
+    private ProgressionSceneNodeReferenceEditor editor = new ProgressionSceneNodeReferenceEditor();
+    //public List<ProgressionComponent> onEnterComponents = new List<ProgressionComponent>();
+    //public List<ProgressionComponent> onExitComponents = new List<ProgressionComponent>(); 
+    //public GameObject gameObject;
+
     public GUIStyle style;
     public GUIStyle defaultNodeStyle;
     public GUIStyle selectedNodeStyle;
@@ -37,7 +41,7 @@ public class Node {
 
     private ProgressionDataEditorWindow window;
 
-    private static int extraHeight = 400;
+    private static int extraHeight = 300;
     private static int width = 300;
     private static int minNodeHeightCount = 4;
     private static float minHeight = ProgressionDataEditorStyles.TOOLBARHEIGHT + (ConnectionPoint.POINTHEIGHT + ConnectionPoint.OUTPADDING) * minNodeHeightCount + 6;
@@ -61,8 +65,11 @@ public class Node {
 
         styleField = new GUIStyle();
         styleField.alignment = TextAnchor.UpperRight;
-
         CheckNameLength();
+    }
+
+    public void InitializeNewNode() {
+        sceneNode = new ProgressionSceneNodeReference();
     }
 
     private void CheckNameLength() {
@@ -96,7 +103,8 @@ public class Node {
     private bool progressionEnterFoldout;
     private bool progressionExitFoldout;
     Vector2 scroll = Vector2.zero;
-    public void Draw(string activeNode) {
+    public bool Draw(string activeNode) {
+        bool changed = false;
         bool isActiveNode = activeNode == name;
         //Calculate height
         float elementHeight = (ConnectionPoint.POINTHEIGHT + ConnectionPoint.OUTPADDING) * outPoints.Count;
@@ -134,82 +142,85 @@ public class Node {
 
         GUILayout.BeginArea(new Rect(rect.x + 2, rect.y + calculatedHeight, rect.width - 4, rect.height));
 
-        scroll = GUILayout.BeginScrollView(scroll, GUILayout.ExpandWidth(true), GUILayout.Height(extraHeight));
-        EditorGUIUtility.labelWidth = 130;
-        GUI.backgroundColor = ProgressionDataEditorStyles.DARKGREY;
-        if (progressionEnterFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(progressionEnterFoldout, "On progression enter", ProgressionDataEditorStyles.FOLDOUT)) {
-            GUI.backgroundColor = Color.white;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Add component");
-            GUI.backgroundColor = Color.white;
-
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button(ProgressionDataEditorStyles.ADDCOMPONENT, ProgressionDataEditorStyles.FOOTERBUTTON)) {
-                OpenAddComponentMenu(ComponentType.ENTER);
-
-            }
-
-            GUILayout.EndHorizontal();
-
-            //foreach (var c in onEnterComponents) {
-            //    if (EditorGUILayout.InspectorTitlebar(true, c)) {
-            //        SerializedObject so = new SerializedObject(c);
-            //        c.DrawGUI(so);
-            //    }
-            //}
-
-            GUILayout.Space(EditorGUIUtility.singleLineHeight);
-        } else DrawHorizontalLine();
-
-
-        EditorGUILayout.EndFoldoutHeaderGroup();
-        GUI.backgroundColor = ProgressionDataEditorStyles.DARKGREY;
-        if (progressionExitFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(progressionExitFoldout, "On progression exit", ProgressionDataEditorStyles.FOLDOUT)) {
-            GUI.backgroundColor = Color.white;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Add component");
-            GUI.backgroundColor = Color.white;
-
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button(ProgressionDataEditorStyles.ADDCOMPONENT, ProgressionDataEditorStyles.FOOTERBUTTON)) {
-                OpenAddComponentMenu(ComponentType.EXIT);
-            }
-
-            GUILayout.EndHorizontal();
-
-            //foreach (var c in onExitComponents) {
-            //    if (EditorGUILayout.InspectorTitlebar(true, c)) {
-            //        SerializedObject so = new SerializedObject(c);
-            //        c.DrawGUI(so);
-            //    }
-            //}
-            GUILayout.Space(EditorGUIUtility.singleLineHeight);
-        }
-        EditorGUILayout.EndFoldoutHeaderGroup();
-        GUI.backgroundColor = Color.white;
-
+        scroll = GUILayout.BeginScrollView(scroll, GUILayout.ExpandWidth(true), GUILayout.Height(extraHeight - 1));
+        EditorGUIUtility.labelWidth = 80;
+        if (editor.DrawGUI(sceneNode)) changed = true;
         EditorGUIUtility.labelWidth = 150;
-
-        DrawHorizontalLine();
-
-        gameObject= EditorGUILayout.ObjectField("A", gameObject, typeof(GameObject), true) as GameObject;
-
         GUILayout.EndScrollView();
+
+        //scroll = GUILayout.BeginScrollView(scroll, GUILayout.ExpandWidth(true), GUILayout.Height(extraHeight));
+        //EditorGUIUtility.labelWidth = 130;
+        //GUI.backgroundColor = ProgressionDataEditorStyles.DARKGREY;
+        //if (progressionEnterFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(progressionEnterFoldout, "On progression enter", ProgressionDataEditorStyles.FOLDOUT)) {
+        //    GUI.backgroundColor = Color.white;
+        //    GUILayout.BeginHorizontal();
+        //    GUILayout.Label("Add component");
+        //    GUI.backgroundColor = Color.white;
+        //
+        //    GUILayout.FlexibleSpace();
+        //    if (GUILayout.Button(ProgressionDataEditorStyles.ADDCOMPONENT, ProgressionDataEditorStyles.FOOTERBUTTON)) {
+        //        OpenAddComponentMenu(ComponentType.ENTER);
+        //
+        //    }
+        //
+        //    GUILayout.EndHorizontal();
+        //
+        //    //foreach (var c in onEnterComponents) {
+        //    //    if (EditorGUILayout.InspectorTitlebar(true, c)) {
+        //    //        SerializedObject so = new SerializedObject(c);
+        //    //        c.DrawGUI(so);
+        //    //    }
+        //    //}
+        //
+        //    GUILayout.Space(EditorGUIUtility.singleLineHeight);
+        //} else DrawHorizontalLine();
+        //
+        //
+        //EditorGUILayout.EndFoldoutHeaderGroup();
+        //GUI.backgroundColor = ProgressionDataEditorStyles.DARKGREY;
+        //if (progressionExitFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(progressionExitFoldout, "On progression exit", ProgressionDataEditorStyles.FOLDOUT)) {
+        //    GUI.backgroundColor = Color.white;
+        //    GUILayout.BeginHorizontal();
+        //    GUILayout.Label("Add component");
+        //    GUI.backgroundColor = Color.white;
+        //
+        //    GUILayout.FlexibleSpace();
+        //    if (GUILayout.Button(ProgressionDataEditorStyles.ADDCOMPONENT, ProgressionDataEditorStyles.FOOTERBUTTON)) {
+        //        OpenAddComponentMenu(ComponentType.EXIT);
+        //    }
+        //
+        //    GUILayout.EndHorizontal();
+        //
+        //    //foreach (var c in onExitComponents) {
+        //    //    if (EditorGUILayout.InspectorTitlebar(true, c)) {
+        //    //        SerializedObject so = new SerializedObject(c);
+        //    //        c.DrawGUI(so);
+        //    //    }
+        //    //}
+        //    GUILayout.Space(EditorGUIUtility.singleLineHeight);
+        //}
+        //EditorGUILayout.EndFoldoutHeaderGroup();
+        //GUI.backgroundColor = Color.white;
+
+
+
+        //gameObject= EditorGUILayout.ObjectField("A", gameObject, typeof(GameObject), true) as GameObject;
+
+        //GUILayout.EndScrollView();
         GUILayout.EndArea();
+        return changed;
     }
 
     private void OpenAddComponentMenu(ComponentType componentType) {
         GenericMenu genericMenu = new GenericMenu();
-        StopwatchWrapper sw = new StopwatchWrapper();
-        var types = ProgressionUtils.GetEnumerableOfType<ProgressionComponentBase>();
+        var types = ProgressionUtils.GetEnumerableOfType<ProgressionComponent>();
         foreach (Type type in types) {
             genericMenu.AddItem(new GUIContent(ObjectNames.NicifyVariableName(type.Name)), false, () => {
-                //if (componentType == ComponentType.ENTER) onEnterComponents.Add((ProgressionComponentBase)Activator.CreateInstance(type));
-                //else if (componentType == ComponentType.EXIT) onExitComponents.Add((ProgressionComponentBase)Activator.CreateInstance(type));
+                //if (componentType == ComponentType.ENTER) onEnterComponents.Add((ProgressionComponent)Activator.CreateInstance(type));
+                //else if (componentType == ComponentType.EXIT) onExitComponents.Add((ProgressionComponent)Activator.CreateInstance(type));
             });
         }
 
-        sw.Print("test");
         genericMenu.ShowAsContext();
     }
 

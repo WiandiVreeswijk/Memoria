@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07142ad56cbf5649bd5b87d2f191917, type: 3}
+  m_Name: Demo
+  m_EditorClassIdentifier: 
+  nodeDataCollection:
+  - id: 0
+    name: Introduction
+    isBaseNode: 1
+    position: {x: 300, y: 300}
+    connections:
+    - name: Pressureplate1
+      reference: 9
+    - name: Pressureplate2
+      reference: 2
+    sceneNode:
+      scenePath: Assets/Scenes/Progression/ProgressionTest 1.unity
+      ID: GlobalObjectId_V1-2-7e4363a14c6e53849b02b31b9912ed4f-42666775-0
+  - id: 2
+    name: Teleport to scene two
+    isBaseNode: 0
+    position: {x: 700, y: 800.00006}
+    connections:
+    - name: SpawnInScene2
+      reference: 7
+    sceneNode:
+      scenePath: Assets/Scenes/Progression/ProgressionTest 1.unity
+      ID: GlobalObjectId_V1-2-7e4363a14c6e53849b02b31b9912ed4f-1867335800-0
+  - id: 7
+    name: Scene two pressure plate
+    isBaseNode: 0
+    position: {x: 1100, y: 800.00006}
+    connections:
+    - name: Pressureplate
+      reference: 0
+    sceneNode:
+      scenePath: Assets/Scenes/Progression/ProgressionTest 2.unity
+      ID: GlobalObjectId_V1-2-a66a40f71ce310a42954ded7197914cd-1927606994-0
+  - id: 9
+    name: Open gate
+    isBaseNode: 0
+    position: {x: 700, y: 300.00003}
+    connections: []
+    sceneNode:
+      scenePath: Assets/Scenes/Progression/ProgressionTest 1.unity
+      ID: GlobalObjectId_V1-2-7e4363a14c6e53849b02b31b9912ed4f-1855804767-0
+  nodeID: 10

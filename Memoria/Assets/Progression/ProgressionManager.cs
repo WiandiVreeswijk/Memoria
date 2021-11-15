@@ -10,6 +10,7 @@ public class ProgressionManager : MonoBehaviour {
 
     void Awake() {
         if (_Instance != null) {
+            Destroy(gameObject);
             throw new System.Exception("Multiple instances of progression manager found");
         }
         _Instance = this;
@@ -26,7 +27,9 @@ public class ProgressionManager : MonoBehaviour {
     private void _Progress(string progressTag) {
         ProgressionNode newNode = activeNode.GetPath(progressTag);
         if (newNode != null) {
+            activeNode.OnProgressionExit();
             activeNode = newNode;
+            activeNode.OnProgressionEnter();
         } else {
             Debug.LogError($"Progression {progressTag} not found in node {activeNode.name}");
         }

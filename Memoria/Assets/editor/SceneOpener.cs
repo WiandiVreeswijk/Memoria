@@ -4,6 +4,18 @@ using UnityEditor;
 using UnityEngine;
 
 public class SceneOpener : EditorWindow {
+    [MenuItem("Scene/ProgressionTest 1")]
+    public static void Progression1() {
+        if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/Progression/ProgressionTest 1.unity");
+    }
+
+    [MenuItem("Scene/ProgressionTest 2")]
+    public static void Progression2() {
+        if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/Progression/ProgressionTest 2.unity");
+    }
+
     [MenuItem("Scene/Wijk")]
     public static void Wijk() {
         if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())

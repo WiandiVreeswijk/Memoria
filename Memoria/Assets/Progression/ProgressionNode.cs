@@ -5,9 +5,11 @@ using UnityEngine;
 public class ProgressionNode {
     public string name;
     Dictionary<string, ProgressionNode> paths = new Dictionary<string, ProgressionNode>();
+    ProgressionSceneNodeReference sceneNodeReference;
 
-    public ProgressionNode(string name) {
+    public ProgressionNode(string name, ProgressionSceneNodeReference sceneNodeReference) {
         this.name = name;
+        this.sceneNodeReference = sceneNodeReference;
     }
 
     public ProgressionNode GetPath(string path) {
@@ -21,6 +23,14 @@ public class ProgressionNode {
 
     public Dictionary<string, ProgressionNode> GetPaths() {
         return paths;
+    }
+
+    public void OnProgressionEnter() {
+        sceneNodeReference.OnEnterProgression();
+    }
+
+    public void OnProgressionExit() {
+        sceneNodeReference.onExitProgression();
     }
 
     public void Print() {

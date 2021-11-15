@@ -44,6 +44,7 @@ public class SceneManager : MonoBehaviour {
     }
 
     public void SetScene(string sceneName) {
+        Debug.Log(sceneName);
         if (sceneDefinitionsMap.TryGetValue(sceneName, out SceneDefinition scene)) {
             if (isLoadingScene || scene == activeScene) return;
             Globals.CinemachineManager.SetInputEnabled(false);
@@ -60,8 +61,7 @@ public class SceneManager : MonoBehaviour {
     //#Todo Fix audio not stopping on scene switch. 
     //DOTween.To(() => cam.m_Lens.FieldOfView, x => cam.m_Lens.FieldOfView = x, 120, 1.0f).SetEase(Ease.InExpo);
     //#Todo Global camera FOV change. 
-    private IEnumerator LoadScene(SceneDefinition scene)
-    {
+    private IEnumerator LoadScene(SceneDefinition scene) {
         string oldSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         isLoadingScene = true;
         activeScene = scene;

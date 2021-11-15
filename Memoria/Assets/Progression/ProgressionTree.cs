@@ -11,7 +11,7 @@ public class ProgressionTree {
         //Create nodes
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
-            ProgressionNode node = new ProgressionNode(data.name);
+            ProgressionNode node = new ProgressionNode(data.name, data.sceneNode);
             if (data.isBaseNode) tree.baseNode = node;
             nodesDict.Add(data.id, node);
         }
