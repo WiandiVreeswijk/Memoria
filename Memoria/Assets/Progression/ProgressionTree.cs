@@ -12,7 +12,7 @@ public class ProgressionTree {
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
             ProgressionNode node = new ProgressionNode(data.name, data.sceneNode);
-            if (data.isBaseNode) tree.baseNode = node;
+            if (progressionData.baseNodeID == data.id) tree.baseNode = node;
             nodesDict.Add(data.id, node);
         }
 

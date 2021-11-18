@@ -15,8 +15,6 @@ public class Node {
     public bool isSelected;
     public bool isHovered;
 
-    public bool isBaseNode;
-
     public ConnectionPoint inPoint;
     //public ConnectionPoint outPoint;
     public List<ConnectionPoint> outPoints = new List<ConnectionPoint>();
@@ -238,7 +236,7 @@ public class Node {
     }
 
     private void DrawHeader(bool isActiveNode) {
-        if (isBaseNode) GUI.backgroundColor = ProgressionDataEditorStyles.BASENODE;
+        if (IsBaseNode()) GUI.backgroundColor = ProgressionDataEditorStyles.BASENODE;
         if (isActiveNode) GUI.backgroundColor = ProgressionDataEditorStyles.ACTIVENODE;
         GUILayout.BeginHorizontal(EditorStyles.toolbar);
         GUILayout.Label(name + (isActiveNode ? " (active)" : ""));
@@ -297,10 +295,14 @@ public class Node {
 
     private void ProcessContextMenu() {
         GenericMenu genericMenu = new GenericMenu();
-        if (!isBaseNode)
+        if (!IsBaseNode())
             genericMenu.AddItem(new GUIContent("Set base node"), false, OnClickSetBaseNode);
         genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
         genericMenu.ShowAsContext();
+    }
+
+    private bool IsBaseNode() {
+        return window.GetBaseNodeID() == id;
     }
 
     private void OnClickSetBaseNode() {

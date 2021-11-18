@@ -15,7 +15,6 @@ MonoBehaviour:
   nodeDataCollection:
   - id: 0
     name: Introduction
-    isBaseNode: 1
     position: {x: 300, y: 300}
     connections:
     - name: Pressureplate1
@@ -27,7 +26,6 @@ MonoBehaviour:
       ID: GlobalObjectId_V1-2-7e4363a14c6e53849b02b31b9912ed4f-42666775-0
   - id: 2
     name: Teleport to scene two
-    isBaseNode: 0
     position: {x: 700, y: 800.00006}
     connections:
     - name: SpawnInScene2
@@ -37,7 +35,6 @@ MonoBehaviour:
       ID: GlobalObjectId_V1-2-7e4363a14c6e53849b02b31b9912ed4f-1867335800-0
   - id: 7
     name: Scene two pressure plate
-    isBaseNode: 0
     position: {x: 1100, y: 800.00006}
     connections:
     - name: Pressureplate
@@ -47,10 +44,19 @@ MonoBehaviour:
       ID: GlobalObjectId_V1-2-a66a40f71ce310a42954ded7197914cd-1927606994-0
   - id: 9
     name: Open gate
-    isBaseNode: 0
-    position: {x: 700, y: 300.00003}
-    connections: []
+    position: {x: 700, y: 299.00003}
+    connections:
+    - name: Pressureplate3
+      reference: 10
     sceneNode:
       scenePath: Assets/Scenes/Progression/ProgressionTest 1.unity
       ID: GlobalObjectId_V1-2-7e4363a14c6e53849b02b31b9912ed4f-1855804767-0
-  nodeID: 10
+  - id: 10
+    name: Open gate 2
+    position: {x: 1100, y: 300}
+    connections: []
+    sceneNode:
+      scenePath: Assets/Scenes/Progression/ProgressionTest 1.unity
+      ID: GlobalObjectId_V1-2-7e4363a14c6e53849b02b31b9912ed4f-2115872510-0
+  baseNodeID: 0
+  nodeID: 11

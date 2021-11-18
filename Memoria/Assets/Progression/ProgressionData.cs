@@ -9,6 +9,7 @@ using UnityEngine;
 public class ProgressionData : ScriptableObject {
     public NodeData[] nodeDataCollection = new NodeData[0];
 
+    public int baseNodeID;
     public int nodeID;
 
     [Serializable]
@@ -22,7 +23,6 @@ public class ProgressionData : ScriptableObject {
     public class NodeData {
         public int id;
         public string name;
-        public bool isBaseNode;
         public Vector2 position;
         public NodeConnection[] connections;
 

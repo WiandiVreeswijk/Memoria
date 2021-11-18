@@ -6,6 +6,7 @@ using UnityEditorInternal;
 public class ProgressionDataEditorWindow : EditorWindow {
     private const string TITLE = "Progression Data Editor";
 
+    private int baseNodeID = -1;
     private List<Node> nodes = new List<Node>();
     private List<Connection> connections = new List<Connection>();
 
@@ -348,7 +349,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
         nodes.Add(node);
 
         if (nodes.Count == 1) {
-            node.isBaseNode = true;
+            baseNodeID = node.id;
         }
         MarkDirty();
     }
@@ -458,6 +459,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
         if (progressionData == null) return;
         Dictionary<int, Node> nodesDict = new Dictionary<int, Node>();
         nodeID = progressionData.nodeID;
+        baseNodeID = progressionData.baseNodeID;
         // Create nodes
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
@@ -471,7 +473,6 @@ public class ProgressionDataEditorWindow : EditorWindow {
             //node.onEnterComponents = new List<ProgressionComponent>(data.onEnterComponents);
             node.sceneNode = new ProgressionSceneNodeReference(data.sceneNode.scenePath, data.sceneNode.ID);
             node.sceneNode.Initialize();
-            node.isBaseNode = data.isBaseNode;
             nodes.Add(node);
             nodesDict.Add(data.id, node);
         }
@@ -491,11 +492,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
     }
 
     public void SetBaseNode(Node newBaseNode) {
-        if (newBaseNode.isBaseNode) return;
-        foreach (var node in nodes) {
-            node.isBaseNode = false;
-        }
-        newBaseNode.isBaseNode = true;
+        baseNodeID = newBaseNode.id;
         MarkDirty();
     }
 
@@ -511,6 +508,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
 
     private void StoreNodeData() {
         progressionData.nodeID = nodeID;
+        progressionData.baseNodeID = baseNodeID;
         progressionData.nodeDataCollection = new ProgressionData.NodeData[nodes.Count];
 
         for (int i = 0; i < nodes.Count; ++i) {
@@ -520,7 +518,6 @@ public class ProgressionDataEditorWindow : EditorWindow {
             progressionData.nodeDataCollection[i].id = node.id;
             progressionData.nodeDataCollection[i].name = node.name;
             progressionData.nodeDataCollection[i].position = node.rect.position - totalDrag;
-            progressionData.nodeDataCollection[i].isBaseNode = node.isBaseNode;
             //progressionData.nodeDataCollection[i].gameObject= node.gameObject;
             progressionData.nodeDataCollection[i].sceneNode = node.sceneNode;
             //progressionData.nodeDataCollection[i].onExitComponents = node.onExitComponents.ToArray();
@@ -540,4 +537,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
         }
     }
     #endregion
+
+    public int GetBaseNodeID() {
+        return baseNodeID;
+    }
 }
