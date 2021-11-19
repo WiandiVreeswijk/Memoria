@@ -26,9 +26,6 @@ public class ProgressionData : ScriptableObject {
         public Vector2 position;
         public NodeConnection[] connections;
 
-        //public GameObject gameObject;
         public ProgressionSceneNodeReference sceneNode;
-        //public ProgressionComponent[] onEnterComponents;
-        //public ProgressionComponent[] onExitComponents;
     }
 }

@@ -5,6 +5,6 @@ using UnityEngine.Events;
 
 public class ProgressionSceneNode : MonoBehaviour
 {
-    public UnityEvent onEnterProgression;
-    public UnityEvent onExitProgression;
+    public UnityEvent onEnterNode;
+    public UnityEvent onExitNode;
 }

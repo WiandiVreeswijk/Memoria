@@ -17,13 +17,13 @@ public class ConnectionPoint {
 
     public ConnectionPointType type;
 
-    public Node node;
+    public EditorNode node;
 
     public Action<ConnectionPoint> OnClickConnectionPoint;
     public Action<ConnectionPoint> DeleteOutNode;
     public Action<ConnectionPoint> OnClickRemoveConnection;
 
-    public ConnectionPoint(Node node, string name, ConnectionPointType type,
+    public ConnectionPoint(EditorNode node, string name, ConnectionPointType type,
         Action<ConnectionPoint> OnClickConnectionPoint, Action<ConnectionPoint> DeleteOutNode) {
         this.node = node;
         this.name = name;

@@ -7,7 +7,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private const string TITLE = "Progression Data Editor";
 
     private int baseNodeID = -1;
-    private List<Node> nodes = new List<Node>();
+    private List<EditorNode> nodes = new List<EditorNode>();
     private List<Connection> connections = new List<Connection>();
 
     private ConnectionPoint selectedInPoint;
@@ -17,7 +17,6 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private Vector2 drag;
 
     private ProgressionData progressionData;
-    //private SerializedObject serializedObject;
 
     private int nodeID;
     private bool dirty = false;
@@ -25,6 +24,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private float zoom = 1.0f;
     private int intZoom = 2;
 
+    private string activeNode = "";
 
     [UnityEditor.Callbacks.OnOpenAsset(1)]
     public static bool OnOpenAsset(int instanceID, int line) {
@@ -60,7 +60,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
 
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.LoadSceneMode arg1) {
         if (nodes != null) {
-            foreach (Node node in nodes) node.sceneNode.Initialize();
+            foreach (EditorNode node in nodes) node.sceneNode.Initialize();
         }
     }
 
@@ -85,10 +85,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
                 SaveProgressionData();
             }
         }
-
     }
 
-    string activeNode = "";
     private void Update() {
         if (!Application.isPlaying) {
             activeNode = "";
@@ -105,33 +103,23 @@ public class ProgressionDataEditorWindow : EditorWindow {
 
     private void OnGUI() {
         ProgressionDataEditorStyles.InitStyles();
-        //EditorGUI.BeginDisabledGroup(Application.isPlaying);
-        //Matrix4x4 before = GUI.matrix;
-        //GUIUtility.ScaleAroundPivot(Vector2.one * zoomScale, new Vector2(position.width, position.height) / 2.0f);
         EditorZoomArea.Begin(zoom, new Rect(0, 0, position.width, position.height));
-        //GUILayout.BeginArea(new Rect(_zoomCoordsOrigin.x, _zoomCoordsOrigin.y, position.width, position.height));
         DrawGrid(20, 0.2f, Color.gray);
         DrawGrid(100, 0.4f, Color.gray);
 
         if (progressionData != null) {
-            //serializedObject.Update();
-            DrawNodes(activeNode);
             DrawConnections();
-
+            DrawNodes(activeNode);
             DrawConnectionLine(Event.current);
+
             ProcessNodeEvents(Event.current);
             ProcessEvents(Event.current);
-            //serializedObject.ApplyModifiedProperties();
         }
-
-        //GUI.matrix = before;
-        //GUILayout.EndArea();
 
         EditorZoomArea.End();
         DrawToolbar();
         DrawProgressionDataField();
         if (GUI.changed) Repaint();
-        //EditorGUI.EndDisabledGroup();
     }
 
     private void DrawToolbar() {
@@ -162,24 +150,18 @@ public class ProgressionDataEditorWindow : EditorWindow {
         EditorGUILayout.BeginHorizontal();
         var newData = EditorGUILayout.ObjectField(progressionData, typeof(ProgressionData), false) as ProgressionData;
         if (newData != progressionData) SelectData(newData);
-        //DrawGearMenu();
         EditorGUILayout.EndHorizontal();
     }
 
     private void SelectData(ProgressionData newData) {
         ClearNodes();
         progressionData = newData;
-        //serializedObject = (newData != null) ? new SerializedObject(newData) : null;
         LoadProgressionData();
     }
 
     private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor) {
         int widthDivs = Mathf.CeilToInt(position.width / zoom / gridSpacing);
         int heightDivs = Mathf.CeilToInt(position.height / zoom / gridSpacing);
-        //if (offset.x < 0) {
-        //    widthDivs+=10;
-        //    heightDivs+=10;
-        //}
 
         if (offset.y < 0) {
             widthDivs++;
@@ -227,12 +209,6 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private void ProcessEvents(Event e) {
         drag = Vector2.zero;
 
-        //Rect rect = position;
-        //rect.x = 0;
-        //rect.y = 0;
-        //rect.y += ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
-        //rect.height -= ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
-        //bool mouseWithinGrid = rect.Contains(e.mousePosition);
         bool mouseWithinGrid = e.mousePosition.y > ProgressionDataEditorStyles.TOOLBARHEIGHT * 2;
         switch (e.type) {
             case EventType.MouseDown:
@@ -343,7 +319,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private void OnClickAddNode(Vector2 mousePosition) {
         // We create the node with the default info for the node.
         int id = nodeID++;
-        Node node = new Node(this, mousePosition, "", id);
+        EditorNode node = new EditorNode(this, mousePosition, "", id);
         node.AddOutPoint();
         node.InitializeNewNode();
         nodes.Add(node);
@@ -357,7 +333,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private void ClearNodes() {
         //nodeCount = 0;
         if (nodes != null && nodes.Count > 0) {
-            Node node;
+            EditorNode node;
             while (nodes.Count > 0) {
                 node = nodes[0];
                 OnClickRemoveNode(node);
@@ -401,7 +377,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
         }
     }
 
-    public void OnClickRemoveNode(Node node) {
+    public void OnClickRemoveNode(EditorNode node) {
         if (connections != null) {
             List<Connection> connectionsToRemove = new List<Connection>();
 
@@ -457,13 +433,13 @@ public class ProgressionDataEditorWindow : EditorWindow {
     private void LoadProgressionData() {
         ClearNodes();
         if (progressionData == null) return;
-        Dictionary<int, Node> nodesDict = new Dictionary<int, Node>();
+        Dictionary<int, EditorNode> nodesDict = new Dictionary<int, EditorNode>();
         nodeID = progressionData.nodeID;
         baseNodeID = progressionData.baseNodeID;
         // Create nodes
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
-            Node node = new Node(this, data.position + totalDrag, data.name, data.id);
+            EditorNode node = new EditorNode(this, data.position + totalDrag, data.name, data.id);
 
             foreach (var nodeConnection in data.connections) {
                 node.AddOutPoint(nodeConnection.name);
@@ -481,7 +457,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
             for (int j = 0; j < data.connections.Length; j++) {
-                Node node = nodesDict[data.id];
+                EditorNode node = nodesDict[data.id];
                 if (data.connections[j].reference != -1) {
                     connections.Add(new Connection(nodesDict[data.connections[j].reference].inPoint, node.outPoints[j], OnClickRemoveConnection));
                 }
@@ -491,7 +467,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
         titleContent.text = TITLE;
     }
 
-    public void SetBaseNode(Node newBaseNode) {
+    public void SetBaseNode(EditorNode newBaseNode) {
         baseNodeID = newBaseNode.id;
         MarkDirty();
     }
@@ -512,16 +488,13 @@ public class ProgressionDataEditorWindow : EditorWindow {
         progressionData.nodeDataCollection = new ProgressionData.NodeData[nodes.Count];
 
         for (int i = 0; i < nodes.Count; ++i) {
-            Node node = nodes[i];
+            EditorNode node = nodes[i];
 
             progressionData.nodeDataCollection[i] = new ProgressionData.NodeData();
             progressionData.nodeDataCollection[i].id = node.id;
             progressionData.nodeDataCollection[i].name = node.name;
             progressionData.nodeDataCollection[i].position = node.rect.position - totalDrag;
-            //progressionData.nodeDataCollection[i].gameObject= node.gameObject;
             progressionData.nodeDataCollection[i].sceneNode = node.sceneNode;
-            //progressionData.nodeDataCollection[i].onExitComponents = node.onExitComponents.ToArray();
-            //progressionData.nodeDataCollection[i].onEnterComponents = node.onEnterComponents.ToArray();
             progressionData.nodeDataCollection[i].connections = new ProgressionData.NodeConnection[node.outPoints.Count];
             for (int j = 0; j < node.outPoints.Count; j++) {
                 var outPoint = node.outPoints[j];

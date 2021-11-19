@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditorInternal;
 using UnityEngine.UIElements;
 
-public class Node {
+public class EditorNode {
     public int id;
     public Rect rect;
     public string name;
@@ -35,7 +35,7 @@ public class Node {
     // GUI Style for the fields
     public GUIStyle styleField;
 
-    public Action<Node> OnRemoveNode;
+    public Action<EditorNode> OnRemoveNode;
 
     private ProgressionDataEditorWindow window;
 
@@ -49,7 +49,7 @@ public class Node {
         EXIT
     }
 
-    public Node(ProgressionDataEditorWindow window, Vector2 position, string name, int id) {
+    public EditorNode(ProgressionDataEditorWindow window, Vector2 position, string name, int id) {
         this.window = window;
         this.name = name;
         this.id = id;

@@ -2,35 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressionNode {
+public class RuntimeNode {
     public string name;
-    Dictionary<string, ProgressionNode> paths = new Dictionary<string, ProgressionNode>();
+    Dictionary<string, RuntimeNode> paths = new Dictionary<string, RuntimeNode>();
     ProgressionSceneNodeReference sceneNodeReference;
 
-    public ProgressionNode(string name, ProgressionSceneNodeReference sceneNodeReference) {
+    public RuntimeNode(string name, ProgressionSceneNodeReference sceneNodeReference) {
         this.name = name;
         this.sceneNodeReference = sceneNodeReference;
     }
 
-    public ProgressionNode GetPath(string path) {
-        paths.TryGetValue(path, out ProgressionNode node);
+    public RuntimeNode GetPath(string path) {
+        paths.TryGetValue(path, out RuntimeNode node);
         return node;
     }
 
-    public void AddPathNode(string path, ProgressionNode node) {
+    public void AddPathNode(string path, RuntimeNode node) {
         paths.Add(path, node);
     }
 
-    public Dictionary<string, ProgressionNode> GetPaths() {
+    public Dictionary<string, RuntimeNode> GetPaths() {
         return paths;
     }
 
-    public void OnProgressionEnter() {
-        sceneNodeReference.OnEnterProgression();
+    public void OnEnterNode() {
+        sceneNodeReference.OnEnterNode();
     }
 
-    public void OnProgressionExit() {
-        sceneNodeReference.onExitProgression();
+    public void OnExitNode() {
+        sceneNodeReference.OnExitNode();
     }
 
     public void Print() {

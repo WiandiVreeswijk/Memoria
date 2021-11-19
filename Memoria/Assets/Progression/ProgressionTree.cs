@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ProgressionTree {
-    public ProgressionNode baseNode;
+    public RuntimeNode baseNode;
 
     public static ProgressionTree CreateFromData(ProgressionData progressionData) {
         ProgressionTree tree = new ProgressionTree();
-        Dictionary<int, ProgressionNode> nodesDict = new Dictionary<int, ProgressionNode>();
+        Dictionary<int, RuntimeNode> nodesDict = new Dictionary<int, RuntimeNode>();
         //Create nodes
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
-            ProgressionNode node = new ProgressionNode(data.name, data.sceneNode);
+            RuntimeNode node = new RuntimeNode(data.name, data.sceneNode);
             if (progressionData.baseNodeID == data.id) tree.baseNode = node;
             nodesDict.Add(data.id, node);
         }
@@ -19,7 +19,7 @@ public class ProgressionTree {
         //Create connections
         for (int i = 0; i < progressionData.nodeDataCollection.Length; i++) {
             ProgressionData.NodeData data = progressionData.nodeDataCollection[i];
-            ProgressionNode node = nodesDict[data.id];
+            RuntimeNode node = nodesDict[data.id];
             for (int j = 0; j < data.connections.Length; j++) {
                 ProgressionData.NodeConnection connection = data.connections[j];
                 if (connection.reference == -1) continue;

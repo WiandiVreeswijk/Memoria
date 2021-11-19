@@ -47,13 +47,13 @@ public class ProgressionSceneNodeReference {
         return false;
     }
 
-    public void OnEnterProgression() {
+    public void OnEnterNode() {
         if (node == null) Initialize();
-        if (node != null) node.onEnterProgression.Invoke();
+        if (node != null) node.onEnterNode.Invoke();
     }
 
-    public void onExitProgression() {
+    public void OnExitNode() {
         if (node == null) Initialize();
-        if (node != null) node.onExitProgression.Invoke();
+        if (node != null) node.onExitNode.Invoke();
     }
 }

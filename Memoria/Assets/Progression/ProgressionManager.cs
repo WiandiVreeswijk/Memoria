@@ -6,7 +6,7 @@ public class ProgressionManager : MonoBehaviour {
     public static ProgressionManager _Instance;
     public ProgressionData progressionData;
     private ProgressionTree progressionTree;
-    private ProgressionNode activeNode;
+    private RuntimeNode activeNode;
 
     void Awake() {
         if (_Instance != null) {
@@ -25,11 +25,11 @@ public class ProgressionManager : MonoBehaviour {
     }
 
     private void _Progress(string progressTag) {
-        ProgressionNode newNode = activeNode.GetPath(progressTag);
+        RuntimeNode newNode = activeNode.GetPath(progressTag);
         if (newNode != null) {
-            activeNode.OnProgressionExit();
+            activeNode.OnExitNode();
             activeNode = newNode;
-            activeNode.OnProgressionEnter();
+            activeNode.OnEnterNode();
         } else {
             Debug.LogError($"Progression {progressTag} not found in node {activeNode.name}");
         }
@@ -39,7 +39,7 @@ public class ProgressionManager : MonoBehaviour {
         _Instance._Progress(progressTag);
     }
 
-    public ProgressionNode GetActiveNode() {
+    public RuntimeNode GetActiveNode() {
         return activeNode;
     }
 }

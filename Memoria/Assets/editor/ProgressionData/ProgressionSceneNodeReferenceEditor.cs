@@ -62,8 +62,8 @@ public class ProgressionSceneNodeReferenceEditor : MonoBehaviour {
     void Refresh() {
         if (reference.node != null) {
             serializedNode = new SerializedObject(reference.node);
-            onEnterProgressionProperty = serializedNode.FindProperty("onEnterProgression");
-            onExitProgressionProperty = serializedNode.FindProperty("onExitProgression");
+            onEnterProgressionProperty = serializedNode.FindProperty("onEnterNode");
+            onExitProgressionProperty = serializedNode.FindProperty("onExitNode");
         }
     }
 }

@@ -426,12 +426,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf9e9d4dbee1843a1dc5e32fe5a8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterProgression:
+  onEnterNode:
     m_PersistentCalls:
       m_Calls: []
-  onExitProgression:
+  onExitNode:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305764317}
+        m_TargetAssemblyTypeName: Notify, Assembly-CSharp
+        m_MethodName: StartNotification
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Player left introduction
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &43424117
 GameObject:
   m_ObjectHideFlags: 3
@@ -456,7 +468,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43424117}
-  m_LocalRotation: {x: -0.040959954, y: -0.040787548, z: 0.038686886, w: 0.99757814}
+  m_LocalRotation: {x: -0.04096, y: -0.04079032, z: 0.03868951, w: 0.9975779}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -722,7 +734,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90029138}
-  m_LocalRotation: {x: -0.059098646, y: -0.041484535, z: 0.037938625, w: 0.99666804}
+  m_LocalRotation: {x: -0.059098646, y: -0.041487303, z: 0.037941203, w: 0.99666774}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1205,6 +1217,49 @@ Transform:
   - {fileID: 1867335799}
   m_Father: {fileID: 0}
   m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &305764316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 305764318}
+  - component: {fileID: 305764317}
+  m_Layer: 0
+  m_Name: Notifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &305764317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305764316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79d2a3f93a305f48a87e1191cb6b971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &305764318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305764316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.4040394, y: 3.7739084, z: -10.25692}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323039729
 GameObject:
@@ -2611,7 +2666,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256735151}
-  m_LocalRotation: {x: -0.07709776, y: -0.053170204, z: 0.04688278, w: 0.9945004}
+  m_LocalRotation: {x: -0.07709773, y: -0.05317238, z: 0.04688473, w: 0.99450016}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3242,7 +3297,7 @@ MonoBehaviour:
   bakedScaleOffsetTerrain: []
   assetList: []
   uvOverlapAssetList: 
-  idremap: 0b0000000c000000
+  idremap: 
   usesRealtimeGI: 0
   emptyDirectionTex: {fileID: 2800000, guid: 04afea73344b7d049b5b7ac5ae315dd5, type: 3}
   anyVolumes: 0
@@ -4317,7 +4372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf9e9d4dbee1843a1dc5e32fe5a8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterProgression:
+  onEnterNode:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1468489327}
@@ -4332,7 +4387,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onExitProgression:
+  onExitNode:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1862564468
@@ -4446,7 +4501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf9e9d4dbee1843a1dc5e32fe5a8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterProgression:
+  onEnterNode:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1867335801}
@@ -4473,7 +4528,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onExitProgression:
+  onExitNode:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1867335801
@@ -5124,19 +5179,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6696288
+      value: 0.6696263
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24702747
+      value: 0.24702649
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6571227
+      value: -0.65712523
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.24241397
+      value: 0.24241488
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5299,7 +5354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf9e9d4dbee1843a1dc5e32fe5a8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterProgression:
+  onEnterNode:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1081851829}
@@ -5314,7 +5369,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onExitProgression:
+  onExitNode:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &2126249120 stripped
