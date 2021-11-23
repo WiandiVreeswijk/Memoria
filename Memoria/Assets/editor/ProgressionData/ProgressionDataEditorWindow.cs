@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditorInternal;
 
 public class ProgressionDataEditorWindow : EditorWindow {
@@ -60,7 +61,10 @@ public class ProgressionDataEditorWindow : EditorWindow {
 
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.LoadSceneMode arg1) {
         if (nodes != null) {
-            foreach (EditorNode node in nodes) node.sceneNode.Initialize();
+            foreach (EditorNode node in nodes)
+            {
+                node.InitializeSceneNodes();
+            }
         }
     }
 
@@ -321,7 +325,6 @@ public class ProgressionDataEditorWindow : EditorWindow {
         int id = nodeID++;
         EditorNode node = new EditorNode(this, mousePosition, "", id);
         node.AddOutPoint();
-        node.InitializeNewNode();
         nodes.Add(node);
 
         if (nodes.Count == 1) {
@@ -447,8 +450,12 @@ public class ProgressionDataEditorWindow : EditorWindow {
 
             //node.onExitComponents = new List<ProgressionComponent>(data.onExitComponents);
             //node.onEnterComponents = new List<ProgressionComponent>(data.onEnterComponents);
-            node.sceneNode = new ProgressionSceneNodeReference(data.sceneNode.scenePath, data.sceneNode.ID);
-            node.sceneNode.Initialize();
+            foreach (var progressionSceneNodeReference in data.sceneNodes) {
+                var progressionNode = new ProgressionNodeComponentReference(progressionSceneNodeReference.scenePath, progressionSceneNodeReference.ID);
+                progressionNode.Initialize();
+                node.AddSceneNode(progressionNode);
+            }
+            node.CheckSceneNodes();
             nodes.Add(node);
             nodesDict.Add(data.id, node);
         }
@@ -494,7 +501,6 @@ public class ProgressionDataEditorWindow : EditorWindow {
             progressionData.nodeDataCollection[i].id = node.id;
             progressionData.nodeDataCollection[i].name = node.name;
             progressionData.nodeDataCollection[i].position = node.rect.position - totalDrag;
-            progressionData.nodeDataCollection[i].sceneNode = node.sceneNode;
             progressionData.nodeDataCollection[i].connections = new ProgressionData.NodeConnection[node.outPoints.Count];
             for (int j = 0; j < node.outPoints.Count; j++) {
                 var outPoint = node.outPoints[j];
@@ -507,6 +513,10 @@ public class ProgressionDataEditorWindow : EditorWindow {
                     }
                 }
             }
+
+            List<ProgressionNodeComponentReference> references = node.GetUsedSceneNodes();
+            progressionData.nodeDataCollection[i].sceneNodes = references.ToArray();
+
         }
     }
     #endregion

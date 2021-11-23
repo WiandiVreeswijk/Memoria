@@ -6,15 +6,15 @@ using UnityEditor;
 using UnityEngine;
 
 [Serializable]
-public class ProgressionSceneNodeReference {
-    [NonSerialized] public ProgressionSceneNode node;
+public class ProgressionNodeComponentReference {
+    [NonSerialized] public ProgressionNodeComponent component;
     [NonSerialized] public string errorMessage = "";
     [SerializeField] public string scenePath = "";
-    [SerializeField] public string ID;
+    [SerializeField] public string ID = "";
 
-    public ProgressionSceneNodeReference() { }
+    public ProgressionNodeComponentReference() { }
 
-    public ProgressionSceneNodeReference(string scenePath, string ID) {
+    public ProgressionNodeComponentReference(string scenePath, string ID) {
         this.scenePath = scenePath;
         this.ID = ID;
     }
@@ -23,17 +23,17 @@ public class ProgressionSceneNodeReference {
         if (scenePath.Length > 0) {
             if (IsSceneOpen(scenePath)) {
                 if (GlobalObjectId.TryParse(ID, out GlobalObjectId goi)) {
-                    node = GlobalObjectId.GlobalObjectIdentifierToObjectSlow(goi) as ProgressionSceneNode;
-                    if (node != null) {
+                    component = GlobalObjectId.GlobalObjectIdentifierToObjectSlow(goi) as ProgressionNodeComponent;
+                    if (component != null) {
                         errorMessage = "";
                         return;
                     }
                 }
 
-                errorMessage = "Node not found in scene";
+                errorMessage = "Component not found in scene";
                 //TODO: reset data if node not found?
             } else {
-                errorMessage = $"This node is located a different scene:\n{Path.GetFileName(scenePath)}";
+                errorMessage = $"This component is located a different scene:\n{Path.GetFileName(scenePath)}";
             }
         }
     }
@@ -48,12 +48,16 @@ public class ProgressionSceneNodeReference {
     }
 
     public void OnEnterNode() {
-        if (node == null) Initialize();
-        if (node != null) node.onEnterNode.Invoke();
+        if (component == null) Initialize();
+        if (component != null) component.OnEnterNode();
     }
 
     public void OnExitNode() {
-        if (node == null) Initialize();
-        if (node != null) node.onExitNode.Invoke();
+        if (component == null) Initialize();
+        if (component != null) component.OnExitNode();
+    }
+
+    public bool IsEmpty() {
+        return component == null && ID.Length == 0 && scenePath.Length == 0;
     }
 }

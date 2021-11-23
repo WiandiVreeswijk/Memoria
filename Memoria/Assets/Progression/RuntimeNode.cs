@@ -5,11 +5,11 @@ using UnityEngine;
 public class RuntimeNode {
     public string name;
     Dictionary<string, RuntimeNode> paths = new Dictionary<string, RuntimeNode>();
-    ProgressionSceneNodeReference sceneNodeReference;
+    ProgressionNodeComponentReference[] sceneNodeReferences;
 
-    public RuntimeNode(string name, ProgressionSceneNodeReference sceneNodeReference) {
+    public RuntimeNode(string name, ProgressionNodeComponentReference[] sceneNodeReferences) {
         this.name = name;
-        this.sceneNodeReference = sceneNodeReference;
+        this.sceneNodeReferences = sceneNodeReferences;
     }
 
     public RuntimeNode GetPath(string path) {
@@ -26,11 +26,15 @@ public class RuntimeNode {
     }
 
     public void OnEnterNode() {
-        sceneNodeReference.OnEnterNode();
+        foreach (var progressionSceneNodeReference in sceneNodeReferences) {
+            progressionSceneNodeReference.OnEnterNode();
+        }
     }
 
     public void OnExitNode() {
-        sceneNodeReference.OnExitNode();
+        foreach (var progressionSceneNodeReference in sceneNodeReferences) {
+            progressionSceneNodeReference.OnExitNode();
+        }
     }
 
     public void Print() {

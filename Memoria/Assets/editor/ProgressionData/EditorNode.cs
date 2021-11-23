@@ -19,8 +19,8 @@ public class EditorNode {
     //public ConnectionPoint outPoint;
     public List<ConnectionPoint> outPoints = new List<ConnectionPoint>();
 
-    public ProgressionSceneNodeReference sceneNode;
-    private ProgressionSceneNodeReferenceEditor editor = new ProgressionSceneNodeReferenceEditor();
+    private List<ProgressionNodeComponentReference> sceneNodes = new List<ProgressionNodeComponentReference>();
+    private ProgressionNodeComponentReferenceEditor editor = new ProgressionNodeComponentReferenceEditor();
     //public List<ProgressionComponent> onEnterComponents = new List<ProgressionComponent>();
     //public List<ProgressionComponent> onExitComponents = new List<ProgressionComponent>(); 
     //public GameObject gameObject;
@@ -39,7 +39,7 @@ public class EditorNode {
 
     private ProgressionDataEditorWindow window;
 
-    private static int extraHeight = 300;
+    private static int extraHeight = 350;
     private static int width = 300;
     private static int minNodeHeightCount = 4;
     private static float minHeight = ProgressionDataEditorStyles.TOOLBARHEIGHT + (ConnectionPoint.POINTHEIGHT + ConnectionPoint.OUTPADDING) * minNodeHeightCount + 6;
@@ -64,10 +64,21 @@ public class EditorNode {
         styleField = new GUIStyle();
         styleField.alignment = TextAnchor.UpperRight;
         CheckNameLength();
+        CheckSceneNodes();
     }
 
-    public void InitializeNewNode() {
-        sceneNode = new ProgressionSceneNodeReference();
+    public void CheckSceneNodes() {
+        List<ProgressionNodeComponentReference> toRemove = new List<ProgressionNodeComponentReference>();
+        foreach (ProgressionNodeComponentReference reference in sceneNodes) {
+            if (reference.IsEmpty()) toRemove.Add(reference);
+        }
+
+        foreach (ProgressionNodeComponentReference reference in toRemove) {
+            sceneNodes.Remove(reference);
+        }
+
+        sceneNodes.Add(new ProgressionNodeComponentReference());
+
     }
 
     private void CheckNameLength() {
@@ -142,7 +153,15 @@ public class EditorNode {
 
         scroll = GUILayout.BeginScrollView(scroll, GUILayout.ExpandWidth(true), GUILayout.Height(extraHeight - 1));
         EditorGUIUtility.labelWidth = 80;
-        if (editor.DrawGUI(sceneNode)) changed = true;
+
+        sceneNodes.ForEach(x => {
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            if (editor.DrawGUI(x)) changed = true;
+            EditorGUILayout.EndVertical();
+            GUILayout.Space(10);
+        });
+        if (changed) CheckSceneNodes();
+
         EditorGUIUtility.labelWidth = 150;
         GUILayout.EndScrollView();
 
@@ -211,7 +230,7 @@ public class EditorNode {
 
     private void OpenAddComponentMenu(ComponentType componentType) {
         GenericMenu genericMenu = new GenericMenu();
-        var types = ProgressionUtils.GetEnumerableOfType<ProgressionComponent>();
+        var types = ProgressionUtils.GetEnumerableOfType<ProgressionNodeComponent>();
         foreach (Type type in types) {
             genericMenu.AddItem(new GUIContent(ObjectNames.NicifyVariableName(type.Name)), false, () => {
                 //if (componentType == ComponentType.ENTER) onEnterComponents.Add((ProgressionComponent)Activator.CreateInstance(type));
@@ -320,5 +339,25 @@ public class EditorNode {
 
     private void OnClickRemoveNode() {
         window.OnClickRemoveNode(this);
+    }
+
+    public void InitializeSceneNodes() {
+        sceneNodes.ForEach(x => x.Initialize());
+    }
+
+    public void AddSceneNode(ProgressionNodeComponentReference progressionNode) {
+        sceneNodes.Add(progressionNode);
+    }
+
+    public List<ProgressionNodeComponentReference> GetUsedSceneNodes() {
+        List<ProgressionNodeComponentReference> references = new List<ProgressionNodeComponentReference>();
+        foreach (var reference in sceneNodes) {
+            if (!reference.IsEmpty()) {
+                references.Add(reference);
+            }
+        }
+
+        return references;
+
     }
 }

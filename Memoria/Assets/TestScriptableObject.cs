@@ -23,7 +23,7 @@ public class TestScriptableObject : StyledScriptableObject {
     [Serializable]
     public class AnotherClass : SomeClass {
         public float value = 0.4543f;
-        public ProgressionSceneNodeReference reference;
+        public ProgressionNodeComponentReference reference;
         public AnotherClass() {
         }
     }

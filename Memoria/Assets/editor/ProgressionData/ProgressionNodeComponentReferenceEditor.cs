@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class ProgressionSceneNodeReferenceEditor : MonoBehaviour {
+public class ProgressionNodeComponentReferenceEditor : MonoBehaviour {
     private SerializedObject serializedNode;
     private SerializedProperty onEnterProgressionProperty;
     private SerializedProperty onExitProgressionProperty;
-    private ProgressionSceneNodeReference reference;
+    private ProgressionNodeComponentReference reference;
 
-    public bool DrawGUI(ProgressionSceneNodeReference activeReference) {
+    public bool DrawGUI(ProgressionNodeComponentReference activeReference) {
         bool changed = false;
         if (reference != activeReference) {
             reference = activeReference;
@@ -21,9 +21,10 @@ public class ProgressionSceneNodeReferenceEditor : MonoBehaviour {
 
         if (reference == null) return false;
         EditorGUI.BeginChangeCheck();
-        reference.node = EditorGUILayout.ObjectField("Scene Node", reference.node, typeof(ProgressionSceneNode), true) as ProgressionSceneNode;
+        bool containsComponent = reference.component != null && serializedNode != null;
+        reference.component = EditorGUILayout.ObjectField("Component", reference.component, typeof(ProgressionNodeComponent), true) as ProgressionNodeComponent;
         if (EditorGUI.EndChangeCheck()) {
-            if (reference.node == null) {
+            if (reference.component == null) {
                 reference.scenePath = "";
                 reference.ID = "";
                 reference.errorMessage = "";
@@ -31,19 +32,28 @@ public class ProgressionSceneNodeReferenceEditor : MonoBehaviour {
             OnNodeChange();
             changed = true;
         }
+
+        if (containsComponent) GUILayout.Label(reference.component.GetName(), EditorStyles.boldLabel);
         GUILayout.Space(8);
+
 
         if (reference.errorMessage.Length > 0) {
             GUILayout.Label(reference.errorMessage, ProgressionDataEditorStyles.ERRORLABEL);
         }
-
-        if (reference.node != null && serializedNode != null) {
+        if (containsComponent) {
             serializedNode.Update();
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(onEnterProgressionProperty);
-            EditorGUILayout.PropertyField(onExitProgressionProperty);
-            serializedNode.ApplyModifiedProperties();
+
+            serializedNode.Update();
+
+            var prop = serializedNode.GetIterator();
+            prop.NextVisible(true);
+            while (prop.NextVisible(false)) {
+                EditorGUILayout.PropertyField(prop);
+            }
+
             if (EditorGUI.EndChangeCheck()) {
+                serializedNode.ApplyModifiedProperties();
                 changed = true;
             }
         }
@@ -52,18 +62,16 @@ public class ProgressionSceneNodeReferenceEditor : MonoBehaviour {
     }
 
     void OnNodeChange() {
-        if (reference.node != null) {
+        if (reference.component != null) {
             Refresh();
-            reference.ID = GlobalObjectId.GetGlobalObjectIdSlow(reference.node).ToString();
+            reference.ID = GlobalObjectId.GetGlobalObjectIdSlow(reference.component).ToString();
             reference.scenePath = UnityEngine.SceneManagement.SceneManager.GetActiveScene().path;
         }
     }
 
     void Refresh() {
-        if (reference.node != null) {
-            serializedNode = new SerializedObject(reference.node);
-            onEnterProgressionProperty = serializedNode.FindProperty("onEnterNode");
-            onExitProgressionProperty = serializedNode.FindProperty("onExitNode");
+        if (reference.component != null) {
+            serializedNode = new SerializedObject(reference.component);
         }
     }
 }
