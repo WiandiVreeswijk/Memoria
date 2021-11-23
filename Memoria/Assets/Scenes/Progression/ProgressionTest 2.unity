@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: b196a8280489dc44283c13ea20af3606, type: 3}
   m_Sun: {fileID: 40952532}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.39568225, g: 0.14989173, b: 0.18825442, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -407,7 +407,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43424117}
-  m_LocalRotation: {x: -0.04095994, y: -0.04079029, z: 0.038689494, w: 0.9975779}
+  m_LocalRotation: {x: -0.04091799, y: -0.052336298, z: 0.0496409, w: 0.9965553}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -716,7 +716,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90029138}
-  m_LocalRotation: {x: -0.059098646, y: -0.041487303, z: 0.037941203, w: 0.99666774}
+  m_LocalRotation: {x: -0.059038036, y: -0.053230606, z: 0.04868073, w: 0.9956461}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1451,6 +1451,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &528002791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: ProgressionTest 2_LM0
+  m_EditorClassIdentifier: 
+  resolution: 2048
+  bitmask: 1
+  id: 0
+  sortingID: 1
+  isImplicit: 1
+  area: 20836.5
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: ProgressionTest 2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &596214502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1844,47 @@ Transform:
   m_Father: {fileID: 812620782}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &679726000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: ProgressionTest 2_LMA1
+  m_EditorClassIdentifier: 
+  resolution: 2048
+  bitmask: 1
+  id: 1
+  sortingID: 2
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: ProgressionTest 2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &812620781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,47 +1976,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &855696542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: volumes
-  m_EditorClassIdentifier: 
-  resolution: 16
-  bitmask: 1
-  id: 2
-  sortingID: 0
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 96140
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: 
-  containsTerrains: 0
-  probes: 1
-  mode: 2
-  renderMode: 1000
-  renderDirMode: 5
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 1
-  voxelSize: {x: 0.4041926, y: 0.42584753, z: 0.40043315}
-  passedFilter: 0
 --- !u!1 &864219436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,47 +2085,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &890860260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: ProgressionTest 2_LMA1
-  m_EditorClassIdentifier: 
-  resolution: 2048
-  bitmask: 1
-  id: 1
-  sortingID: 2
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: ProgressionTest 2
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &891486751
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,47 +2214,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6208774559576395859, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f7aceb2735bb6644796ae7ec5b3690d0, type: 3}
---- !u!114 &1027299522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: ProgressionTest 2_LM0
-  m_EditorClassIdentifier: 
-  resolution: 2048
-  bitmask: 1
-  id: 0
-  sortingID: 1
-  isImplicit: 1
-  area: 20832
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: ProgressionTest 2
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &1256735151
 GameObject:
   m_ObjectHideFlags: 3
@@ -2279,7 +2238,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256735151}
-  m_LocalRotation: {x: -0.07709773, y: -0.05317238, z: 0.04688473, w: 0.99450016}
+  m_LocalRotation: {x: -0.077024244, y: -0.06239962, z: 0.055020846, w: 0.9935523}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2425,6 +2384,47 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334895251}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1338914294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: volumes
+  m_EditorClassIdentifier: 
+  resolution: 16
+  bitmask: 1
+  id: 2
+  sortingID: 0
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 96140
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: 
+  containsTerrains: 0
+  probes: 1
+  mode: 2
+  renderMode: 1000
+  renderDirMode: 5
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 1
+  voxelSize: {x: 0.4041926, y: 0.42584753, z: 0.40043315}
+  passedFilter: 0
 --- !u!1 &1410038961
 GameObject:
   m_ObjectHideFlags: 1
@@ -2529,7 +2529,7 @@ MonoBehaviour:
   renderSettingsRTPVSceneView: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
-  lastBakeTime: 139
+  lastBakeTime: 85
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
   lightUIDs: f8c2dd8e30dbcad9
@@ -2595,22 +2595,23 @@ MonoBehaviour:
     cookie: {fileID: 0}
     angle: 30
   implicitGroups:
-  - {fileID: 855696542}
-  - {fileID: 890860260}
-  - {fileID: 1027299522}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
-  - {fileID: 890860260}
+  - {fileID: 1338914294}
+  - {fileID: 679726000}
+  - {fileID: 528002791}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
+  - {fileID: 679726000}
   implicitGroupedObjects:
   - {fileID: 0}
   - {fileID: 200460608}
@@ -2619,6 +2620,7 @@ MonoBehaviour:
   - {fileID: 622915253}
   - {fileID: 623238023}
   - {fileID: 655361464}
+  - {fileID: 864219436}
   - {fileID: 1334895251}
   - {fileID: 1466266110}
   - {fileID: 1565347885}
@@ -2631,8 +2633,8 @@ MonoBehaviour:
   bounds:
   - m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 50, y: 1.110223e-15, z: 50}
-  - m_Center: {x: 0, y: 3.1082554, z: 0}
-    m_Extent: {x: 150, y: 3.1082554, z: 150}
+  - m_Center: {x: 0, y: 3.1016304, z: 0}
+    m_Extent: {x: 150, y: 3.1148806, z: 150}
   - m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 5000, y: 5000, z: 5000}
   hasEmissive: 0101
@@ -2671,6 +2673,7 @@ MonoBehaviour:
   - {fileID: 622915256}
   - {fileID: 623238026}
   - {fileID: 655361466}
+  - {fileID: 864219439}
   - {fileID: 1334895254}
   - {fileID: 1466266113}
   - {fileID: 1565347887}
@@ -2680,25 +2683,27 @@ MonoBehaviour:
   - {fileID: 1988256709}
   - {fileID: 2038980995}
   - {fileID: 2097902016}
-  bakedIDs: 010000000000000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  bakedIDs: 01000000000000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   bakedScaleOffset:
   - {x: 0.5716522, y: 0.55520827, z: -0.0023184877, w: -0.002251795}
   - {x: 1, y: 1, z: 0, w: 0}
   - {x: 0.12416556, y: 0.120936275, z: 0, w: 0.8790637}
   - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.7750325}
-  - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.65019506}
+  - {x: 0.124165595, y: 0.120936275, z: 0.74766356, w: 0.7750325}
   - {x: 0.42638525, y: 0.41891164, z: 0.5696993, w: -0.0016990078}
-  - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.5253576}
-  - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.40052015}
+  - {x: 0.087429166, y: 0.090196274, z: 0.571074, w: 0.2753169}
+  - {x: 0.124165535, y: 0.120936275, z: 0.87583447, w: 0.65019506}
+  - {x: 0.124165595, y: 0.120936275, z: 0.74766356, w: 0.65019506}
   - {x: 0.3725827, y: 0.36278954, z: 0.37232068, w: 0.6383205}
   - {x: 0.3725827, y: 0.36278954, z: -0.0015111085, w: 0.6383205}
   - {x: 0.42638525, y: 0.4189117, z: -0.001729319, w: 0.36241022}
-  - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.27568272}
-  - {x: 0.124165595, y: 0.120936275, z: 0.74766356, w: 0.76462936}
+  - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.5253576}
+  - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.40052015}
   - {x: 0.42638525, y: 0.4189117, z: 0.425507, w: 0.36241022}
-  - {x: 0.124165595, y: 0.120936334, z: 0.74766356, w: 0.6397919}
-  bakedVertexOffset: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  - {x: 0.124165595, y: 0.120936275, z: 0.85447264, w: 0.27568272}
+  bakedVertexOffset: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   bakedVertexColorMesh:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2723,7 +2728,7 @@ MonoBehaviour:
   bakedScaleOffsetTerrain: []
   assetList: []
   uvOverlapAssetList: 
-  idremap: 0b0000000c000000
+  idremap: 0000000001000000
   usesRealtimeGI: 0
   emptyDirectionTex: {fileID: 2800000, guid: 04afea73344b7d049b5b7ac5ae315dd5, type: 3}
   anyVolumes: 1
@@ -2731,12 +2736,12 @@ MonoBehaviour:
   sectors:
   - name: $G
     maps:
-    - {fileID: 2800000, guid: cf82db0434fd0b640b3dbcd544707944, type: 3}
-    - {fileID: 2800000, guid: feffa03e1bb470048a00be5b8de9f5ff, type: 3}
+    - {fileID: 2800000, guid: dd80a656afe0f1d4d89faa516e396602, type: 3}
+    - {fileID: 2800000, guid: 334e18a0ce4a4034885cdb165f0ce36b, type: 3}
     masks: []
     dirMaps:
-    - {fileID: 2800000, guid: aa6e9ebb72840964ca01901526549b43, type: 3}
-    - {fileID: 2800000, guid: f9f8960f0c039bd4089a46fd8ff21d8d, type: 3}
+    - {fileID: 2800000, guid: 6f65c95b3013a9d4bb0b3aac518ddb3d, type: 3}
+    - {fileID: 2800000, guid: b045f2df511211d469bbdf5f942fd19d, type: 3}
     rnmMaps0: []
     rnmMaps1: []
     rnmMaps2: []
@@ -3918,19 +3923,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.66962636
+      value: 0.6590626
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24702656
+      value: 0.24312957
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.65712523
+      value: -0.66771954
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.24241489
+      value: 0.24632317
       objectReference: {fileID: 0}
     - target: {fileID: 3449185404226622899, guid: dd3901c0d069fea42a73d99ecd211eb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
