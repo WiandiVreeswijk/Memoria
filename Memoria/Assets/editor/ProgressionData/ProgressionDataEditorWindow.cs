@@ -63,7 +63,7 @@ public class ProgressionDataEditorWindow : EditorWindow {
         if (nodes != null) {
             foreach (EditorNode node in nodes)
             {
-                node.InitializeSceneNodes();
+                node.InitializeComponents();
             }
         }
     }
@@ -450,12 +450,12 @@ public class ProgressionDataEditorWindow : EditorWindow {
 
             //node.onExitComponents = new List<ProgressionComponent>(data.onExitComponents);
             //node.onEnterComponents = new List<ProgressionComponent>(data.onEnterComponents);
-            foreach (var progressionSceneNodeReference in data.sceneNodes) {
+            foreach (var progressionSceneNodeReference in data.components) {
                 var progressionNode = new ProgressionNodeComponentReference(progressionSceneNodeReference.scenePath, progressionSceneNodeReference.ID);
                 progressionNode.Initialize();
                 node.AddSceneNode(progressionNode);
             }
-            node.CheckSceneNodes();
+            node.CheckComponents();
             nodes.Add(node);
             nodesDict.Add(data.id, node);
         }
@@ -514,8 +514,8 @@ public class ProgressionDataEditorWindow : EditorWindow {
                 }
             }
 
-            List<ProgressionNodeComponentReference> references = node.GetUsedSceneNodes();
-            progressionData.nodeDataCollection[i].sceneNodes = references.ToArray();
+            List<ProgressionNodeComponentReference> references = node.GetUsedComponents();
+            progressionData.nodeDataCollection[i].components = references.ToArray();
 
         }
     }

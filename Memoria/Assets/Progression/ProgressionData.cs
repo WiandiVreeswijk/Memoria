@@ -26,6 +26,6 @@ public class ProgressionData : ScriptableObject {
         public Vector2 position;
         public NodeConnection[] connections;
 
-        [SerializeReference] public ProgressionNodeComponentReference[] sceneNodes;
+        [SerializeReference] public ProgressionNodeComponentReference[] components;
     }
 }

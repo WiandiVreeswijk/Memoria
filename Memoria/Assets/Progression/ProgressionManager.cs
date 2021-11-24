@@ -18,6 +18,7 @@ public class ProgressionManager : MonoBehaviour {
         BuildTree();
     }
 
+    /*Convert progression data to a progression tree for runtime usage*/
     private void BuildTree() {
         if (progressionData == null) throw new System.Exception("No progression data found in progression manager");
         progressionTree = ProgressionTree.CreateFromData(progressionData);
@@ -35,11 +36,16 @@ public class ProgressionManager : MonoBehaviour {
         }
     }
 
+    /*Progress from the active node to the next node based on the name given to a connection*/
     public static void Progress(string progressTag) {
         _Instance._Progress(progressTag);
     }
 
     public RuntimeNode GetActiveNode() {
         return activeNode;
+    }
+
+    public static List<string> GetAvailablePaths() {
+        return _Instance.activeNode.GetAvailablePaths();
     }
 }

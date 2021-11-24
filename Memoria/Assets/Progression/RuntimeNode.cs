@@ -25,6 +25,10 @@ public class RuntimeNode {
         return paths;
     }
 
+    public List<string> GetAvailablePaths() {
+        return new List<string>(paths.Keys);
+    }
+
     public void OnEnterNode() {
         foreach (var progressionSceneNodeReference in sceneNodeReferences) {
             progressionSceneNodeReference.OnEnterNode();

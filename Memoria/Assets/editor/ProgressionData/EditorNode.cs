@@ -19,7 +19,7 @@ public class EditorNode {
     //public ConnectionPoint outPoint;
     public List<ConnectionPoint> outPoints = new List<ConnectionPoint>();
 
-    private List<ProgressionNodeComponentReference> sceneNodes = new List<ProgressionNodeComponentReference>();
+    private List<ProgressionNodeComponentReference> components = new List<ProgressionNodeComponentReference>();
     private ProgressionNodeComponentReferenceEditor editor = new ProgressionNodeComponentReferenceEditor();
     //public List<ProgressionComponent> onEnterComponents = new List<ProgressionComponent>();
     //public List<ProgressionComponent> onExitComponents = new List<ProgressionComponent>(); 
@@ -64,20 +64,20 @@ public class EditorNode {
         styleField = new GUIStyle();
         styleField.alignment = TextAnchor.UpperRight;
         CheckNameLength();
-        CheckSceneNodes();
+        CheckComponents();
     }
 
-    public void CheckSceneNodes() {
+    public void CheckComponents() {
         List<ProgressionNodeComponentReference> toRemove = new List<ProgressionNodeComponentReference>();
-        foreach (ProgressionNodeComponentReference reference in sceneNodes) {
+        foreach (ProgressionNodeComponentReference reference in components) {
             if (reference.IsEmpty()) toRemove.Add(reference);
         }
 
         foreach (ProgressionNodeComponentReference reference in toRemove) {
-            sceneNodes.Remove(reference);
+            components.Remove(reference);
         }
 
-        sceneNodes.Add(new ProgressionNodeComponentReference());
+        components.Add(new ProgressionNodeComponentReference());
 
     }
 
@@ -154,13 +154,13 @@ public class EditorNode {
         scroll = GUILayout.BeginScrollView(scroll, GUILayout.ExpandWidth(true), GUILayout.Height(extraHeight - 1));
         EditorGUIUtility.labelWidth = 80;
 
-        sceneNodes.ForEach(x => {
+        components.ForEach(x => {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             if (editor.DrawGUI(x)) changed = true;
             EditorGUILayout.EndVertical();
             GUILayout.Space(10);
         });
-        if (changed) CheckSceneNodes();
+        if (changed) CheckComponents();
 
         EditorGUIUtility.labelWidth = 150;
         GUILayout.EndScrollView();
@@ -341,17 +341,17 @@ public class EditorNode {
         window.OnClickRemoveNode(this);
     }
 
-    public void InitializeSceneNodes() {
-        sceneNodes.ForEach(x => x.Initialize());
+    public void InitializeComponents() {
+        components.ForEach(x => x.Initialize());
     }
 
     public void AddSceneNode(ProgressionNodeComponentReference progressionNode) {
-        sceneNodes.Add(progressionNode);
+        components.Add(progressionNode);
     }
 
-    public List<ProgressionNodeComponentReference> GetUsedSceneNodes() {
+    public List<ProgressionNodeComponentReference> GetUsedComponents() {
         List<ProgressionNodeComponentReference> references = new List<ProgressionNodeComponentReference>();
-        foreach (var reference in sceneNodes) {
+        foreach (var reference in components) {
             if (!reference.IsEmpty()) {
                 references.Add(reference);
             }

@@ -21,7 +21,7 @@ MonoBehaviour:
       reference: 9
     - name: Pressureplate2
       reference: 2
-    sceneNodes:
+    components:
     - id: 0
   - id: 2
     name: Teleport to scene two
@@ -29,7 +29,7 @@ MonoBehaviour:
     connections:
     - name: SpawnInScene2
       reference: 7
-    sceneNodes:
+    components:
     - id: 1
   - id: 7
     name: Scene two pressure plate
@@ -37,7 +37,7 @@ MonoBehaviour:
     connections:
     - name: Pressureplate
       reference: 0
-    sceneNodes:
+    components:
     - id: 2
     - id: 3
   - id: 9
@@ -46,13 +46,13 @@ MonoBehaviour:
     connections:
     - name: Pressureplate3
       reference: 10
-    sceneNodes:
+    components:
     - id: 4
   - id: 10
     name: Open gate 2
     position: {x: 1100, y: 300}
     connections: []
-    sceneNodes:
+    components:
     - id: 5
   baseNodeID: 0
   nodeID: 11
@@ -72,12 +72,12 @@ MonoBehaviour:
       type: {class: ProgressionNodeComponentReference, ns: , asm: Assembly-CSharp}
       data:
         scenePath: Assets/Scenes/Progression/ProgressionTest 2.unity
-        ID: GlobalObjectId_V1-2-a66a40f71ce310a42954ded7197914cd-1927606994-0
+        ID: GlobalObjectId_V1-2-a66a40f71ce310a42954ded7197914cd-1717261474-0
     00000003:
       type: {class: ProgressionNodeComponentReference, ns: , asm: Assembly-CSharp}
       data:
         scenePath: Assets/Scenes/Progression/ProgressionTest 2.unity
-        ID: GlobalObjectId_V1-2-a66a40f71ce310a42954ded7197914cd-1717261474-0
+        ID: GlobalObjectId_V1-2-a66a40f71ce310a42954ded7197914cd-1927606994-0
     00000004:
       type: {class: ProgressionNodeComponentReference, ns: , asm: Assembly-CSharp}
       data:
